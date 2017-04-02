@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		556DBAED1E8FB1510038D214 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBAEC1E8FB1510038D214 /* main.m */; };
 		556DBAF01E8FB1510038D214 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBAEF1E8FB1510038D214 /* AppDelegate.m */; };
-		556DBAF31E8FB1510038D214 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBAF21E8FB1510038D214 /* ViewController.m */; };
 		556DBAF61E8FB1520038D214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556DBAF41E8FB1520038D214 /* Main.storyboard */; };
 		556DBAF91E8FB1520038D214 /* Dharm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 556DBAF71E8FB1520038D214 /* Dharm.xcdatamodeld */; };
 		556DBAFB1E8FB1520038D214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556DBAFA1E8FB1520038D214 /* Assets.xcassets */; };
 		556DBAFE1E8FB1520038D214 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556DBAFC1E8FB1520038D214 /* LaunchScreen.storyboard */; };
+		556DBB071E8FB7380038D214 /* SKBunkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB061E8FB7380038D214 /* SKBunkerViewController.m */; };
+		556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB091E8FB7550038D214 /* SKSettingsViewController.m */; };
+		556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,13 +23,17 @@
 		556DBAEC1E8FB1510038D214 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		556DBAEE1E8FB1510038D214 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		556DBAEF1E8FB1510038D214 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		556DBAF11E8FB1510038D214 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		556DBAF21E8FB1510038D214 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		556DBAF51E8FB1520038D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		556DBAF81E8FB1520038D214 /* Dharm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dharm.xcdatamodel; sourceTree = "<group>"; };
 		556DBAFA1E8FB1520038D214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		556DBAFD1E8FB1520038D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		556DBAFF1E8FB1520038D214 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		556DBB051E8FB7380038D214 /* SKBunkerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBunkerViewController.h; sourceTree = "<group>"; };
+		556DBB061E8FB7380038D214 /* SKBunkerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBunkerViewController.m; sourceTree = "<group>"; };
+		556DBB081E8FB7550038D214 /* SKSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSettingsViewController.h; sourceTree = "<group>"; };
+		556DBB091E8FB7550038D214 /* SKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettingsViewController.m; sourceTree = "<group>"; };
+		556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLeaderboardsViewController.h; sourceTree = "<group>"; };
+		556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +66,11 @@
 		556DBAEA1E8FB1510038D214 /* Dharm */ = {
 			isa = PBXGroup;
 			children = (
+				556DBB0E1E8FB77C0038D214 /* Bunker */,
+				556DBB0F1E8FB7840038D214 /* Settings */,
+				556DBB101E8FB78D0038D214 /* Leaderboards */,
 				556DBAEE1E8FB1510038D214 /* AppDelegate.h */,
 				556DBAEF1E8FB1510038D214 /* AppDelegate.m */,
-				556DBAF11E8FB1510038D214 /* ViewController.h */,
-				556DBAF21E8FB1510038D214 /* ViewController.m */,
 				556DBAF41E8FB1520038D214 /* Main.storyboard */,
 				556DBAFA1E8FB1520038D214 /* Assets.xcassets */,
 				556DBAFC1E8FB1520038D214 /* LaunchScreen.storyboard */,
@@ -80,6 +87,33 @@
 				556DBAEC1E8FB1510038D214 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		556DBB0E1E8FB77C0038D214 /* Bunker */ = {
+			isa = PBXGroup;
+			children = (
+				556DBB051E8FB7380038D214 /* SKBunkerViewController.h */,
+				556DBB061E8FB7380038D214 /* SKBunkerViewController.m */,
+			);
+			name = Bunker;
+			sourceTree = "<group>";
+		};
+		556DBB0F1E8FB7840038D214 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				556DBB081E8FB7550038D214 /* SKSettingsViewController.h */,
+				556DBB091E8FB7550038D214 /* SKSettingsViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		556DBB101E8FB78D0038D214 /* Leaderboards */ = {
+			isa = PBXGroup;
+			children = (
+				556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */,
+				556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */,
+			);
+			name = Leaderboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,6 +142,7 @@
 		556DBAE01E8FB1500038D214 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SK;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Kirill Solovov";
 				TargetAttributes = {
@@ -153,10 +188,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				556DBAF31E8FB1510038D214 /* ViewController.m in Sources */,
 				556DBAF01E8FB1510038D214 /* AppDelegate.m in Sources */,
 				556DBAF91E8FB1520038D214 /* Dharm.xcdatamodeld in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
+				556DBB071E8FB7380038D214 /* SKBunkerViewController.m in Sources */,
+				556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */,
+				556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

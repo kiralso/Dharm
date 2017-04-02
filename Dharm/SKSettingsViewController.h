@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SKSettingsViewController.h
 //  Dharm
 //
 //  Created by Кирилл on 01.04.17.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface SKSettingsViewController : UITableViewController
 
 @end
-
