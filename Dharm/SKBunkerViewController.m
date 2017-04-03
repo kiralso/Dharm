@@ -7,25 +7,87 @@
 //
 
 #import "SKBunkerViewController.h"
+#import "SKTimer.h"
+#import "SKLocalNotificationManagger.h"
 
 @interface SKBunkerViewController ()
 
+@property (assign, nonatomic) NSTimeInterval timerEndInSeconds;
+@property (assign, nonatomic) NSTimeInterval timerStartInSeconds;
+@property (assign, nonatomic) NSTimeInterval timerIntervalInSeconds;
+@property (assign, nonatomic) NSInteger score;
+
 @end
+
+static NSString * const scoreKey = @"scoreKey";
 
 @implementation SKBunkerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.score = [[NSUserDefaults standardUserDefaults] integerForKey:scoreKey];
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i",(int)self.score];
+    
+    self.timerEndInSeconds = 0.0;
+    self.timerStartInSeconds = 0.1 * 60.0;
+    self.timerIntervalInSeconds = 1.0;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateTimeLabel:)
+                                                 name:SKTimerTimerTextChangedNotification
+                                               object:nil];
+    
+    [self startTimerWithDefaultParameters:NO];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Actions
 
 - (IBAction)infoAction:(UIBarButtonItem *)sender {
     
+}
+
+#pragma mark - Useful methods
+
+- (void) updateTimeLabel:(NSNotification *) notification {
+    
+    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTimerTextUserInfoKey];
+    
+    if (dateComponents.minute < 4) {
+        self.timeLabel.textColor = [UIColor redColor];
+    } else {
+        self.timeLabel.textColor = [UIColor darkGrayColor];
+    }
+    
+    if (dateComponents.second < 1 && dateComponents.minute < 1) {
+        [self startTimerWithDefaultParameters:YES];
+    } else {
+        self.timeLabel.text = [NSString stringWithFormat:@"%003i:%02i",
+                               (int)dateComponents.minute, (int)dateComponents.second];
+    }
+}
+
+- (void) startTimerWithDefaultParameters:(BOOL) yesOrNo {
+    
+    if (yesOrNo) {
+        self.timer = [[SKTimer alloc] initWithStartInSeconds:108 * 60.f
+                                                     withEnd:0.0
+                                                 andInterval:0.1];
+    } else {
+        self.timer = [[SKTimer alloc] initWithStartInSeconds:self.timerStartInSeconds
+                                                     withEnd:self.timerEndInSeconds
+                                                 andInterval:self.timerIntervalInSeconds];
+    }
+    
+    [self.timer startTimer];
 }
 
 @end
