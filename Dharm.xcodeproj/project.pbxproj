@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		556492501E98F8A70028623E /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5564924F1E98F8A70028623E /* SKConstants.m */; };
+		556492531E98FDE70028623E /* SKCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 556492521E98FDE70028623E /* SKCoreDataManager.m */; };
+		5564925D1E98FFE80028623E /* SKNotificationDate+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 556492561E98FFE80028623E /* SKNotificationDate+CoreDataClass.m */; };
+		5564925E1E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 556492581E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m */; };
+		5564925F1E98FFE80028623E /* SKUser+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5564925A1E98FFE80028623E /* SKUser+CoreDataClass.m */; };
+		556492601E98FFE80028623E /* SKUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5564925C1E98FFE80028623E /* SKUser+CoreDataProperties.m */; };
 		556DBAED1E8FB1510038D214 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBAEC1E8FB1510038D214 /* main.m */; };
 		556DBAF01E8FB1510038D214 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBAEF1E8FB1510038D214 /* AppDelegate.m */; };
 		556DBAF61E8FB1520038D214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556DBAF41E8FB1520038D214 /* Main.storyboard */; };
@@ -16,11 +22,25 @@
 		556DBB071E8FB7380038D214 /* SKBunkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB061E8FB7380038D214 /* SKBunkerViewController.m */; };
 		556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB091E8FB7550038D214 /* SKSettingsViewController.m */; };
 		556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */; };
+		55ACA8491E93016F00DD98BC /* SKInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA8481E93016E00DD98BC /* SKInfoViewController.m */; };
+		55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */; };
 		55EC38271E91181F00D3E399 /* SKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC38261E91181F00D3E399 /* SKTimer.m */; };
 		55EC382A1E9148E100D3E399 /* SKLocalNotificationManagger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC38291E9148E100D3E399 /* SKLocalNotificationManagger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5564924E1E98F8A70028623E /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
+		5564924F1E98F8A70028623E /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
+		556492511E98FDE70028623E /* SKCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCoreDataManager.h; sourceTree = "<group>"; };
+		556492521E98FDE70028623E /* SKCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCoreDataManager.m; sourceTree = "<group>"; };
+		556492551E98FFE80028623E /* SKNotificationDate+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SKNotificationDate+CoreDataClass.h"; path = "Dharm/SKNotificationDate+CoreDataClass.h"; sourceTree = "<group>"; };
+		556492561E98FFE80028623E /* SKNotificationDate+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SKNotificationDate+CoreDataClass.m"; path = "Dharm/SKNotificationDate+CoreDataClass.m"; sourceTree = "<group>"; };
+		556492571E98FFE80028623E /* SKNotificationDate+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SKNotificationDate+CoreDataProperties.h"; path = "Dharm/SKNotificationDate+CoreDataProperties.h"; sourceTree = "<group>"; };
+		556492581E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SKNotificationDate+CoreDataProperties.m"; path = "Dharm/SKNotificationDate+CoreDataProperties.m"; sourceTree = "<group>"; };
+		556492591E98FFE80028623E /* SKUser+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SKUser+CoreDataClass.h"; path = "Dharm/SKUser+CoreDataClass.h"; sourceTree = "<group>"; };
+		5564925A1E98FFE80028623E /* SKUser+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SKUser+CoreDataClass.m"; path = "Dharm/SKUser+CoreDataClass.m"; sourceTree = "<group>"; };
+		5564925B1E98FFE80028623E /* SKUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SKUser+CoreDataProperties.h"; path = "Dharm/SKUser+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5564925C1E98FFE80028623E /* SKUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SKUser+CoreDataProperties.m"; path = "Dharm/SKUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		556DBAE81E8FB1510038D214 /* Dharm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dharm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		556DBAEC1E8FB1510038D214 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		556DBAEE1E8FB1510038D214 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -36,6 +56,10 @@
 		556DBB091E8FB7550038D214 /* SKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettingsViewController.m; sourceTree = "<group>"; };
 		556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLeaderboardsViewController.h; sourceTree = "<group>"; };
 		556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsViewController.m; sourceTree = "<group>"; };
+		55ACA8471E93016E00DD98BC /* SKInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKInfoViewController.h; sourceTree = "<group>"; };
+		55ACA8481E93016E00DD98BC /* SKInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKInfoViewController.m; sourceTree = "<group>"; };
+		55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDateGenerator.h; sourceTree = "<group>"; };
+		55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDateGenerator.m; sourceTree = "<group>"; };
 		55EC38251E91181F00D3E399 /* SKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTimer.h; sourceTree = "<group>"; };
 		55EC38261E91181F00D3E399 /* SKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTimer.m; sourceTree = "<group>"; };
 		55EC38281E9148E100D3E399 /* SKLocalNotificationManagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLocalNotificationManagger.h; sourceTree = "<group>"; };
@@ -53,6 +77,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		556492541E98FDF30028623E /* Coredata */ = {
+			isa = PBXGroup;
+			children = (
+				556492611E99003E0028623E /* ManagedObjects */,
+				556DBAF71E8FB1520038D214 /* Dharm.xcdatamodeld */,
+				556492511E98FDE70028623E /* SKCoreDataManager.h */,
+				556492521E98FDE70028623E /* SKCoreDataManager.m */,
+			);
+			name = Coredata;
+			sourceTree = "<group>";
+		};
+		556492611E99003E0028623E /* ManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				556492551E98FFE80028623E /* SKNotificationDate+CoreDataClass.h */,
+				556492561E98FFE80028623E /* SKNotificationDate+CoreDataClass.m */,
+				556492571E98FFE80028623E /* SKNotificationDate+CoreDataProperties.h */,
+				556492581E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m */,
+				556492591E98FFE80028623E /* SKUser+CoreDataClass.h */,
+				5564925A1E98FFE80028623E /* SKUser+CoreDataClass.m */,
+				5564925B1E98FFE80028623E /* SKUser+CoreDataProperties.h */,
+				5564925C1E98FFE80028623E /* SKUser+CoreDataProperties.m */,
+			);
+			name = ManagedObjects;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		556DBADF1E8FB1500038D214 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +123,7 @@
 		556DBAEA1E8FB1510038D214 /* Dharm */ = {
 			isa = PBXGroup;
 			children = (
+				556492541E98FDF30028623E /* Coredata */,
 				556DBB0E1E8FB77C0038D214 /* Bunker */,
 				556DBB0F1E8FB7840038D214 /* Settings */,
 				556DBB101E8FB78D0038D214 /* Leaderboards */,
@@ -81,7 +133,6 @@
 				556DBAFA1E8FB1520038D214 /* Assets.xcassets */,
 				556DBAFC1E8FB1520038D214 /* LaunchScreen.storyboard */,
 				556DBAFF1E8FB1520038D214 /* Info.plist */,
-				556DBAF71E8FB1520038D214 /* Dharm.xcdatamodeld */,
 				556DBAEB1E8FB1510038D214 /* Supporting Files */,
 			);
 			path = Dharm;
@@ -98,12 +149,18 @@
 		556DBB0E1E8FB77C0038D214 /* Bunker */ = {
 			isa = PBXGroup;
 			children = (
+				5564924E1E98F8A70028623E /* SKConstants.h */,
+				5564924F1E98F8A70028623E /* SKConstants.m */,
 				556DBB051E8FB7380038D214 /* SKBunkerViewController.h */,
 				556DBB061E8FB7380038D214 /* SKBunkerViewController.m */,
 				55EC38251E91181F00D3E399 /* SKTimer.h */,
 				55EC38261E91181F00D3E399 /* SKTimer.m */,
 				55EC38281E9148E100D3E399 /* SKLocalNotificationManagger.h */,
 				55EC38291E9148E100D3E399 /* SKLocalNotificationManagger.m */,
+				55ACA8471E93016E00DD98BC /* SKInfoViewController.h */,
+				55ACA8481E93016E00DD98BC /* SKInfoViewController.m */,
+				55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */,
+				55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */,
 			);
 			name = Bunker;
 			sourceTree = "<group>";
@@ -154,7 +211,7 @@
 			attributes = {
 				CLASSPREFIX = SK;
 				LastUpgradeCheck = 0800;
-				ORGANIZATIONNAME = "Kirill Solovov";
+				ORGANIZATIONNAME = "Kirill Solovyov";
 				TargetAttributes = {
 					556DBAE71E8FB1510038D214 = {
 						CreatedOnToolsVersion = 8.0;
@@ -198,13 +255,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5564925E1E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m in Sources */,
 				556DBAF01E8FB1510038D214 /* AppDelegate.m in Sources */,
+				5564925D1E98FFE80028623E /* SKNotificationDate+CoreDataClass.m in Sources */,
+				5564925F1E98FFE80028623E /* SKUser+CoreDataClass.m in Sources */,
 				556DBAF91E8FB1520038D214 /* Dharm.xcdatamodeld in Sources */,
+				556492531E98FDE70028623E /* SKCoreDataManager.m in Sources */,
 				55EC382A1E9148E100D3E399 /* SKLocalNotificationManagger.m in Sources */,
+				556492501E98F8A70028623E /* SKConstants.m in Sources */,
+				55ACA8491E93016F00DD98BC /* SKInfoViewController.m in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
 				55EC38271E91181F00D3E399 /* SKTimer.m in Sources */,
 				556DBB071E8FB7380038D214 /* SKBunkerViewController.m in Sources */,
+				55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */,
 				556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */,
+				556492601E98FFE80028623E /* SKUser+CoreDataProperties.m in Sources */,
 				556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,10 +28,11 @@ static NSString * const dateToKey = @"dateToKey";
     if ([defaults objectForKey:dateFromKey] && [defaults objectForKey:dateToKey]) {
         self.dateFromPicker.date = [defaults objectForKey:dateFromKey];
         self.dateToPicker.date = [defaults objectForKey:dateToKey];
-
     }
     
     [defaults synchronize];
+    
+    [self checkPickersForDifficulty];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -53,16 +54,42 @@ static NSString * const dateToKey = @"dateToKey";
     return 1;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+#pragma mark - Actions
+
 - (IBAction)difficultySwitchAction:(UISwitch *)sender {
     [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:difficultyKey];
+    
+    [self checkPickersForDifficulty];
 }
 
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:dateFromKey];
+    if (!self.difficultySwitch.on) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:dateFromKey];
+    }
 }
 
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:dateToKey];
+    if (!self.difficultySwitch.on) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:dateToKey];
+    }
+}
 
+#pragma mark - Useful Methods
+
+- (void) checkPickersForDifficulty {
+    
+    if (self.difficultySwitch.on) {
+        self.dateFromPicker.enabled = NO;
+        self.dateToPicker.enabled = NO;
+    } else {
+        self.dateFromPicker.enabled = YES;
+        self.dateToPicker.enabled = YES;
+    }
 }
 @end

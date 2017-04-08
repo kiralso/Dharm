@@ -23,13 +23,13 @@
     return sharedManager;
 }
 
-- (void) setLocalNotifications {
+- (void) setLocalNotificationsForFireDates:(NSArray<NSDate *> *) dates {
     
-    for (int i = 1; i < 5 ; i++) {
+    for (int i = 0; i < [dates count] ; i++) {
         
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         
-        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:(6 * i - 4.0)];
+        localNotification.fireDate = [dates objectAtIndex:i];
         localNotification.alertBody = @"Пора спасть мир!!!";
         localNotification.alertTitle = [NSString stringWithFormat:@"Notification # %d",i];
         localNotification.timeZone = [NSTimeZone defaultTimeZone];

@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SKTimer : NSObject
+extern NSString* const SKTimerTextChangedNotification;
+extern NSString* const SKTimerTextUserInfoKey;
 
-extern NSString* const SKTimerTimerTextChangedNotification;
-extern NSString* const SKTimerTimerTextUserInfoKey;
+@interface SKTimer : NSObject
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) NSDateComponents *timerComponents;

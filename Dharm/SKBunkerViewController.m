@@ -9,6 +9,7 @@
 #import "SKBunkerViewController.h"
 #import "SKTimer.h"
 #import "SKLocalNotificationManagger.h"
+#import "SKConstants.h"
 
 @interface SKBunkerViewController ()
 
@@ -19,14 +20,12 @@
 
 @end
 
-static NSString * const scoreKey = @"scoreKey";
-
 @implementation SKBunkerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.score = [[NSUserDefaults standardUserDefaults] integerForKey:scoreKey];
+    self.score = [[NSUserDefaults standardUserDefaults] integerForKey:kScoreKey];
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i",(int)self.score];
     
     self.timerEndInSeconds = 0.0;
@@ -35,7 +34,7 @@ static NSString * const scoreKey = @"scoreKey";
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateTimeLabel:)
-                                                 name:SKTimerTimerTextChangedNotification
+                                                 name:SKTimerTextChangedNotification
                                                object:nil];
     
     [self startTimerWithDefaultParameters:NO];
@@ -49,17 +48,11 @@ static NSString * const scoreKey = @"scoreKey";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Actions
-
-- (IBAction)infoAction:(UIBarButtonItem *)sender {
-    
-}
-
 #pragma mark - Useful methods
 
 - (void) updateTimeLabel:(NSNotification *) notification {
     
-    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTimerTextUserInfoKey];
+    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
     
     if (dateComponents.minute < 4) {
         self.timeLabel.textColor = [UIColor redColor];

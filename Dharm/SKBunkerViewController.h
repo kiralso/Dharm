@@ -18,6 +18,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UITextField *safetyCode;
 
-- (IBAction)infoAction:(UIBarButtonItem *)sender;
-
 @end

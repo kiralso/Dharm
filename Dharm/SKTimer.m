@@ -16,8 +16,8 @@
 
 @end
 
-NSString* const SKTimerTimerTextChangedNotification = @"SKTimerTimerTextChangedNotification";
-NSString* const SKTimerTimerTextUserInfoKey = @"SKTimerTimerTextUserInfoKey";
+NSString* const SKTimerTextChangedNotification = @"SKTimerTextChangedNotification";
+NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
 
 @implementation SKTimer
 
@@ -73,9 +73,9 @@ NSString* const SKTimerTimerTextUserInfoKey = @"SKTimerTimerTextUserInfoKey";
     _timerComponents = timerComponents;
     
     NSDictionary *dictionary = [NSDictionary dictionaryWithObject:timerComponents
-                                                           forKey:SKTimerTimerTextUserInfoKey];
+                                                           forKey:SKTimerTextUserInfoKey];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:SKTimerTimerTextChangedNotification
+    [[NSNotificationCenter defaultCenter] postNotificationName:SKTimerTextChangedNotification
                                                         object:nil
                                                       userInfo:dictionary];
 }

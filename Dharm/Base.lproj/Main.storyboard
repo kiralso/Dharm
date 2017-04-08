@@ -14,6 +14,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="I6o-z3-l6q" kind="relationship" relationship="viewControllers" id="C9J-6K-M9k"/>
@@ -29,10 +31,13 @@
         <scene sceneID="yOC-ae-VqV">
             <objects>
                 <navigationController id="I6o-z3-l6q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bunker" id="3sg-ZZ-Ag5"/>
+                    <tabBarItem key="tabBarItem" title="Bunker" image="obelisk-1" id="3sg-ZZ-Ag5"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="736"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4ht-e1-41I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="kLE-YT-VQQ" kind="relationship" relationship="rootViewController" id="6uB-GP-is1"/>
@@ -47,17 +52,17 @@
             <objects>
                 <tableViewController id="Prf-vL-7JC" customClass="SKSettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tpi-6D-vhG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection headerTitle="Dificulty" id="VB3-Kc-bNV">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="WpR-r8-W1N">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="92" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WpR-r8-W1N" id="nzG-y4-rTf">
-                                            <frame key="frameInset" width="375" height="59"/>
+                                            <frame key="frameInset" width="414" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xGo-xC-8pN">
@@ -83,10 +88,10 @@
                             <tableViewSection headerTitle="Time settings" id="GjU-sz-VUc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="70" id="odH-r3-xOy">
-                                        <rect key="frame" x="0.0" y="180" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="180" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="odH-r3-xOy" id="ctf-Za-IkS">
-                                            <frame key="frameInset" width="375" height="69"/>
+                                            <frame key="frameInset" width="414" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can chose time when you are able to save the world!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa0-ZV-pvw">
@@ -105,10 +110,10 @@
                             <tableViewSection headerTitle="I will be available to save the world from.." id="hAE-Ds-tZP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="150" id="Y3U-Vy-ix1">
-                                        <rect key="frame" x="0.0" y="278" width="375" height="150"/>
+                                        <rect key="frame" x="0.0" y="278" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y3U-Vy-ix1" id="pqu-Gz-VX5">
-                                            <frame key="frameInset" width="375" height="149"/>
+                                            <frame key="frameInset" width="414" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1QI-sv-6LD">
@@ -127,13 +132,13 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="...to " id="E78-NW-Crt">
+                            <tableViewSection headerTitle="...to..." id="E78-NW-Crt">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="150" id="0Ga-cG-CdA">
-                                        <rect key="frame" x="0.0" y="456" width="375" height="150"/>
+                                        <rect key="frame" x="0.0" y="456" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ga-cG-CdA" id="jkw-nb-3QF">
-                                            <frame key="frameInset" width="375" height="149"/>
+                                            <frame key="frameInset" width="414" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yrv-Ez-DEf">
@@ -173,10 +178,13 @@
         <scene sceneID="xil-ju-Tce">
             <objects>
                 <navigationController id="dux-pW-tAf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="6IL-du-dI6"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="eagle" id="6IL-du-dI6"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="736"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2gz-Vx-JfY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="Prf-vL-7JC" kind="relationship" relationship="rootViewController" id="Ssh-8b-fzR"/>
@@ -195,7 +203,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Aje-tw-Tv2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ogx-Fx-hhW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="105:03" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkm-Ah-11m">
@@ -227,11 +235,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Bunker" id="Eii-LM-Zbe">
-                        <barButtonItem key="rightBarButtonItem" title="Info" id="7bz-xT-shL">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="GF3-f6-3px">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XVe-ml-zLM">
+                                <rect key="frame" x="362" y="6" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="owl-2">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="A4c-tK-m7B" kind="presentation" modalTransitionStyle="coverVertical" id="WV1-fu-5Hs"/>
+                                </connections>
+                            </button>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="infoAction:" destination="kLE-YT-VQQ" id="Xs4-3n-pjo"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -244,12 +261,50 @@
             </objects>
             <point key="canvasLocation" x="1637.5999999999999" y="-904.49775112443785"/>
         </scene>
+        <!--Info-->
+        <scene sceneID="jIK-gx-uMr">
+            <objects>
+                <viewController title="Info" id="A4c-tK-m7B" customClass="SKInfoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Voe-1y-EK7"/>
+                        <viewControllerLayoutGuide type="bottom" id="cdP-O4-Ziv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8iH-BH-Nxs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c03-Vp-Eml">
+                                <frame key="frameInset" minX="115" minY="535" width="145" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Okay">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="okAction:" destination="A4c-tK-m7B" eventType="touchUpInside" id="sIO-Cx-gSk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4 8 15 16 23 42" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgB-Sf-bxh">
+                                <frame key="frameInset" minX="125" minY="315" width="124" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y6X-hw-VXJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2716" y="-924.28785607196414"/>
+        </scene>
         <!--Leaderboard-->
         <scene sceneID="0gX-tV-iNk">
             <objects>
                 <tableViewController id="m9b-5O-Oqu" customClass="SKLeaderboardsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yUy-BB-JUP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -267,10 +322,13 @@
         <scene sceneID="AEU-qZ-jXS">
             <objects>
                 <navigationController id="axx-hb-HVv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Leaderboard" id="jyI-jK-FH6"/>
+                    <tabBarItem key="tabBarItem" title="Leaderboard" image="snake" id="jyI-jK-FH6"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="736"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cuG-AO-mBq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="m9b-5O-Oqu" kind="relationship" relationship="rootViewController" id="ZCr-Dp-Ysy"/>
@@ -283,5 +341,10 @@
     </scenes>
     <resources>
         <image name="dharm-logo" width="736" height="736"/>
+        <image name="eagle" width="32" height="32"/>
+        <image name="obelisk-1" width="32" height="32"/>
+        <image name="owl-2" width="32" height="32"/>
+        <image name="snake" width="32" height="32"/>
     </resources>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

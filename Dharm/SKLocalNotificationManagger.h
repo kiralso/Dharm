@@ -12,4 +12,6 @@
 
 + (SKLocalNotificationManagger *) sharedManager;
 
+- (void) setLocalNotificationsForFireDates:(NSArray<NSDate *> *) dates;
+
 @end
