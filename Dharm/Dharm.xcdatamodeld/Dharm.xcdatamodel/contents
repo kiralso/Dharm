@@ -3,14 +3,14 @@
     <entity name="SKNotificationDate" representedClassName="SKNotificationDate" syncable="YES">
         <attribute name="fireDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="warningDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SKUser" inverseName="fireDate" inverseEntity="SKUser" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SKUser" inverseName="notificationDate" inverseEntity="SKUser" syncable="YES"/>
     </entity>
     <entity name="SKUser" representedClassName="SKUser" syncable="YES">
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="fireDate" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SKNotificationDate" inverseName="user" inverseEntity="SKNotificationDate" syncable="YES"/>
+        <relationship name="notificationDate" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SKNotificationDate" inverseName="user" inverseEntity="SKNotificationDate" syncable="YES"/>
     </entity>
     <elements>
         <element name="SKNotificationDate" positionX="-315" positionY="-148" width="128" height="88"/>
-        <element name="SKUser" positionX="-99" positionY="-189" width="128" height="73"/>
+        <element name="SKUser" positionX="-99" positionY="-162" width="128" height="73"/>
     </elements>
 </model>

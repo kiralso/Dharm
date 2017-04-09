@@ -22,6 +22,7 @@
 		556DBB071E8FB7380038D214 /* SKBunkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB061E8FB7380038D214 /* SKBunkerViewController.m */; };
 		556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB091E8FB7550038D214 /* SKSettingsViewController.m */; };
 		556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */; };
+		55A1D66E1E9A56F900CEE5DB /* SKUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */; };
 		55ACA8491E93016F00DD98BC /* SKInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA8481E93016E00DD98BC /* SKInfoViewController.m */; };
 		55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */; };
 		55EC38271E91181F00D3E399 /* SKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC38261E91181F00D3E399 /* SKTimer.m */; };
@@ -56,6 +57,8 @@
 		556DBB091E8FB7550038D214 /* SKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettingsViewController.m; sourceTree = "<group>"; };
 		556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLeaderboardsViewController.h; sourceTree = "<group>"; };
 		556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsViewController.m; sourceTree = "<group>"; };
+		55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserDataManager.h; sourceTree = "<group>"; };
+		55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserDataManager.m; sourceTree = "<group>"; };
 		55ACA8471E93016E00DD98BC /* SKInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKInfoViewController.h; sourceTree = "<group>"; };
 		55ACA8481E93016E00DD98BC /* SKInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKInfoViewController.m; sourceTree = "<group>"; };
 		55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDateGenerator.h; sourceTree = "<group>"; };
@@ -84,6 +87,8 @@
 				556DBAF71E8FB1520038D214 /* Dharm.xcdatamodeld */,
 				556492511E98FDE70028623E /* SKCoreDataManager.h */,
 				556492521E98FDE70028623E /* SKCoreDataManager.m */,
+				55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */,
+				55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */,
 			);
 			name = Coredata;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 				556DBB071E8FB7380038D214 /* SKBunkerViewController.m in Sources */,
 				55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */,
 				556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */,
+				55A1D66E1E9A56F900CEE5DB /* SKUserDataManager.m in Sources */,
 				556492601E98FFE80028623E /* SKUser+CoreDataProperties.m in Sources */,
 				556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */,
 			);
