@@ -17,8 +17,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    //application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes:[.Alert, .Sound, .Badge],categories: nil))
     
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert categories:nil]];
     

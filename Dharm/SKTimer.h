@@ -20,5 +20,6 @@ extern NSString* const SKTimerTextUserInfoKey;
 - (void) startTimer;
 - (void) timerDidFinish;
 - (void) resetTimer;
+- (void) stopTimer;
 
 @end

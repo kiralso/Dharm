@@ -61,7 +61,7 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
 
 - (void) resetTimer {
     
-    [self.timer invalidate];
+    [self stopTimer];
     
     self.timerStartInSeconds = self.timerEndInSeconds;
     
@@ -78,6 +78,10 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
     [[NSNotificationCenter defaultCenter] postNotificationName:SKTimerTextChangedNotification
                                                         object:nil
                                                       userInfo:dictionary];
+}
+
+- (void) stopTimer {
+    [self.timer invalidate];
 }
 
 #pragma mark - Time Filter

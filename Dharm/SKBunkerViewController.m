@@ -8,15 +8,15 @@
 
 #import "SKBunkerViewController.h"
 #import "SKTimer.h"
-#import "SKLocalNotificationManagger.h"
 #import "SKConstants.h"
+#import "SKUserDataManager.h"
+#import "SKUser+CoreDataClass.h"
 
 @interface SKBunkerViewController ()
 
 @property (assign, nonatomic) NSTimeInterval timerEndInSeconds;
 @property (assign, nonatomic) NSTimeInterval timerStartInSeconds;
 @property (assign, nonatomic) NSTimeInterval timerIntervalInSeconds;
-@property (assign, nonatomic) NSInteger score;
 
 @end
 
@@ -25,8 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.score = [[NSUserDefaults standardUserDefaults] integerForKey:kScoreKey];
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i",(int)self.score];
+    [[SKUserDataManager sharedInstance] createUser];
+    
+    [self updateScoreLabel];
     
     self.timerEndInSeconds = 0.0;
     self.timerStartInSeconds = 0.1 * 60.0;
@@ -81,6 +82,13 @@
     }
     
     [self.timer startTimer];
+}
+
+- (void) updateScoreLabel {
+    
+    SKUser *user = [[SKUserDataManager sharedInstance] user];
+    
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i",(int)user.score];
 }
 
 @end

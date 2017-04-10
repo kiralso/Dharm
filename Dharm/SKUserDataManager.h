@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class SKUser;
+
 @interface SKUserDataManager : NSObject
 
 + (SKUserDataManager *) sharedInstance;
+
+- (void) createUser;
+- (SKUser *) user;
+- (void) updateUserWithScore:(NSInteger) score;
+- (void) updateUserWithNotificationDateArray:(NSArray *)array;
 
 @end

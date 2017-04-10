@@ -34,7 +34,7 @@
 
 - (NSDate *) firstFireDateSinceNowFromSet:(NSSet *) set {
     
-    NSDate * fireDate = [[NSDate alloc] init];
+    NSDate * fireDate = nil;
     
     NSDateComponents *startRangeComponents =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
                                                                   fromDate:[NSDate date]
@@ -49,13 +49,40 @@
                                                                         toDate:date
                                                                        options:0];
         
-        if (components.second < startRange) {
+        if (components.second < startRange && components.second > 0) {
             startRange = components.second;
             fireDate = date;
         }
     }
     
     return fireDate;
+}
+
+- (NSArray<NSDate *> *) fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *) startComponents andComponents:(NSDateComponents *) endComponents {
+    
+    NSMutableArray *dates = [NSMutableArray array];
+
+    int i = 0;
+    while ([dates count] < 30) {
+        i++;
+        NSDate *date= [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMinute
+                                                               value:kMinutesYoSaveTheWorld * i
+                                                              toDate:[NSDate date]
+                                                             options:0];
+        
+        NSDateComponents *components = [[NSCalendar currentCalendar]
+                                        components:NSCalendarUnitHour | NSCalendarUnitMinute
+                                        fromDate:date];
+        
+        BOOL isHourGood = startComponents.hour < components.hour && endComponents.hour > components.hour;
+        BOOL isMinutesGood = startComponents.minute < components.minute && endComponents.minute > components.minute;
+        
+        if (isHourGood && isMinutesGood) {
+            [dates addObject:date];
+        }
+    }
+
+    return dates;
 }
 
 #pragma mark - warning dates
@@ -67,7 +94,7 @@
     for (NSDate *dateFromArray in array) {
         
         NSDate *date= [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMinute
-                                                               value:-4
+                                                               value:-kMinutesBeforeFireDateToWarn
                                                               toDate:dateFromArray
                                                              options:0];
         

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SKObserverProtocol.h"
 
-@interface SKSettingsViewController : UITableViewController
+@interface SKSettingsViewController : UITableViewController <SKObserverProtocol>
 
 @property (weak, nonatomic) IBOutlet UISwitch *difficultySwitch;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateFromPicker;

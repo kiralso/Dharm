@@ -43,14 +43,41 @@
 
 #pragma mark - User
 
-- (BOOL) updateUserWithScore:(NSInteger) score {
+- (void) createUser {
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"SKUser"];
+    SKUser * user = [self user];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"SKUser"
+                                                         inManagedObjectContext:self.moc];
+    
+    if (!user) {
+        
+        user = [[SKUser alloc] initWithEntity:entityDescription
+                       insertIntoManagedObjectContext:self.moc];
+        
+        user.score = 0;
+        
+        NSError *error = nil;
+        if (![self.moc save:&error]) {
+            abort();
+        }
+    }
+    
+}
+
+- (SKUser *) user {
+    
+    NSFetchRequest *request = [SKUser fetchRequest];
     
     NSArray* array = [self.moc executeFetchRequest:request
                                              error:nil];
     
-    SKUser *user = [array firstObject];
+    return [array firstObject];
+}
+
+- (void) updateUserWithScore:(NSInteger) score {
+    
+    SKUser *user = [self user];
     
     user.score = score;
     
@@ -58,27 +85,20 @@
     if (![self.moc save:&error]) {
         abort();
     }
-    
-    return YES;
 }
 
-- (void) createUser {
+- (void) updateUserWithNotificationDateArray:(NSArray *)array {
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"SKUser"];
+    SKUser *user = [self user];
     
-    NSArray* array = [self.moc executeFetchRequest:request
-                                             error:nil];
+    NSSet *dateSet = [NSSet setWithArray:array];
     
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"SKUser"
-                                                         inManagedObjectContext:self.moc];
+    user.fireDate = dateSet;
     
-    if (!array || [array count] < 1) {
-        SKUser *user = [[SKUser alloc] initWithEntity:entityDescription
-                       insertIntoManagedObjectContext:self.moc];
-        
-        user.score = 0;
+    NSError *error = nil;
+    if (![self.moc save:&error]) {
+        abort();
     }
-    
 }
 
 @end

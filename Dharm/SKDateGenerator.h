@@ -13,5 +13,6 @@
 - (NSArray<NSDate *> *) fireDatesSinceNow;
 - (NSDate *) firstFireDateSinceNowFromSet:(NSSet *) set;
 - (NSArray<NSDate *> *) warningDatesWithArray:(NSArray<NSDate *> *) array;
+- (NSArray<NSDate *> *) fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *) startComponents andComponents:(NSDateComponents *) endComponents;
 
 @end

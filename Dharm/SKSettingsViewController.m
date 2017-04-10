@@ -7,32 +7,33 @@
 //
 
 #import "SKSettingsViewController.h"
+#import "SKConstants.h"
+#import "SKMainObserver.h"
 
 @interface SKSettingsViewController ()
 
 @end
 
-static NSString * const difficultyKey = @"difficultyKey";
-static NSString * const dateFromKey = @"dateFromKey";
-static NSString * const dateToKey = @"dateToKey";
-
 @implementation SKSettingsViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    self.difficultySwitch.on = [defaults boolForKey:difficultyKey];
+    self.difficultySwitch.on = [defaults boolForKey:kDifficultySwitchKey];
     
-    if ([defaults objectForKey:dateFromKey] && [defaults objectForKey:dateToKey]) {
-        self.dateFromPicker.date = [defaults objectForKey:dateFromKey];
-        self.dateToPicker.date = [defaults objectForKey:dateToKey];
+    if ([defaults objectForKey:kDateFromPickerKey] && [defaults objectForKey:kDateToPickerKey]) {
+        self.dateFromPicker.date = [defaults objectForKey:kDateFromPickerKey];
+        self.dateToPicker.date = [defaults objectForKey:kDateToPickerKey];
     }
     
     [defaults synchronize];
     
     [self checkPickersForDifficulty];
+    
+    [self addObserver:[SKMainObserver sharedObserver]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -42,6 +43,10 @@ static NSString * const dateToKey = @"dateToKey";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [self removeObserver:[SKMainObserver sharedObserver]];
 }
 
 #pragma mark - Table view data source
@@ -63,21 +68,54 @@ static NSString * const dateToKey = @"dateToKey";
 #pragma mark - Actions
 
 - (IBAction)difficultySwitchAction:(UISwitch *)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:difficultyKey];
-    
+    [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];
     [self checkPickersForDifficulty];
+    
+    [self setValue:sender forKey:kDifficultySwitchKey];
 }
 
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender {
-    if (!self.difficultySwitch.on) {
-        [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:dateFromKey];
-    }
+    [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:kDateFromPickerKey];
+    
+    [self setValue:sender forKey:kDateFromPickerKey];
 }
 
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender {
-    if (!self.difficultySwitch.on) {
-        [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:dateToKey];
-    }
+    [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
+    
+    [self setValue:sender forKey:kDateToPickerKey];
+}
+
+#pragma mark - Observer
+
+- (void) addObserver:(NSObject *) observer {
+    
+    [self addObserver:observer
+           forKeyPath:kDifficultySwitchKey
+              options:NSKeyValueObservingOptionNew
+              context:nil];
+    
+    [self addObserver:observer
+           forKeyPath:kDateFromPickerKey
+              options:NSKeyValueObservingOptionNew
+              context:nil];
+    
+    [self addObserver:observer
+           forKeyPath:kDateToPickerKey
+              options:NSKeyValueObservingOptionNew
+              context:nil];
+}
+
+- (void) removeObserver:(NSObject *) observer {
+    
+    [self removeObserver:observer
+              forKeyPath:kDifficultySwitchKey];
+    
+    [self removeObserver:observer
+              forKeyPath:kDateFromPickerKey];
+    
+    [self removeObserver:observer
+              forKeyPath:kDateToPickerKey];
 }
 
 #pragma mark - Useful Methods
