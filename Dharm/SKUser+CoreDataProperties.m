@@ -2,7 +2,7 @@
 //  SKUser+CoreDataProperties.m
 //  Dharm
 //
-//  Created by Кирилл on 08.04.17.
+//  Created by Кирилл on 11.04.17.
 //  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
@@ -15,6 +15,6 @@
 }
 
 @dynamic score;
-@dynamic fireDate;
+@dynamic notificationDate;
 
 @end

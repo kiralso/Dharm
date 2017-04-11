@@ -102,7 +102,7 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="512937614.15922499">
                                                         <!--2017-04-03 18:40:14 +0000-->
                                                     </date>
-                                                    <locale key="locale" localeIdentifier="ru"/>
+                                                    <locale key="locale" localeIdentifier="en_150"/>
                                                     <connections>
                                                         <action selector="dateFromPickerAction:" destination="Prf-vL-7JC" eventType="valueChanged" id="zKZ-FO-Swz"/>
                                                     </connections>

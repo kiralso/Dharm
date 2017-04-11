@@ -32,9 +32,9 @@
     
     if ([self.codeTextField.text isEqualToString:kSafetyString]) {
         
-        NSInteger newScore = [[SKUserDataManager sharedInstance] user].score++;
+        NSInteger newScore = [[SKUserDataManager sharedManager] user].score++;
         
-        [[SKUserDataManager sharedInstance] updateUserWithScore:newScore];
+        [[SKUserDataManager sharedManager] updateUserWithScore:newScore];
         
         [self updateScoreLabel];
         
@@ -119,7 +119,7 @@
 
 - (void) updateScoreLabel {
     
-    SKUser *user = [[SKUserDataManager sharedInstance] user];
+    SKUser *user = [[SKUserDataManager sharedManager] user];
     
     self.codeTextField.text = [NSString stringWithFormat:@"Score: %i",(int)user.score];
 }

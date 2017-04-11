@@ -20,7 +20,7 @@
 
 @implementation SKUserDataManager
 
-+ (SKUserDataManager *) sharedInstance {
++ (SKUserDataManager *) sharedManager {
     
     static SKUserDataManager *manager = nil;
     
@@ -87,13 +87,13 @@
     }
 }
 
-- (void) updateUserWithNotificationDateArray:(NSArray *)array {
+- (void) updateUserWithNotificationDateArray:(NSArray<SKNotificationDate *> *)array {
     
     SKUser *user = [self user];
     
     NSSet *dateSet = [NSSet setWithArray:array];
     
-    user.fireDate = dateSet;
+    user.notificationDate = dateSet;
     
     NSError *error = nil;
     if (![self.moc save:&error]) {

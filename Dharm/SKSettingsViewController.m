@@ -14,6 +14,8 @@
 
 @end
 
+static NSInteger const kHoursBetweenPickers = 3;
+
 @implementation SKSettingsViewController
 
 - (void)viewDidLoad {
@@ -31,18 +33,13 @@
     
     [defaults synchronize];
     
-    [self checkPickersForDifficulty];
+    [self checkDifficultyInFromPicker:self.dateFromPicker andToPicker:self.dateToPicker withSwitch:self.difficultySwitch];
     
     [self addObserver:[SKMainObserver sharedObserver]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)dealloc {
@@ -68,19 +65,29 @@
 #pragma mark - Actions
 
 - (IBAction)difficultySwitchAction:(UISwitch *)sender {
+    
     [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];
-    [self checkPickersForDifficulty];
+    
+    [self checkDifficultyInFromPicker:self.dateFromPicker andToPicker:self.dateToPicker withSwitch:self.difficultySwitch];
+    
+    [self checkToPicker];
     
     [self setValue:sender forKey:kDifficultySwitchKey];
 }
 
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender {
+        
+    [self checkToPicker];
+    
     [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:kDateFromPickerKey];
     
     [self setValue:sender forKey:kDateFromPickerKey];
 }
 
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender {
+    
+    [self checkToPicker];
+    
     [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
     
     [self setValue:sender forKey:kDateToPickerKey];
@@ -120,14 +127,41 @@
 
 #pragma mark - Useful Methods
 
-- (void) checkPickersForDifficulty {
+- (void) checkDifficultyInFromPicker:(UIDatePicker *) fromPicker andToPicker:(UIDatePicker *) toPicker withSwitch:(UISwitch *) dSwitch {
     
-    if (self.difficultySwitch.on) {
-        self.dateFromPicker.enabled = NO;
-        self.dateToPicker.enabled = NO;
+    if (dSwitch.on) {
+        fromPicker.enabled = NO;
+        toPicker.enabled = NO;
     } else {
-        self.dateFromPicker.enabled = YES;
-        self.dateToPicker.enabled = YES;
+        fromPicker.enabled = YES;
+        toPicker.enabled = YES;
     }
 }
+
+- (NSDate *) checkTimeInFromPicker:(UIDatePicker *) fromPicker andToPicker:(UIDatePicker *) toPicker withHoursBetween:(NSInteger) hours {
+    
+    NSDateComponents *fromComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
+                                                          fromDate:fromPicker.date];
+    NSDateComponents *toComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
+                                                                    fromDate:toPicker.date];
+    
+    if (ABS((toComponents.hour - fromComponents.hour)) < hours) {
+        return [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour
+                                                               value:hours
+                                                              toDate:fromPicker.date
+                                                             options:0];
+    }
+
+    return toPicker.date;
+}
+
+- (void) checkToPicker {
+    
+    NSDate * date = [self checkTimeInFromPicker:self.dateFromPicker
+                                    andToPicker:self.dateToPicker
+                               withHoursBetween:kHoursBetweenPickers];
+    
+    [self.dateToPicker setDate:date animated:YES];
+}
+
 @end

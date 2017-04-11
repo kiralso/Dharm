@@ -12,7 +12,7 @@
 
 @interface SKUserDataManager : NSObject
 
-+ (SKUserDataManager *) sharedInstance;
++ (SKUserDataManager *) sharedManager;
 
 - (void) createUser;
 - (SKUser *) user;

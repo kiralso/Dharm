@@ -23,7 +23,7 @@
 
 - (void) updateScoreLabel {
     
-    SKUser *user = [[SKUserDataManager sharedInstance] user];
+    SKUser *user = [[SKUserDataManager sharedManager] user];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i",user.score];

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SKUserDataManager.h"
+#import "SKNotificationDateDataManager.h"
+#import "SKNotificationDate+CoreDataClass.h"
 #import "SKMainObserver.h"
 #import "SKConstants.h"
 #import "SKDateGenerator.h"
@@ -62,7 +64,7 @@
 
 #pragma mark - Useful Methods
 
-- (void) localWarningAndFailNotificationsForDates: (NSArray <NSDate *> *) dates andDatesGenerator:(SKDateGenerator *) generator {
+- (NSArray<SKNotificationDate *> *) localWarningAndFailNotificationsForDates: (NSArray <NSDate *> *) dates andDatesGenerator:(SKDateGenerator *) generator {
         
     NSArray *warningDatesArray = [generator warningDatesWithArray:dates];
     
@@ -73,6 +75,19 @@
     [[UIApplication sharedApplication] setLocalNotificationsForFireDates:warningDatesArray
                                                                    title:kWarningTitle
                                                            andAllertBody:kWarningBody];
+    
+    NSMutableArray *notificationsArray = [NSMutableArray array];
+    SKUser *user = [[SKUserDataManager sharedManager] user];
+    
+    for (int i = 0; i < [dates count]; i++) {
+        SKNotificationDate * nd =
+        [[SKNotificationDateDataManager sharedManager] createWithFireDate:dates[i]
+                                                              warningDate:warningDatesArray[i]
+                                                                  andUser:user];
+        
+        [notificationsArray addObject:nd];
+    }
+    return notificationsArray;
 }
 
 - (NSArray<NSDate *> *) datesArrayBetweenDatePickersOnViewController:(SKSettingsViewController *) vc withDateGenerator:(SKDateGenerator *) generator {
@@ -96,10 +111,10 @@
 
 - (void) localNotificationsAndSaveDatesArray:(NSArray <NSDate *> *) datesArray withDateGenerator:(SKDateGenerator *) generator {
     
-    [self localWarningAndFailNotificationsForDates:datesArray
-                                 andDatesGenerator:generator];
+    NSArray *notificationsArray = [self localWarningAndFailNotificationsForDates:datesArray
+                                                               andDatesGenerator:generator];
     
-    [[SKUserDataManager sharedInstance] updateUserWithNotificationDateArray:datesArray];
+    [[SKUserDataManager sharedManager] updateUserWithNotificationDateArray:notificationsArray];
 }
 
 @end

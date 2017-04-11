@@ -10,6 +10,8 @@
 
 @interface SKDateGenerator : NSObject
 
+- (NSDate *) localDateFromGMTDate:(NSDate *) date;
+
 - (NSArray<NSDate *> *) fireDatesSinceNow;
 - (NSDate *) firstFireDateSinceNowFromSet:(NSSet *) set;
 - (NSArray<NSDate *> *) warningDatesWithArray:(NSArray<NSDate *> *) array;

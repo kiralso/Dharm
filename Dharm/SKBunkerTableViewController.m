@@ -42,7 +42,7 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[SKUserDataManager sharedInstance] createUser];
+    [[SKUserDataManager sharedManager] createUser];
     
 }
 
