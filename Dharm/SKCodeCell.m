@@ -10,20 +10,46 @@
 #import "SKConstants.h"
 #import "SKUserDataManager.h"
 #import "SKUser+CoreDataClass.h"
+#import "SKMainObserver.h"
+#import "SKTimer.h"
 
 @interface SKCodeCell () <UITextFieldDelegate>
 
+@property (assign, nonatomic) BOOL codeCanEntered;
+
 @end
 
-@implementation SKCodeCell 
+@implementation SKCodeCell
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     if (self) {
-        [self updateScoreLabel];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(checkCodeCanEntered:)
+                                                     name:SKTimerTextChangedNotification
+                                                   object:nil];
+        self.codeCanEntered = NO;
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Notifications
+
+- (void) checkCodeCanEntered:(NSNotification *) notification {
+
+    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
+
+    if (dateComponents.minute < 4) {
+        self.codeCanEntered = YES;
+    } else {
+        self.codeCanEntered = NO;
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -32,11 +58,7 @@
     
     if ([self.codeTextField.text isEqualToString:kSafetyString]) {
         
-        NSInteger newScore = [[SKUserDataManager sharedManager] user].score++;
-        
-        [[SKUserDataManager sharedManager] updateUserWithScore:newScore];
-        
-        [self updateScoreLabel];
+        [[SKMainObserver sharedObserver] codeDidEntered];
         
         return YES;
     }
@@ -49,7 +71,7 @@
     NSCharacterSet* validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     NSArray* components = [string componentsSeparatedByCharactersInSet:validationSet];
     
-    if ([components count] > 1) {
+    if ([components count] > 1 || self.codeCanEntered == NO) {
         return NO;
     }
     
@@ -59,69 +81,49 @@
     NSArray* validationComponents = [newString componentsSeparatedByCharactersInSet:validationSet];
     newString = [validationComponents componentsJoinedByString:@""];
     
+    static const int maxCodeLength = 10; //4815162342
     
-    static const int localNumberMaxLength = 7;
-    static const int countryCodeMaxLength = 1;
-    static const int areaCodeMaxLength = 3;
-    
-    if ([newString length] > localNumberMaxLength + countryCodeMaxLength + areaCodeMaxLength) {
+    if ([newString length] > maxCodeLength) {
         return NO;
     }
     
-    NSInteger localNumberLength = MIN([newString length], localNumberMaxLength);
+    NSInteger currentCodeLength = MIN([newString length], maxCodeLength);
     
-    if (localNumberLength > 0) {
-        
-        NSString* number = [newString substringFromIndex:(int)[newString length] - localNumberLength];
-        
-        [resultString appendString:number];
-        
-        if ([resultString length] > 3) {
-            
-            [resultString insertString:@"-" atIndex:3];
-            
-        }
-        
+    NSString* number = [newString substringFromIndex:(int)[newString length] - currentCodeLength];
+    
+    [resultString appendString:number];
+    
+    if ([resultString length] > 1) {
+        [resultString insertString:@" " atIndex:1];
     }
     
-    if ([newString length] > localNumberMaxLength) {
-        
-        NSInteger areaCodeLength = MIN((int)[newString length] - localNumberMaxLength, areaCodeMaxLength);
-        
-        NSRange areaRange = NSMakeRange((int)[newString length] - localNumberMaxLength - areaCodeLength, areaCodeLength);
-        
-        NSString* area = [newString substringWithRange:areaRange];
-        
-        area = [NSString stringWithFormat:@"(%@) ",area];
-        
-        [resultString insertString:area atIndex:0];
+    if ([resultString length] > 3) {
+        [resultString insertString:@" " atIndex:3];
     }
     
-    if ([newString length] > localNumberMaxLength + areaCodeMaxLength) {
-        
-        NSInteger countryCodeLength = MIN((int)[newString length] - localNumberMaxLength - areaCodeMaxLength, countryCodeMaxLength);
-        
-        NSRange countryCodeRange = NSMakeRange(0, countryCodeLength);
-        
-        NSString* countryCode = [newString substringWithRange:countryCodeRange];
-        
-        countryCode = [NSString stringWithFormat:@"+%@ ",countryCode];
-        
-        [resultString insertString:countryCode atIndex:0];
+    if ([resultString length] > 6) {
+        [resultString insertString:@" " atIndex:6];
+    }
+    
+    if ([resultString length] > 9) {
+        [resultString insertString:@" " atIndex:9];
+    }
+    if ([resultString length] > 12) {
+        [resultString insertString:@" " atIndex:12];
     }
     
     textField.text = resultString;
     
+    if ([textField.text isEqualToString:kSafetyString]) {
+                
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [textField resignFirstResponder];
+            textField.text = @"";
+            
+            [[SKMainObserver sharedObserver] codeDidEntered];
+        });
+    }
     return NO;
-}
-
-#pragma mark - Useful methods
-
-- (void) updateScoreLabel {
-    
-    SKUser *user = [[SKUserDataManager sharedManager] user];
-    
-    self.codeTextField.text = [NSString stringWithFormat:@"Score: %i",(int)user.score];
 }
 
 @end

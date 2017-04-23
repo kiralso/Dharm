@@ -16,4 +16,7 @@
 
 @property (strong, nonatomic) SKTimer *timer;
 
+- (void) startTimerInStart:(NSTimeInterval)start end:(NSTimeInterval)end andInterval:(NSTimeInterval)interval;
+- (void) startTimerToNextFireDate;
+
 @end

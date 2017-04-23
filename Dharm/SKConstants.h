@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 static NSInteger const kNumberOfDatesToGenerate = 30;
-static NSInteger const kMinutesBeforeFireDateToWarn = 4;
-static NSInteger const kMinutesYoSaveTheWorld = 108;
-static NSString * const kScoreKey = @"scoreKey";
+static NSInteger const kMinutesBeforeFireDateToWarn = 4.0;
+static NSInteger const kMinutesYoSaveTheWorld = 108.0;
+
+static NSString * const kScoreKey = @"kScoreKey";
 static NSString * const kSafetyString = @"4 8 15 16 23 42";
+static NSString * const kCodeEnteredKey = @"kCodeEnteredKey";
 
 #pragma mark - NSUserDefaults keys
 

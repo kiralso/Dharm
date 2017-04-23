@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* const SKMainObserverReloadViewControlerNotification;
+
 @interface SKMainObserver : NSObject
 
 + (SKMainObserver *) sharedObserver;
+- (void) updateNotificationDates;
+- (NSTimeInterval) timeIntervalBeforeNextFireDate;
+- (void) updateDataWithScore:(NSInteger)score;
+- (void) codeDidEntered;
 
 @end

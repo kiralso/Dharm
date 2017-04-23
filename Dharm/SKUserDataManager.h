@@ -18,5 +18,6 @@
 - (SKUser *) user;
 - (void) updateUserWithScore:(NSInteger) score;
 - (void) updateUserWithNotificationDateArray:(NSArray *)array;
+- (NSSet *) fireDates;
 
 @end

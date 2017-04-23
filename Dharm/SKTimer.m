@@ -26,10 +26,10 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
     self = [super init];
     
     if (self) {
-        _timer = [[NSTimer alloc] init];
-        _timerStartInSeconds = start;
-        _timerEndInSeconds = end;
-        _timerIntervalInSeconds = interval;
+        self.timer = [[NSTimer alloc] init];
+        self.timerStartInSeconds = start;
+        self.timerEndInSeconds = end;
+        self.timerIntervalInSeconds = interval;
     }
     return self;
 }
@@ -45,6 +45,8 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
                                                     selector:@selector(timerDidFinish)
                                                     userInfo:nil
                                                      repeats:YES];
+        
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     }
 }
 

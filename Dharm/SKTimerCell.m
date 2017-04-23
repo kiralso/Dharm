@@ -8,12 +8,10 @@
 
 #import "SKTimerCell.h"
 #import "SKTimer.h"
+#import "SKConstants.h"
+#import "SKMainObserver.h"
 
 @interface SKTimerCell()
-
-@property (assign, nonatomic) NSTimeInterval timerEndInSeconds;
-@property (assign, nonatomic) NSTimeInterval timerStartInSeconds;
-@property (assign, nonatomic) NSTimeInterval timerIntervalInSeconds;
 
 @end
 
@@ -23,17 +21,11 @@
 {
     self = [super initWithCoder:coder];
     if (self) {
-        self.timerEndInSeconds = 0.0;
-        self.timerStartInSeconds = 0.1 * 60.0;
-        self.timerIntervalInSeconds = 1.0;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(updateTimeLabel:)
                                                      name:SKTimerTextChangedNotification
                                                    object:nil];
-        
-        [self startTimerWithDefaultParameters:NO];
-
     }
     return self;
 }
@@ -55,7 +47,10 @@
     }
     
     if (dateComponents.second < 1 && dateComponents.minute < 1) {
-        [self startTimerWithDefaultParameters:YES];
+        
+        [self startTimerToNextFireDate];
+        
+        [[SKMainObserver sharedObserver] updateDataWithScore:0];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
@@ -64,20 +59,24 @@
     }
 }
 
-- (void) startTimerWithDefaultParameters:(BOOL) yesOrNo {
+- (void) startTimerInStart:(NSTimeInterval)start end:(NSTimeInterval)end andInterval:(NSTimeInterval)interval {
     
-    if (yesOrNo) {
-        self.timer = [[SKTimer alloc] initWithStartInSeconds:108 * 60.f
-                                                     withEnd:0.0
-                                                 andInterval:0.1];
-    } else {
-        self.timer = [[SKTimer alloc] initWithStartInSeconds:self.timerStartInSeconds
-                                                     withEnd:self.timerEndInSeconds
-                                                 andInterval:self.timerIntervalInSeconds];
-    }
-    
-    [self.timer startTimer];
+        [self.timer.timer invalidate];
+        
+        self.timer = [[SKTimer alloc] initWithStartInSeconds:start
+                                                     withEnd:end
+                                                 andInterval:interval];
+        
+        [self.timer startTimer];
 }
 
+- (void) startTimerToNextFireDate {
+    
+    NSTimeInterval start = [[SKMainObserver sharedObserver] timeIntervalBeforeNextFireDate];
+    
+    [self startTimerInStart:start
+                        end:0.f
+                andInterval:0.1];
+}
 
 @end

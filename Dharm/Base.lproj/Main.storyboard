@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.74932414505082345" green="0.2330686553837357" blue="0.1597222874012828" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Ljn-vE-l2q" kind="relationship" relationship="viewControllers" id="kkL-VG-OBM"/>
@@ -42,10 +42,10 @@
                                         <rect key="frame" x="0.0" y="92" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WpR-r8-W1N" id="nzG-y4-rTf">
-                                            <frame key="frameInset" width="414" height="60"/>
+                                            <frame key="frameInset" width="414" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xGo-xC-8pN">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGo-xC-8pN">
                                                     <frame key="frameInset" minX="30" minY="14" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="onTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,7 +71,7 @@
                                         <rect key="frame" x="0.0" y="180" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="odH-r3-xOy" id="ctf-Za-IkS">
-                                            <frame key="frameInset" width="414" height="70"/>
+                                            <frame key="frameInset" width="414" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can chose time when you are able to save the world!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa0-ZV-pvw">
@@ -93,7 +93,7 @@
                                         <rect key="frame" x="0.0" y="278" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y3U-Vy-ix1" id="pqu-Gz-VX5">
-                                            <frame key="frameInset" width="414" height="150"/>
+                                            <frame key="frameInset" width="414" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1QI-sv-6LD">
@@ -104,7 +104,7 @@
                                                     </date>
                                                     <locale key="locale" localeIdentifier="en_150"/>
                                                     <connections>
-                                                        <action selector="dateFromPickerAction:" destination="Prf-vL-7JC" eventType="valueChanged" id="zKZ-FO-Swz"/>
+                                                        <action selector="dateFromPickerAction:" destination="Prf-vL-7JC" eventType="valueChanged" id="0aO-xt-PeT"/>
                                                     </connections>
                                                 </datePicker>
                                             </subviews>
@@ -118,7 +118,7 @@
                                         <rect key="frame" x="0.0" y="456" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ga-cG-CdA" id="jkw-nb-3QF">
-                                            <frame key="frameInset" width="414" height="150"/>
+                                            <frame key="frameInset" width="414" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yrv-Ez-DEf">
@@ -145,7 +145,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="Egt-oC-SpD"/>
                     <connections>
-                        <outlet property="dateFromPicker" destination="1QI-sv-6LD" id="jpK-lt-4sC"/>
+                        <outlet property="dateFromPicker" destination="1QI-sv-6LD" id="lrK-aI-cbA"/>
                         <outlet property="dateToPicker" destination="Yrv-Ez-DEf" id="MAE-as-pGb"/>
                         <outlet property="difficultySwitch" destination="xGo-xC-8pN" id="DcW-C1-zhj"/>
                     </connections>
@@ -293,7 +293,7 @@
                                     <segue destination="A4c-tK-m7B" kind="presentation" id="0gw-vd-gI2"/>
                                 </connections>
                             </button>
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.74932414510000001" green="0.23306865539999999" blue="0.1597222874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>

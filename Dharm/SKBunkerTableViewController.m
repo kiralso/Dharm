@@ -12,14 +12,10 @@
 #import "SKLogoCell.h"
 #import "SKCodeCell.h"
 #import "SKAdCell.h"
-#import "SKUserDataManager.h"
 #import "SKTimer.h"
+#import "SKMainObserver.h"
 
 @interface SKBunkerTableViewController ()
-
-@property (assign, nonatomic) NSTimeInterval timerEndInSeconds;
-@property (assign, nonatomic) NSTimeInterval timerStartInSeconds;
-@property (assign, nonatomic) NSTimeInterval timerIntervalInSeconds;
 
 @end
 
@@ -42,8 +38,14 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[SKUserDataManager sharedManager] createUser];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTableView:)
+                                                 name:SKMainObserverReloadViewControlerNotification
+                                               object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Table view data source
@@ -75,6 +77,8 @@ static NSString * const adCellIdentifier = @"adCell";
                                                    forIndexPath:indexPath];
             
             self.timerCell = (SKTimerCell *)cell;
+            
+            [self.timerCell startTimerToNextFireDate];
             
             return self.timerCell;
         case SKCellsLogo:
@@ -123,14 +127,23 @@ static NSString * const adCellIdentifier = @"adCell";
         case SKCellsCode:
             return screenHeight * 0.1f;
         case SKCellsAd:
-            return screenHeight * 0.1f;
+            return screenHeight * 0.05f;
     }
     
-    return 40.f;
+    return 10.f;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
+}
+
+#pragma mark - Notifications
+
+- (void) reloadTableView:(NSNotification *) notification {
+    
+    [self.scoreCell updateScoreLabel];
+
+    [self.tableView reloadData];
 }
 
 @end

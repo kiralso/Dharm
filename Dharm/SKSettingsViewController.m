@@ -66,9 +66,9 @@ static NSInteger const kHoursBetweenPickers = 3;
 
 - (IBAction)difficultySwitchAction:(UISwitch *)sender {
     
-    [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];
-    
     [self checkDifficultyInFromPicker:self.dateFromPicker andToPicker:self.dateToPicker withSwitch:self.difficultySwitch];
+    
+    [self saveSettings];
     
     [self checkToPicker];
     
@@ -76,19 +76,19 @@ static NSInteger const kHoursBetweenPickers = 3;
 }
 
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender {
-        
-    [self checkToPicker];
     
-    [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:kDateFromPickerKey];
+    [self saveSettings];
+    
+    [self checkToPicker];
     
     [self setValue:sender forKey:kDateFromPickerKey];
 }
 
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender {
     
-    [self checkToPicker];
+    [self saveSettings];
     
-    [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
+    [self checkToPicker];
     
     [self setValue:sender forKey:kDateToPickerKey];
 }
@@ -145,7 +145,8 @@ static NSInteger const kHoursBetweenPickers = 3;
     NSDateComponents *toComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
                                                                     fromDate:toPicker.date];
     
-    if (ABS((toComponents.hour - fromComponents.hour)) < hours) {
+    NSInteger hoursBetween = toComponents.hour - fromComponents.hour;
+    if (ABS(hoursBetween) < hours || hoursBetween == 0) {
         return [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour
                                                                value:hours
                                                               toDate:fromPicker.date
@@ -160,8 +161,14 @@ static NSInteger const kHoursBetweenPickers = 3;
     NSDate * date = [self checkTimeInFromPicker:self.dateFromPicker
                                     andToPicker:self.dateToPicker
                                withHoursBetween:kHoursBetweenPickers];
-    
+
     [self.dateToPicker setDate:date animated:YES];
+}
+
+- (void) saveSettings {
+    [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:kDateFromPickerKey];
+    [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
+    [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];
 }
 
 @end

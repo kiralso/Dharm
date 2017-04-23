@@ -30,4 +30,9 @@
     });
 }
 
+- (void) updateScoreLabelWithScore:(NSInteger) score {
+    
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", score];
+}
+
 @end

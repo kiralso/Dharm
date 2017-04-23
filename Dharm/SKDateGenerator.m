@@ -20,8 +20,6 @@
     for (int i = 1; i <= kNumberOfDatesToGenerate; i++) {
         
         NSDate *date= [NSDate dateWithTimeIntervalSinceNow:kMinutesYoSaveTheWorld * 60 * i];
-
-        date = [self localDateFromGMTDate:date];
         
         [dates addObject:date];
     }
@@ -70,9 +68,7 @@
         NSDateComponents *components = [[NSCalendar currentCalendar]
                                         components:NSCalendarUnitHour | NSCalendarUnitMinute
                                         fromDate:date];
-        
-        date = [self localDateFromGMTDate:date];
-        
+                
         BOOL isStartHoursAreEqual = startComponents.hour == components.hour;
         BOOL isEndHoursAreEqual = endComponents.hour == components.hour;
         BOOL isHourGood = NO;
@@ -116,11 +112,8 @@
     
     for (NSDate *dateFromArray in array) {
         
-        NSDate *date= [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMinute
-                                                               value:-kMinutesBeforeFireDateToWarn
-                                                              toDate:dateFromArray
-                                                             options:0];
-        
+        NSDate *date= [NSDate dateWithTimeInterval:-kMinutesBeforeFireDateToWarn*60 sinceDate:dateFromArray];
+
         [dates addObject:date];
     }
     

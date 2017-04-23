@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "SKCoreDataManager.h"
+#import "SKMainObserver.h"
+#import "SKConstants.h"
+#import "SKUserDataManager.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +22,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert categories:nil]];
+    
+    [SKMainObserver sharedObserver];
+    
+    [[SKUserDataManager sharedManager] createUser];
+    
+    if ([[[SKUserDataManager sharedManager] fireDates] count] == 0) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
+
+        [[SKMainObserver sharedObserver] updateNotificationDates];
+    }
     
     return YES;
 }
@@ -46,8 +60,6 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
     [[SKCoreDataManager sharedManager] saveContext];
 }
 

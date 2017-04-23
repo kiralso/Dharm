@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SKObserverProtocol.h"
 
 @interface SKCodeCell : UITableViewCell
 

@@ -11,9 +11,7 @@
 @implementation UIApplication (SKNotificationManager)
 
 - (void) setLocalNotificationsForFireDates:(NSArray<NSDate *> *) dates title:(NSString *) title andAllertBody:(NSString *) body {
-    
-    [self cancelAllLocalNotifications];
-    
+        
     for (int i = 0; i < [dates count] ; i++) {
         
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];

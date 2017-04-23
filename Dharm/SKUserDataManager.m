@@ -101,4 +101,17 @@
     }
 }
 
+- (NSSet *) fireDates {
+    
+    NSSet* notificationDates = [[SKUserDataManager sharedManager] user].notificationDate;
+    
+    NSMutableSet *fireDatesSet = [NSMutableSet set];
+    
+    for (SKNotificationDate *date in notificationDates) {
+        [fireDatesSet addObject:date.fireDate];
+    }
+    
+    return fireDatesSet;
+}
+
 @end
