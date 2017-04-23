@@ -27,7 +27,32 @@
     
     [[SKUserDataManager sharedManager] createUser];
     
-    if ([[[SKUserDataManager sharedManager] fireDates] count] == 0) {
+    NSSet *fireDates = [[SKUserDataManager sharedManager] fireDates];
+    
+    BOOL recountDates = YES;
+    
+    if ([fireDates count] != 0) {
+        
+        NSMutableSet *datesAfterNow = [NSMutableSet set];
+        
+        NSDate *currentDate = [NSDate date];
+        
+        NSComparisonResult result;
+        
+        for (NSDate *date in fireDates) {
+            result = [currentDate compare:date];
+            
+            if(result == NSOrderedAscending) {
+                [datesAfterNow addObject:date];
+            }
+        }
+        
+        if ([datesAfterNow count] > 0) {
+            recountDates = NO;
+        }
+    }
+    
+    if (recountDates) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
 
