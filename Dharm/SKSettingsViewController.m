@@ -9,6 +9,7 @@
 #import "SKSettingsViewController.h"
 #import "SKConstants.h"
 #import "SKMainObserver.h"
+#import "AMViralSwitch.h"
 
 @interface SKSettingsViewController ()
 
@@ -33,9 +34,29 @@ static NSInteger const kHoursBetweenPickers = 3;
     
     [defaults synchronize];
     
-    [self checkDifficultyInFromPicker:self.dateFromPicker andToPicker:self.dateToPicker withSwitch:self.difficultySwitch];
+    [self checkDifficultyInFromPicker:self.dateFromPicker
+                             toPicker:self.dateToPicker
+                           withSwitch:self.difficultySwitch
+                            infoLabel:self.info];
     
     [self addObserver:[SKMainObserver sharedObserver]];
+    
+    self.difficultySwitch.animationDuration = 2.0;
+    
+    self.difficultySwitch.animationElementsOff = @[
+                                              @{ AMElementView: self.view.layer,
+                                                 AMElementKeyPath: @"backgroundColor",
+                                                 AMElementFromValue:(id)[UIColor clearColor].CGColor,
+                                                 AMElementToValue:(id)[UIColor whiteColor].CGColor}
+                                              ];
+    
+    self.difficultySwitch.animationElementsOn = @[
+                                            @{ AMElementView: self.view.layer,
+                                            AMElementKeyPath: @"backgroundColor",
+                                          AMElementFromValue:(id)[UIColor whiteColor].CGColor,
+                                            AMElementToValue:(id)[UIColor clearColor].CGColor}
+                                                   ];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -46,27 +67,14 @@ static NSInteger const kHoursBetweenPickers = 3;
     [self removeObserver:[SKMainObserver sharedObserver]];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
-}
-
 #pragma mark - Actions
 
-- (IBAction)difficultySwitchAction:(UISwitch *)sender {
+- (IBAction)difficultySwitchAction:(AMViralSwitch *)sender {
     
-    [self checkDifficultyInFromPicker:self.dateFromPicker andToPicker:self.dateToPicker withSwitch:self.difficultySwitch];
+    [self checkDifficultyInFromPicker:self.dateFromPicker
+                             toPicker:self.dateToPicker
+                           withSwitch:self.difficultySwitch
+                            infoLabel:self.info];
     
     [self saveSettings];
     
@@ -127,14 +135,16 @@ static NSInteger const kHoursBetweenPickers = 3;
 
 #pragma mark - Useful Methods
 
-- (void) checkDifficultyInFromPicker:(UIDatePicker *) fromPicker andToPicker:(UIDatePicker *) toPicker withSwitch:(UISwitch *) dSwitch {
+- (void) checkDifficultyInFromPicker:(UIDatePicker *) fromPicker toPicker:(UIDatePicker *) toPicker withSwitch:(UISwitch *) dSwitch infoLabel:(UILabel *) label {
     
     if (dSwitch.on) {
-        fromPicker.enabled = NO;
-        toPicker.enabled = NO;
+        fromPicker.hidden = YES;
+        toPicker.hidden = YES;
+        label.hidden = NO;
     } else {
-        fromPicker.enabled = YES;
-        toPicker.enabled = YES;
+        toPicker.hidden = NO;
+        fromPicker.hidden = NO;
+        label.hidden = YES;
     }
 }
 

@@ -33,26 +33,33 @@
     
     NSDate * fireDate = nil;
     
+    NSArray *datesArray = [set allObjects];
+    
     NSDateComponents *startRangeComponents =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
                                                                             fromDate:[NSDate date]
-                                                                              toDate:[set anyObject]
+                                                                              toDate:[datesArray firstObject]
                                                                              options:0];
-    NSInteger startRange = startRangeComponents.second;
-    
-    for (NSDate *date in set) {
+    NSInteger startRange = ABS(startRangeComponents.second);
+    //NSLog(@"START SECONDS %li",startRangeComponents.second);
+
+    for (NSDate *date in datesArray) {
         
         NSDateComponents *components =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
                                                                       fromDate:[NSDate date]
                                                                         toDate:date
                                                                        options:0];
-        
+        //NSLog(@"%li",components.second);
         if (components.second < startRange && components.second > 0) {
             startRange = components.second;
             fireDate = date;
         }
     }
     
-    return fireDate;
+    if (fireDate) {
+        return fireDate;
+    } else {
+        return [datesArray firstObject];
+    }    
 }
 
 - (NSArray<NSDate *> *) fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *) startComponents andComponents:(NSDateComponents *) endComponents {

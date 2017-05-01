@@ -14,8 +14,13 @@
 #import "SKAdCell.h"
 #import "SKTimer.h"
 #import "SKMainObserver.h"
+#import "NGSPopoverView.h"
+#import "UIView+Shake.h"
 
 @interface SKBunkerTableViewController ()
+
+@property (nonatomic, assign, getter = isThrowingGestureEnabled) BOOL throwingGestureEnabled;
+@property (nonatomic, assign, getter = isTapBlurToDismissEnabled) BOOL tapBlurToDismissEnabled;
 
 @end
 
@@ -42,6 +47,14 @@ static NSString * const adCellIdentifier = @"adCell";
                                              selector:@selector(reloadTableView:)
                                                  name:SKMainObserverReloadViewControlerNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(shakeView:)
+                                                 name:SKTimerTextChangedNotification
+                                               object:nil];
+    
+    self.tapBlurToDismissEnabled = YES;
+    self.throwingGestureEnabled = YES;
 }
 
 - (void)dealloc {
@@ -144,6 +157,34 @@ static NSString * const adCellIdentifier = @"adCell";
     [self.scoreCell updateScoreLabel];
 
     [self.tableView reloadData];
+}
+
+- (void) shakeView:(NSNotification *) notification {
+    
+    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
+
+    if(!dateComponents.minute && dateComponents.second < 10) {
+       [self.view shake:10
+               withDelta:20
+                   speed:0.1
+          shakeDirection:ShakeDirectionVertical];
+    }
+}
+
+- (IBAction)showInfoPopoverAction:(UIButton *)sender {
+
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"4 8 15 16 23 42";
+    label.numberOfLines = 0;
+    
+    NGSPopoverView *popover = [[NGSPopoverView alloc] initWithCornerRadius:0.f
+                                                                 direction:NGSPopoverArrowPositionAutomatic
+                                                                 arrowSize:CGSizeMake(20, 10)];
+    popover.contentView = label;
+    popover.fillScreen = YES;
+    
+    [popover showFromView:sender animated:YES];
+    
 }
 
 @end

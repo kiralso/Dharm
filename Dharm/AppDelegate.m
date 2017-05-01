@@ -44,6 +44,8 @@
             
             if(result == NSOrderedAscending) {
                 [datesAfterNow addObject:date];
+            } else {
+                [[SKUserDataManager sharedManager] updateUserWithScore:0];
             }
         }
         

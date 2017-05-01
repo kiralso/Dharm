@@ -45,7 +45,7 @@
 
     NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
 
-    if (dateComponents.minute < 4) {
+    if (dateComponents.minute < kMinutesBeforeFireDateToWarn) {
         self.codeCanEntered = YES;
     } else {
         self.codeCanEntered = NO;

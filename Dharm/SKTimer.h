@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class MSWeakTimer;
+
 extern NSString* const SKTimerTextChangedNotification;
 extern NSString* const SKTimerTextUserInfoKey;
 
 @interface SKTimer : NSObject
 
-@property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) MSWeakTimer *timer;
 @property (strong, nonatomic) NSDateComponents *timerComponents;
 
 - (instancetype)initWithStartInSeconds:(NSTimeInterval)start withEnd:(NSTimeInterval) end andInterval:(NSTimeInterval) interval;

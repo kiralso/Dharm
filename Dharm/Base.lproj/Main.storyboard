@@ -27,132 +27,78 @@
             </objects>
             <point key="canvasLocation" x="-543" y="32"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="R8w-Ls-1a4">
+        <!--Settings View Controller-->
+        <scene sceneID="uTn-4c-ZFx">
             <objects>
-                <tableViewController id="Prf-vL-7JC" customClass="SKSettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tpi-6D-vhG">
+                <viewController id="st1-2z-L3k" customClass="SKSettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jVN-ab-afM"/>
+                        <viewControllerLayoutGuide type="bottom" id="UXf-kd-3oW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nUv-XO-v1h">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="uvp-tS-jem">
+                                <frame key="frameInset" minX="86" minY="425" height="187" maxX="85"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="512937731.30951399">
+                                    <!--2017-04-03 18:42:11 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="ru"/>
+                                <connections>
+                                    <action selector="dateToPickerAction:" destination="st1-2z-L3k" eventType="valueChanged" id="8bW-Sa-CQn"/>
+                                </connections>
+                            </datePicker>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="itu-1e-JdA" customClass="AMViralSwitch">
+                                <frame key="frameInset" minX="20" minY="84" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="onTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="difficultySwitchAction:" destination="st1-2z-L3k" eventType="valueChanged" id="Udx-8S-AAN"/>
+                                </connections>
+                            </switch>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="MWF-kU-gVm">
+                                <frame key="frameInset" minX="86" minY="142" height="198" maxX="85"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="512937614.15922499">
+                                    <!--2017-04-03 18:40:14 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="en_150"/>
+                                <connections>
+                                    <action selector="dateFromPickerAction:" destination="st1-2z-L3k" eventType="valueChanged" id="vFV-mz-rme"/>
+                                </connections>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hardcore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atX-cv-IuO">
+                                <frame key="frameInset" minX="86" minY="77" width="108" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="When hardcore is switched on, you should save the world every 108 minutes.Turn off it if you not prepared!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjl-Fc-Nfb">
+                                <frame key="frameInset" minX="58" minY="224" width="299" height="288"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <sections>
-                            <tableViewSection headerTitle="Difficulty" id="VB3-Kc-bNV">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="WpR-r8-W1N">
-                                        <rect key="frame" x="0.0" y="92" width="414" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WpR-r8-W1N" id="nzG-y4-rTf">
-                                            <frame key="frameInset" width="414" height="59"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGo-xC-8pN">
-                                                    <frame key="frameInset" minX="30" minY="14" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="onTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <connections>
-                                                        <action selector="difficultySwitchAction:" destination="Prf-vL-7JC" eventType="valueChanged" id="QNt-lJ-828"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hardcore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osK-eF-4Vb">
-                                                    <frame key="frameInset" minX="90" minY="14" width="78" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Time settings" id="GjU-sz-VUc">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="70" id="odH-r3-xOy">
-                                        <rect key="frame" x="0.0" y="180" width="414" height="70"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="odH-r3-xOy" id="ctf-Za-IkS">
-                                            <frame key="frameInset" width="414" height="69"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can chose time when you are able to save the world!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa0-ZV-pvw">
-                                                    <frame key="frameInset" minX="8" minY="11" width="351" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="I will be available to save the world from.." id="hAE-Ds-tZP">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="150" id="Y3U-Vy-ix1">
-                                        <rect key="frame" x="0.0" y="278" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y3U-Vy-ix1" id="pqu-Gz-VX5">
-                                            <frame key="frameInset" width="414" height="149"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1QI-sv-6LD">
-                                                    <frame key="frameInset" minX="7" minY="8" height="133" maxX="11"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="512937614.15922499">
-                                                        <!--2017-04-03 18:40:14 +0000-->
-                                                    </date>
-                                                    <locale key="locale" localeIdentifier="en_150"/>
-                                                    <connections>
-                                                        <action selector="dateFromPickerAction:" destination="Prf-vL-7JC" eventType="valueChanged" id="0aO-xt-PeT"/>
-                                                    </connections>
-                                                </datePicker>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="...to..." id="E78-NW-Crt">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="150" id="0Ga-cG-CdA">
-                                        <rect key="frame" x="0.0" y="456" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ga-cG-CdA" id="jkw-nb-3QF">
-                                            <frame key="frameInset" width="414" height="149"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yrv-Ez-DEf">
-                                                    <frame key="frameInset" minX="7" minY="8" height="133" maxX="11"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="512937731.30951399">
-                                                        <!--2017-04-03 18:42:11 +0000-->
-                                                    </date>
-                                                    <locale key="locale" localeIdentifier="ru"/>
-                                                    <connections>
-                                                        <action selector="dateToPickerAction:" destination="Prf-vL-7JC" eventType="valueChanged" id="WrX-0d-Qwj"/>
-                                                    </connections>
-                                                </datePicker>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="Prf-vL-7JC" id="qWI-dM-h0E"/>
-                            <outlet property="delegate" destination="Prf-vL-7JC" id="9IM-pt-EUt"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="Egt-oC-SpD"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="PnG-1D-UMe"/>
                     <connections>
-                        <outlet property="dateFromPicker" destination="1QI-sv-6LD" id="lrK-aI-cbA"/>
-                        <outlet property="dateToPicker" destination="Yrv-Ez-DEf" id="MAE-as-pGb"/>
-                        <outlet property="difficultySwitch" destination="xGo-xC-8pN" id="DcW-C1-zhj"/>
+                        <outlet property="dateFromPicker" destination="MWF-kU-gVm" id="z2t-pJ-sRP"/>
+                        <outlet property="dateToPicker" destination="uvp-tS-jem" id="FSI-CA-Yo4"/>
+                        <outlet property="difficultySwitch" destination="itu-1e-JdA" id="cKa-fF-ykQ"/>
+                        <outlet property="info" destination="Wjl-Fc-Nfb" id="oG9-n7-1Ri"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="76h-fT-wN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NsB-dX-W1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2016" y="228"/>
+            <point key="canvasLocation" x="2048" y="227.58620689655174"/>
         </scene>
         <!--Settings-->
         <scene sceneID="xil-ju-Tce">
@@ -167,7 +113,7 @@
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Prf-vL-7JC" kind="relationship" relationship="rootViewController" id="Ssh-8b-fzR"/>
+                        <segue destination="st1-2z-L3k" kind="relationship" relationship="rootViewController" id="zUJ-d8-Bv4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ztd-Yp-o8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -182,6 +128,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scoreCell" rowHeight="30" id="Gvj-oa-xYt" customClass="SKScoreCell">
                                 <rect key="frame" x="0.0" y="92" width="375" height="30"/>
@@ -290,7 +237,7 @@
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="A4c-tK-m7B" kind="presentation" id="0gw-vd-gI2"/>
+                                    <action selector="showInfoPopoverAction:" destination="eaW-ga-j4T" eventType="touchUpInside" id="stL-1W-w4G"/>
                                 </connections>
                             </button>
                             <color key="tintColor" red="0.74932414510000001" green="0.23306865539999999" blue="0.1597222874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -317,44 +264,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8S-2O-rw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="882" y="-634"/>
-        </scene>
-        <!--Info-->
-        <scene sceneID="jIK-gx-uMr">
-            <objects>
-                <viewController title="Info" id="A4c-tK-m7B" customClass="SKInfoViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Voe-1y-EK7"/>
-                        <viewControllerLayoutGuide type="bottom" id="cdP-O4-Ziv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8iH-BH-Nxs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c03-Vp-Eml">
-                                <frame key="frameInset" minX="115" minY="535" width="145" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="ok">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="okAction:" destination="A4c-tK-m7B" eventType="touchUpInside" id="sIO-Cx-gSk"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4 8 15 16 23 42" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgB-Sf-bxh">
-                                <frame key="frameInset" minX="125" minY="315" width="124" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y6X-hw-VXJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3071" y="-634"/>
         </scene>
         <!--Leaderboard-->
         <scene sceneID="0gX-tV-iNk">

@@ -40,7 +40,7 @@
     
     NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
     
-    if (dateComponents.minute < 4) {
+    if (dateComponents.minute < kMinutesBeforeFireDateToWarn) {
         self.timerLabel.textColor = [UIColor redColor];
     } else {
         self.timerLabel.textColor = [UIColor darkGrayColor];
@@ -61,7 +61,7 @@
 
 - (void) startTimerInStart:(NSTimeInterval)start end:(NSTimeInterval)end andInterval:(NSTimeInterval)interval {
     
-        [self.timer.timer invalidate];
+        [self.timer stopTimer];
         
         self.timer = [[SKTimer alloc] initWithStartInSeconds:start
                                                      withEnd:end

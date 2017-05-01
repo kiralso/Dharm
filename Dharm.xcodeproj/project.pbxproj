@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4145A18E3BD3374C31CC8907 /* libPods-Dharm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4FB7AC4ACD06E84E2DCDAE /* libPods-Dharm.a */; };
 		5518196B1E9A78D100BD59B4 /* SKBunkerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5518196A1E9A78D100BD59B4 /* SKBunkerTableViewController.m */; };
 		5518196E1E9A7BF400BD59B4 /* SKScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5518196D1E9A7BF400BD59B4 /* SKScoreCell.m */; };
 		551819721E9A7C1800BD59B4 /* SKTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551819711E9A7C1800BD59B4 /* SKTimerCell.m */; };
@@ -31,8 +32,10 @@
 		556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB091E8FB7550038D214 /* SKSettingsViewController.m */; };
 		556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */; };
 		55A1D66E1E9A56F900CEE5DB /* SKUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */; };
-		55ACA8491E93016F00DD98BC /* SKInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA8481E93016E00DD98BC /* SKInfoViewController.m */; };
 		55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */; };
+		55B59CAC1EAE731800B969A5 /* libAMViralSwitch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */; };
+		55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */; };
+		55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */; };
 		55EC38271E91181F00D3E399 /* SKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC38261E91181F00D3E399 /* SKTimer.m */; };
 /* End PBXBuildFile section */
 
@@ -83,12 +86,16 @@
 		556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsViewController.m; sourceTree = "<group>"; };
 		55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserDataManager.h; sourceTree = "<group>"; };
 		55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserDataManager.m; sourceTree = "<group>"; };
-		55ACA8471E93016E00DD98BC /* SKInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKInfoViewController.h; sourceTree = "<group>"; };
-		55ACA8481E93016E00DD98BC /* SKInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKInfoViewController.m; sourceTree = "<group>"; };
 		55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDateGenerator.h; sourceTree = "<group>"; };
 		55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDateGenerator.m; sourceTree = "<group>"; };
+		55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAMViralSwitch.a; path = "Pods/../build/Debug-iphoneos/AMViralSwitch/libAMViralSwitch.a"; sourceTree = "<group>"; };
+		55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMSWeakTimer.a; path = "Pods/../build/Debug-iphoneos/MSWeakTimer/libMSWeakTimer.a"; sourceTree = "<group>"; };
+		55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUIView+Shake.a"; path = "Pods/../build/Debug-iphoneos/UIView+Shake/libUIView+Shake.a"; sourceTree = "<group>"; };
 		55EC38251E91181F00D3E399 /* SKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTimer.h; sourceTree = "<group>"; };
 		55EC38261E91181F00D3E399 /* SKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTimer.m; sourceTree = "<group>"; };
+		8F161D563E3A8DDB9AC1F50E /* Pods-Dharm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dharm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dharm/Pods-Dharm.debug.xcconfig"; sourceTree = "<group>"; };
+		AD4FB7AC4ACD06E84E2DCDAE /* libPods-Dharm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dharm.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCC42AE72A013E2E913B226F /* Pods-Dharm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dharm.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dharm/Pods-Dharm.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +103,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B59CAC1EAE731800B969A5 /* libAMViralSwitch.a in Frameworks */,
+				55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */,
+				55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */,
+				4145A18E3BD3374C31CC8907 /* libPods-Dharm.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +184,8 @@
 			children = (
 				556DBAEA1E8FB1510038D214 /* Dharm */,
 				556DBAE91E8FB1510038D214 /* Products */,
+				748DF71BE7976640542379EC /* Pods */,
+				E40EDEC173917F8791F9D011 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,11 +205,11 @@
 				556DBB0E1E8FB77C0038D214 /* Bunker */,
 				556DBB0F1E8FB7840038D214 /* Settings */,
 				556DBB101E8FB78D0038D214 /* Leaderboards */,
-				556DBAF41E8FB1520038D214 /* Main.storyboard */,
+				556DBAEB1E8FB1510038D214 /* Supporting Files */,
 				556DBAFA1E8FB1520038D214 /* Assets.xcassets */,
+				556DBAF41E8FB1520038D214 /* Main.storyboard */,
 				556DBAFC1E8FB1520038D214 /* LaunchScreen.storyboard */,
 				556DBAFF1E8FB1520038D214 /* Info.plist */,
-				556DBAEB1E8FB1510038D214 /* Supporting Files */,
 			);
 			path = Dharm;
 			sourceTree = "<group>";
@@ -214,8 +227,6 @@
 			children = (
 				55EC38251E91181F00D3E399 /* SKTimer.h */,
 				55EC38261E91181F00D3E399 /* SKTimer.m */,
-				55ACA8471E93016E00DD98BC /* SKInfoViewController.h */,
-				55ACA8481E93016E00DD98BC /* SKInfoViewController.m */,
 				551819691E9A78D100BD59B4 /* SKBunkerTableViewController.h */,
 				5518196A1E9A78D100BD59B4 /* SKBunkerTableViewController.m */,
 				5518196F1E9A7C0300BD59B4 /* Cells */,
@@ -241,6 +252,26 @@
 			name = Leaderboards;
 			sourceTree = "<group>";
 		};
+		748DF71BE7976640542379EC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F161D563E3A8DDB9AC1F50E /* Pods-Dharm.debug.xcconfig */,
+				FCC42AE72A013E2E913B226F /* Pods-Dharm.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E40EDEC173917F8791F9D011 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */,
+				55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */,
+				55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */,
+				AD4FB7AC4ACD06E84E2DCDAE /* libPods-Dharm.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -248,9 +279,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 556DBB021E8FB1520038D214 /* Build configuration list for PBXNativeTarget "Dharm" */;
 			buildPhases = (
+				C7B9B0C518E57B1C02DAD803 /* [CP] Check Pods Manifest.lock */,
 				556DBAE41E8FB1510038D214 /* Sources */,
 				556DBAE51E8FB1510038D214 /* Frameworks */,
 				556DBAE61E8FB1510038D214 /* Resources */,
+				4619396BAE73BC316C71259D /* [CP] Embed Pods Frameworks */,
+				25C823DE6E849F28F61614C4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -308,6 +342,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		25C823DE6E849F28F61614C4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dharm/Pods-Dharm-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4619396BAE73BC316C71259D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dharm/Pods-Dharm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7B9B0C518E57B1C02DAD803 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		556DBAE41E8FB1510038D214 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -323,7 +405,6 @@
 				556492531E98FDE70028623E /* SKCoreDataManager.m in Sources */,
 				551819781E9A7C5300BD59B4 /* SKLogoCell.m in Sources */,
 				556492501E98F8A70028623E /* SKConstants.m in Sources */,
-				55ACA8491E93016F00DD98BC /* SKInfoViewController.m in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
 				55EC38271E91181F00D3E399 /* SKTimer.m in Sources */,
 				5518196E1E9A7BF400BD59B4 /* SKScoreCell.m in Sources */,
@@ -454,11 +535,18 @@
 		};
 		556DBB031E8FB1520038D214 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F161D563E3A8DDB9AC1F50E /* Pods-Dharm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Dharm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/AMViralSwitch",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/MSWeakTimer",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/UIView+Shake",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -466,11 +554,18 @@
 		};
 		556DBB041E8FB1520038D214 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCC42AE72A013E2E913B226F /* Pods-Dharm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Dharm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/AMViralSwitch",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/MSWeakTimer",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/UIView+Shake",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

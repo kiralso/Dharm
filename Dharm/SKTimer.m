@@ -7,6 +7,8 @@
 //
 
 #import "SKTimer.h"
+#import <MSWeakTimer.h>
+
 
 @interface SKTimer ()
 
@@ -26,7 +28,6 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
     self = [super init];
     
     if (self) {
-        self.timer = [[NSTimer alloc] init];
         self.timerStartInSeconds = start;
         self.timerEndInSeconds = end;
         self.timerIntervalInSeconds = interval;
@@ -36,18 +37,14 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
 
 - (void) startTimer {
     
-    if (!self.timer.valid) { //prevent more than one timer on the thread
-        
-        self.timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
-        
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timerIntervalInSeconds
+    self.timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
+    
+    self.timer = [MSWeakTimer scheduledTimerWithTimeInterval:self.timerIntervalInSeconds
                                                       target:self
                                                     selector:@selector(timerDidFinish)
                                                     userInfo:nil
-                                                     repeats:YES];
-        
-        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    }
+                                                     repeats:YES
+                                               dispatchQueue:dispatch_get_main_queue()];
 }
 
 - (void) timerDidFinish {

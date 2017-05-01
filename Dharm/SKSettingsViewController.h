@@ -8,14 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "SKObserverProtocol.h"
+#import "AMViralSwitch.h"
 
-@interface SKSettingsViewController : UITableViewController <SKObserverProtocol>
+@class AMViralSwitch;
 
-@property (weak, nonatomic) IBOutlet UISwitch *difficultySwitch;
+@interface SKSettingsViewController : UIViewController <SKObserverProtocol>
+
+
+@property (weak, nonatomic) IBOutlet AMViralSwitch *difficultySwitch;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateFromPicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateToPicker;
+@property (weak, nonatomic) IBOutlet UILabel *info;
 
-- (IBAction)difficultySwitchAction:(UISwitch *)sender;
+- (IBAction)difficultySwitchAction:(AMViralSwitch *)sender;
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender;
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender;
 
