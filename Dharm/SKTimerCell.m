@@ -8,7 +8,7 @@
 
 #import "SKTimerCell.h"
 #import "SKTimer.h"
-#import "SKConstants.h"
+#import "SKUtils.h"
 #import "SKMainObserver.h"
 
 @interface SKTimerCell()
@@ -41,9 +41,13 @@
     NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
     
     if (dateComponents.minute < kMinutesBeforeFireDateToWarn) {
-        self.timerLabel.textColor = [UIColor redColor];
+        UIColor *customRed = [UIColor colorWithRed:163.f/255.f
+                                             green:26.f/255.f
+                                              blue:27.f/255.f
+                                             alpha:1.f];
+        self.timerLabel.textColor = customRed;
     } else {
-        self.timerLabel.textColor = [UIColor darkGrayColor];
+        self.timerLabel.textColor = [UIColor blackColor];
     }
     
     if (dateComponents.second < 1 && dateComponents.minute < 1) {

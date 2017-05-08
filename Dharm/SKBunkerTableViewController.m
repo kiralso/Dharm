@@ -13,9 +13,12 @@
 #import "SKCodeCell.h"
 #import "SKAdCell.h"
 #import "SKTimer.h"
+#import "SKUtils.h"
 #import "SKMainObserver.h"
 #import "NGSPopoverView.h"
 #import "UIView+Shake.h"
+#import "UIViewController+SKViewControllerCategory.h"
+#import "UITableViewController+SKTableViewCategory.h"
 
 @interface SKBunkerTableViewController ()
 
@@ -27,14 +30,12 @@
 typedef enum : NSUInteger {
     SKCellsScore,
     SKCellsTimer,
-    SKCellsLogo,
     SKCellsCode,
     SKCellsAd
 } SKCells;
 
 static NSString * const scoreCellIdentifier = @"scoreCell";
 static NSString * const timerCellIdentifier = @"timerCell";
-static NSString * const logoCellIdentifier = @"logoCell";
 static NSString * const codeCellIdentifier = @"codeCell";
 static NSString * const adCellIdentifier = @"adCell";
 
@@ -48,13 +49,13 @@ static NSString * const adCellIdentifier = @"adCell";
                                                  name:SKMainObserverReloadViewControlerNotification
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(shakeView:)
-                                                 name:SKTimerTextChangedNotification
-                                               object:nil];
-    
     self.tapBlurToDismissEnabled = YES;
     self.throwingGestureEnabled = YES;
+    
+    UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
+    [self drawStatusBarOnNavigationViewWithColor:color];
+    
+    [self setBackgroundImageViewWithImageName:backgroundPath()];
 }
 
 - (void)dealloc {
@@ -68,7 +69,7 @@ static NSString * const adCellIdentifier = @"adCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -94,14 +95,6 @@ static NSString * const adCellIdentifier = @"adCell";
             [self.timerCell startTimerToNextFireDate];
             
             return self.timerCell;
-        case SKCellsLogo:
-            
-            cell = [tableView dequeueReusableCellWithIdentifier:logoCellIdentifier
-                                                   forIndexPath:indexPath];
-                        
-            self.logoCell = (SKLogoCell *)cell;
-            
-            return self.logoCell;
         case SKCellsCode:
             
             cell = [tableView dequeueReusableCellWithIdentifier:codeCellIdentifier
@@ -127,23 +120,21 @@ static NSString * const adCellIdentifier = @"adCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGRect rect = self.tableView.bounds;
     CGFloat screenHeight = rect.size.height;
-    
+
     switch (indexPath.row) {
         case SKCellsScore:
             return screenHeight * 0.05f;
         case SKCellsTimer:
-            return screenHeight * 0.15f;
-        case SKCellsLogo:
-            return screenHeight * 0.5f;
+            return screenHeight * 0.52f;
         case SKCellsCode:
-            return screenHeight * 0.1f;
+            return screenHeight * 0.15f;
         case SKCellsAd:
-            return screenHeight * 0.05f;
+            return screenHeight * 0.1f;
     }
     
-    return 10.f;
+    return 1.f;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -157,18 +148,6 @@ static NSString * const adCellIdentifier = @"adCell";
     [self.scoreCell updateScoreLabel];
 
     [self.tableView reloadData];
-}
-
-- (void) shakeView:(NSNotification *) notification {
-    
-    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
-
-    if(!dateComponents.minute && dateComponents.second < 10) {
-       [self.view shake:10
-               withDelta:20
-                   speed:0.1
-          shakeDirection:ShakeDirectionVertical];
-    }
 }
 
 - (IBAction)showInfoPopoverAction:(UIButton *)sender {

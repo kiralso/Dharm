@@ -14,7 +14,10 @@
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 - (void)saveContext;
+- (void)oldSaveContext;
 
 + (SKCoreDataManager *) sharedManager;
+- (NSManagedObjectContext *) oldManagedObjectContext;
+
 
 @end

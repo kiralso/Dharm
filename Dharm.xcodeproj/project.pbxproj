@@ -3,21 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4145A18E3BD3374C31CC8907 /* libPods-Dharm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4FB7AC4ACD06E84E2DCDAE /* libPods-Dharm.a */; };
+		55079BE11EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55079BE01EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m */; };
+		55079BE41EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55079BE31EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m */; };
+		551319A11EC09D860072B442 /* SKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 551319A01EC09D860072B442 /* SKUtils.m */; };
 		5518196B1E9A78D100BD59B4 /* SKBunkerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5518196A1E9A78D100BD59B4 /* SKBunkerTableViewController.m */; };
 		5518196E1E9A7BF400BD59B4 /* SKScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5518196D1E9A7BF400BD59B4 /* SKScoreCell.m */; };
 		551819721E9A7C1800BD59B4 /* SKTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551819711E9A7C1800BD59B4 /* SKTimerCell.m */; };
 		551819781E9A7C5300BD59B4 /* SKLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551819771E9A7C5300BD59B4 /* SKLogoCell.m */; };
 		5518197B1E9A7C6700BD59B4 /* SKCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5518197A1E9A7C6700BD59B4 /* SKCodeCell.m */; };
 		5518197E1E9A7C7500BD59B4 /* SKAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5518197D1E9A7C7500BD59B4 /* SKAdCell.m */; };
-		55490E5D1E9CFEF400331AF2 /* SKNotificationDateDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55490E5C1E9CFEF400331AF2 /* SKNotificationDateDataManager.m */; };
 		554D046C1E9C0D0D002D3E1E /* SKMainObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 554D046B1E9C0D0D002D3E1E /* SKMainObserver.m */; };
 		554D04711E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 554D04701E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.m */; };
-		556492501E98F8A70028623E /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5564924F1E98F8A70028623E /* SKConstants.m */; };
 		556492531E98FDE70028623E /* SKCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 556492521E98FDE70028623E /* SKCoreDataManager.m */; };
 		5564925D1E98FFE80028623E /* SKNotificationDate+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 556492561E98FFE80028623E /* SKNotificationDate+CoreDataClass.m */; };
 		5564925E1E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 556492581E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m */; };
@@ -40,6 +41,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55079BDF1EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SKViewControllerCategory.h"; sourceTree = "<group>"; };
+		55079BE01EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SKViewControllerCategory.m"; sourceTree = "<group>"; };
+		55079BE21EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+SKTableViewCategory.h"; sourceTree = "<group>"; };
+		55079BE31EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+SKTableViewCategory.m"; sourceTree = "<group>"; };
+		5513199F1EC09D860072B442 /* SKUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUtils.h; sourceTree = "<group>"; };
+		551319A01EC09D860072B442 /* SKUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUtils.m; sourceTree = "<group>"; };
 		551819691E9A78D100BD59B4 /* SKBunkerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBunkerTableViewController.h; sourceTree = "<group>"; };
 		5518196A1E9A78D100BD59B4 /* SKBunkerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBunkerTableViewController.m; sourceTree = "<group>"; };
 		5518196C1E9A7BF400BD59B4 /* SKScoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKScoreCell.h; sourceTree = "<group>"; };
@@ -52,15 +59,11 @@
 		5518197A1E9A7C6700BD59B4 /* SKCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCodeCell.m; sourceTree = "<group>"; };
 		5518197C1E9A7C7500BD59B4 /* SKAdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAdCell.h; sourceTree = "<group>"; };
 		5518197D1E9A7C7500BD59B4 /* SKAdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAdCell.m; sourceTree = "<group>"; };
-		55490E5B1E9CFEF400331AF2 /* SKNotificationDateDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKNotificationDateDataManager.h; sourceTree = "<group>"; };
-		55490E5C1E9CFEF400331AF2 /* SKNotificationDateDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKNotificationDateDataManager.m; sourceTree = "<group>"; };
 		554D046A1E9C0D0D002D3E1E /* SKMainObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMainObserver.h; sourceTree = "<group>"; };
 		554D046B1E9C0D0D002D3E1E /* SKMainObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMainObserver.m; sourceTree = "<group>"; };
 		554D046D1E9C1434002D3E1E /* SKObserverProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObserverProtocol.h; sourceTree = "<group>"; };
 		554D046F1E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+SKNotificationManager.h"; sourceTree = "<group>"; };
 		554D04701E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+SKNotificationManager.m"; sourceTree = "<group>"; };
-		5564924E1E98F8A70028623E /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
-		5564924F1E98F8A70028623E /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
 		556492511E98FDE70028623E /* SKCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCoreDataManager.h; sourceTree = "<group>"; };
 		556492521E98FDE70028623E /* SKCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCoreDataManager.m; sourceTree = "<group>"; };
 		556492551E98FFE80028623E /* SKNotificationDate+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SKNotificationDate+CoreDataClass.h"; path = "Dharm/SKNotificationDate+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -113,6 +116,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55079BE51EB779E90044FCF4 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				554D046F1E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.h */,
+				554D04701E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.m */,
+				55079BDF1EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.h */,
+				55079BE01EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m */,
+				55079BE21EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.h */,
+				55079BE31EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		5518196F1E9A7C0300BD59B4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +149,6 @@
 		554D04691E9AF9FF002D3E1E /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				5564924E1E98F8A70028623E /* SKConstants.h */,
-				5564924F1E98F8A70028623E /* SKConstants.m */,
 				556DBAEE1E8FB1510038D214 /* AppDelegate.h */,
 				556DBAEF1E8FB1510038D214 /* AppDelegate.m */,
 				55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */,
@@ -142,8 +156,8 @@
 				554D046A1E9C0D0D002D3E1E /* SKMainObserver.h */,
 				554D046B1E9C0D0D002D3E1E /* SKMainObserver.m */,
 				554D046D1E9C1434002D3E1E /* SKObserverProtocol.h */,
-				554D046F1E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.h */,
-				554D04701E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.m */,
+				5513199F1EC09D860072B442 /* SKUtils.h */,
+				551319A01EC09D860072B442 /* SKUtils.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -157,8 +171,6 @@
 				556492521E98FDE70028623E /* SKCoreDataManager.m */,
 				55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */,
 				55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */,
-				55490E5B1E9CFEF400331AF2 /* SKNotificationDateDataManager.h */,
-				55490E5C1E9CFEF400331AF2 /* SKNotificationDateDataManager.m */,
 			);
 			name = Coredata;
 			sourceTree = "<group>";
@@ -200,6 +212,7 @@
 		556DBAEA1E8FB1510038D214 /* Dharm */ = {
 			isa = PBXGroup;
 			children = (
+				55079BE51EB779E90044FCF4 /* Categories */,
 				554D04691E9AF9FF002D3E1E /* Main */,
 				556492541E98FDF30028623E /* Coredata */,
 				556DBB0E1E8FB77C0038D214 /* Bunker */,
@@ -312,7 +325,7 @@
 				};
 			};
 			buildConfigurationList = 556DBAE31E8FB1500038D214 /* Build configuration list for PBXProject "Dharm" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -395,8 +408,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55079BE11EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m in Sources */,
 				5564925E1E98FFE80028623E /* SKNotificationDate+CoreDataProperties.m in Sources */,
 				556DBAF01E8FB1510038D214 /* AppDelegate.m in Sources */,
+				55079BE41EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m in Sources */,
 				5518196B1E9A78D100BD59B4 /* SKBunkerTableViewController.m in Sources */,
 				5564925D1E98FFE80028623E /* SKNotificationDate+CoreDataClass.m in Sources */,
 				5564925F1E98FFE80028623E /* SKUser+CoreDataClass.m in Sources */,
@@ -404,7 +419,6 @@
 				556DBAF91E8FB1520038D214 /* Dharm.xcdatamodeld in Sources */,
 				556492531E98FDE70028623E /* SKCoreDataManager.m in Sources */,
 				551819781E9A7C5300BD59B4 /* SKLogoCell.m in Sources */,
-				556492501E98F8A70028623E /* SKConstants.m in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
 				55EC38271E91181F00D3E399 /* SKTimer.m in Sources */,
 				5518196E1E9A7BF400BD59B4 /* SKScoreCell.m in Sources */,
@@ -413,8 +427,8 @@
 				556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */,
 				55A1D66E1E9A56F900CEE5DB /* SKUserDataManager.m in Sources */,
 				556492601E98FFE80028623E /* SKUser+CoreDataProperties.m in Sources */,
+				551319A11EC09D860072B442 /* SKUtils.m in Sources */,
 				556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */,
-				55490E5D1E9CFEF400331AF2 /* SKNotificationDateDataManager.m in Sources */,
 				554D04711E9C1DB4002D3E1E /* UIApplication+SKNotificationManager.m in Sources */,
 				554D046C1E9C0D0D002D3E1E /* SKMainObserver.m in Sources */,
 				551819721E9A7C1800BD59B4 /* SKTimerCell.m in Sources */,
@@ -461,6 +475,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -483,7 +498,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -509,6 +524,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -525,7 +541,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -549,6 +565,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -568,6 +585,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

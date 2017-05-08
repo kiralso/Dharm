@@ -22,7 +22,7 @@
     return manager;
 }
 
-#pragma mark - Core Data stack
+#pragma mark - Core Data stack iOS 10+
 
 @synthesize persistentContainer = _persistentContainer;
 
@@ -67,4 +67,44 @@
     }
 }
 
+#pragma mark - Core Data stack iOS 9+
+
+- (NSManagedObjectContext *) oldManagedObjectContext {
+    
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Dharm" withExtension:@"momd"];
+    
+    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+    
+    NSArray *url = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                        inDomains:NSUserDomainMask];
+    
+    NSURL *docURL = [url lastObject];
+    
+    NSURL *storeURL = [docURL URLByAppendingPathComponent:@"Dharm.sqlite"];
+    
+    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    
+    [moc setPersistentStoreCoordinator:coordinator];
+    
+    NSError *error = nil;
+    
+    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        NSLog(@"Error migrating store - %@", error.description);
+    }
+    
+    return moc;
+}
+
+- (void)oldSaveContext {
+    NSManagedObjectContext *context = [self oldManagedObjectContext];
+    NSError *error = nil;
+    if ([context hasChanges] && ![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
+}
 @end

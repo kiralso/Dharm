@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SKUserDataManager.h"
-#import "SKNotificationDateDataManager.h"
 #import "SKNotificationDate+CoreDataClass.h"
 #import "SKUser+CoreDataClass.h"
 #import "SKMainObserver.h"
-#import "SKConstants.h"
+#import "SKUtils.h"
 #import "SKDateGenerator.h"
 #import "UIApplication+SKNotificationManager.h"
 #import "SKSettingsViewController.h"
@@ -127,9 +126,9 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
     
     for (int i = 0; i < [dates count]; i++) {
         SKNotificationDate * nd =
-        [[SKNotificationDateDataManager sharedManager] createWithFireDate:dates[i]
-                                                              warningDate:warningDatesArray[i]
-                                                                  andUser:user];
+        [[SKUserDataManager sharedManager] notificationDateWithFireDate:dates[i]
+                                                            warningDate:warningDatesArray[i]
+                                                                andUser:user];
         
         [notificationsArray addObject:nd];
     }

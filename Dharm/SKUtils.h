@@ -1,12 +1,13 @@
 //
-//  SKConstants.h
+//  SKUtils.h
 //  Dharm
 //
-//  Created by Кирилл on 08.04.17.
-//  Copyright © 2017 Kirill Solovov. All rights reserved.
+//  Created by Кирилл on 08.05.17.
+//  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 static NSInteger const kNumberOfDatesToGenerate = 30;
 static NSInteger const kMinutesBeforeFireDateToWarn = 1.0;
@@ -29,7 +30,15 @@ static NSString * const kAlertBody = @"Увы, молодой человек, в
 static NSString * const kWarningTitle = @"Опять пора спасать мир!";
 static NSString * const kWarningBody = @"Новобранец, у тебя 4 минуты, чтобы ввести код!";
 
+#pragma mark - BackgroundPaths
 
-@interface SKConstants : NSObject
+static NSString * const kPhoneBackground = @"dharm background3.pdf";
+static NSString * const kPadBackground = @"dharmBackgroundIPAD.pdf";
 
-@end
+#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a];
+
+BOOL iPad();
+BOOL iPhone();
+
+NSString* backgroundPath();
+

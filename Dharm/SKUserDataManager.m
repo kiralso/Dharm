@@ -11,10 +11,12 @@
 #import "SKUser+CoreDataClass.h"
 #import "SKNotificationDate+CoreDataClass.h"
 #import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
 
 @interface SKUserDataManager()
 
 @property(strong, nonatomic) NSManagedObjectContext *moc;
+@property(assign, nonatomic) NSInteger systemVersion;
 
 @end
 
@@ -36,7 +38,16 @@
 {
     self = [super init];
     if (self) {
-        self.moc = [SKCoreDataManager sharedManager].persistentContainer.viewContext;
+        
+        NSString *systemVersion = [[UIDevice currentDevice].systemVersion substringToIndex:1];
+        
+        self.systemVersion = [systemVersion integerValue];
+        
+        if (self.systemVersion < 10) {
+            self.moc = [SKCoreDataManager sharedManager].oldManagedObjectContext;
+        } else {
+            self.moc = [SKCoreDataManager sharedManager].persistentContainer.viewContext;
+        }
     }
     return self;
 }
@@ -113,5 +124,27 @@
     
     return fireDatesSet;
 }
+
+- (SKNotificationDate *) notificationDateWithFireDate:(NSDate *) fireDate warningDate:(NSDate *) warningDate andUser:(SKUser *) user {
+    
+    NSEntityDescription *entityDescription =
+    [NSEntityDescription entityForName:@"SKNotificationDate"
+                inManagedObjectContext:self.moc];
+    
+    SKNotificationDate *nd = [[SKNotificationDate alloc] initWithEntity:entityDescription
+                                         insertIntoManagedObjectContext:self.moc];
+    
+    nd.fireDate = fireDate;
+    nd.warningDate = warningDate;
+    nd.user = user;
+    
+    NSError *error = nil;
+    if (![self.moc save:&error]) {
+        abort();
+    }
+    
+    return nd;
+}
+
 
 @end

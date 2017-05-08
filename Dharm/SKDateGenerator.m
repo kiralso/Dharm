@@ -7,7 +7,7 @@
 //
 
 #import "SKDateGenerator.h"
-#import "SKConstants.h"
+#import "SKUtils.h"
 
 @implementation SKDateGenerator
 
@@ -40,7 +40,6 @@
                                                                               toDate:[datesArray firstObject]
                                                                              options:0];
     NSInteger startRange = ABS(startRangeComponents.second);
-    //NSLog(@"START SECONDS %li",startRangeComponents.second);
 
     for (NSDate *date in datesArray) {
         
@@ -48,7 +47,7 @@
                                                                       fromDate:[NSDate date]
                                                                         toDate:date
                                                                        options:0];
-        //NSLog(@"%li",components.second);
+        
         if (components.second < startRange && components.second > 0) {
             startRange = components.second;
             fireDate = date;

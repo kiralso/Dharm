@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "SKCoreDataManager.h"
 #import "SKMainObserver.h"
-#import "SKConstants.h"
+#import "SKUtils.h"
 #import "SKUserDataManager.h"
 
 @interface AppDelegate ()
@@ -22,9 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert categories:nil]];
-    
-    [SKMainObserver sharedObserver];
-    
+        
     [[SKUserDataManager sharedManager] createUser];
     
     NSSet *fireDates = [[SKUserDataManager sharedManager] fireDates];

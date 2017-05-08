@@ -7,9 +7,10 @@
 //
 
 #import "SKSettingsViewController.h"
-#import "SKConstants.h"
+#import "SKUtils.h"
 #import "SKMainObserver.h"
 #import "AMViralSwitch.h"
+#import "UIViewController+SKViewControllerCategory.h"
 
 @interface SKSettingsViewController ()
 
@@ -47,16 +48,22 @@ static NSInteger const kHoursBetweenPickers = 3;
                                               @{ AMElementView: self.view.layer,
                                                  AMElementKeyPath: @"backgroundColor",
                                                  AMElementFromValue:(id)[UIColor clearColor].CGColor,
-                                                 AMElementToValue:(id)[UIColor whiteColor].CGColor}
+                                                 AMElementToValue:(id)self.view.backgroundColor.CGColor}
                                               ];
     
     self.difficultySwitch.animationElementsOn = @[
                                             @{ AMElementView: self.view.layer,
                                             AMElementKeyPath: @"backgroundColor",
-                                          AMElementFromValue:(id)[UIColor whiteColor].CGColor,
+                                          AMElementFromValue:(id)self.view.backgroundColor.CGColor,
                                             AMElementToValue:(id)[UIColor clearColor].CGColor}
                                                    ];
     
+    UIImage *image = [UIImage imageNamed:backgroundPath()];
+    
+    self.backgroundView.image = image;
+    
+    UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
+    [self drawStatusBarOnNavigationViewWithColor:color];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -140,10 +147,20 @@ static NSInteger const kHoursBetweenPickers = 3;
     if (dSwitch.on) {
         fromPicker.hidden = YES;
         toPicker.hidden = YES;
+        
+        for (UILabel *label in self.softcoreInfoCollectionOfLabels) {
+            label.hidden = YES;
+        }
+        
         label.hidden = NO;
     } else {
         toPicker.hidden = NO;
         fromPicker.hidden = NO;
+        
+        for (UILabel *label in self.softcoreInfoCollectionOfLabels) {
+            label.hidden = NO;
+        }
+        
         label.hidden = YES;
     }
 }

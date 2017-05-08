@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class SKUser;
+@class SKNotificationDate;
 
 @interface SKUserDataManager : NSObject
 
@@ -19,5 +20,6 @@
 - (void) updateUserWithScore:(NSInteger) score;
 - (void) updateUserWithNotificationDateArray:(NSArray *)array;
 - (NSSet *) fireDates;
+- (SKNotificationDate *) notificationDateWithFireDate:(NSDate *) fireDate warningDate:(NSDate *) warningDate andUser:(SKUser *) user;
 
 @end

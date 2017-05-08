@@ -7,7 +7,7 @@
 //
 
 #import "SKCodeCell.h"
-#import "SKConstants.h"
+#import "SKUtils.h"
 #import "SKUserDataManager.h"
 #import "SKUser+CoreDataClass.h"
 #import "SKMainObserver.h"

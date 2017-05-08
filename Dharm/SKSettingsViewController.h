@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateFromPicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateToPicker;
 @property (weak, nonatomic) IBOutlet UILabel *info;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *softcoreInfoCollectionOfLabels;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 
 - (IBAction)difficultySwitchAction:(AMViralSwitch *)sender;
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender;
