@@ -32,11 +32,15 @@
 		556DBAFE1E8FB1520038D214 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556DBAFC1E8FB1520038D214 /* LaunchScreen.storyboard */; };
 		556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB091E8FB7550038D214 /* SKSettingsViewController.m */; };
 		556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */; };
+		55979D3A1ED4A51D00163F00 /* SKGameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 55979D391ED4A51D00163F00 /* SKGameKitHelper.m */; };
+		55979D3D1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55979D3C1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m */; };
 		55A1D66E1E9A56F900CEE5DB /* SKUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */; };
+		55A743A11ECE189D00BF4AF0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A743A01ECE189D00BF4AF0 /* GameKit.framework */; };
 		55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */; };
 		55B59CAC1EAE731800B969A5 /* libAMViralSwitch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */; };
 		55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */; };
 		55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */; };
+		55E92D3D1EC1C6C000B58280 /* SKPopoverInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */; };
 		55EC38271E91181F00D3E399 /* SKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC38261E91181F00D3E399 /* SKTimer.m */; };
 /* End PBXBuildFile section */
 
@@ -87,13 +91,20 @@
 		556DBB091E8FB7550038D214 /* SKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettingsViewController.m; sourceTree = "<group>"; };
 		556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLeaderboardsViewController.h; sourceTree = "<group>"; };
 		556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsViewController.m; sourceTree = "<group>"; };
+		55979D381ED4A51D00163F00 /* SKGameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKGameKitHelper.h; sourceTree = "<group>"; };
+		55979D391ED4A51D00163F00 /* SKGameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKGameKitHelper.m; sourceTree = "<group>"; };
+		55979D3B1ED4AFF800163F00 /* SKLeaderboardsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLeaderboardsNavigationController.h; sourceTree = "<group>"; };
+		55979D3C1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsNavigationController.m; sourceTree = "<group>"; };
 		55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserDataManager.h; sourceTree = "<group>"; };
 		55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserDataManager.m; sourceTree = "<group>"; };
+		55A743A01ECE189D00BF4AF0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDateGenerator.h; sourceTree = "<group>"; };
 		55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDateGenerator.m; sourceTree = "<group>"; };
 		55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAMViralSwitch.a; path = "Pods/../build/Debug-iphoneos/AMViralSwitch/libAMViralSwitch.a"; sourceTree = "<group>"; };
 		55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMSWeakTimer.a; path = "Pods/../build/Debug-iphoneos/MSWeakTimer/libMSWeakTimer.a"; sourceTree = "<group>"; };
 		55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUIView+Shake.a"; path = "Pods/../build/Debug-iphoneos/UIView+Shake/libUIView+Shake.a"; sourceTree = "<group>"; };
+		55E92D3B1EC1C6C000B58280 /* SKPopoverInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPopoverInfoViewController.h; sourceTree = "<group>"; };
+		55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPopoverInfoViewController.m; sourceTree = "<group>"; };
 		55EC38251E91181F00D3E399 /* SKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTimer.h; sourceTree = "<group>"; };
 		55EC38261E91181F00D3E399 /* SKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTimer.m; sourceTree = "<group>"; };
 		8F161D563E3A8DDB9AC1F50E /* Pods-Dharm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dharm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dharm/Pods-Dharm.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +121,7 @@
 				55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */,
 				55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */,
 				4145A18E3BD3374C31CC8907 /* libPods-Dharm.a in Frameworks */,
+				55A743A11ECE189D00BF4AF0 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +224,7 @@
 		556DBAEA1E8FB1510038D214 /* Dharm */ = {
 			isa = PBXGroup;
 			children = (
+				55979D371ED4A4CB00163F00 /* GameKit */,
 				55079BE51EB779E90044FCF4 /* Categories */,
 				554D04691E9AF9FF002D3E1E /* Main */,
 				556492541E98FDF30028623E /* Coredata */,
@@ -240,6 +253,8 @@
 			children = (
 				55EC38251E91181F00D3E399 /* SKTimer.h */,
 				55EC38261E91181F00D3E399 /* SKTimer.m */,
+				55E92D3B1EC1C6C000B58280 /* SKPopoverInfoViewController.h */,
+				55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */,
 				551819691E9A78D100BD59B4 /* SKBunkerTableViewController.h */,
 				5518196A1E9A78D100BD59B4 /* SKBunkerTableViewController.m */,
 				5518196F1E9A7C0300BD59B4 /* Cells */,
@@ -261,8 +276,19 @@
 			children = (
 				556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */,
 				556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */,
+				55979D3B1ED4AFF800163F00 /* SKLeaderboardsNavigationController.h */,
+				55979D3C1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m */,
 			);
 			name = Leaderboards;
+			sourceTree = "<group>";
+		};
+		55979D371ED4A4CB00163F00 /* GameKit */ = {
+			isa = PBXGroup;
+			children = (
+				55979D381ED4A51D00163F00 /* SKGameKitHelper.h */,
+				55979D391ED4A51D00163F00 /* SKGameKitHelper.m */,
+			);
+			name = GameKit;
 			sourceTree = "<group>";
 		};
 		748DF71BE7976640542379EC /* Pods */ = {
@@ -277,6 +303,7 @@
 		E40EDEC173917F8791F9D011 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55A743A01ECE189D00BF4AF0 /* GameKit.framework */,
 				55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */,
 				55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */,
 				55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */,
@@ -321,6 +348,11 @@
 					556DBAE71E8FB1510038D214 = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -417,10 +449,13 @@
 				5564925F1E98FFE80028623E /* SKUser+CoreDataClass.m in Sources */,
 				5518197E1E9A7C7500BD59B4 /* SKAdCell.m in Sources */,
 				556DBAF91E8FB1520038D214 /* Dharm.xcdatamodeld in Sources */,
+				55E92D3D1EC1C6C000B58280 /* SKPopoverInfoViewController.m in Sources */,
+				55979D3A1ED4A51D00163F00 /* SKGameKitHelper.m in Sources */,
 				556492531E98FDE70028623E /* SKCoreDataManager.m in Sources */,
 				551819781E9A7C5300BD59B4 /* SKLogoCell.m in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
 				55EC38271E91181F00D3E399 /* SKTimer.m in Sources */,
+				55979D3D1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m in Sources */,
 				5518196E1E9A7BF400BD59B4 /* SKScoreCell.m in Sources */,
 				55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */,
 				5518197B1E9A7C6700BD59B4 /* SKCodeCell.m in Sources */,
@@ -554,6 +589,8 @@
 			baseConfigurationReference = 8F161D563E3A8DDB9AC1F50E /* Pods-Dharm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -563,8 +600,9 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/MSWeakTimer",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/UIView+Shake",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SK.Dharm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -574,6 +612,8 @@
 			baseConfigurationReference = FCC42AE72A013E2E913B226F /* Pods-Dharm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -583,8 +623,9 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/MSWeakTimer",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/UIView+Shake",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SK.Dharm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

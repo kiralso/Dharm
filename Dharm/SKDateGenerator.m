@@ -81,7 +81,7 @@
         
         if (startComponents.hour > endComponents.hour) {
             
-            BOOL isGoodBeforeMidnight = components.hour < 24 && components.hour > startComponents.hour;
+            BOOL isGoodBeforeMidnight = components.hour < 24 && components.hour >= startComponents.hour;
             BOOL isGoodAfterMidnight = components.hour >= 0 && components.hour <= endComponents.hour;
 
             if (isGoodBeforeMidnight || isGoodAfterMidnight) {

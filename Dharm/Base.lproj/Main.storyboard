@@ -358,7 +358,7 @@
         <!--Лучшие игроки-->
         <scene sceneID="AEU-qZ-jXS">
             <objects>
-                <navigationController id="axx-hb-HVv" sceneMemberID="viewController">
+                <navigationController id="axx-hb-HVv" customClass="SKLeaderboardsNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Лучшие игроки" image="plain-triangle" id="jyI-jK-FH6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cuG-AO-mBq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

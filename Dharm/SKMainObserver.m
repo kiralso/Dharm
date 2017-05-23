@@ -47,6 +47,44 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
 
 #pragma mark - Useful Methods
 
+- (void) checkScore {
+    
+    NSSet *fireDates = [[SKUserDataManager sharedManager] fireDates];
+    
+    BOOL recountDates = YES;
+    
+    if ([fireDates count] != 0) {
+        
+        NSMutableSet *datesAfterNow = [NSMutableSet set];
+        
+        NSDate *currentDate = [NSDate date];
+        
+        NSComparisonResult result;
+        
+        for (NSDate *date in fireDates) {
+            result = [currentDate compare:date];
+            
+            if(result == NSOrderedAscending) {
+                [datesAfterNow addObject:date];
+            } else {
+                [[SKUserDataManager sharedManager] updateUserWithScore:0];
+            }
+        }
+        
+        if ([datesAfterNow count] > 0) {
+            recountDates = NO;
+        }
+    }
+    
+    if (recountDates) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
+        
+        [self updateNotificationDates];
+    }
+}
+
+
 - (void) codeDidEntered {
     
     NSInteger newScore = [[SKUserDataManager sharedManager] user].score + 1;
@@ -58,8 +96,13 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
     
     [[SKUserDataManager sharedManager] updateUserWithScore:score];
     
+    [self updateData];
+}
+
+- (void) updateData {
+    
     [self updateNotificationDates];
-        
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:SKMainObserverReloadViewControlerNotification
                                                         object:nil];
 }

@@ -15,7 +15,9 @@ extern NSString* const SKMainObserverReloadViewControlerNotification;
 + (SKMainObserver *) sharedObserver;
 - (void) updateNotificationDates;
 - (NSTimeInterval) timeIntervalBeforeNextFireDate;
+- (void) updateData;
 - (void) updateDataWithScore:(NSInteger)score;
 - (void) codeDidEntered;
+- (void) checkScore;
 
 @end

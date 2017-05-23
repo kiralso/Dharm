@@ -22,9 +22,6 @@
 
 @interface SKBunkerTableViewController ()
 
-@property (nonatomic, assign, getter = isThrowingGestureEnabled) BOOL throwingGestureEnabled;
-@property (nonatomic, assign, getter = isTapBlurToDismissEnabled) BOOL tapBlurToDismissEnabled;
-
 @end
 
 typedef enum : NSUInteger {
@@ -49,13 +46,19 @@ static NSString * const adCellIdentifier = @"adCell";
                                                  name:SKMainObserverReloadViewControlerNotification
                                                object:nil];
     
-    self.tapBlurToDismissEnabled = YES;
-    self.throwingGestureEnabled = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTableView:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
     
     UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
     [self drawStatusBarOnNavigationViewWithColor:color];
     
     [self setBackgroundImageViewWithImageName:backgroundPath()];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 - (void)dealloc {
@@ -145,15 +148,19 @@ static NSString * const adCellIdentifier = @"adCell";
 
 - (void) reloadTableView:(NSNotification *) notification {
     
+    [[SKMainObserver sharedObserver] checkScore];
+    
     [self.scoreCell updateScoreLabel];
 
     [self.tableView reloadData];
 }
 
+#pragma mark - Actions
+
 - (IBAction)showInfoPopoverAction:(UIButton *)sender {
 
     UILabel *label = [[UILabel alloc] init];
-    label.text = @"4 8 15 16 23 42";
+    label.text = [NSString stringWithFormat:@"Код: 4 8 15 16 23 42\nЧисла можно вводить за %li минуты до истечения таймера\nЛюбое изменение настроек сбросит набранные очки", (long)kMinutesBeforeFireDateToWarn];
     label.numberOfLines = 0;
     
     NGSPopoverView *popover = [[NGSPopoverView alloc] initWithCornerRadius:0.f
@@ -163,7 +170,6 @@ static NSString * const adCellIdentifier = @"adCell";
     popover.fillScreen = YES;
     
     [popover showFromView:sender animated:YES];
-    
 }
 
 @end
