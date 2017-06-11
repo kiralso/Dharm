@@ -69,7 +69,7 @@
     GKScore *score = [self.usersArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = score.player.alias;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Score %lld", score.value];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lld", score.value];
     
     return cell;
 }
