@@ -12,6 +12,8 @@
 #import "SKUtils.h"
 #import "SKUserDataManager.h"
 
+@import GoogleMobileAds;
+
 @interface AppDelegate ()
 
 @end
@@ -26,6 +28,8 @@
     [[SKUserDataManager sharedManager] createUser];
     
     [[SKMainObserver sharedObserver] checkScore];
+    
+    [GADMobileAds configureWithApplicationID:kAdMobAppIdentifier];
     
     return YES;
 }

@@ -16,6 +16,7 @@
 #import "UIApplication+SKNotificationManager.h"
 #import "SKSettingsViewController.h"
 #import "SKCodeCell.h"
+#import "SKGameKitHelper.h"
 
 NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserverReloadViewControlerNotification";
 
@@ -89,6 +90,11 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
     
     NSInteger newScore = [[SKUserDataManager sharedManager] user].score + 1;
     
+    [[SKGameKitHelper sharedGameKitHelper] reportScore:newScore];
+    
+    //NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
+    //[[SKGameKitHelper sharedGameKitHelper] reportScore:(int64_t) newScore forLeaderboardID: identifier];
+    
     [self updateDataWithScore:newScore];
 }
 
@@ -156,13 +162,18 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
         
     NSArray *warningDatesArray = [generator warningDatesWithArray:dates];
     
+    NSString *alertTitle = NSLocalizedString(@"SORRY", nil);
+    NSString *alertBody = NSLocalizedString(@"SHAME", nil);
+    NSString *warningTitle = NSLocalizedString(@"SAVETHEWORLD", nil);
+    NSString *warningBody = NSLocalizedString(@"ROCKIE", nil);
+    
     [[UIApplication sharedApplication] setLocalNotificationsForFireDates:dates
-                                                                   title:kAlertTitle
-                                                           andAllertBody:kAlertBody];
+                                                                   title:alertTitle
+                                                           andAllertBody:alertBody];
     
     [[UIApplication sharedApplication] setLocalNotificationsForFireDates:warningDatesArray
-                                                                   title:kWarningTitle
-                                                           andAllertBody:kWarningBody];
+                                                                   title:warningTitle
+                                                           andAllertBody:warningBody];
     
     NSMutableArray *notificationsArray = [NSMutableArray array];
     SKUser *user = [[SKUserDataManager sharedManager] user];

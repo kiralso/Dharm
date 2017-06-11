@@ -23,16 +23,15 @@
 
 - (void) updateScoreLabel {
     
-    SKUser *user = [[SKUserDataManager sharedManager] user];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.scoreLabel.text = [NSString stringWithFormat:@"Счет: %i",user.score];
+        SKUser *user = [[SKUserDataManager sharedManager] user];
+        
+        self.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @(user.score)];
     });
 }
 
 - (void) updateScoreLabelWithScore:(NSInteger) score {
-    
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", (long)score];
+    self.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((long)score)];
 }
 
 @end

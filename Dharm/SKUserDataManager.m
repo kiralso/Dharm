@@ -79,9 +79,14 @@
 - (SKUser *) user {
     
     NSFetchRequest *request = [SKUser fetchRequest];
-    
+    NSError *error = nil;
     NSArray* array = [self.moc executeFetchRequest:request
-                                             error:nil];
+                                             error:&error];
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+        return nil;
+    }
     
     return [array firstObject];
 }

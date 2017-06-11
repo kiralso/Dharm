@@ -33,13 +33,13 @@
 		556DBB0A1E8FB7550038D214 /* SKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB091E8FB7550038D214 /* SKSettingsViewController.m */; };
 		556DBB0D1E8FB76E0038D214 /* SKLeaderboardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */; };
 		55979D3A1ED4A51D00163F00 /* SKGameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 55979D391ED4A51D00163F00 /* SKGameKitHelper.m */; };
-		55979D3D1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55979D3C1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m */; };
 		55A1D66E1E9A56F900CEE5DB /* SKUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */; };
 		55A743A11ECE189D00BF4AF0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A743A01ECE189D00BF4AF0 /* GameKit.framework */; };
 		55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */; };
 		55B59CAC1EAE731800B969A5 /* libAMViralSwitch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */; };
 		55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */; };
 		55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */; };
+		55CBD4991EE08478002679FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55CBD49B1EE08478002679FE /* Localizable.strings */; };
 		55E92D3D1EC1C6C000B58280 /* SKPopoverInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */; };
 		55EC38271E91181F00D3E399 /* SKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC38261E91181F00D3E399 /* SKTimer.m */; };
 /* End PBXBuildFile section */
@@ -93,8 +93,6 @@
 		556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsViewController.m; sourceTree = "<group>"; };
 		55979D381ED4A51D00163F00 /* SKGameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKGameKitHelper.h; sourceTree = "<group>"; };
 		55979D391ED4A51D00163F00 /* SKGameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKGameKitHelper.m; sourceTree = "<group>"; };
-		55979D3B1ED4AFF800163F00 /* SKLeaderboardsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLeaderboardsNavigationController.h; sourceTree = "<group>"; };
-		55979D3C1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardsNavigationController.m; sourceTree = "<group>"; };
 		55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserDataManager.h; sourceTree = "<group>"; };
 		55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserDataManager.m; sourceTree = "<group>"; };
 		55A743A01ECE189D00BF4AF0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -103,6 +101,10 @@
 		55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAMViralSwitch.a; path = "Pods/../build/Debug-iphoneos/AMViralSwitch/libAMViralSwitch.a"; sourceTree = "<group>"; };
 		55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMSWeakTimer.a; path = "Pods/../build/Debug-iphoneos/MSWeakTimer/libMSWeakTimer.a"; sourceTree = "<group>"; };
 		55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUIView+Shake.a"; path = "Pods/../build/Debug-iphoneos/UIView+Shake/libUIView+Shake.a"; sourceTree = "<group>"; };
+		55CBD49A1EE08478002679FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55CBD49C1EE08492002679FE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		55CBD49D1EE08492002679FE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		55CBD49E1EE08493002679FE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E92D3B1EC1C6C000B58280 /* SKPopoverInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPopoverInfoViewController.h; sourceTree = "<group>"; };
 		55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPopoverInfoViewController.m; sourceTree = "<group>"; };
 		55EC38251E91181F00D3E399 /* SKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTimer.h; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				556DBAF41E8FB1520038D214 /* Main.storyboard */,
 				556DBAFC1E8FB1520038D214 /* LaunchScreen.storyboard */,
 				556DBAFF1E8FB1520038D214 /* Info.plist */,
+				55CBD49B1EE08478002679FE /* Localizable.strings */,
 			);
 			path = Dharm;
 			sourceTree = "<group>";
@@ -276,8 +279,6 @@
 			children = (
 				556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */,
 				556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */,
-				55979D3B1ED4AFF800163F00 /* SKLeaderboardsNavigationController.h */,
-				55979D3C1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m */,
 			);
 			name = Leaderboards;
 			sourceTree = "<group>";
@@ -363,6 +364,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 556DBADF1E8FB1500038D214;
 			productRefGroup = 556DBAE91E8FB1510038D214 /* Products */;
@@ -381,6 +383,7 @@
 			files = (
 				556DBAFE1E8FB1520038D214 /* LaunchScreen.storyboard in Resources */,
 				556DBAFB1E8FB1520038D214 /* Assets.xcassets in Resources */,
+				55CBD4991EE08478002679FE /* Localizable.strings in Resources */,
 				556DBAF61E8FB1520038D214 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,7 +458,6 @@
 				551819781E9A7C5300BD59B4 /* SKLogoCell.m in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
 				55EC38271E91181F00D3E399 /* SKTimer.m in Sources */,
-				55979D3D1ED4AFF800163F00 /* SKLeaderboardsNavigationController.m in Sources */,
 				5518196E1E9A7BF400BD59B4 /* SKScoreCell.m in Sources */,
 				55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */,
 				5518197B1E9A7C6700BD59B4 /* SKCodeCell.m in Sources */,
@@ -477,6 +479,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				556DBAF51E8FB1520038D214 /* Base */,
+				55CBD49C1EE08492002679FE /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -485,8 +488,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				556DBAFD1E8FB1520038D214 /* Base */,
+				55CBD49D1EE08492002679FE /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		55CBD49B1EE08478002679FE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55CBD49A1EE08478002679FE /* en */,
+				55CBD49E1EE08493002679FE /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -496,6 +509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -545,6 +559,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -589,6 +604,7 @@
 			baseConfigurationReference = 8F161D563E3A8DDB9AC1F50E /* Pods-Dharm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;
@@ -612,6 +628,7 @@
 			baseConfigurationReference = FCC42AE72A013E2E913B226F /* Pods-Dharm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;

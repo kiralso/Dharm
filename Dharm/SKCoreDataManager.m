@@ -67,7 +67,7 @@
     }
 }
 
-#pragma mark - Core Data stack iOS 9+
+#pragma mark - Core Data stack old iOS
 
 - (NSManagedObjectContext *) oldManagedObjectContext {
     

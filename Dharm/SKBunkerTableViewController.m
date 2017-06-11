@@ -19,8 +19,13 @@
 #import "UIView+Shake.h"
 #import "UIViewController+SKViewControllerCategory.h"
 #import "UITableViewController+SKTableViewCategory.h"
+#import "SKGameKitHelper.h"
 
-@interface SKBunkerTableViewController ()
+@import GoogleMobileAds;
+
+@interface SKBunkerTableViewController () <GADBannerViewDelegate>
+
+@property(nonatomic, strong) GADBannerView *bannerView;
 
 @end
 
@@ -59,6 +64,13 @@ static NSString * const adCellIdentifier = @"adCell";
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showAuthenticationViewController)
+                                                 name:SKPresentAuthenticationViewControllerNotification
+                                               object:nil];
+    
+    [[SKGameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
 }
 
 - (void)dealloc {
@@ -113,6 +125,15 @@ static NSString * const adCellIdentifier = @"adCell";
             
             self.adCell = (SKAdCell *)cell;
             
+            self.adCell.adView.adUnitID = kAdMobAdIdentifier;
+            self.adCell.adView.adSize = kGADAdSizeSmartBannerPortrait;
+            self.adCell.adView.rootViewController = self;
+            self.adCell.adView.delegate = self;
+            
+            GADRequest *request = [GADRequest request];
+            //request.testDevices = @[ kGADSimulatorID, @"9291ab358d305b95d038fc96c2e16e44" ];
+            [self.adCell.adView loadRequest:request];
+            
             return self.adCell;
     }
     
@@ -134,7 +155,7 @@ static NSString * const adCellIdentifier = @"adCell";
         case SKCellsCode:
             return screenHeight * 0.15f;
         case SKCellsAd:
-            return screenHeight * 0.1f;
+            return 60;//screenHeight * 0.1f;
     }
     
     return 1.f;
@@ -147,12 +168,19 @@ static NSString * const adCellIdentifier = @"adCell";
 #pragma mark - Notifications
 
 - (void) reloadTableView:(NSNotification *) notification {
-    
+
     [[SKMainObserver sharedObserver] checkScore];
-    
+
     [self.scoreCell updateScoreLabel];
 
     [self.tableView reloadData];
+}
+
+- (void)showAuthenticationViewController {
+    
+    [self presentViewController:[SKGameKitHelper sharedGameKitHelper].authenticationViewController
+                       animated:YES
+                     completion:nil];
 }
 
 #pragma mark - Actions
@@ -160,7 +188,7 @@ static NSString * const adCellIdentifier = @"adCell";
 - (IBAction)showInfoPopoverAction:(UIButton *)sender {
 
     UILabel *label = [[UILabel alloc] init];
-    label.text = [NSString stringWithFormat:@"Код: 4 8 15 16 23 42\nЧисла можно вводить за %li минуты до истечения таймера\nЛюбое изменение настроек сбросит набранные очки", (long)kMinutesBeforeFireDateToWarn];
+    label.text = [NSString stringWithFormat:NSLocalizedString(@"POPOVER", nil), kMinutesBeforeFireDateToWarn];
     label.numberOfLines = 0;
     
     NGSPopoverView *popover = [[NGSPopoverView alloc] initWithCornerRadius:0.f
@@ -170,6 +198,17 @@ static NSString * const adCellIdentifier = @"adCell";
     popover.fillScreen = YES;
     
     [popover showFromView:sender animated:YES];
+}
+
+#pragma mark - GADBannerViewDelegate
+
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
+    NSLog(@"====== Success loading ======");
+    self.adCell.adView = self.bannerView;
+}
+
+- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"====== Loading failure , error - %@ ======", [error localizedDescription]);
 }
 
 @end

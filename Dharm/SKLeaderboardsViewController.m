@@ -10,9 +10,11 @@
 #import "UITableViewController+SKTableViewCategory.h"
 #import "UIViewController+SKViewControllerCategory.h"
 #import "SKUtils.h"
+#import "SKGameKitHelper.h"
 
 @interface SKLeaderboardsViewController ()
 
+@property (strong, nonatomic) NSArray *usersArray;
 @end
 
 @implementation SKLeaderboardsViewController
@@ -24,77 +26,58 @@
     
     UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
     [self drawStatusBarOnNavigationViewWithColor:color];
+    
+    self.usersArray = nil;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
+    
+    [[SKGameKitHelper sharedGameKitHelper] loadLeaderboardWithIdentifier:identifier andCompetionHandler:^(NSArray<GKScore *> *scores, NSError *error) {
+        
+        if (error != nil) {
+            NSLog(@"ERROR - %@", error.localizedDescription);
+        } else {
+            
+            self.usersArray = scores;
+            
+            [[self tableView] reloadData];
+        }
+    }];
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [self.usersArray count];
 }
 
-
-
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: forIndexPath:indexPath];
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
+    
+    GKScore *score = [self.usersArray objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = score.player.alias;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Score %lld", score.value];
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - UITableViewDelegate
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

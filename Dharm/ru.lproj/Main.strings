@@ -1,0 +1,59 @@
+
+/* Class = "UITextField"; placeholder = "введите код здесь"; ObjectID = "1am-NV-RKU"; */
+"1am-NV-RKU.placeholder" = "введите код здесь";
+
+/* Class = "UILabel"; text = "Когда тебе удобно спасать мир?"; ObjectID = "5DN-df-872"; */
+"5DN-df-872.text" = "Когда тебе удобно спасать мир?";
+
+/* Class = "UINavigationItem"; title = "Бункер"; ObjectID = "5rF-Bb-D5Y"; */
+"5rF-Bb-D5Y.title" = "Бункер";
+
+/* Class = "UITabBarItem"; title = "Настройки"; ObjectID = "6IL-du-dI6"; */
+"6IL-du-dI6.title" = "Настройки";
+
+/* Class = "UITabBarItem"; title = "Бункер"; ObjectID = "Ai8-xU-6tL"; */
+"Ai8-xU-6tL.title" = "Бункер";
+
+/* Class = "UITableViewController"; title = "Лучшие новобранцы"; ObjectID = "B7h-gi-fjG"; */
+"B7h-gi-fjG.title" = "Лучшие новобранцы";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "E0W-jz-zVJ"; */
+"E0W-jz-zVJ.text" = "Title";
+
+/* Class = "UILabel"; text = "Счет:"; ObjectID = "M3s-4Z-E2M"; */
+"M3s-4Z-E2M.text" = "Счет:";
+
+/* Class = "UINavigationItem"; title = "Лучшие игроки"; ObjectID = "Ofl-an-lcd"; */
+"Ofl-an-lcd.title" = "Лучшие игроки";
+
+/* Class = "UINavigationItem"; title = "Настройки"; ObjectID = "PnG-1D-UMe"; */
+"PnG-1D-UMe.title" = "Настройки";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "UcS-hU-OVa"; */
+"UcS-hU-OVa.title" = "Item";
+
+/* Class = "UILabel"; text = "Когда включен режим \"хардкор\", тебе придется спасать мир каждые 108 минут в любое время суток. Выключай, если жизнь тебя к такому не готовила!"; ObjectID = "Wjl-Fc-Nfb"; */
+"Wjl-Fc-Nfb.text" = "Когда включен режим \"хардкор\", тебе придется спасать мир каждые 108 минут в любое время суток. Выключай, если жизнь тебя к такому не готовила!";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "afM-rW-OSJ"; */
+"afM-rW-OSJ.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Лучшие игроки"; ObjectID = "ahb-3R-5wb"; */
+"ahb-3R-5wb.title" = "Лучшие игроки";
+
+/* Class = "UILabel"; text = "Хардкор"; ObjectID = "atX-cv-IuO"; */
+"atX-cv-IuO.text" = "Хардкор";
+
+/* Class = "UILabel"; text = "Ты можешь 
+вводить код с:"; ObjectID = "c75-9T-Br6"; */
+"c75-9T-Br6.text" = "Ты можешь 
+вводить код с:";
+
+/* Class = "UITableViewController"; title = "Bunker"; ObjectID = "eaW-ga-j4T"; */
+"eaW-ga-j4T.title" = "Бункер";
+
+/* Class = "UITabBarItem"; title = "Лучшие игроки"; ObjectID = "jyI-jK-FH6"; */
+"jyI-jK-FH6.title" = "Лучшие игроки";
+
+/* Class = "UILabel"; text = "До:"; ObjectID = "ziw-JS-88a"; */
+"ziw-JS-88a.text" = "До:";

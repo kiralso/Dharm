@@ -8,7 +8,7 @@
 
 #import "SKGameKitHelper.h"
 
-@interface SKGameKitHelper()
+@interface SKGameKitHelper() 
 
 @property (assign, nonatomic) BOOL enableGameCenter;
 
@@ -52,6 +52,16 @@ NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentA
             [self setAuthenticationViewController:viewController];
         } else if([GKLocalPlayer localPlayer].isAuthenticated) {
             self.enableGameCenter = YES;
+            
+            [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+                
+                if (error != nil) {
+                    NSLog(@"%@", [error localizedDescription]);
+                } else {
+                    self.leaderboardIdentifier = leaderboardIdentifier;
+                }
+            }];
+            
         } else {
             self.enableGameCenter = NO;
         }
@@ -62,7 +72,7 @@ NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentA
     
     if (authenticationViewController != nil) {
         
-        self.authenticationViewController = authenticationViewController;
+        _authenticationViewController = authenticationViewController;
         
         [[NSNotificationCenter defaultCenter]
          postNotificationName:SKPresentAuthenticationViewControllerNotification
@@ -78,4 +88,68 @@ NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentA
         NSLog(@"GameKitHelper ERROR: %@",[[_lastError userInfo] description]);
     }
 }
+
+#pragma mark - Player Actions
+
+- (void) reportScore:(NSInteger) score {
+    
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        
+        NSLog(@"SCORE - %lld", (int64_t) score);
+        
+        GKScore *bestScore = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardIdentifier];
+
+        if (bestScore.value > score) {
+            return;
+        }
+        
+        NSLog(@"BEST SCORE - %lld", bestScore.value);
+
+        bestScore.value = (int64_t) score;
+        NSLog(@"IDENTIFIER - %@", bestScore.leaderboardIdentifier);
+        
+        [GKScore reportScores:@[bestScore] withCompletionHandler:^(NSError * _Nullable error) {
+            
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            }
+            
+            GKScore *bestScore = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardIdentifier];
+            
+            NSLog(@"%@", bestScore.description);
+            
+            NSLog(@"BEST SCORE - %lld", bestScore.value);
+        }];
+    }
+}
+
+- (void) reportScore: (int64_t) score forLeaderboardID: (NSString*) identifier {
+    
+    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier: identifier];
+    scoreReporter.value = score;
+    scoreReporter.context = 0;
+    
+    NSArray *scores = @[scoreReporter];
+    [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
+        //Do something interesting here.
+    }];
+}
+
+- (void) loadLeaderboardWithIdentifier:(NSString *) leaderboardIdentifier
+                   andCompetionHandler:(void(^)(NSArray<GKScore *> *scores, NSError * error))completionHandler {
+    
+    if ([SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier) {
+        
+        GKLeaderboard *leaderboardRequest = [[GKLeaderboard alloc] init];
+        
+        leaderboardRequest.playerScope = GKLeaderboardPlayerScopeGlobal;
+        leaderboardRequest.timeScope = GKLeaderboardTimeScopeAllTime;
+        leaderboardRequest.identifier = leaderboardIdentifier;
+        leaderboardRequest.range = NSMakeRange(1,20);
+        
+        [leaderboardRequest loadScoresWithCompletionHandler:completionHandler];
+    }
+}
+
+
 @end

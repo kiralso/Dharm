@@ -1,0 +1,16 @@
+/* 
+   Localizible.strings
+  Dharm
+
+  Created by Кирилл on 31.05.17.
+  Copyright © 2017 Kirill Solovyov. All rights reserved.
+*/
+
+"Score :%@" = "Score :%@";
+
+"POPOVER" = "Code: 4 8 15 16 23 42\nYou can enter the numbers %li minutes before the countdown gets to zero\nAny change in the settings will reset the score";
+
+"SORRY" = "What a pity! What a shame!";
+"SHAME" = "Sadly, my friend, you couldn't save anyone";
+"SAVETHEWORLD" = "It's time to save the world again!";
+"ROCKIE" = "Hey, rookie! You have 4 minutes to enter the code";
