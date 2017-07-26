@@ -6,11 +6,8 @@
 //  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "SKUserDataManager.h"
-#import "SKNotificationDate+CoreDataClass.h"
-#import "SKUser+CoreDataClass.h"
 #import "SKMainObserver.h"
+#import "SKUserDataManager.h"
 #import "SKUtils.h"
 #import "SKDateGenerator.h"
 #import "UIApplication+SKNotificationManager.h"
@@ -34,69 +31,7 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
     return manager;
 }
 
-#pragma mark - KVO
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    
-    if ([keyPath isEqualToString:kDateToPickerKey] ||
-        [keyPath isEqualToString:kDateFromPickerKey] ||
-        [keyPath isEqualToString:kDifficultySwitchKey]) {
-    
-        [self updateDataWithScore:0];
-    }
-}
-
 #pragma mark - Useful Methods
-
-- (void) checkScore {
-    
-    NSSet *fireDates = [[SKUserDataManager sharedManager] fireDates];
-    
-    BOOL recountDates = YES;
-    
-    if ([fireDates count] != 0) {
-        
-        NSMutableSet *datesAfterNow = [NSMutableSet set];
-        
-        NSDate *currentDate = [NSDate date];
-        
-        NSComparisonResult result;
-        
-        for (NSDate *date in fireDates) {
-            result = [currentDate compare:date];
-            
-            if(result == NSOrderedAscending) {
-                [datesAfterNow addObject:date];
-            } else {
-                [[SKUserDataManager sharedManager] updateUserWithScore:0];
-            }
-        }
-        
-        if ([datesAfterNow count] > 0) {
-            recountDates = NO;
-        }
-    }
-    
-    if (recountDates) {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
-        
-        [self updateNotificationDates];
-    }
-}
-
-
-- (void) codeDidEntered {
-    
-    NSInteger newScore = [[SKUserDataManager sharedManager] user].score + 1;
-    
-    [[SKGameKitHelper sharedGameKitHelper] reportScore:newScore];
-    
-    //NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
-    //[[SKGameKitHelper sharedGameKitHelper] reportScore:(int64_t) newScore forLeaderboardID: identifier];
-    
-    [self updateDataWithScore:newScore];
-}
 
 - (void) updateDataWithScore:(NSInteger)score {
     
@@ -115,11 +50,11 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
 
 - (NSTimeInterval) timeIntervalBeforeNextFireDate {
     
-    NSSet *fireDates = [[SKUserDataManager sharedManager] fireDates];
+    NSArray *fireDates = [[SKUserDataManager sharedManager] fireDates];
     
     SKDateGenerator *generator = [[SKDateGenerator alloc] init];
     
-    NSDate *closeFiredate = [generator firstFireDateSinceNowFromSet:fireDates];
+    NSDate *closeFiredate = [generator firstFireDateSinceNowFromArray:fireDates];
     
     NSDateComponents *startRangeComponents =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
                                                                             fromDate:[NSDate date]
@@ -150,9 +85,8 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
         NSDate *startDate = [defaults valueForKey:kDateFromPickerKey];
         NSDate *endDate = [defaults valueForKey:kDateToPickerKey];
         
-        datesArray = [self datesArrayBetweenStartDate:startDate
-                                           andEndDate:endDate
-                                    withDateGenerator:generator];
+        datesArray = [generator datesArrayBetweenStartDate:startDate
+                                           andEndDate:endDate];
         
         [self localNotificationsAndSaveDatesArray:datesArray withDateGenerator:generator];
     }
@@ -176,13 +110,11 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
                                                            andAllertBody:warningBody];
     
     NSMutableArray *notificationsArray = [NSMutableArray array];
-    SKUser *user = [[SKUserDataManager sharedManager] user];
     
     for (int i = 0; i < [dates count]; i++) {
         SKNotificationDate * nd =
         [[SKUserDataManager sharedManager] notificationDateWithFireDate:dates[i]
-                                                            warningDate:warningDatesArray[i]
-                                                                andUser:user];
+                                                            warningDate:warningDatesArray[i]];
         
         [notificationsArray addObject:nd];
     }
@@ -194,28 +126,8 @@ NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserver
     NSDate *startDate = vc.dateFromPicker.date;
     NSDate *endDate = vc.dateToPicker.date;
     
-    NSArray *datesArray = [self datesArrayBetweenStartDate:startDate
-                                                andEndDate:endDate
-                                         withDateGenerator:generator];
-    
-    return datesArray;
-}
-
-- (NSArray<NSDate *> *) datesArrayBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate withDateGenerator:(SKDateGenerator *) generator {
-    
-    NSDate *dateTo = endDate;
-    
-    NSDateComponents *componentsTo =[[NSCalendar currentCalendar]
-                                     components:NSCalendarUnitHour | NSCalendarUnitMinute
-                                     fromDate:dateTo];
-    
-    NSDate *dateFrom = startDate;
-    
-    NSDateComponents *componentsFrom =[[NSCalendar currentCalendar]
-                                       components:NSCalendarUnitHour | NSCalendarUnitMinute
-                                       fromDate:dateFrom];
-    
-    NSArray *datesArray = [generator fireDatesWithHoursAndMinutesBetweenComponents:componentsFrom andComponents:componentsTo];
+    NSArray *datesArray = [generator datesArrayBetweenStartDate:startDate
+                                                andEndDate:endDate];
     
     return datesArray;
 }

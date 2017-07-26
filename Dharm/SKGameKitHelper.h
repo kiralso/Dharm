@@ -14,7 +14,6 @@ extern NSString * const SKPresentAuthenticationViewControllerNotification;
 @interface SKGameKitHelper : NSObject
 
 @property (nonatomic, readonly) UIViewController *authenticationViewController;
-@property (nonatomic, readonly) NSError *lastError;
 @property (strong, nonatomic) NSString *leaderboardIdentifier;
 
 + (instancetype) sharedGameKitHelper;

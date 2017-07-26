@@ -29,12 +29,10 @@
     return datesArray;
 }
 
-- (NSDate *) firstFireDateSinceNowFromSet:(NSSet *) set {
+- (NSDate *) firstFireDateSinceNowFromArray:(NSArray *) datesArray {
     
     NSDate * fireDate = nil;
-    
-    NSArray *datesArray = [set allObjects];
-    
+        
     NSDateComponents *startRangeComponents =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
                                                                             fromDate:[NSDate date]
                                                                               toDate:[datesArray firstObject]
@@ -134,6 +132,27 @@
     NSTimeZone *tz = [NSTimeZone defaultTimeZone];
     NSInteger seconds = [tz secondsFromGMTForDate: date];
     return [NSDate dateWithTimeInterval: seconds sinceDate: date];
+}
+
+#pragma mark - Other
+
+- (NSArray<NSDate *> *) datesArrayBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate {
+    
+    NSDate *dateTo = endDate;
+    
+    NSDateComponents *componentsTo =[[NSCalendar currentCalendar]
+                                     components:NSCalendarUnitHour | NSCalendarUnitMinute
+                                     fromDate:dateTo];
+    
+    NSDate *dateFrom = startDate;
+    
+    NSDateComponents *componentsFrom =[[NSCalendar currentCalendar]
+                                       components:NSCalendarUnitHour | NSCalendarUnitMinute
+                                       fromDate:dateFrom];
+    
+    NSArray *datesArray = [self fireDatesWithHoursAndMinutesBetweenComponents:componentsFrom andComponents:componentsTo];
+    
+    return datesArray;
 }
 
 @end

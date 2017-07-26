@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "SKCoreDataManager.h"
-#import "SKMainObserver.h"
 #import "SKUtils.h"
 #import "SKUserDataManager.h"
 
@@ -20,22 +18,18 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert categories:nil]];
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound categories:nil]];
         
-    [[SKUserDataManager sharedManager] createUser];
-    
-    [[SKMainObserver sharedObserver] checkScore];
-    
     [GADMobileAds configureWithApplicationID:kAdMobAppIdentifier];
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     return YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[SKCoreDataManager sharedManager] saveContext];
+    [[SKUserDataManager sharedManager] saveUser];
 }
 
 @end

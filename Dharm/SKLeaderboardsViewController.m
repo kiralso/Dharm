@@ -23,10 +23,10 @@
     [super viewDidLoad];
     
     [self setBackgroundImageViewWithImageName:backgroundPath()];
-    
+    /*
     UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
     [self drawStatusBarOnNavigationViewWithColor:color];
-    
+    */
     self.usersArray = nil;
 }
 

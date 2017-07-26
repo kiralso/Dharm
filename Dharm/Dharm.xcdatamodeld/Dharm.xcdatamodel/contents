@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="SKNotificationDate" representedClassName="SKNotificationDate" syncable="YES">
-        <attribute name="fireDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="warningDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SKUser" inverseName="notificationDate" inverseEntity="SKUser" syncable="YES"/>
-    </entity>
-    <entity name="SKUser" representedClassName="SKUser" syncable="YES">
-        <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="notificationDate" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SKNotificationDate" inverseName="user" inverseEntity="SKNotificationDate" syncable="YES"/>
-    </entity>
-    <elements>
-        <element name="SKNotificationDate" positionX="-315" positionY="-148" width="128" height="88"/>
-        <element name="SKUser" positionX="-99" positionY="-162" width="128" height="73"/>
-    </elements>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <elements/>
 </model>

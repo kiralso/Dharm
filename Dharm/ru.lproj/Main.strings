@@ -1,59 +1,60 @@
 
-/* Class = "UITextField"; placeholder = "введите код здесь"; ObjectID = "1am-NV-RKU"; */
-"1am-NV-RKU.placeholder" = "введите код здесь";
+/* Class = "UITextField"; placeholder = "enter the code here"; ObjectID = "1am-NV-RKU"; */
+"1am-NV-RKU.placeholder" = "вводить код здесь";
 
-/* Class = "UILabel"; text = "Когда тебе удобно спасать мир?"; ObjectID = "5DN-df-872"; */
+/* Class = "UILabel"; text = "When would you like to save the world?"; ObjectID = "5DN-df-872"; */
 "5DN-df-872.text" = "Когда тебе удобно спасать мир?";
 
-/* Class = "UINavigationItem"; title = "Бункер"; ObjectID = "5rF-Bb-D5Y"; */
+/* Class = "UIViewController"; title = "Tutorial"; ObjectID = "5PE-w8-FTv"; */
+"5PE-w8-FTv.title" = "Руководство";
+
+/* Class = "UINavigationItem"; title = "Bunker"; ObjectID = "5rF-Bb-D5Y"; */
 "5rF-Bb-D5Y.title" = "Бункер";
 
-/* Class = "UITabBarItem"; title = "Настройки"; ObjectID = "6IL-du-dI6"; */
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "6IL-du-dI6"; */
 "6IL-du-dI6.title" = "Настройки";
 
-/* Class = "UITabBarItem"; title = "Бункер"; ObjectID = "Ai8-xU-6tL"; */
+/* Class = "UITabBarItem"; title = "Bunker"; ObjectID = "Ai8-xU-6tL"; */
 "Ai8-xU-6tL.title" = "Бункер";
 
-/* Class = "UITableViewController"; title = "Лучшие новобранцы"; ObjectID = "B7h-gi-fjG"; */
-"B7h-gi-fjG.title" = "Лучшие новобранцы";
+/* Class = "UITableViewController"; title = "Best players"; ObjectID = "B7h-gi-fjG"; */
+"B7h-gi-fjG.title" = "Лучшие игроки";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "E0W-jz-zVJ"; */
 "E0W-jz-zVJ.text" = "Title";
 
-/* Class = "UILabel"; text = "Счет:"; ObjectID = "M3s-4Z-E2M"; */
+/* Class = "UILabel"; text = "Score:"; ObjectID = "M3s-4Z-E2M"; */
 "M3s-4Z-E2M.text" = "Счет:";
 
-/* Class = "UINavigationItem"; title = "Лучшие игроки"; ObjectID = "Ofl-an-lcd"; */
-"Ofl-an-lcd.title" = "Лучшие игроки";
-
-/* Class = "UINavigationItem"; title = "Настройки"; ObjectID = "PnG-1D-UMe"; */
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "PnG-1D-UMe"; */
 "PnG-1D-UMe.title" = "Настройки";
 
-/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "UcS-hU-OVa"; */
-"UcS-hU-OVa.title" = "Item";
-
-/* Class = "UILabel"; text = "Когда включен режим \"хардкор\", тебе придется спасать мир каждые 108 минут в любое время суток. Выключай, если жизнь тебя к такому не готовила!"; ObjectID = "Wjl-Fc-Nfb"; */
-"Wjl-Fc-Nfb.text" = "Когда включен режим \"хардкор\", тебе придется спасать мир каждые 108 минут в любое время суток. Выключай, если жизнь тебя к такому не готовила!";
+/* Class = "UILabel"; text = "When the hardcore mode is on, you have to save the world every 108 minutes at any time.\nTurn the mode off, if your life has not prepared you for this!"; ObjectID = "Wjl-Fc-Nfb"; */
+"Wjl-Fc-Nfb.text" = "Когда включен режим хардкор, ты будешь спасать мир каждые 108 минут.\nВыключай, если жизнь тебя к такому не готовила!";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "afM-rW-OSJ"; */
-"afM-rW-OSJ.text" = "Detail";
+"afM-rW-OSJ.text" = "Детали";
 
-/* Class = "UINavigationItem"; title = "Лучшие игроки"; ObjectID = "ahb-3R-5wb"; */
+/* Class = "UINavigationItem"; title = "Best players"; ObjectID = "ahb-3R-5wb"; */
 "ahb-3R-5wb.title" = "Лучшие игроки";
 
-/* Class = "UILabel"; text = "Хардкор"; ObjectID = "atX-cv-IuO"; */
+/* Class = "UILabel"; text = "Hardcore"; ObjectID = "atX-cv-IuO"; */
 "atX-cv-IuO.text" = "Хардкор";
 
-/* Class = "UILabel"; text = "Ты можешь 
-вводить код с:"; ObjectID = "c75-9T-Br6"; */
-"c75-9T-Br6.text" = "Ты можешь 
-вводить код с:";
+/* Class = "UILabel"; text = "You can enter the code from:"; ObjectID = "c75-9T-Br6"; */
+"c75-9T-Br6.text" = "Ты можешь вводить код с:";
 
 /* Class = "UITableViewController"; title = "Bunker"; ObjectID = "eaW-ga-j4T"; */
 "eaW-ga-j4T.title" = "Бункер";
 
-/* Class = "UITabBarItem"; title = "Лучшие игроки"; ObjectID = "jyI-jK-FH6"; */
+/* Class = "UITabBarItem"; title = "Best players"; ObjectID = "jyI-jK-FH6"; */
 "jyI-jK-FH6.title" = "Лучшие игроки";
 
-/* Class = "UILabel"; text = "До:"; ObjectID = "ziw-JS-88a"; */
+/* Class = "UIViewController"; title = "Settings"; ObjectID = "st1-2z-L3k"; */
+"st1-2z-L3k.title" = "Настройки";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "zXf-9w-Yxt"; */
+"zXf-9w-Yxt.normalTitle" = "Готово";
+
+/* Class = "UILabel"; text = "To:"; ObjectID = "ziw-JS-88a"; */
 "ziw-JS-88a.text" = "До:";

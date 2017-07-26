@@ -12,7 +12,4 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 
-- (void) updateScoreLabel;
-- (void) updateScoreLabelWithScore:(NSInteger) score;
-
 @end

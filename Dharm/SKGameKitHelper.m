@@ -46,11 +46,15 @@ NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentA
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
     
     localPlayer.authenticateHandler =^(UIViewController *viewController, NSError *error) {
-        [self setLastError:error];
+        
+        if (error) {
+            NSLog(@"GameKitHelper ERROR: %@",[error localizedDescription]);
+        }
         
         if(viewController != nil) {
             [self setAuthenticationViewController:viewController];
         } else if([GKLocalPlayer localPlayer].isAuthenticated) {
+            
             self.enableGameCenter = YES;
             
             [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
@@ -77,15 +81,6 @@ NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentA
         [[NSNotificationCenter defaultCenter]
          postNotificationName:SKPresentAuthenticationViewControllerNotification
                        object:self];
-    }
-}
-
-- (void)setLastError:(NSError *)error {
-    
-    _lastError = [error copy];
-    
-    if (_lastError) {
-        NSLog(@"GameKitHelper ERROR: %@",[[_lastError userInfo] description]);
     }
 }
 

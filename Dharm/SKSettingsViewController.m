@@ -8,9 +8,9 @@
 
 #import "SKSettingsViewController.h"
 #import "SKUtils.h"
-#import "SKMainObserver.h"
 #import "AMViralSwitch.h"
 #import "UIViewController+SKViewControllerCategory.h"
+#import "SKMainObserver.h"
 
 @interface SKSettingsViewController ()
 
@@ -40,8 +40,6 @@ static NSInteger const kHoursBetweenPickers = 3;
                            withSwitch:self.difficultySwitch
                             infoLabel:self.info];
     
-    [self addObserver:[SKMainObserver sharedObserver]];
-    
     self.difficultySwitch.animationDuration = 2.0;
     
     self.difficultySwitch.animationElementsOff = @[
@@ -62,16 +60,17 @@ static NSInteger const kHoursBetweenPickers = 3;
     
     self.backgroundView.image = image;
     
+    [self.dateToPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
+    [self.dateFromPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
+
+    /*
     UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
     [self drawStatusBarOnNavigationViewWithColor:color];
+     */
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)dealloc {
-    [self removeObserver:[SKMainObserver sharedObserver]];
 }
 
 #pragma mark - Actions
@@ -86,8 +85,6 @@ static NSInteger const kHoursBetweenPickers = 3;
     [self saveSettings];
     
     [self checkToPicker];
-    
-    [self setValue:sender forKey:kDifficultySwitchKey];
 }
 
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender {
@@ -95,8 +92,6 @@ static NSInteger const kHoursBetweenPickers = 3;
     [self saveSettings];
     
     [self checkToPicker];
-    
-    [self setValue:sender forKey:kDateFromPickerKey];
 }
 
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender {
@@ -104,40 +99,6 @@ static NSInteger const kHoursBetweenPickers = 3;
     [self saveSettings];
     
     [self checkToPicker];
-    
-    [self setValue:sender forKey:kDateToPickerKey];
-}
-
-#pragma mark - Observer
-
-- (void) addObserver:(NSObject *) observer {
-    
-    [self addObserver:observer
-           forKeyPath:kDifficultySwitchKey
-              options:NSKeyValueObservingOptionNew
-              context:nil];
-    
-    [self addObserver:observer
-           forKeyPath:kDateFromPickerKey
-              options:NSKeyValueObservingOptionNew
-              context:nil];
-    
-    [self addObserver:observer
-           forKeyPath:kDateToPickerKey
-              options:NSKeyValueObservingOptionNew
-              context:nil];
-}
-
-- (void) removeObserver:(NSObject *) observer {
-    
-    [self removeObserver:observer
-              forKeyPath:kDifficultySwitchKey];
-    
-    [self removeObserver:observer
-              forKeyPath:kDateFromPickerKey];
-    
-    [self removeObserver:observer
-              forKeyPath:kDateToPickerKey];
 }
 
 #pragma mark - Useful Methods
@@ -196,6 +157,7 @@ static NSInteger const kHoursBetweenPickers = 3;
     [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:kDateFromPickerKey];
     [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
     [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];
+    [[SKMainObserver sharedObserver] updateData];
 }
 
 @end

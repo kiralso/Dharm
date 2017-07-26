@@ -22,6 +22,7 @@
 @property (strong, nonatomic) SKCodeCell *codeCell;
 @property (strong, nonatomic) SKAdCell *adCell;
 
-- (IBAction)showInfoPopoverAction:(UIButton *)sender;
+- (IBAction)showMenuAction:(UIBarButtonItem *)sender;
+- (IBAction)showPopoverAction:(UIButton *)sender;
 
 @end

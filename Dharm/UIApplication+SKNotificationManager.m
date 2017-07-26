@@ -20,6 +20,7 @@
         localNotification.alertBody = body;
         localNotification.alertTitle = title;
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
         
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     }

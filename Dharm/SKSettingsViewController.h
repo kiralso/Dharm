@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SKObserverProtocol.h"
 #import "AMViralSwitch.h"
 
 @class AMViralSwitch;
 
-@interface SKSettingsViewController : UIViewController <SKObserverProtocol>
-
+@interface SKSettingsViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet AMViralSwitch *difficultySwitch;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateFromPicker;
