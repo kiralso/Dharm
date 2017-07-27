@@ -7,6 +7,7 @@
 */
 
 "Score :%@" = "Score :%@";
+"PROGRESS" = "%ld of %ld";
 
 "POPOVER" = "Code: 4 8 15 16 23 42\nYou can enter the numbers %li minutes before the countdown gets to zero";
 

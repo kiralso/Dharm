@@ -54,7 +54,8 @@
     self.imageView.image = [UIImage imageNamed:page.imageName];
     self.textView.text = page.storyText;
     self.progressBar.progress = progress;
-    self.progressLabel.text = [NSString stringWithFormat:@"%ld of %ld", index + 1, numberOfPages];
+    NSString *progressText = [NSString stringWithFormat:NSLocalizedString(@"PROGRESS", nil), index + 1, numberOfPages];
+    self.progressLabel.text = progressText;
     
     if (!page.isChoise) {
         self.yesButton.hidden = YES;
