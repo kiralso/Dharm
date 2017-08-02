@@ -494,9 +494,11 @@ static NSString * const adCellIdentifier = @"adCell";
     if (newScore > maxScore) {
         [[SKUserDataManager sharedManager] updatePagesIndexesWithNextIndex];
     }
-    
+    /*
     NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
     [[SKGameKitHelper sharedGameKitHelper] reportScore:(int64_t) newScore forLeaderboardID: identifier];
+    */
+    [[SKGameKitHelper sharedGameKitHelper] reportScore:newScore];
     
     [[SKMainObserver sharedObserver] updateDataWithScore:newScore];
     

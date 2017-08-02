@@ -21,6 +21,8 @@
     } else {
         [self setupPageAtIndex:self.pageIndex];
     }
+    
+    self.textView.textColor = [UIColor whiteColor];
 }
 
 #pragma mark - Actions

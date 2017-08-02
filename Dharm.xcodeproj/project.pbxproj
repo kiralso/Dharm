@@ -35,6 +35,7 @@
 		55B59CAC1EAE731800B969A5 /* libAMViralSwitch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */; };
 		55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */; };
 		55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */; };
+		55C3B3931F2C5D5D0086AD36 /* SKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C3B3921F2C5D5D0086AD36 /* SKTabBarController.m */; };
 		55CBD4991EE08478002679FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55CBD49B1EE08478002679FE /* Localizable.strings */; };
 		55E8BE0A1F0EAA4E007306C8 /* SKStoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE091F0EAA4E007306C8 /* SKStoryMenuViewController.m */; };
 		55E8BE0D1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE0C1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m */; };
@@ -96,6 +97,8 @@
 		55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAMViralSwitch.a; path = "Pods/../build/Debug-iphoneos/AMViralSwitch/libAMViralSwitch.a"; sourceTree = "<group>"; };
 		55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMSWeakTimer.a; path = "Pods/../build/Debug-iphoneos/MSWeakTimer/libMSWeakTimer.a"; sourceTree = "<group>"; };
 		55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUIView+Shake.a"; path = "Pods/../build/Debug-iphoneos/UIView+Shake/libUIView+Shake.a"; sourceTree = "<group>"; };
+		55C3B3911F2C5D5D0086AD36 /* SKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTabBarController.h; sourceTree = "<group>"; };
+		55C3B3921F2C5D5D0086AD36 /* SKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTabBarController.m; sourceTree = "<group>"; };
 		55CBD49A1EE08478002679FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55CBD49D1EE08492002679FE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		55CBD49E1EE08493002679FE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 		556DBB0E1E8FB77C0038D214 /* Bunker */ = {
 			isa = PBXGroup;
 			children = (
+				55C3B3911F2C5D5D0086AD36 /* SKTabBarController.h */,
+				55C3B3921F2C5D5D0086AD36 /* SKTabBarController.m */,
 				55EC38251E91181F00D3E399 /* SKTimer.h */,
 				55EC38261E91181F00D3E399 /* SKTimer.m */,
 				55E92D3B1EC1C6C000B58280 /* SKPopoverInfoViewController.h */,
@@ -460,6 +465,7 @@
 				55320D101EFE949A0054F7A6 /* SKTutorialViewController.m in Sources */,
 				55FC88321F1AC08A004C15F8 /* SKStoryResetTableViewCell.m in Sources */,
 				556DBAF01E8FB1510038D214 /* AppDelegate.m in Sources */,
+				55C3B3931F2C5D5D0086AD36 /* SKTabBarController.m in Sources */,
 				55079BE41EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m in Sources */,
 				5518196B1E9A78D100BD59B4 /* SKBunkerTableViewController.m in Sources */,
 				5518197E1E9A7C7500BD59B4 /* SKAdCell.m in Sources */,
