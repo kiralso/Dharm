@@ -25,6 +25,11 @@
     self.textView.textColor = [UIColor whiteColor];
 }
 
+- (void) viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self.textView setContentOffset:CGPointZero animated:NO];
+}
+
 #pragma mark - Actions
 
 - (IBAction)doneAction:(UIButton *)sender {
@@ -96,7 +101,6 @@
     
     self.imageView.image = [UIImage imageNamed:page.imageName];
     self.textView.text = page.storyText;
-    
 }
 
 @end

@@ -18,11 +18,9 @@ extern NSString * const SKPresentAuthenticationViewControllerNotification;
 
 + (instancetype) sharedGameKitHelper;
 - (void) authenticateLocalPlayer;
-- (void) reportScore:(NSInteger) score;
+- (void) reportScore:(int64_t) score;
 
 - (void) loadLeaderboardWithIdentifier:(NSString *) leaderboardIdentifier
                    andCompetionHandler:(void(^)(NSArray<GKScore *> *scores, NSError *error))completionHandler;
-
-- (void) reportScore: (int64_t) score forLeaderboardID: (NSString*) leaderboardIdentifier;
 
 @end

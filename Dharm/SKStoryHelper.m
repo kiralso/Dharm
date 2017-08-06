@@ -58,11 +58,10 @@
 
 - (void)showLastStory {
     
-    NSInteger maxScore = [SKUserDataManager sharedManager].userMaxScore;
     NSInteger score = [SKUserDataManager sharedManager].userScore;
     BOOL isGameOver = [SKUserDataManager sharedManager].isGameOver;
     
-    if (maxScore == score && score != 0 && !isGameOver) {
+    if (score != 0 && !isGameOver) {
         
         SKTutorialPageViewController *storyVC = [self.delegate.storyboard instantiateViewControllerWithIdentifier:@"SKTutorialPageViewController"];
         
@@ -74,12 +73,8 @@
         }
         
         NSInteger initialIndex = [indexes count] - 1;
-        
-        if ([indexes[initialIndex] integerValue] == 8) {
-            return;
-        }
-        
-        storyVC.indexOfInitialViewController = [indexes count] - 1;
+
+        storyVC.indexOfInitialViewController = initialIndex;
         storyVC.storyPages = pages;
         
         [self.delegate pagesDidLoad:pages];

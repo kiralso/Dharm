@@ -41,7 +41,7 @@
     
     [[SKGameKitHelper sharedGameKitHelper] loadLeaderboardWithIdentifier:identifier andCompetionHandler:^(NSArray<GKScore *> *scores, NSError *error) {
         
-        if (error != nil) {
+        if (error) {
             NSLog(@"ERROR - %@", error.localizedDescription);
         } else {
             

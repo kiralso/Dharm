@@ -226,7 +226,7 @@ static NSString * const adCellIdentifier = @"adCell";
 
 - (void)showAuthenticationViewController {
     
-    [self presentViewController:[SKGameKitHelper sharedGameKitHelper].authenticationViewController
+    [self.parentViewController presentViewController:[SKGameKitHelper sharedGameKitHelper].authenticationViewController
                        animated:YES
                      completion:nil];
 }
@@ -488,21 +488,18 @@ static NSString * const adCellIdentifier = @"adCell";
 
 - (void) codeDidEntered {
     
+    NSInteger userScore = [SKUserDataManager sharedManager].userScore + 1;
+    
+    [[SKMainObserver sharedObserver] updateDataWithScore:userScore];
+
     NSInteger maxScore = [SKUserDataManager sharedManager].userMaxScore;
-    NSInteger newScore = [SKUserDataManager sharedManager].userScore + 1;
-    
-    if (newScore > maxScore) {
+
+    if (userScore == maxScore) {
         [[SKUserDataManager sharedManager] updatePagesIndexesWithNextIndex];
+        [self.storyHelper showLastStory];
     }
-    /*
-    NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
-    [[SKGameKitHelper sharedGameKitHelper] reportScore:(int64_t) newScore forLeaderboardID: identifier];
-    */
-    [[SKGameKitHelper sharedGameKitHelper] reportScore:newScore];
     
-    [[SKMainObserver sharedObserver] updateDataWithScore:newScore];
-    
-    [self.storyHelper showLastStory];
+    [[SKGameKitHelper sharedGameKitHelper] reportScore:(int64_t)userScore];
 }
 
 #pragma mark - Timer

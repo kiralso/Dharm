@@ -102,7 +102,7 @@ static NSString *const kUserKey = @"SKUser";
 
 - (void) updateUserWithScore:(NSInteger) score {
     
-    if (self.user.score < score) {
+    if (self.user.maxScore < score) {
         self.user.maxScore = score;
     }
     
