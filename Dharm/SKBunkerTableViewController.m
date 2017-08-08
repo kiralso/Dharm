@@ -97,11 +97,6 @@ static NSString * const adCellIdentifier = @"adCell";
     self.leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:self.leftSwipe];
     
-    /*
-    UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
-    [self drawStatusBarOnNavigationViewWithColor:color];
-    */
-    
     [self setBackgroundImageViewWithImageName:backgroundPath()];
     
     self.storyHelper = [[SKStoryHelper alloc] init];
@@ -489,16 +484,15 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void) codeDidEntered {
     
     NSInteger userScore = [SKUserDataManager sharedManager].userScore + 1;
-    
-    [[SKMainObserver sharedObserver] updateDataWithScore:userScore];
-
     NSInteger maxScore = [SKUserDataManager sharedManager].userMaxScore;
 
-    if (userScore == maxScore) {
+    if (userScore > maxScore || maxScore == 0) {
         [[SKUserDataManager sharedManager] updatePagesIndexesWithNextIndex];
         [self.storyHelper showLastStory];
     }
     
+    [[SKMainObserver sharedObserver] updateDataWithScore:userScore];
+
     [[SKGameKitHelper sharedGameKitHelper] reportScore:(int64_t)userScore];
 }
 

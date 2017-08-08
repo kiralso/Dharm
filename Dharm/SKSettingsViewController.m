@@ -62,11 +62,6 @@ static NSInteger const kHoursBetweenPickers = 3;
     
     [self.dateToPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
     [self.dateFromPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
-
-    /*
-    UIColor *color = RGBA(207.f, 216.f, 220.f, 1.f);
-    [self drawStatusBarOnNavigationViewWithColor:color];
-     */
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

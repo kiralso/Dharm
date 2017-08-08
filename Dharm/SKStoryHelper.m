@@ -58,10 +58,9 @@
 
 - (void)showLastStory {
     
-    NSInteger score = [SKUserDataManager sharedManager].userScore;
     BOOL isGameOver = [SKUserDataManager sharedManager].isGameOver;
     
-    if (score != 0 && !isGameOver) {
+    if (!isGameOver) {
         
         SKTutorialPageViewController *storyVC = [self.delegate.storyboard instantiateViewControllerWithIdentifier:@"SKTutorialPageViewController"];
         

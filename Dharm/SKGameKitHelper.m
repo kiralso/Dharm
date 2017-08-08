@@ -16,7 +16,7 @@
 
 NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentAuthenticationViewControllerNotification";
 
-NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard";
+NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
 
 @implementation SKGameKitHelper
 
@@ -61,6 +61,10 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard";
             
             self.enableGameCenter = YES;
             
+            [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString * _Nullable leaderboardIdentifier, NSError * _Nullable error) {
+                NSLog(@"%@", leaderboardIdentifier);
+            }];
+            
             [[GKLocalPlayer localPlayer] setDefaultLeaderboardIdentifier:kLeaderboardIdentifier completionHandler:^(NSError * _Nullable error) {
                 
                 if (error != nil) {
@@ -92,7 +96,7 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard";
 
 - (void) reportScore:(int64_t)score {
     
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+    if ([GKLocalPlayer localPlayer].isAuthenticated && self.leaderboardIdentifier) {
         
         NSLog(@"IDENTIFIER - %@", self.leaderboardIdentifier);
         GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier: self.leaderboardIdentifier];
