@@ -23,6 +23,17 @@
     }
     
     self.textView.textColor = [UIColor whiteColor];
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = self.textView.bounds;
+    gradient.colors = @[(id)[UIColor clearColor].CGColor,
+                        (id)[UIColor blackColor].CGColor,
+                        (id)[UIColor blackColor].CGColor,
+                        (id)[UIColor clearColor].CGColor];
+    gradient.locations = @[@0.0, @0.05, @0.85, @1.0];
+    
+    self.textView.superview.layer.mask = gradient;
 }
 
 - (void) viewDidLayoutSubviews {

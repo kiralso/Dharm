@@ -87,8 +87,6 @@ enum: NSInteger {
             return NSLocalizedString(@"CHAPTERTWO", nil);
         case SKTableSectionPartThree:
             return NSLocalizedString(@"CHAPTERTHREE", nil);
-        case SKTableSectionResetStory:
-            return NSLocalizedString(@"RESET", nil);
         default:
             return @"";
     }
@@ -125,7 +123,7 @@ enum: NSInteger {
                                                             forIndexPath:indexPath];
             
             self.resetCell = (SKStoryResetTableViewCell *) cell;
-            self.resetCell.resetLabel.text = @"RESET";
+            self.resetCell.resetLabel.text = NSLocalizedString(@"RESET", nil);;
             return self.resetCell;
             
         default:

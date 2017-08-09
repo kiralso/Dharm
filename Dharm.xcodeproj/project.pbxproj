@@ -34,9 +34,10 @@
 		55ACA84F1E9579EE00DD98BC /* SKDateGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */; };
 		55B59CAC1EAE731800B969A5 /* libAMViralSwitch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CA91EAE731800B969A5 /* libAMViralSwitch.a */; };
 		55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAA1EAE731800B969A5 /* libMSWeakTimer.a */; };
-		55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B59CAB1EAE731800B969A5 /* libUIView+Shake.a */; };
 		55C3B3931F2C5D5D0086AD36 /* SKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C3B3921F2C5D5D0086AD36 /* SKTabBarController.m */; };
 		55CBD4991EE08478002679FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55CBD49B1EE08478002679FE /* Localizable.strings */; };
+		55E1E3621F3A3B41005CAB9F /* storehouse.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55E1E3611F3A3B41005CAB9F /* storehouse.plist */; };
+		55E1E3651F3A4009005CAB9F /* SKLeaderboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E1E3641F3A4009005CAB9F /* SKLeaderboardCell.m */; };
 		55E8BE0A1F0EAA4E007306C8 /* SKStoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE091F0EAA4E007306C8 /* SKStoryMenuViewController.m */; };
 		55E8BE0D1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE0C1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m */; };
 		55E8BE111F0EDA22007306C8 /* SKStoryPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE101F0EDA22007306C8 /* SKStoryPage.m */; };
@@ -102,6 +103,9 @@
 		55CBD49A1EE08478002679FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55CBD49D1EE08492002679FE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		55CBD49E1EE08493002679FE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55E1E3611F3A3B41005CAB9F /* storehouse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = storehouse.plist; sourceTree = "<group>"; };
+		55E1E3631F3A4009005CAB9F /* SKLeaderboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLeaderboardCell.h; sourceTree = "<group>"; };
+		55E1E3641F3A4009005CAB9F /* SKLeaderboardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLeaderboardCell.m; sourceTree = "<group>"; };
 		55E8BE081F0EAA4E007306C8 /* SKStoryMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKStoryMenuViewController.h; sourceTree = "<group>"; };
 		55E8BE091F0EAA4E007306C8 /* SKStoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKStoryMenuViewController.m; sourceTree = "<group>"; };
 		55E8BE0B1F0EAA76007306C8 /* SKStoryMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKStoryMenuTableViewCell.h; sourceTree = "<group>"; };
@@ -132,7 +136,6 @@
 			files = (
 				55B59CAC1EAE731800B969A5 /* libAMViralSwitch.a in Frameworks */,
 				55B59CAD1EAE731800B969A5 /* libMSWeakTimer.a in Frameworks */,
-				55B59CAE1EAE731800B969A5 /* libUIView+Shake.a in Frameworks */,
 				4145A18E3BD3374C31CC8907 /* libPods-Dharm.a in Frameworks */,
 				55A743A11ECE189D00BF4AF0 /* GameKit.framework in Frameworks */,
 			);
@@ -222,6 +225,7 @@
 				556DBAF41E8FB1520038D214 /* Main.storyboard */,
 				556DBAFC1E8FB1520038D214 /* LaunchScreen.storyboard */,
 				556DBAFF1E8FB1520038D214 /* Info.plist */,
+				55E1E3611F3A3B41005CAB9F /* storehouse.plist */,
 				55CBD49B1EE08478002679FE /* Localizable.strings */,
 			);
 			path = Dharm;
@@ -267,6 +271,8 @@
 			children = (
 				556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */,
 				556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */,
+				55E1E3631F3A4009005CAB9F /* SKLeaderboardCell.h */,
+				55E1E3641F3A4009005CAB9F /* SKLeaderboardCell.m */,
 			);
 			name = Leaderboards;
 			sourceTree = "<group>";
@@ -399,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				556DBAFE1E8FB1520038D214 /* LaunchScreen.storyboard in Resources */,
+				55E1E3621F3A3B41005CAB9F /* storehouse.plist in Resources */,
 				556DBAFB1E8FB1520038D214 /* Assets.xcassets in Resources */,
 				55CBD4991EE08478002679FE /* Localizable.strings in Resources */,
 				556DBAF61E8FB1520038D214 /* Main.storyboard in Resources */,
@@ -463,6 +470,7 @@
 				55079BE11EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m in Sources */,
 				55E8BE0A1F0EAA4E007306C8 /* SKStoryMenuViewController.m in Sources */,
 				55320D101EFE949A0054F7A6 /* SKTutorialViewController.m in Sources */,
+				55E1E3651F3A4009005CAB9F /* SKLeaderboardCell.m in Sources */,
 				55FC88321F1AC08A004C15F8 /* SKStoryResetTableViewCell.m in Sources */,
 				556DBAF01E8FB1510038D214 /* AppDelegate.m in Sources */,
 				55C3B3931F2C5D5D0086AD36 /* SKTabBarController.m in Sources */,

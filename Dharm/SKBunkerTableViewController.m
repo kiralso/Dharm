@@ -17,7 +17,6 @@
 #import "SKUtils.h"
 #import "SKMainObserver.h"
 #import "NGSPopoverView.h"
-#import "UIView+Shake.h"
 #import "UIViewController+SKViewControllerCategory.h"
 #import "UITableViewController+SKTableViewCategory.h"
 #import "SKGameKitHelper.h"

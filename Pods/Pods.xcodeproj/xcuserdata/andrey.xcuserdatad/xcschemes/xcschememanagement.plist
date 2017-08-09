@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CBStoreHouseRefreshControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MSWeakTimer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,11 +34,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>UIView+Shake.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -47,7 +47,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B82B8E319274D9D40763007F01F9AAB</key>
+		<key>6AF5962108EC6C6AFE87B5D754B7B3FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C0DD4C644559646D9040D59FEF2567F4</key>
+		<key>C3865209B640B119EFAB3CB4396AC94C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

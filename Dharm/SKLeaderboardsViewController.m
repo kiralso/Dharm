@@ -8,13 +8,17 @@
 
 #import "SKLeaderboardsViewController.h"
 #import "UITableViewController+SKTableViewCategory.h"
-#import "UIViewController+SKViewControllerCategory.h"
 #import "SKUtils.h"
 #import "SKGameKitHelper.h"
+#import "CBStoreHouseRefreshControl.h"
+#import "SKLeaderboardCell.h"
 
-@interface SKLeaderboardsViewController ()
+@interface SKLeaderboardsViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *usersArray;
+
+@property (nonatomic, strong) CBStoreHouseRefreshControl *storeHouseRefreshControl;
+
 @end
 
 @implementation SKLeaderboardsViewController
@@ -34,19 +38,98 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
+    [self loadPlayers];
     
-    [[SKGameKitHelper sharedGameKitHelper] loadLeaderboardWithIdentifier:identifier andCompetionHandler:^(NSArray<GKScore *> *scores, NSError *error) {
+    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.tableView
+                                                                            target:self
+                                                                     refreshAction:@selector(refreshTriggered)
+                                                                             plist:@"storehouse"
+                                                                             color:[UIColor whiteColor]
+                                                                         lineWidth:3.0
+                                                                        dropHeight:50
+                                                                             scale:1
+                                                              horizontalRandomness:150
+                                                           reverseLoadingAnimation:YES
+                                                           internalAnimationFactor:0.5];
+}
+
+-(void)loadPlayers {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
+    NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
+
+    __weak SKLeaderboardsViewController *weakSelf = self;
+    
+    [[SKGameKitHelper sharedGameKitHelper] loadLeaderboardWithIdentifier:identifier
+                                                     andCompetionHandler:^(NSArray<GKScore *> *scores, NSError *error) {
         
         if (error) {
             NSLog(@"ERROR - %@", error.localizedDescription);
         } else {
             
-            self.usersArray = scores;
+            weakSelf.usersArray = scores;
             
-            [[self tableView] reloadData];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            
+            [[weakSelf tableView] reloadData];
         }
     }];
+
+}
+
+-(UIImage *)playerAvatarWithIndex:(NSInteger)index {
+    
+    UIImage *avatar = nil;
+    
+    switch (index) {
+        case 0:
+            return avatar = [UIImage imageNamed:@"hurley"];
+        case 1:
+            return avatar = [UIImage imageNamed:@"John Lock"];
+        case 2:
+            return avatar = [UIImage imageNamed:@"ben"];
+        case 3:
+            return avatar = [UIImage imageNamed:@"jack"];
+        case 4:
+            return avatar = [UIImage imageNamed:@"kate"];
+        case 5:
+            return avatar = [UIImage imageNamed:@"sawer"];
+        case 6:
+            return avatar = [UIImage imageNamed:@"sayid"];
+        case 7:
+            return avatar = [UIImage imageNamed:@"juliet"];
+        case 8:
+            return avatar = [UIImage imageNamed:@"faraday"];
+        case 9:
+            return avatar = [UIImage imageNamed:@"charlie"];
+        case 10:
+            return avatar = [UIImage imageNamed:@"claire"];
+        case 11:
+            return avatar = [UIImage imageNamed:@"sun"];
+        case 12:
+            return avatar = [UIImage imageNamed:@"jin"];
+        case 13:
+            return avatar = [UIImage imageNamed:@"desmond"];
+        case 14:
+            return avatar = [UIImage imageNamed:@"eco"];
+        case 15:
+            return avatar = [UIImage imageNamed:@"richard"];
+        case 16:
+            return avatar = [UIImage imageNamed:@"russo"];
+        case 17:
+            return avatar = [UIImage imageNamed:@"Ethan"];
+        case 18:
+            return avatar = [UIImage imageNamed:@"lapidus"];
+        case 19:
+            return avatar = [UIImage imageNamed:@"michael"];
+        default:
+            return nil;
+    }
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark - UITableViewDataSource
@@ -61,12 +144,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
+    SKLeaderboardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SKLeaderboardCell"
+                                                              forIndexPath:indexPath];
     
     GKScore *score = [self.usersArray objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = score.player.alias;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lld", score.value];
+    cell.playerAliasLabel.text = [NSString stringWithFormat:@"%@", score.player.alias];
+    cell.scoreLabel.text = [NSString stringWithFormat:@"%lld", score.value];
+    cell.rowNumberLabel.text = [NSString stringWithFormat:@"%ld.", indexPath.row + 1];
+    cell.playerAvatarImage.image = [self playerAvatarWithIndex:indexPath.row];
     
     return cell;
 }
@@ -77,4 +163,33 @@
     return NO;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.f;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.storeHouseRefreshControl scrollViewDidScroll];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self.storeHouseRefreshControl scrollViewDidEndDragging];
+}
+
+#pragma mark - CBStoreHouseRefreshControl
+
+- (void)refreshTriggered {
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
+    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:1.0 inModes:@[NSRunLoopCommonModes]];
+}
+
+- (void)finishRefreshControl {
+    
+    [self loadPlayers];
+    
+    [self.storeHouseRefreshControl finishingLoading];
+}
 @end

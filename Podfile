@@ -7,8 +7,8 @@ target 'Dharm' do
 pod 'AMViralSwitch'
 pod 'NGSPopoverView'
 pod 'MSWeakTimer', '~> 1.1.0'
-pod 'UIView+Shake'
 pod 'Google-Mobile-Ads-SDK'
+pod 'CBStoreHouseRefreshControl'
   # Pods for Dharm
 
 end
