@@ -80,55 +80,55 @@
 
 -(UIImage *)playerAvatarWithIndex:(NSInteger)index {
     
-    UIImage *avatar = nil;
-    
     switch (index) {
         case 0:
-            return avatar = [UIImage imageNamed:@"hurley"];
+            return [UIImage imageNamed:@"hurley"];
         case 1:
-            return avatar = [UIImage imageNamed:@"John Lock"];
+            return [UIImage imageNamed:@"John Lock"];
         case 2:
-            return avatar = [UIImage imageNamed:@"ben"];
+            return [UIImage imageNamed:@"ben"];
         case 3:
-            return avatar = [UIImage imageNamed:@"jack"];
+            return [UIImage imageNamed:@"jack"];
         case 4:
-            return avatar = [UIImage imageNamed:@"kate"];
+            return [UIImage imageNamed:@"kate"];
         case 5:
-            return avatar = [UIImage imageNamed:@"sawer"];
+            return [UIImage imageNamed:@"sawer"];
         case 6:
-            return avatar = [UIImage imageNamed:@"sayid"];
+            return [UIImage imageNamed:@"sayid"];
         case 7:
-            return avatar = [UIImage imageNamed:@"juliet"];
+            return [UIImage imageNamed:@"juliet"];
         case 8:
-            return avatar = [UIImage imageNamed:@"faraday"];
+            return [UIImage imageNamed:@"faraday"];
         case 9:
-            return avatar = [UIImage imageNamed:@"charlie"];
+            return [UIImage imageNamed:@"charlie"];
         case 10:
-            return avatar = [UIImage imageNamed:@"claire"];
+            return [UIImage imageNamed:@"claire"];
         case 11:
-            return avatar = [UIImage imageNamed:@"sun"];
+            return [UIImage imageNamed:@"sun"];
         case 12:
-            return avatar = [UIImage imageNamed:@"jin"];
+            return [UIImage imageNamed:@"jin"];
         case 13:
-            return avatar = [UIImage imageNamed:@"desmond"];
+            return [UIImage imageNamed:@"desmond"];
         case 14:
-            return avatar = [UIImage imageNamed:@"eco"];
+            return [UIImage imageNamed:@"eco"];
         case 15:
-            return avatar = [UIImage imageNamed:@"richard"];
+            return [UIImage imageNamed:@"richard"];
         case 16:
-            return avatar = [UIImage imageNamed:@"russo"];
+            return [UIImage imageNamed:@"russo"];
         case 17:
-            return avatar = [UIImage imageNamed:@"Ethan"];
+            return [UIImage imageNamed:@"Ethan"];
         case 18:
-            return avatar = [UIImage imageNamed:@"lapidus"];
+            return [UIImage imageNamed:@"lapidus"];
         case 19:
-            return avatar = [UIImage imageNamed:@"michael"];
+            return [UIImage imageNamed:@"michael"];
         default:
             return nil;
     }
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 

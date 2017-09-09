@@ -50,6 +50,7 @@ enum: NSInteger {
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     self.pagesArray = [self.storyHelper loadPages];
 

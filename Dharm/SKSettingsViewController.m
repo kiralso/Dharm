@@ -65,6 +65,8 @@ static NSInteger const kHoursBetweenPickers = 3;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

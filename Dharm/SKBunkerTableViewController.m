@@ -107,6 +107,9 @@ static NSString * const adCellIdentifier = @"adCell";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+
     [self.tableView reloadData];
     
     [[SKGameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
@@ -287,37 +290,6 @@ static NSString * const adCellIdentifier = @"adCell";
     [popover showFromView:sender animated:YES];
 }
 
-/*
-- (void) showStory {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    BOOL isFirstTime = [defaults boolForKey:kIsFirstTime];
-    
-    SKTutorialPageViewController *tutorialVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SKTutorialPageViewController"];
-    
-    NSInteger maxScore = [SKUserDataManager sharedManager].userMaxScore;
-    NSInteger score = [SKUserDataManager sharedManager].userScore;
-
-    if (!isFirstTime) {
-        
-        [defaults setBool:YES forKey:kIsFirstTime];
-        tutorialVC.indexOfInitialViewController = 0;
-        tutorialVC.isFromMenu = NO;
-    } else if (maxScore == score && score != 0) {
-        
-        NSArray *allIndexes = [SKUserDataManager sharedManager].userPagesIndexesArray;
-        NSRange range = NSMakeRange(0, [allIndexes count] -1);
-        NSArray *indexes = [allIndexes subarrayWithRange:range];
-        
-        tutorialVC.indexOfInitialViewController = [[indexes lastObject] integerValue];
-        tutorialVC.isFromMenu = NO;
-        tutorialVC.storyPages = [[SKStoryPage alloc] pagesWithArrayOfIndexes:indexes];
-    }
-    [self presentViewController:tutorialVC animated:YES completion:nil];
-
-}
-*/
 #pragma mark - Menu
 
 - (void) showMenu {
