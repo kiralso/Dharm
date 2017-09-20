@@ -40,7 +40,7 @@
 
 @end
 
-typedef enum : NSUInteger {
+typedef enum : NSInteger {
     SKCellsScore,
     SKCellsTimer,
     SKCellsCode,
@@ -65,11 +65,6 @@ static NSString * const adCellIdentifier = @"adCell";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTableView:)
                                                  name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(checkCodeCanEntered:)
-                                                 name:SKTimerTextChangedNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -109,9 +104,7 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-
     [self.tableView reloadData];
-    
     [[SKGameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
 }
 
@@ -228,35 +221,29 @@ static NSString * const adCellIdentifier = @"adCell";
                      completion:nil];
 }
 
-- (void) checkCodeCanEntered:(NSNotification *) notification {
-    
-    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
-    
-    if (dateComponents.minute < kMinutesBeforeFireDateToWarn) {
-        self.codeCanEntered = YES;
-    } else {
-        self.codeCanEntered = NO;
-    }
-}
-
 - (void) updateTimeLabel:(NSNotification *) notification {
     
     NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
     
     if (dateComponents.minute < kMinutesBeforeFireDateToWarn) {
-        UIColor *customRed = RGBA(163.f, 26.f, 27.f, 1.f);
         
+        UIColor *customRed = RGBA(163.f, 26.f, 27.f, 1.f);
         self.timerCell.timerLabel.textColor = customRed;
+        [self codeCanBeEntered:YES];
+        
     } else {
+        
         self.timerCell.timerLabel.textColor = [UIColor whiteColor];
+        [self codeCanBeEntered:NO];
     }
     
     if (dateComponents.second < 1 && dateComponents.minute < 1) {
         
         [self startTimerToNextFireDate];
-        
         [[SKMainObserver sharedObserver] updateDataWithScore:0];
+        
     } else {
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             self.timerCell.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
                                               (int)dateComponents.minute, (int)dateComponents.second];
@@ -454,11 +441,11 @@ static NSString * const adCellIdentifier = @"adCell";
 
 - (void) codeDidEntered {
     
-    NSInteger userScore = [SKUserDataManager sharedManager].userScore + 1;
-    NSInteger maxScore = [SKUserDataManager sharedManager].userMaxScore;
+    NSInteger userScore = [SKUserDataManager sharedManager].user.score + 1;
+    NSInteger maxScore = [SKUserDataManager sharedManager].user.maxScore;
 
     if (userScore > maxScore || maxScore == 0) {
-        [[SKUserDataManager sharedManager] updatePagesIndexesWithNextIndex];
+        [self.storyHelper updatePagesIndexesWithNextIndex];
         [self.storyHelper showLastStory];
     }
     
@@ -544,17 +531,22 @@ static NSString * const adCellIdentifier = @"adCell";
     
     dispatch_async(dispatch_get_main_queue(), ^{
 
-        NSInteger score = [SKUserDataManager sharedManager].userScore;
+        NSInteger score = [SKUserDataManager sharedManager].user.score;
     
         self.scoreCell.scoreLabel.text =
         [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
     });
 }
 
-#pragma mark - SKStoryHelperDelegate
+#pragma mark - Helpful Functions
 
-- (void) pagesDidLoad:(NSArray *)pages {
+- (void) codeCanBeEntered:(BOOL) yesNo {
     
+    if (yesNo) {
+        self.codeCanEntered = YES;
+    } else {
+        self.codeCanEntered = NO;
+    }
 }
 
 @end

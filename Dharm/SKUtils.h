@@ -10,8 +10,8 @@
 #import <UIKit/UIKit.h>
 
 static NSInteger const kNumberOfDatesToGenerate = 30;
-static NSInteger const kMinutesBeforeFireDateToWarn = 4;
-static NSInteger const kMinutesYoSaveTheWorld = 108;
+static NSInteger const kMinutesBeforeFireDateToWarn = 1;
+static NSInteger const kMinutesYoSaveTheWorld = 2;
 
 static NSString * const kScoreKey = @"kScoreKey";
 static NSString * const kSafetyString = @"4 8 15 16 23 42";

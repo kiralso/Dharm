@@ -14,6 +14,8 @@
 
 @implementation SKUser
 
+#pragma mark - NSCoder
+
 - (void)encodeWithCoder:(NSCoder *)encoder {
     
     [encoder encodeObject:@(self.score) forKey:@"score"];

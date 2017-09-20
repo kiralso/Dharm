@@ -10,7 +10,14 @@
 #import "SKTutorialPageViewController.h"
 #import "SKStoryPage.h"
 #import "SKUserDataManager.h"
+#import "SKStoryHelper.h"
 #import "SKUtils.h"
+
+@interface SKTutorialViewController()
+
+@property (strong, nonatomic) SKStoryHelper *storyHelper;
+
+@end
 
 @implementation SKTutorialViewController
 
@@ -23,6 +30,7 @@
         [self setupPageAtIndex:self.pageIndex];
     }
     
+    self.storyHelper = [[SKStoryHelper alloc] init];
     self.textView.textColor = [UIColor whiteColor];
 }
 
@@ -53,14 +61,14 @@
 
 - (IBAction)yesAction:(UIButton *)sender {
     
-    [[SKUserDataManager sharedManager] updatePagesIndexesWithNextIndexAndAnswer:YES];
+    [self.storyHelper updatePagesIndexesWithNextIndexAndAnswer:YES];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)noAction:(UIButton *)sender {
     
-    [[SKUserDataManager sharedManager] updatePagesIndexesWithNextIndexAndAnswer:NO];
+    [self.storyHelper updatePagesIndexesWithNextIndexAndAnswer:NO];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -84,8 +92,8 @@
         self.noButton.hidden = YES;
     } else {
         
-        NSSet *answeredPages = [SKUserDataManager sharedManager].userAnsweredPages;
-        NSNumber *pageNumber = [SKUserDataManager sharedManager].userPagesIndexesArray[index];
+        NSSet *answeredPages = [SKUserDataManager sharedManager].user.answeredPages;
+        NSNumber *pageNumber = [SKUserDataManager sharedManager].user.pagesIndexesArray[index];
         
         if ([answeredPages member:pageNumber]) {
             self.yesButton.hidden = YES;

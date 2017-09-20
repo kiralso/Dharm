@@ -7,18 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SKUser.h"
 
 @class SKUser;
 @class SKNotificationDate;
 
 @interface SKUserDataManager : NSObject
 
-@property (assign, nonatomic) NSInteger userScore;
-@property (assign, nonatomic) NSInteger userMaxScore;
-@property (strong, nonatomic) NSArray *userNotificationDates;
-@property (strong, nonatomic) NSArray *userPagesIndexesArray;
-@property (strong, nonatomic) NSSet *userAnsweredPages;
-@property (assign, nonatomic) BOOL isGameOver;
+@property(strong, nonatomic) SKUser *user;
 
 + (SKUserDataManager *) sharedManager;
 
@@ -33,10 +29,5 @@
 - (void) updateUserWithNotificationDateArray:(NSArray *)array;
 - (NSArray *)fireDates;
 - (SKNotificationDate *)notificationDateWithFireDate:(NSDate *)fireDate warningDate:(NSDate *)warningDate;
-
-//story pages
-- (void) updatePagesIndexesWithNewIndex:(NSInteger)index;
-- (void) updatePagesIndexesWithNextIndex;
-- (void) updatePagesIndexesWithNextIndexAndAnswer:(BOOL) yesNo;
 
 @end

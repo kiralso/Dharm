@@ -21,7 +21,9 @@
 
     NSArray* pages = [[SKStoryPage alloc] pagesWithArrayOfIndexes:pagesIndexesArray];
     
-    [self.delegate pagesDidLoad:pages];
+    if ([self.delegate respondsToSelector:@selector(pagesDidLoad:)]) {
+        [self.delegate pagesDidLoad:pages];
+    }
     
     return pages;
 }
@@ -58,7 +60,7 @@
 
 - (void)showLastStory {
     
-    BOOL isGameOver = [SKUserDataManager sharedManager].isGameOver;
+    BOOL isGameOver = [SKUserDataManager sharedManager].user.isGameOver;
     
     if (!isGameOver) {
         
@@ -76,7 +78,9 @@
         storyVC.indexOfInitialViewController = initialIndex;
         storyVC.storyPages = pages;
         
-        [self.delegate pagesDidLoad:pages];
+        if ([self.delegate respondsToSelector:@selector(pagesDidLoad:)]) {
+            [self.delegate pagesDidLoad:pages];
+        }
         
         [self.delegate presentViewController:storyVC animated:YES completion:nil];
     }
@@ -91,11 +95,104 @@
     [self.delegate presentViewController:storyVC animated:YES completion:nil];
 }
 
+#pragma mark - Story Pages
+
+- (void) updatePagesIndexesWithNewIndex:(NSInteger)index {
+    
+    NSMutableArray *indexes = [NSMutableArray arrayWithArray:[SKUserDataManager sharedManager].user.pagesIndexesArray];
+    NSNumber *newIndex = @(index);
+    
+    [indexes addObject:newIndex];
+    
+    [SKUserDataManager sharedManager].user.pagesIndexesArray = indexes;
+    
+    [[SKUserDataManager sharedManager] saveUser];
+}
+
+- (void) updatePagesIndexesWithNextIndex {
+    
+    NSMutableArray *indexes = [NSMutableArray arrayWithArray:[SKUserDataManager sharedManager].user.pagesIndexesArray];
+    SKStoryPageNumber lastIndex = [[indexes lastObject] integerValue];
+    NSNumber *nextIndex = nil;
+    
+    switch (lastIndex) {
+        case SKStoryPageNumberNine:
+            nextIndex = @(SKStoryPageNumberThirteen);
+            break;
+        case SKStoryPageNumberNineteen:
+            nextIndex = @(SKStoryPageThanks);
+            break;
+        case SKStoryPageNumberTwenty:
+            nextIndex = @(SKStoryPageThanks);
+            break;
+        case SKStoryPageNumberMax : // last possible page + 1
+            [SKUserDataManager sharedManager].user.isGameOver = YES;
+            return;
+        default:
+            nextIndex = @(lastIndex + 1);
+            break;
+    }
+    
+    [indexes addObject:nextIndex];
+    
+    [SKUserDataManager sharedManager].user.pagesIndexesArray = indexes;
+    
+    [[SKUserDataManager sharedManager] saveUser];
+}
+
+- (void) updatePagesIndexesWithNextIndexAndAnswer:(BOOL) yesNo {
+    
+    NSMutableArray *pagesIndexes = [NSMutableArray arrayWithArray:[SKUserDataManager sharedManager].user.pagesIndexesArray];
+    NSMutableSet *answeredPages = [NSMutableSet setWithSet:[SKUserDataManager sharedManager].user.answeredPages];
+    
+    NSArray *tmpArray = [pagesIndexes subarrayWithRange:NSMakeRange(0, [pagesIndexes count] - 1)];
+    NSMutableArray *subIndexes = [NSMutableArray arrayWithArray:tmpArray];
+    
+    NSInteger lastIndex = [[subIndexes lastObject] integerValue];
+    NSInteger nextIndex = 0;
+    
+    switch (lastIndex) {
+        case 5:
+            if (yesNo) { //Stay in bunker
+                nextIndex = 6;
+            } else {
+                nextIndex = 10;
+            }
+            break;
+        case 13:
+            if (yesNo) { //Save Desmond
+                nextIndex = 14;
+            } else {
+                nextIndex = 21;
+            }
+            break;
+        case 17:
+            if (yesNo) { //Drink or not
+                nextIndex = 18;
+            } else {
+                nextIndex = 20;
+            }
+            break;
+            
+        default:
+            nextIndex = lastIndex + 1;
+            break;
+    }
+    
+    [answeredPages addObject:@(lastIndex)];
+    [subIndexes addObject:@(nextIndex)];
+    
+    [SKUserDataManager sharedManager].user.pagesIndexesArray = subIndexes;
+    [SKUserDataManager sharedManager].user.answeredPages = answeredPages;
+    
+    [[SKUserDataManager sharedManager] saveUser];
+}
+
 #pragma mark - Private
 
 - (NSArray *)pagesIndexesWithoutLast {
     
-    NSArray *pagesIndexesArray = [SKUserDataManager sharedManager].userPagesIndexesArray;
+    NSArray *pagesIndexesArray = [SKUserDataManager sharedManager].user.pagesIndexesArray;
     NSRange range = NSMakeRange(0, [pagesIndexesArray count] -1);
     NSArray *indexes = [pagesIndexesArray subarrayWithRange:range];
     

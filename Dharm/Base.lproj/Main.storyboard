@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ANy-Z8-0Ss">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ANy-Z8-0Ss">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Medium</string>
+            <string>AvenirNext-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Tab Bar Controller-->
         <scene sceneID="1io-27-K8U">
@@ -142,8 +148,8 @@ Turn the mode off, if your life has not prepared you for this!</string>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="woQ-cO-D9K" firstAttribute="centerY" secondItem="Wjl-Fc-Nfb" secondAttribute="centerY" id="1lT-jS-96j"/>
-                            <constraint firstItem="Wjl-Fc-Nfb" firstAttribute="trailing" secondItem="nUv-XO-v1h" secondAttribute="trailingMargin" id="32P-IM-axz"/>
-                            <constraint firstItem="Wjl-Fc-Nfb" firstAttribute="leading" secondItem="nUv-XO-v1h" secondAttribute="leadingMargin" id="8ti-nN-XaA"/>
+                            <constraint firstItem="Wjl-Fc-Nfb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nUv-XO-v1h" secondAttribute="trailingMargin" id="32P-IM-axz"/>
+                            <constraint firstItem="Wjl-Fc-Nfb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nUv-XO-v1h" secondAttribute="leadingMargin" id="8ti-nN-XaA"/>
                             <constraint firstItem="Wjl-Fc-Nfb" firstAttribute="centerX" secondItem="nUv-XO-v1h" secondAttribute="centerX" id="MDg-aP-F1O"/>
                             <constraint firstItem="7bC-J6-4NF" firstAttribute="leading" secondItem="nUv-XO-v1h" secondAttribute="leading" id="Nbg-CT-IDe"/>
                             <constraint firstItem="woQ-cO-D9K" firstAttribute="leading" secondItem="nUv-XO-v1h" secondAttribute="leading" id="NrO-RT-y2h"/>
@@ -177,7 +183,7 @@ Turn the mode off, if your life has not prepared you for this!</string>
                 <navigationController id="dux-pW-tAf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="square-3" selectedImage="square-3" id="6IL-du-dI6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="2gz-Vx-JfY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -320,7 +326,7 @@ Turn the mode off, if your life has not prepared you for this!</string>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-4Z-E2M">
                                             <rect key="frame" x="266" y="38" width="101" height="24"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="101" id="H6U-UT-scU"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="101" id="H6U-UT-scU"/>
                                                 <constraint firstAttribute="height" constant="24" id="hNp-Tv-Is9"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
@@ -331,6 +337,7 @@ Turn the mode off, if your life has not prepared you for this!</string>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="M3s-4Z-E2M" firstAttribute="centerY" secondItem="oD2-zk-1Hd" secondAttribute="centerY" id="65y-k5-W0O"/>
+                                        <constraint firstItem="M3s-4Z-E2M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oD2-zk-1Hd" secondAttribute="leadingMargin" id="VQR-Ks-LPQ"/>
                                         <constraint firstItem="M3s-4Z-E2M" firstAttribute="trailing" secondItem="oD2-zk-1Hd" secondAttribute="trailingMargin" id="dmT-oW-tjg"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -655,7 +662,7 @@ This station was originally constructed as a laboratory, where scientists could 
                 <navigationController id="Ljn-vE-l2q" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Bunker" image="hexagon-geometrical-shape-outline-2" selectedImage="hexagon-geometrical-shape-outline-2" id="Ai8-xU-6tL"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="ggB-xy-2iE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <textAttributes key="titleTextAttributes">
@@ -687,20 +694,20 @@ This station was originally constructed as a laboratory, where scientists could 
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="33c-Ay-leP" id="9Xx-uQ-suA">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIz-vl-Nmd">
                                             <rect key="frame" x="7.5" y="0.0" width="22.5" height="80"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="22.5" id="Z9b-9r-Mq1"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22.5" id="Z9b-9r-Mq1"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaZ-bi-ld0">
-                                            <rect key="frame" x="126" y="0.0" width="173" height="80"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaZ-bi-ld0">
+                                            <rect key="frame" x="126" y="0.0" width="113.5" height="80"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="80" id="n4i-4P-oIy"/>
                                             </constraints>
@@ -708,10 +715,10 @@ This station was originally constructed as a laboratory, where scientists could 
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4SI-UR-bGf">
-                                            <rect key="frame" x="307" y="0.0" width="60" height="80"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4SI-UR-bGf">
+                                            <rect key="frame" x="247.5" y="0.0" width="119.5" height="80"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="VeH-YP-Bzh"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="VeH-YP-Bzh"/>
                                                 <constraint firstAttribute="height" constant="80" id="f30-vv-3uA"/>
                                             </constraints>
                                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
@@ -740,6 +747,7 @@ This station was originally constructed as a laboratory, where scientists could 
                                         <constraint firstAttribute="bottom" secondItem="uIz-vl-Nmd" secondAttribute="bottom" constant="-0.5" id="DS7-DW-ssw"/>
                                         <constraint firstAttribute="bottom" secondItem="oaZ-bi-ld0" secondAttribute="bottom" constant="-0.5" id="Fkg-je-Zcq"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="p0K-YN-7v9" secondAttribute="bottom" constant="2.5" id="HfV-6g-Whd"/>
+                                        <constraint firstAttribute="trailing" secondItem="4SI-UR-bGf" secondAttribute="trailing" constant="8" id="I50-93-4cZ"/>
                                         <constraint firstItem="uIz-vl-Nmd" firstAttribute="top" secondItem="9Xx-uQ-suA" secondAttribute="top" id="QrK-Av-ca4"/>
                                         <constraint firstItem="p0K-YN-7v9" firstAttribute="leading" secondItem="uIz-vl-Nmd" secondAttribute="trailing" constant="8" id="X6Q-VD-lli"/>
                                         <constraint firstItem="oaZ-bi-ld0" firstAttribute="leading" secondItem="p0K-YN-7v9" secondAttribute="trailing" constant="28" id="Yc3-rU-jrg"/>
@@ -778,7 +786,7 @@ This station was originally constructed as a laboratory, where scientists could 
                 <navigationController id="axx-hb-HVv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Best players" image="triangle-2" selectedImage="triangle-2" id="jyI-jK-FH6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="cuG-AO-mBq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

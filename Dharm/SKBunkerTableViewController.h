@@ -10,7 +10,6 @@
 
 @class SKScoreCell;
 @class SKTimerCell;
-@class SKLogoCell;
 @class SKCodeCell;
 @class SKAdCell;
 
@@ -18,7 +17,6 @@
 
 @property (strong, nonatomic) SKScoreCell *scoreCell;
 @property (strong, nonatomic) SKTimerCell *timerCell;
-@property (strong, nonatomic) SKLogoCell *logoCell;
 @property (strong, nonatomic) SKCodeCell *codeCell;
 @property (strong, nonatomic) SKAdCell *adCell;
 

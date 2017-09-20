@@ -62,16 +62,14 @@
     __weak SKLeaderboardsViewController *weakSelf = self;
     
     [[SKGameKitHelper sharedGameKitHelper] loadLeaderboardWithIdentifier:identifier
-                                                     andCompetionHandler:^(NSArray<GKScore *> *scores, NSError *error) {
+                                                     andCompetionHandler:^(NSArray<GKScore *> *scores,
+                                                                           NSError *error) {
         
         if (error) {
             NSLog(@"ERROR - %@", error.localizedDescription);
         } else {
-            
             weakSelf.usersArray = scores;
-            
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            
             [[weakSelf tableView] reloadData];
         }
     }];
@@ -128,7 +126,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
@@ -151,7 +148,7 @@
     
     cell.playerAliasLabel.text = [NSString stringWithFormat:@"%@", score.player.alias];
     cell.scoreLabel.text = [NSString stringWithFormat:@"%lld", score.value];
-    cell.rowNumberLabel.text = [NSString stringWithFormat:@"%ld.", indexPath.row + 1];
+    cell.rowNumberLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1];
     cell.playerAvatarImage.image = [self playerAvatarWithIndex:indexPath.row];
     
     return cell;
@@ -189,7 +186,6 @@
 - (void)finishRefreshControl {
     
     [self loadPlayers];
-    
     [self.storeHouseRefreshControl finishingLoading];
 }
 @end

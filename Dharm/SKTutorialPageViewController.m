@@ -44,7 +44,7 @@
         viewController.pagesArray = self.storyPages;
     } else {
         
-        NSArray *pagesIndexesArray = [SKUserDataManager sharedManager].userPagesIndexesArray;
+        NSArray *pagesIndexesArray = [SKUserDataManager sharedManager].user.pagesIndexesArray;
         NSMutableArray* pages = [NSMutableArray array];
 
         for (NSNumber *index in pagesIndexesArray) {

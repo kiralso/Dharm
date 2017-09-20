@@ -23,11 +23,14 @@
 - (void)showStoryAtIndex:(NSInteger)index;
 - (void)showDisasterWithPower:(NSInteger)index;
 
+- (void) updatePagesIndexesWithNewIndex:(NSInteger)index;
+- (void) updatePagesIndexesWithNextIndex;
+- (void) updatePagesIndexesWithNextIndexAndAnswer:(BOOL) yesNo;
+
 @end
 
 @protocol SKStoryHelperDelegate
 
 @optional
 - (void)pagesDidLoad:(NSArray *)pages;
-
 @end

@@ -12,8 +12,6 @@
 #import "SKDateGenerator.h"
 #import "UIApplication+SKNotificationManager.h"
 #import "SKSettingsViewController.h"
-#import "SKCodeCell.h"
-#import "SKGameKitHelper.h"
 
 NSString* const SKMainObserverReloadViewControlerNotification = @"SKMainObserverReloadViewControlerNotification";
 
