@@ -11,12 +11,17 @@
 
 extern NSString * const SKPresentAuthenticationViewControllerNotification;
 
+@protocol SKGameKitHelperDelegate
+
+- (void) showAuthenticationController:(UIViewController *)authenticationController;
+
+@end
+
 @interface SKGameKitHelper : NSObject
 
-@property (nonatomic, readonly) UIViewController *authenticationViewController;
 @property (strong, nonatomic) NSString *leaderboardIdentifier;
+@property (weak, nonatomic) UIViewController<SKGameKitHelperDelegate> *delegate;
 
-+ (instancetype) sharedGameKitHelper;
 - (void) authenticateLocalPlayer;
 - (void) reportScore:(int64_t) score;
 

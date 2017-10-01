@@ -113,22 +113,19 @@
 - (NSArray<NSDate *> *) warningDatesWithArray:(NSArray<NSDate *> *) array {
     
     NSMutableArray *dates = [NSMutableArray array];
-    
     for (NSDate *dateFromArray in array) {
         
         NSDate *date= [NSDate dateWithTimeInterval:-kMinutesBeforeFireDateToWarn*60 sinceDate:dateFromArray];
 
         [dates addObject:date];
     }
-    
-    NSArray * datesArray = [NSArray arrayWithArray:dates];
-    
-    return datesArray;
+    return [NSArray arrayWithArray:dates];;
 }
 
 #pragma mark - Local date
 
 -(NSDate *) localDateFromGMTDate:(NSDate *) date {
+    
     NSTimeZone *tz = [NSTimeZone defaultTimeZone];
     NSInteger seconds = [tz secondsFromGMTForDate: date];
     return [NSDate dateWithTimeInterval: seconds sinceDate: date];
@@ -139,20 +136,16 @@
 - (NSArray<NSDate *> *) datesArrayBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate {
     
     NSDate *dateTo = endDate;
-    
     NSDateComponents *componentsTo =[[NSCalendar currentCalendar]
                                      components:NSCalendarUnitHour | NSCalendarUnitMinute
                                      fromDate:dateTo];
     
     NSDate *dateFrom = startDate;
-    
     NSDateComponents *componentsFrom =[[NSCalendar currentCalendar]
                                        components:NSCalendarUnitHour | NSCalendarUnitMinute
                                        fromDate:dateFrom];
     
-    NSArray *datesArray = [self fireDatesWithHoursAndMinutesBetweenComponents:componentsFrom andComponents:componentsTo];
-    
-    return datesArray;
+    return [self fireDatesWithHoursAndMinutesBetweenComponents:componentsFrom andComponents:componentsTo];;
 }
 
 @end

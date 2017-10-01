@@ -11,10 +11,10 @@
 #import "SKStoryResetTableViewCell.h"
 #import "SKTutorialPageViewController.h"
 #import "SKStoryPage.h"
-#import "SKUtils.h"
 #import "SKUserDataManager.h"
 #import "SKMainObserver.h"
 #import "SKStoryHelper.h"
+#import "SKAlertHelper.h"
 
 enum: NSInteger {
     SKTableSectionPartOne,
@@ -32,6 +32,7 @@ enum: NSInteger {
 @property (assign, nonatomic) NSInteger numberOfPagesInPartThree;
 
 @property (strong, nonatomic) SKStoryHelper *storyHelper;
+@property (strong, nonatomic) SKAlertHelper *alertHelper;
 
 @end
 
@@ -43,6 +44,7 @@ enum: NSInteger {
     self.menuTableView.delegate = self;
     self.menuTableView.dataSource = self;
     
+    self.alertHelper = [[SKAlertHelper alloc] init];
     self.storyHelper = [[SKStoryHelper alloc] init];
     self.storyHelper.delegate = self;
     
@@ -63,9 +65,15 @@ enum: NSInteger {
     
     if (indexPath.section == SKTableSectionResetStory) {
         
-        [self showResetAlert];
-    } else {
+        [self.alertHelper showResetStoryAlertOnViewController:self
+                                                withOkHandler:^(UIAlertAction * _Nonnull action) {
+                                                                     [[SKUserDataManager sharedManager] resetUser];
+                                                                     self.pagesArray = [self.storyHelper loadPages];
+                                                                     [self.menuTableView reloadData];
+                                                                     [[SKMainObserver sharedObserver] updateData];
+        }];
         
+    } else {
         NSInteger index = [self storyIndexFromIndexPath:indexPath];
         [self.storyHelper showStoryAtIndex:index];
     }
@@ -163,40 +171,6 @@ enum: NSInteger {
     }
     
     return 0;
-}
-
-- (void) showResetAlert {
-    
-    NSString *alertTitle = NSLocalizedString(@"RESETTITLE", nil);
-    NSString *alertMessage = NSLocalizedString(@"RESETMESSAGE", nil);
-    NSString *okTitle = NSLocalizedString(@"OK", nil);
-    NSString *cancelTitle = NSLocalizedString(@"CANCEL", nil);
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
-                                                                   message:alertMessage
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                         
-                                                         [[SKUserDataManager sharedManager] resetUser];
-                                                         
-                                                         self.pagesArray = [self.storyHelper loadPages];
-                                                         
-                                                         [self.menuTableView reloadData];
-                                                         
-                                                         [[SKMainObserver sharedObserver] updateData];
-                                                     }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-    
-    [alert addAction:okAction];
-    [alert addAction:cancelAction];
-
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - SKStoryHelperDelegate

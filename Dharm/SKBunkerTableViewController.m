@@ -6,37 +6,46 @@
 //  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
+//Controllers
 #import "SKBunkerTableViewController.h"
 #import "SKStoryMenuViewController.h"
 #import "SKTutorialPageViewController.h"
+
+//Views
 #import "SKScoreCell.h"
 #import "SKTimerCell.h"
 #import "SKCodeCell.h"
 #import "SKAdCell.h"
+
+//Models
 #import "SKTimer.h"
 #import "SKUtils.h"
+#import "SKStoryPage.h"
 #import "SKMainObserver.h"
 #import "NGSPopoverView.h"
-#import "UIViewController+SKViewControllerCategory.h"
-#import "UITableViewController+SKTableViewCategory.h"
 #import "SKGameKitHelper.h"
 #import "SKUserDataManager.h"
-#import "SKStoryPage.h"
 #import "SKStoryHelper.h"
+#import "SKAlertHelper.h"
+#import "UITableViewController+SKTableViewCategory.h"
+
 
 @import GoogleMobileAds;
 
-@interface SKBunkerTableViewController () <GADBannerViewDelegate, UITextFieldDelegate, SKStoryHelperDelegate>
+@interface SKBunkerTableViewController () <GADBannerViewDelegate, UITextFieldDelegate, SKStoryHelperDelegate, SKGameKitHelperDelegate, SKTimerDelegate>
 
+@property (strong, nonatomic) SKStoryMenuViewController *storyVC;
+
+@property (strong, nonatomic) SKTimer *timer;
 @property (nonatomic, strong) GADBannerView *bannerView;
 @property (assign, nonatomic) BOOL codeCanEntered;
-@property (strong, nonatomic) UITextField *codeTextField;
-@property (strong, nonatomic) SKTimer *timer;
 @property (assign, nonatomic) BOOL isMenuHidden;
-@property (strong, nonatomic) SKStoryMenuViewController *storyVC;
 @property (strong, nonatomic) UISwipeGestureRecognizer *rightSwipe;
 @property (strong, nonatomic) UISwipeGestureRecognizer *leftSwipe;
+@property (strong, nonatomic) UITextField *codeTextField;
 @property (strong, nonatomic) SKStoryHelper *storyHelper;
+@property (strong, nonatomic) SKAlertHelper *alertHelper;
+@property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
 
 @end
 
@@ -67,16 +76,6 @@ static NSString * const adCellIdentifier = @"adCell";
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showAuthenticationViewController)
-                                                 name:SKPresentAuthenticationViewControllerNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateTimeLabel:)
-                                                 name:SKTimerTextChangedNotification
-                                               object:nil];
-    
     self.codeCanEntered = NO;
     self.isMenuHidden = YES;
     
@@ -94,18 +93,19 @@ static NSString * const adCellIdentifier = @"adCell";
     [self setBackgroundImageViewWithImageName:backgroundPath()];
     
     self.storyHelper = [[SKStoryHelper alloc] init];
+    self.alertHelper = [[SKAlertHelper alloc] init];
+    self.gameCenterHelper = [[SKGameKitHelper alloc] init];
     self.storyHelper.delegate = self;
+    self.gameCenterHelper.delegate = self;
     
     [self checkScore];
-    
     [self.storyHelper showTutorial];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
     [super viewDidAppear:animated];
     [self.tableView reloadData];
-    [[SKGameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+    [self.gameCenterHelper authenticateLocalPlayer];
 }
 
 - (void)dealloc {
@@ -133,20 +133,18 @@ static NSString * const adCellIdentifier = @"adCell";
                                                    forIndexPath:indexPath];
             
             self.scoreCell = (SKScoreCell *)cell;
-            
             [self updateScoreLabel];
-            
             return self.scoreCell;
+            
         case SKCellsTimer:
             
             cell = [tableView dequeueReusableCellWithIdentifier:timerCellIdentifier
                                                    forIndexPath:indexPath];
             
             self.timerCell = (SKTimerCell *)cell;
-            
             [self startTimerToNextFireDate];
-            
             return self.timerCell;
+            
         case SKCellsCode:
             
             cell = [tableView dequeueReusableCellWithIdentifier:codeCellIdentifier
@@ -155,15 +153,14 @@ static NSString * const adCellIdentifier = @"adCell";
             self.codeCell = (SKCodeCell *)cell;
             self.codeCell.codeTextField.delegate = self;
             self.codeTextField = self.codeCell.codeTextField;
-            
             return self.codeCell;
+            
         case SKCellsAd:
             
             cell = [tableView dequeueReusableCellWithIdentifier:adCellIdentifier
                                                    forIndexPath:indexPath];
             
             self.adCell = (SKAdCell *)cell;
-            
             self.adCell.adView.adUnitID = kAdMobAdIdentifier;
             self.adCell.adView.adSize = kGADAdSizeSmartBannerPortrait;
             self.adCell.adView.rootViewController = self;
@@ -171,10 +168,8 @@ static NSString * const adCellIdentifier = @"adCell";
             
             GADRequest *request = [GADRequest request];
             [self.adCell.adView loadRequest:request];
-            
             return self.adCell;
     }
-    
     return cell;
 }
 
@@ -208,53 +203,22 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void) reloadTableView:(NSNotification *) notification {
 
     [self checkScore];
-    
     [self updateScoreLabel];
-
     [self.tableView reloadData];
 }
 
-- (void)showAuthenticationViewController {
+#pragma mark - SKGameKitHelperDelegate
+
+- (void) showAuthenticationController:(UIViewController *)authenticationController {
     
-    [self.parentViewController presentViewController:[SKGameKitHelper sharedGameKitHelper].authenticationViewController
+    [self.parentViewController presentViewController:authenticationController
                        animated:YES
                      completion:nil];
-}
-
-- (void) updateTimeLabel:(NSNotification *) notification {
-    
-    NSDateComponents *dateComponents = [notification.userInfo objectForKey:SKTimerTextUserInfoKey];
-    
-    if (dateComponents.minute < kMinutesBeforeFireDateToWarn) {
-        
-        UIColor *customRed = RGBA(163.f, 26.f, 27.f, 1.f);
-        self.timerCell.timerLabel.textColor = customRed;
-        [self codeCanBeEntered:YES];
-        
-    } else {
-        
-        self.timerCell.timerLabel.textColor = [UIColor whiteColor];
-        [self codeCanBeEntered:NO];
-    }
-    
-    if (dateComponents.second < 1 && dateComponents.minute < 1) {
-        
-        [self startTimerToNextFireDate];
-        [[SKMainObserver sharedObserver] updateDataWithScore:0];
-        
-    } else {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.timerCell.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
-                                              (int)dateComponents.minute, (int)dateComponents.second];
-        });
-    }
 }
 
 #pragma mark - Actions
 
 - (IBAction)showMenuAction:(UIBarButtonItem *)sender {
-    
     if (self.isMenuHidden) {
         [self showMenu];
     } else {
@@ -273,7 +237,6 @@ static NSString * const adCellIdentifier = @"adCell";
                                                                  arrowSize:CGSizeMake(0, 0)];
     popover.contentView = label;
     popover.fillScreen = YES;
-    
     [popover showFromView:sender animated:YES];
 }
 
@@ -282,7 +245,6 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void) showMenu {
     
     [UIView animateWithDuration:0.3 animations:^{
-        
         self.storyVC.view.frame = CGRectMake(0,
                                              0,
                                              UIScreen.mainScreen.bounds.size.width,
@@ -297,7 +259,6 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void) hideMenu {
     
     [UIView animateWithDuration:0.3 animations:^{
-        
         self.storyVC.view.frame = CGRectMake(-UIScreen.mainScreen.bounds.size.width,
                                              0,
                                              UIScreen.mainScreen.bounds.size.width,
@@ -313,39 +274,15 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void) handleSwipe:(UISwipeGestureRecognizer *) sender {
     
     switch (sender.direction) {
-            
         case UISwipeGestureRecognizerDirectionRight:
             [self showMenu];
             break;
-            
         case UISwipeGestureRecognizerDirectionLeft:
             [self hideMenu];
             break;
-            
         default:
             break;
     }
-}
-
-#pragma mark - Alerts
-
-- (void) showCantEnterAlert {
-    
-    NSString *alertTitle = NSLocalizedString(@"ALERTERROR", nil);
-    NSString *alertMessage = NSLocalizedString(@"ALERTMESSAGE", nil);
-    NSString *alertCancel = NSLocalizedString(@"OK", nil);
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
-                                                                   message:alertMessage
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:alertCancel
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:nil];
-    
-    [alert addAction:cancelAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - GADBannerViewDelegate
@@ -364,12 +301,9 @@ static NSString * const adCellIdentifier = @"adCell";
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if ([self.codeTextField.text isEqualToString:kSafetyString]) {
-        
         [self codeDidEntered];
-        
         return YES;
     }
-    
     return NO;
 }
 
@@ -381,7 +315,7 @@ static NSString * const adCellIdentifier = @"adCell";
     if ([components count] > 1) {
         return NO;
     } else if (self.codeCanEntered == NO) {
-        [self showCantEnterAlert];
+        [self.alertHelper showCantEnterCodeAlertOnViewController:self];
         return NO;
     }
     
@@ -398,7 +332,6 @@ static NSString * const adCellIdentifier = @"adCell";
     }
     
     NSInteger currentCodeLength = MIN([newString length], maxCodeLength);
-    
     NSString* number = [newString substringFromIndex:(int)[newString length] - currentCodeLength];
     
     [resultString appendString:number];
@@ -418,6 +351,7 @@ static NSString * const adCellIdentifier = @"adCell";
     if ([resultString length] > 9) {
         [resultString insertString:@" " atIndex:9];
     }
+    
     if ([resultString length] > 12) {
         [resultString insertString:@" " atIndex:12];
     }
@@ -433,7 +367,6 @@ static NSString * const adCellIdentifier = @"adCell";
             [self codeDidEntered];
         });
     }
-    
     return NO;
 }
 
@@ -450,8 +383,7 @@ static NSString * const adCellIdentifier = @"adCell";
     }
     
     [[SKMainObserver sharedObserver] updateDataWithScore:userScore];
-
-    [[SKGameKitHelper sharedGameKitHelper] reportScore:(int64_t)userScore];
+    [self.gameCenterHelper reportScore:(int64_t)userScore];
 }
 
 #pragma mark - Timer
@@ -461,17 +393,16 @@ static NSString * const adCellIdentifier = @"adCell";
                andInterval:(NSTimeInterval)interval {
     
     [self.timer stopTimer];
-    
     self.timer = [[SKTimer alloc] initWithStartInSeconds:start
                                                  withEnd:end
-                                             andInterval:interval];
-    
+                                                interval:interval
+                                             andDelegate:self];
     [self.timer startTimer];
 }
 
 - (void) startTimerToNextFireDate {
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
         NSTimeInterval start = [[SKMainObserver sharedObserver] timeIntervalBeforeNextFireDate];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -480,6 +411,30 @@ static NSString * const adCellIdentifier = @"adCell";
                         andInterval:0.1];
         });
     });
+}
+
+#pragma mark - SKTimerDelegate
+
+- (void)timerComponentsDidChange:(NSDateComponents *)components {
+    
+    if (components.minute < kMinutesBeforeFireDateToWarn) {
+        UIColor *customRed = RGBA(163.f, 26.f, 27.f, 1.f);
+        self.timerCell.timerLabel.textColor = customRed;
+        [self codeCanBeEntered:YES];
+    } else {
+        self.timerCell.timerLabel.textColor = [UIColor whiteColor];
+        [self codeCanBeEntered:NO];
+    }
+    
+    if (components.second < 1 && components.minute < 1) {
+        [self startTimerToNextFireDate];
+        [[SKMainObserver sharedObserver] updateDataWithScore:0];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.timerCell.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
+                                              (int)components.minute, (int)components.second];
+        });
+    }
 }
 
 #pragma mark - Score
@@ -495,15 +450,14 @@ static NSString * const adCellIdentifier = @"adCell";
     if ([fireDates count] != 0) {
         
         NSMutableArray *datesAfterNow = [NSMutableArray array];
-        
         NSDate *currentDate = [NSDate date];
-        
         NSComparisonResult result;
         
         for (NSDate *date in fireDates) {
+            
             result = [currentDate compare:date];
             
-            if(result == NSOrderedAscending) {
+            if (result == NSOrderedAscending) {
                 [datesAfterNow addObject:date];
             } else {
                 resetScore = YES;
@@ -530,11 +484,8 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void) updateScoreLabel {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-
         NSInteger score = [SKUserDataManager sharedManager].user.score;
-    
-        self.scoreCell.scoreLabel.text =
-        [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
+        self.scoreCell.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
     });
 }
 

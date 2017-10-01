@@ -10,7 +10,7 @@
 
 @implementation SKAlertHelper
 
-- (void) showCantEnterCodeAlert {
+- (void) showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController {
     
     NSString *alertTitle = NSLocalizedString(@"ALERTERROR", nil);
     NSString *alertMessage = NSLocalizedString(@"ALERTMESSAGE", nil);
@@ -25,11 +25,11 @@
                                                          handler:nil];
     
     [alert addAction:cancelAction];
-    [self.delegate presentViewController:alert animated:YES completion:nil];
-    
+    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
-- (void) showResetStoryAlertWithOkHandler:(void(^)(UIAlertAction * _Nonnull action)) handler {
+- (void) showResetStoryAlertOnViewController:(UIViewController *_Nonnull)viewController
+                               withOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler {
     
     NSString *alertTitle = NSLocalizedString(@"RESETTITLE", nil);
     NSString *alertMessage = NSLocalizedString(@"RESETMESSAGE", nil);
@@ -51,7 +51,7 @@
     [alert addAction:okAction];
     [alert addAction:cancelAction];
     
-    [self.delegate presentViewController:alert animated:YES completion:nil];
+    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end

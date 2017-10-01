@@ -36,8 +36,8 @@ static NSString * const kAdMobAdIdentifier = @"ca-app-pub-1068109744372144/49598
 
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a];
 
-BOOL iPad();
-BOOL iPhone();
+BOOL iPad(void);
+BOOL iPhone(void);
 
-NSString* backgroundPath();
+NSString* backgroundPath(void);
 

@@ -13,9 +13,7 @@
 - (void) setBackgroundImageViewWithImageName:(NSString *) imageName {
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    
     [tempImageView setFrame:self.tableView.frame];
-    
     self.tableView.backgroundView = tempImageView;
 }
 

@@ -16,8 +16,8 @@
 @interface SKLeaderboardsViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *usersArray;
-
 @property (nonatomic, strong) CBStoreHouseRefreshControl *storeHouseRefreshControl;
+@property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
 
 @end
 
@@ -57,11 +57,11 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
-    NSString *identifier = [SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier;
+    NSString *identifier = self.gameCenterHelper.leaderboardIdentifier;
 
     __weak SKLeaderboardsViewController *weakSelf = self;
     
-    [[SKGameKitHelper sharedGameKitHelper] loadLeaderboardWithIdentifier:identifier
+    [self.gameCenterHelper loadLeaderboardWithIdentifier:identifier
                                                      andCompetionHandler:^(NSArray<GKScore *> *scores,
                                                                            NSError *error) {
         

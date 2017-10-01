@@ -23,7 +23,10 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
 
 @implementation SKTimer
 
-- (instancetype)initWithStartInSeconds:(NSTimeInterval)start withEnd:(NSTimeInterval) end andInterval:(NSTimeInterval) interval {
+- (instancetype)initWithStartInSeconds:(NSTimeInterval)start
+                               withEnd:(NSTimeInterval)end
+                              interval:(NSTimeInterval)interval
+                           andDelegate:(id<SKTimerDelegate>)delegate {
     
     self = [super init];
     
@@ -31,14 +34,16 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
         self.timerStartInSeconds = start;
         self.timerEndInSeconds = end;
         self.timerIntervalInSeconds = interval;
+        self.delegate = delegate;
     }
     return self;
 }
 
 - (void) startTimer {
     
-    self.timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
-    
+    NSDateComponents *timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
+    [self.delegate timerComponentsDidChange:timerComponents];
+
     self.timer = [MSWeakTimer scheduledTimerWithTimeInterval:self.timerIntervalInSeconds
                                                       target:self
                                                     selector:@selector(timerDidFinish)
@@ -52,31 +57,19 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
     self.timerStartInSeconds = self.timerStartInSeconds - self.timerIntervalInSeconds;
     
     if (self.timerStartInSeconds <= 0) {
-        [self.timer invalidate];
+        [self stopTimer];
     }
     
-    self.timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
+    NSDateComponents *timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
+    [self.delegate timerComponentsDidChange:timerComponents];
 }
 
 - (void) resetTimer {
     
     [self stopTimer];
-    
     self.timerStartInSeconds = self.timerEndInSeconds;
-    
-    self.timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
-}
-
-- (void) setTimerComponents:(NSDateComponents *)timerComponents {
-    
-    _timerComponents = timerComponents;
-    
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObject:timerComponents
-                                                           forKey:SKTimerTextUserInfoKey];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:SKTimerTextChangedNotification
-                                                        object:nil
-                                                      userInfo:dictionary];
+    NSDateComponents *timerComponents = [self dateComponentsFromTimeInterval:self.timerStartInSeconds];
+    [self.delegate timerComponentsDidChange:timerComponents];
 }
 
 - (void) stopTimer {
@@ -91,10 +84,8 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
     int seconds = time - (double)minutes * 60;
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    
     components.minute = minutes;
     components.second = seconds;
-    
     return components;
 }
 

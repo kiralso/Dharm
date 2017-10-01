@@ -13,12 +13,21 @@
 extern NSString* const SKTimerTextChangedNotification;
 extern NSString* const SKTimerTextUserInfoKey;
 
+@protocol SKTimerDelegate
+
+- (void)timerComponentsDidChange:(NSDateComponents *)components;
+
+@end
+
 @interface SKTimer : NSObject
 
+@property(weak, nonatomic) id<SKTimerDelegate> delegate;
 @property (strong, nonatomic) MSWeakTimer *timer;
-@property (strong, nonatomic) NSDateComponents *timerComponents;
 
-- (instancetype)initWithStartInSeconds:(NSTimeInterval)start withEnd:(NSTimeInterval) end andInterval:(NSTimeInterval) interval;
+- (instancetype)initWithStartInSeconds:(NSTimeInterval)start
+                               withEnd:(NSTimeInterval)end
+                              interval:(NSTimeInterval)interval
+                           andDelegate:(id<SKTimerDelegate>)delegate;
 - (void) startTimer;
 - (void) timerDidFinish;
 - (void) resetTimer;

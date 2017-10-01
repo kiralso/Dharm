@@ -15,22 +15,9 @@
 @end
 
 NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentAuthenticationViewControllerNotification";
-
 NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
 
 @implementation SKGameKitHelper
-
-+ (instancetype)sharedGameKitHelper {
-    
-    static SKGameKitHelper *sharedGameKitHelper;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedGameKitHelper = [[SKGameKitHelper alloc] init];
-    });
-    
-    return sharedGameKitHelper;
-}
 
 - (id)init
 {
@@ -46,7 +33,6 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
 - (void)authenticateLocalPlayer {
     
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-    
     localPlayer.authenticateHandler =^(UIViewController *viewController, NSError *error) {
         
         if (error) {
@@ -55,12 +41,11 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
         
         if (viewController) {
             
-            [self setAuthenticationViewController:viewController];
+            [self.delegate showAuthenticationController:viewController];
             
         } else if([GKLocalPlayer localPlayer].isAuthenticated) {
             
             self.enableGameCenter = YES;
-            
             [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString * _Nullable leaderboardIdentifier, NSError * _Nullable error) {
                 NSLog(@"%@", leaderboardIdentifier);
             }];
@@ -78,18 +63,6 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
             self.enableGameCenter = NO;
         }
     };
-}
-
-- (void)setAuthenticationViewController:(UIViewController *)authenticationViewController {
-    
-    if (authenticationViewController != nil) {
-        
-        _authenticationViewController = authenticationViewController;
-        
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:SKPresentAuthenticationViewControllerNotification
-                       object:self];
-    }
 }
 
 #pragma mark - Player Actions
@@ -117,7 +90,7 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
 - (void) loadLeaderboardWithIdentifier:(NSString *) leaderboardIdentifier
                    andCompetionHandler:(void(^)(NSArray<GKScore *> *scores, NSError * error))completionHandler {
     
-    if ([SKGameKitHelper sharedGameKitHelper].leaderboardIdentifier) {
+    if (self.leaderboardIdentifier) {
         
         GKLeaderboard *leaderboardRequest = [[GKLeaderboard alloc] init];
         

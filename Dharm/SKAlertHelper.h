@@ -9,20 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@protocol SKAlertHelperDelegate
-
-@optional
-- (void) showCantEnterCodeAlert;
-- (void) showResetStoryAlertWithOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler;
-
-@end
-
-
 @interface SKAlertHelper : NSObject
 
-@property (weak, nonatomic) UIViewController<SKAlertHelperDelegate> * _Nullable delegate;
-
-- (void) showCantEnterCodeAlert;
-- (void) showResetStoryAlertWithOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler;
+- (void) showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController;
+- (void) showResetStoryAlertOnViewController:(UIViewController *_Nonnull)viewController
+                               withOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler;
 
 @end
