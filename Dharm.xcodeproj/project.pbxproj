@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		411FE4101F81177300566A95 /* SKAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 411FE40F1F81177300566A95 /* SKAlertHelper.m */; };
 		4145A18E3BD3374C31CC8907 /* libPods-Dharm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4FB7AC4ACD06E84E2DCDAE /* libPods-Dharm.a */; };
 		55079BE11EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55079BE01EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m */; };
 		55079BE41EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55079BE31EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m */; };
@@ -41,7 +42,6 @@
 		55E8BE0A1F0EAA4E007306C8 /* SKStoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE091F0EAA4E007306C8 /* SKStoryMenuViewController.m */; };
 		55E8BE0D1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE0C1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m */; };
 		55E8BE111F0EDA22007306C8 /* SKStoryPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8BE101F0EDA22007306C8 /* SKStoryPage.m */; };
-		55E92D3D1EC1C6C000B58280 /* SKPopoverInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */; };
 		55EC38271E91181F00D3E399 /* SKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC38261E91181F00D3E399 /* SKTimer.m */; };
 		55F91BED1F1A39AB0044DF34 /* SKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F91BEC1F1A39AB0044DF34 /* SKUser.m */; };
 		55F91BF01F1A39C40044DF34 /* SKNotificationDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F91BEF1F1A39C40044DF34 /* SKNotificationDate.m */; };
@@ -50,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		411FE40E1F81177300566A95 /* SKAlertHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAlertHelper.h; sourceTree = "<group>"; };
+		411FE40F1F81177300566A95 /* SKAlertHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAlertHelper.m; sourceTree = "<group>"; };
 		55079BDF1EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SKViewControllerCategory.h"; sourceTree = "<group>"; };
 		55079BE01EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SKViewControllerCategory.m"; sourceTree = "<group>"; };
 		55079BE21EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+SKTableViewCategory.h"; sourceTree = "<group>"; };
@@ -112,8 +114,6 @@
 		55E8BE0C1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKStoryMenuTableViewCell.m; sourceTree = "<group>"; };
 		55E8BE0F1F0EDA22007306C8 /* SKStoryPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKStoryPage.h; sourceTree = "<group>"; };
 		55E8BE101F0EDA22007306C8 /* SKStoryPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKStoryPage.m; sourceTree = "<group>"; };
-		55E92D3B1EC1C6C000B58280 /* SKPopoverInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPopoverInfoViewController.h; sourceTree = "<group>"; };
-		55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPopoverInfoViewController.m; sourceTree = "<group>"; };
 		55EC38251E91181F00D3E399 /* SKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTimer.h; sourceTree = "<group>"; };
 		55EC38261E91181F00D3E399 /* SKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTimer.m; sourceTree = "<group>"; };
 		55F91BEB1F1A39AB0044DF34 /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
@@ -144,6 +144,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		411FE4081F81118800566A95 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5518196F1E9A7C0300BD59B4 /* BunkerCells */,
+				55FC88361F1BEC1B004C15F8 /* StoryCells */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		411FE4091F81119200566A95 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55F91BEE1F1A39C40044DF34 /* SKNotificationDate.h */,
+				55F91BEF1F1A39C40044DF34 /* SKNotificationDate.m */,
+				55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */,
+				55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */,
+				55F91BEB1F1A39AB0044DF34 /* SKUser.h */,
+				55F91BEC1F1A39AB0044DF34 /* SKUser.m */,
+				554D046A1E9C0D0D002D3E1E /* SKMainObserver.h */,
+				554D046B1E9C0D0D002D3E1E /* SKMainObserver.m */,
+				55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */,
+				55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */,
+				55EC38251E91181F00D3E399 /* SKTimer.h */,
+				55EC38261E91181F00D3E399 /* SKTimer.m */,
+				55E8BE0F1F0EDA22007306C8 /* SKStoryPage.h */,
+				55E8BE101F0EDA22007306C8 /* SKStoryPage.m */,
+				55FC883A1F1C06E1004C15F8 /* SKStoryHelper.h */,
+				55FC883B1F1C06E1004C15F8 /* SKStoryHelper.m */,
+				411FE40E1F81177300566A95 /* SKAlertHelper.h */,
+				411FE40F1F81177300566A95 /* SKAlertHelper.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		411FE40A1F8111B500566A95 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				55C3B3911F2C5D5D0086AD36 /* SKTabBarController.h */,
+				55C3B3921F2C5D5D0086AD36 /* SKTabBarController.m */,
+				551819691E9A78D100BD59B4 /* SKBunkerTableViewController.h */,
+				5518196A1E9A78D100BD59B4 /* SKBunkerTableViewController.m */,
+				55320D0E1EFE949A0054F7A6 /* SKTutorialViewController.h */,
+				55320D0F1EFE949A0054F7A6 /* SKTutorialViewController.m */,
+				5595A48F1F02F675007126E9 /* SKTutorialPageViewController.h */,
+				5595A4901F02F675007126E9 /* SKTutorialPageViewController.m */,
+				55E8BE081F0EAA4E007306C8 /* SKStoryMenuViewController.h */,
+				55E8BE091F0EAA4E007306C8 /* SKStoryMenuViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		411FE40B1F81133100566A95 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				556DBB081E8FB7550038D214 /* SKSettingsViewController.h */,
+				556DBB091E8FB7550038D214 /* SKSettingsViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		411FE40C1F81134B00566A95 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */,
+				556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		411FE40D1F81135C00566A95 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55E1E3631F3A4009005CAB9F /* SKLeaderboardCell.h */,
+				55E1E3641F3A4009005CAB9F /* SKLeaderboardCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		55079BE51EB779E90044FCF4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +235,7 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		5518196F1E9A7C0300BD59B4 /* Cells */ = {
+		5518196F1E9A7C0300BD59B4 /* BunkerCells */ = {
 			isa = PBXGroup;
 			children = (
 				5518196C1E9A7BF400BD59B4 /* SKScoreCell.h */,
@@ -169,28 +247,7 @@
 				5518197C1E9A7C7500BD59B4 /* SKAdCell.h */,
 				5518197D1E9A7C7500BD59B4 /* SKAdCell.m */,
 			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		554D04691E9AF9FF002D3E1E /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				556DBAEE1E8FB1510038D214 /* AppDelegate.h */,
-				556DBAEF1E8FB1510038D214 /* AppDelegate.m */,
-				55ACA84D1E9579EE00DD98BC /* SKDateGenerator.h */,
-				55ACA84E1E9579EE00DD98BC /* SKDateGenerator.m */,
-				554D046A1E9C0D0D002D3E1E /* SKMainObserver.h */,
-				554D046B1E9C0D0D002D3E1E /* SKMainObserver.m */,
-				5513199F1EC09D860072B442 /* SKUtils.h */,
-				551319A01EC09D860072B442 /* SKUtils.m */,
-				55A1D66C1E9A56F900CEE5DB /* SKUserDataManager.h */,
-				55A1D66D1E9A56F900CEE5DB /* SKUserDataManager.m */,
-				55F91BEB1F1A39AB0044DF34 /* SKUser.h */,
-				55F91BEC1F1A39AB0044DF34 /* SKUser.m */,
-				55F91BEE1F1A39C40044DF34 /* SKNotificationDate.h */,
-				55F91BEF1F1A39C40044DF34 /* SKNotificationDate.m */,
-			);
-			name = Main;
+			name = BunkerCells;
 			sourceTree = "<group>";
 		};
 		556DBADF1E8FB1500038D214 = {
@@ -214,9 +271,7 @@
 		556DBAEA1E8FB1510038D214 /* Dharm */ = {
 			isa = PBXGroup;
 			children = (
-				55979D371ED4A4CB00163F00 /* GameKit */,
 				55079BE51EB779E90044FCF4 /* Categories */,
-				554D04691E9AF9FF002D3E1E /* Main */,
 				556DBB0E1E8FB77C0038D214 /* Bunker */,
 				556DBB0F1E8FB7840038D214 /* Settings */,
 				556DBB101E8FB78D0038D214 /* Leaderboards */,
@@ -234,6 +289,10 @@
 		556DBAEB1E8FB1510038D214 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				556DBAEE1E8FB1510038D214 /* AppDelegate.h */,
+				556DBAEF1E8FB1510038D214 /* AppDelegate.m */,
+				5513199F1EC09D860072B442 /* SKUtils.h */,
+				551319A01EC09D860072B442 /* SKUtils.m */,
 				556DBAF71E8FB1520038D214 /* Dharm.xcdatamodeld */,
 				556DBAEC1E8FB1510038D214 /* main.m */,
 			);
@@ -243,16 +302,9 @@
 		556DBB0E1E8FB77C0038D214 /* Bunker */ = {
 			isa = PBXGroup;
 			children = (
-				55C3B3911F2C5D5D0086AD36 /* SKTabBarController.h */,
-				55C3B3921F2C5D5D0086AD36 /* SKTabBarController.m */,
-				55EC38251E91181F00D3E399 /* SKTimer.h */,
-				55EC38261E91181F00D3E399 /* SKTimer.m */,
-				55E92D3B1EC1C6C000B58280 /* SKPopoverInfoViewController.h */,
-				55E92D3C1EC1C6C000B58280 /* SKPopoverInfoViewController.m */,
-				551819691E9A78D100BD59B4 /* SKBunkerTableViewController.h */,
-				5518196A1E9A78D100BD59B4 /* SKBunkerTableViewController.m */,
-				5595A4921F02F684007126E9 /* Story */,
-				5518196F1E9A7C0300BD59B4 /* Cells */,
+				411FE40A1F8111B500566A95 /* Controller */,
+				411FE4081F81118800566A95 /* View */,
+				411FE4091F81119200566A95 /* Model */,
 			);
 			name = Bunker;
 			sourceTree = "<group>";
@@ -260,8 +312,7 @@
 		556DBB0F1E8FB7840038D214 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				556DBB081E8FB7550038D214 /* SKSettingsViewController.h */,
-				556DBB091E8FB7550038D214 /* SKSettingsViewController.m */,
+				411FE40B1F81133100566A95 /* Controller */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -269,30 +320,11 @@
 		556DBB101E8FB78D0038D214 /* Leaderboards */ = {
 			isa = PBXGroup;
 			children = (
-				556DBB0B1E8FB76E0038D214 /* SKLeaderboardsViewController.h */,
-				556DBB0C1E8FB76E0038D214 /* SKLeaderboardsViewController.m */,
-				55E1E3631F3A4009005CAB9F /* SKLeaderboardCell.h */,
-				55E1E3641F3A4009005CAB9F /* SKLeaderboardCell.m */,
+				55979D371ED4A4CB00163F00 /* GameKit */,
+				411FE40C1F81134B00566A95 /* Controller */,
+				411FE40D1F81135C00566A95 /* View */,
 			);
 			name = Leaderboards;
-			sourceTree = "<group>";
-		};
-		5595A4921F02F684007126E9 /* Story */ = {
-			isa = PBXGroup;
-			children = (
-				55FC88361F1BEC1B004C15F8 /* Cells */,
-				55320D0E1EFE949A0054F7A6 /* SKTutorialViewController.h */,
-				55320D0F1EFE949A0054F7A6 /* SKTutorialViewController.m */,
-				5595A48F1F02F675007126E9 /* SKTutorialPageViewController.h */,
-				5595A4901F02F675007126E9 /* SKTutorialPageViewController.m */,
-				55E8BE081F0EAA4E007306C8 /* SKStoryMenuViewController.h */,
-				55E8BE091F0EAA4E007306C8 /* SKStoryMenuViewController.m */,
-				55E8BE0F1F0EDA22007306C8 /* SKStoryPage.h */,
-				55E8BE101F0EDA22007306C8 /* SKStoryPage.m */,
-				55FC883A1F1C06E1004C15F8 /* SKStoryHelper.h */,
-				55FC883B1F1C06E1004C15F8 /* SKStoryHelper.m */,
-			);
-			name = Story;
 			sourceTree = "<group>";
 		};
 		55979D371ED4A4CB00163F00 /* GameKit */ = {
@@ -304,7 +336,7 @@
 			name = GameKit;
 			sourceTree = "<group>";
 		};
-		55FC88361F1BEC1B004C15F8 /* Cells */ = {
+		55FC88361F1BEC1B004C15F8 /* StoryCells */ = {
 			isa = PBXGroup;
 			children = (
 				55E8BE0B1F0EAA76007306C8 /* SKStoryMenuTableViewCell.h */,
@@ -312,7 +344,7 @@
 				55FC88301F1AC08A004C15F8 /* SKStoryResetTableViewCell.h */,
 				55FC88311F1AC08A004C15F8 /* SKStoryResetTableViewCell.m */,
 			);
-			name = Cells;
+			name = StoryCells;
 			sourceTree = "<group>";
 		};
 		748DF71BE7976640542379EC /* Pods */ = {
@@ -478,9 +510,9 @@
 				5518196B1E9A78D100BD59B4 /* SKBunkerTableViewController.m in Sources */,
 				5518197E1E9A7C7500BD59B4 /* SKAdCell.m in Sources */,
 				556DBAF91E8FB1520038D214 /* Dharm.xcdatamodeld in Sources */,
-				55E92D3D1EC1C6C000B58280 /* SKPopoverInfoViewController.m in Sources */,
 				55979D3A1ED4A51D00163F00 /* SKGameKitHelper.m in Sources */,
 				55E8BE111F0EDA22007306C8 /* SKStoryPage.m in Sources */,
+				411FE4101F81177300566A95 /* SKAlertHelper.m in Sources */,
 				55E8BE0D1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
 				5595A4911F02F675007126E9 /* SKTutorialPageViewController.m in Sources */,

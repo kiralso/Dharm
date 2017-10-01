@@ -62,12 +62,12 @@ FOUNDATION_EXPORT NSString *const AMElementToValue;
  *
  * Block called when the animation from 'off' to 'on' is completed
  */
-@property (nonatomic, copy) void (^completionOn)();
+@property (nonatomic, copy) void (^completionOn)(void);
 
 /** Animation 'off' completion
  *
  * Block called when the animation from 'on' to 'off' is completed
  */
-@property (nonatomic, copy) void (^completionOff)();
+@property (nonatomic, copy) void (^completionOff)(void);
 
 @end
