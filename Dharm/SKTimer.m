@@ -24,7 +24,7 @@ NSString* const SKTimerTextUserInfoKey = @"SKTimerTextUserInfoKey";
 @implementation SKTimer
 
 - (instancetype)initWithStartInSeconds:(NSTimeInterval)start
-                               withEnd:(NSTimeInterval)end
+                                   end:(NSTimeInterval)end
                               interval:(NSTimeInterval)interval
                            andDelegate:(id<SKTimerDelegate>)delegate {
     

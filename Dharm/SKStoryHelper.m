@@ -140,7 +140,7 @@
     [[SKUserDataManager sharedManager] saveUser];
 }
 
-- (void) updatePagesIndexesWithNextIndexAndAnswer:(BOOL) yesNo {
+- (void) updatePagesIndexesWithNextIndexAndAnswer:(BOOL)yesNo {
     
     NSMutableArray *pagesIndexes = [NSMutableArray arrayWithArray:[SKUserDataManager sharedManager].user.pagesIndexesArray];
     NSMutableSet *answeredPages = [NSMutableSet setWithSet:[SKUserDataManager sharedManager].user.answeredPages];
@@ -184,7 +184,6 @@
     
     [SKUserDataManager sharedManager].user.pagesIndexesArray = subIndexes;
     [SKUserDataManager sharedManager].user.answeredPages = answeredPages;
-    
     [[SKUserDataManager sharedManager] saveUser];
 }
 

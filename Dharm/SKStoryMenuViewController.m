@@ -12,9 +12,9 @@
 #import "SKTutorialPageViewController.h"
 #import "SKStoryPage.h"
 #import "SKUserDataManager.h"
-#import "SKMainObserver.h"
 #import "SKStoryHelper.h"
 #import "SKAlertHelper.h"
+#import "SKLocalNotificationHelper.h"
 
 enum: NSInteger {
     SKTableSectionPartOne,
@@ -65,12 +65,19 @@ enum: NSInteger {
     
     if (indexPath.section == SKTableSectionResetStory) {
         
+        __weak SKStoryMenuViewController *weakSelf = self;
         [self.alertHelper showResetStoryAlertOnViewController:self
                                                 withOkHandler:^(UIAlertAction * _Nonnull action) {
-                                                                     [[SKUserDataManager sharedManager] resetUser];
-                                                                     self.pagesArray = [self.storyHelper loadPages];
-                                                                     [self.menuTableView reloadData];
-                                                                     [[SKMainObserver sharedObserver] updateData];
+                                                    
+                                                    [[SKUserDataManager sharedManager] resetUser];
+                                                    weakSelf.pagesArray = [weakSelf.storyHelper loadPages];
+                                                    [weakSelf.menuTableView reloadData];
+                                                    
+                                                    UITableViewController *vc = (UITableViewController *)weakSelf.parentViewController;
+                                                    [vc.tableView reloadData];
+                                                    
+                                                    SKLocalNotificationHelper *notificationHelper = [[SKLocalNotificationHelper alloc] init];
+                                                    [notificationHelper updateNotificationDatesWithCompletion:nil];
         }];
         
     } else {

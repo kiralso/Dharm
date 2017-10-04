@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class SKTimer;
-
 @interface SKTimerCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;

@@ -20,9 +20,4 @@
     self.tabBar.tintColor = [UIColor whiteColor];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

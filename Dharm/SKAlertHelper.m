@@ -10,7 +10,7 @@
 
 @implementation SKAlertHelper
 
-- (void) showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController {
+- (void)showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController {
     
     NSString *alertTitle = NSLocalizedString(@"ALERTERROR", nil);
     NSString *alertMessage = NSLocalizedString(@"ALERTMESSAGE", nil);
@@ -28,8 +28,8 @@
     [viewController presentViewController:alert animated:YES completion:nil];
 }
 
-- (void) showResetStoryAlertOnViewController:(UIViewController *_Nonnull)viewController
-                               withOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler {
+- (void)showResetStoryAlertOnViewController:(UIViewController *_Nonnull)viewController
+                              withOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler {
     
     NSString *alertTitle = NSLocalizedString(@"RESETTITLE", nil);
     NSString *alertMessage = NSLocalizedString(@"RESETMESSAGE", nil);

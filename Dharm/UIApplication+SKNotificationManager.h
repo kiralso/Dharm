@@ -10,6 +10,6 @@
 
 @interface UIApplication (SKNotificationManager)
 
-- (void) setLocalNotificationsForFireDates:(NSArray<NSDate *> *) dates title:(NSString *) title andAllertBody:(NSString *) body;
+- (void)scheduleLocalNotificationsForFireDates:(NSArray<NSDate *> *) dates title:(NSString *) title andAllertBody:(NSString *) body;
 
 @end

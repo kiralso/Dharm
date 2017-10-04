@@ -12,6 +12,12 @@
 @protocol SKStoryHelperDelegate;
 @class SKStoryPage;
 
+@protocol SKStoryHelperDelegate
+
+@optional
+- (void)pagesDidLoad:(NSArray *)pages;
+@end
+
 @interface SKStoryHelper : NSObject
 
 @property (weak, nonatomic) UIViewController<SKStoryHelperDelegate> *delegate;
@@ -23,14 +29,8 @@
 - (void)showStoryAtIndex:(NSInteger)index;
 - (void)showDisasterWithPower:(NSInteger)index;
 
-- (void) updatePagesIndexesWithNewIndex:(NSInteger)index;
-- (void) updatePagesIndexesWithNextIndex;
-- (void) updatePagesIndexesWithNextIndexAndAnswer:(BOOL) yesNo;
+- (void)updatePagesIndexesWithNewIndex:(NSInteger)index;
+- (void)updatePagesIndexesWithNextIndex;
+- (void)updatePagesIndexesWithNextIndexAndAnswer:(BOOL) yesNo;
 
-@end
-
-@protocol SKStoryHelperDelegate
-
-@optional
-- (void)pagesDidLoad:(NSArray *)pages;
 @end

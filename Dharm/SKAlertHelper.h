@@ -11,8 +11,8 @@
 
 @interface SKAlertHelper : NSObject
 
-- (void) showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController;
-- (void) showResetStoryAlertOnViewController:(UIViewController *_Nonnull)viewController
-                               withOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler;
+- (void)showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController;
+- (void)showResetStoryAlertOnViewController:(UIViewController *_Nonnull)viewController
+                              withOkHandler:(void(^_Nullable)(UIAlertAction * _Nonnull action)) handler;
 
 @end

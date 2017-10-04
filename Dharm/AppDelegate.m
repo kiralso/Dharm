@@ -10,8 +10,6 @@
 #import "SKUtils.h"
 #import "SKUserDataManager.h"
 
-@import GoogleMobileAds;
-
 @interface AppDelegate ()
 
 @end
@@ -20,9 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound categories:nil]];
-        
-    [GADMobileAds configureWithApplicationID:kAdMobAppIdentifier];
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge |
+                                                   UIUserNotificationTypeAlert | UIUserNotificationTypeSound
+                                                                                    categories:nil]];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     return YES;

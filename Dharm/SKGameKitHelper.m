@@ -39,7 +39,7 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
             NSLog(@"GameKitHelper ERROR: %@",[error localizedDescription]);
         }
         
-        if (viewController) {
+        if (viewController && self.delegate) {
             
             [self.delegate showAuthenticationController:viewController];
             

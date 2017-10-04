@@ -145,7 +145,18 @@
                                        components:NSCalendarUnitHour | NSCalendarUnitMinute
                                        fromDate:dateFrom];
     
-    return [self fireDatesWithHoursAndMinutesBetweenComponents:componentsFrom andComponents:componentsTo];;
+    return [self fireDatesWithHoursAndMinutesBetweenComponents:componentsFrom andComponents:componentsTo];
+}
+
+- (NSArray<NSDate *> *)datesArrayBetweenDatePickers:(UIDatePicker *)pickerFrom
+                                           pickerTo:(UIDatePicker *)pickerTo {
+    
+    NSDate *startDate = pickerFrom.date;
+    NSDate *endDate = pickerTo.date;
+    NSArray *datesArray = [self datesArrayBetweenStartDate:startDate
+                                                andEndDate:endDate];
+    
+    return datesArray;
 }
 
 @end

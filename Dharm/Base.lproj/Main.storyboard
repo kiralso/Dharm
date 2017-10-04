@@ -316,15 +316,15 @@ Turn the mode off, if your life has not prepared you for this!</string>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <rect key="contentStretch" x="0.0" y="1" width="0.0" height="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scoreCell" rowHeight="100" id="Gvj-oa-xYt" customClass="SKScoreCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scoreCell" rowHeight="96" id="Gvj-oa-xYt" customClass="SKScoreCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gvj-oa-xYt" id="oD2-zk-1Hd">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-4Z-E2M">
-                                            <rect key="frame" x="266" y="38" width="101" height="24"/>
+                                            <rect key="frame" x="266" y="36" width="101" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="101" id="H6U-UT-scU"/>
                                                 <constraint firstAttribute="height" constant="24" id="hNp-Tv-Is9"/>
@@ -347,14 +347,14 @@ Turn the mode off, if your life has not prepared you for this!</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timerCell" rowHeight="200" id="dCd-FD-ErN" customClass="SKTimerCell">
-                                <rect key="frame" x="0.0" y="128" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="124" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dCd-FD-ErN" id="fDp-g2-XCq">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="108" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ke4-sT-D3h">
-                                            <rect key="frame" x="118" y="83" width="139.5" height="109.5"/>
+                                            <rect key="frame" x="118" y="90" width="139.5" height="109.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="80"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -362,7 +362,7 @@ Turn the mode off, if your life has not prepared you for this!</string>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Ke4-sT-D3h" firstAttribute="centerY" secondItem="fDp-g2-XCq" secondAttribute="centerY" constant="37" id="CRl-nR-6wr"/>
+                                        <constraint firstItem="Ke4-sT-D3h" firstAttribute="centerY" secondItem="fDp-g2-XCq" secondAttribute="centerY" constant="44.75" id="CRl-nR-6wr"/>
                                         <constraint firstItem="Ke4-sT-D3h" firstAttribute="centerX" secondItem="fDp-g2-XCq" secondAttribute="centerX" id="WSy-ek-JQw"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -372,17 +372,17 @@ Turn the mode off, if your life has not prepared you for this!</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="codeCell" rowHeight="100" id="vOI-PU-1bO" customClass="SKCodeCell">
-                                <rect key="frame" x="0.0" y="328" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="324" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vOI-PU-1bO" id="Tva-jg-ceh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter the code here" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1am-NV-RKU">
-                                            <rect key="frame" x="59.5" y="30.5" width="256.5" height="39"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="enter the code here" textAlignment="center" minimumFontSize="13" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1am-NV-RKU">
+                                            <rect key="frame" x="14" y="32.5" width="347" height="35"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="28"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" keyboardAppearance="alert"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
@@ -395,8 +395,9 @@ Turn the mode off, if your life has not prepared you for this!</string>
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="1am-NV-RKU" firstAttribute="centerY" secondItem="Tva-jg-ceh" secondAttribute="centerY" id="baa-9J-sn7"/>
-                                        <constraint firstItem="1am-NV-RKU" firstAttribute="centerX" secondItem="Tva-jg-ceh" secondAttribute="centerX" id="wmn-IX-BIb"/>
+                                        <constraint firstItem="1am-NV-RKU" firstAttribute="centerX" secondItem="Tva-jg-ceh" secondAttribute="centerX" id="X5g-20-qES"/>
+                                        <constraint firstItem="1am-NV-RKU" firstAttribute="centerY" secondItem="Tva-jg-ceh" secondAttribute="centerY" id="bui-uY-ySQ"/>
+                                        <constraint firstItem="1am-NV-RKU" firstAttribute="leading" secondItem="Tva-jg-ceh" secondAttribute="leadingMargin" constant="6" id="low-4a-Ner"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -405,31 +406,14 @@ Turn the mode off, if your life has not prepared you for this!</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="adCell" rowHeight="50" id="8Fr-Yp-o5r" customClass="SKAdCell">
-                                <rect key="frame" x="0.0" y="428" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="424" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Fr-Yp-o5r" id="wra-15-y8V">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pm-mD-DDF" userLabel="AdView" customClass="GADBannerView">
-                                            <rect key="frame" x="27.5" y="0.0" width="320" height="50"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="bno-hp-Cmg"/>
-                                                <constraint firstAttribute="width" constant="320" id="mpn-ak-cUX"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="1pm-mD-DDF" firstAttribute="centerY" secondItem="wra-15-y8V" secondAttribute="centerY" id="Izv-aO-Cdu"/>
-                                        <constraint firstItem="1pm-mD-DDF" firstAttribute="centerX" secondItem="wra-15-y8V" secondAttribute="centerX" id="T51-S9-BAQ"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="adView" destination="1pm-mD-DDF" id="Y8e-1K-iZY"/>
-                                </connections>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                         </prototypes>
                         <sections/>

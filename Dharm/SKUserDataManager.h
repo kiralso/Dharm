@@ -16,17 +16,17 @@
 
 @property(strong, nonatomic) SKUser *user;
 
-+ (SKUserDataManager *) sharedManager;
++ (SKUserDataManager *)sharedManager;
 
-- (SKUser *) loadUser;
-- (void) saveUser;
-- (void) resetUser;
+- (SKUser *)loadUser;
+- (void)saveUser;
+- (void)resetUser;
 
 //score
-- (void) updateUserWithScore:(NSInteger)score;
+- (void)updateUserWithScore:(NSInteger)score;
 
 //notification dates
-- (void) updateUserWithNotificationDateArray:(NSArray *)array;
+- (void)updateUserWithNotificationDateArray:(NSArray *)array;
 - (NSArray *)fireDates;
 - (SKNotificationDate *)notificationDateWithFireDate:(NSDate *)fireDate warningDate:(NSDate *)warningDate;
 

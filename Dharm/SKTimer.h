@@ -21,16 +21,16 @@ extern NSString* const SKTimerTextUserInfoKey;
 
 @interface SKTimer : NSObject
 
-@property(weak, nonatomic) id<SKTimerDelegate> delegate;
+@property (weak, nonatomic) id<SKTimerDelegate> delegate;
 @property (strong, nonatomic) MSWeakTimer *timer;
 
 - (instancetype)initWithStartInSeconds:(NSTimeInterval)start
-                               withEnd:(NSTimeInterval)end
+                                   end:(NSTimeInterval)end
                               interval:(NSTimeInterval)interval
                            andDelegate:(id<SKTimerDelegate>)delegate;
-- (void) startTimer;
-- (void) timerDidFinish;
-- (void) resetTimer;
-- (void) stopTimer;
+- (void)startTimer;
+- (void)timerDidFinish;
+- (void)resetTimer;
+- (void)stopTimer;
 
 @end

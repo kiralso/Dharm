@@ -15,11 +15,6 @@
 
 @interface SKBunkerTableViewController : UITableViewController
 
-@property (strong, nonatomic) SKScoreCell *scoreCell;
-@property (strong, nonatomic) SKTimerCell *timerCell;
-@property (strong, nonatomic) SKCodeCell *codeCell;
-@property (strong, nonatomic) SKAdCell *adCell;
-
 - (IBAction)showMenuAction:(UIBarButtonItem *)sender;
 - (IBAction)showPopoverAction:(UIButton *)sender;
 

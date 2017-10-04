@@ -10,13 +10,14 @@
 
 @implementation UIApplication (SKNotificationManager)
 
-- (void) setLocalNotificationsForFireDates:(NSArray<NSDate *> *) dates title:(NSString *) title andAllertBody:(NSString *) body {
-        
-    for (int i = 0; i < [dates count] ; i++) {
+- (void)scheduleLocalNotificationsForFireDates:(NSArray<NSDate *> *)dates
+                                         title:(NSString *)title
+                                 andAllertBody:(NSString *)body {
+    
+    for (NSDate *date in dates) {
         
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        
-        localNotification.fireDate = [dates objectAtIndex:i];
+        localNotification.fireDate = date;
         localNotification.alertBody = body;
         localNotification.alertTitle = title;
         localNotification.timeZone = [NSTimeZone defaultTimeZone];

@@ -21,18 +21,24 @@
 #import "SKTimer.h"
 #import "SKUtils.h"
 #import "SKStoryPage.h"
-#import "SKMainObserver.h"
 #import "NGSPopoverView.h"
-#import "SKGameKitHelper.h"
 #import "SKUserDataManager.h"
+#import "SKDateGenerator.h"
 #import "SKStoryHelper.h"
 #import "SKAlertHelper.h"
+#import "SKGameKitHelper.h"
+#import "SKLocalNotificationHelper.h"
 #import "UITableViewController+SKTableViewCategory.h"
+#import "UIColor+SKColorCategory.h"
 
+typedef enum : NSInteger {
+    SKCellsScore,
+    SKCellsTimer,
+    SKCellsAd,
+    SKCellsCode
+} SKCell;
 
-@import GoogleMobileAds;
-
-@interface SKBunkerTableViewController () <GADBannerViewDelegate, UITextFieldDelegate, SKStoryHelperDelegate, SKGameKitHelperDelegate, SKTimerDelegate>
+@interface SKBunkerTableViewController () <UITextFieldDelegate, SKStoryHelperDelegate, SKTimerDelegate>
 
 @property (strong, nonatomic) SKStoryMenuViewController *storyVC;
 
@@ -46,15 +52,15 @@
 @property (strong, nonatomic) SKStoryHelper *storyHelper;
 @property (strong, nonatomic) SKAlertHelper *alertHelper;
 @property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
+@property (strong, nonatomic) SKLocalNotificationHelper *localNotificationHelper;
+
+//Cells
+@property (strong, nonatomic) SKScoreCell *scoreCell;
+@property (strong, nonatomic) SKTimerCell *timerCell;
+@property (strong, nonatomic) SKCodeCell *codeCell;
+@property (strong, nonatomic) SKAdCell *adCell;
 
 @end
-
-typedef enum : NSInteger {
-    SKCellsScore,
-    SKCellsTimer,
-    SKCellsCode,
-    SKCellsAd
-} SKCells;
 
 static NSString * const scoreCellIdentifier = @"scoreCell";
 static NSString * const timerCellIdentifier = @"timerCell";
@@ -65,11 +71,6 @@ static NSString * const adCellIdentifier = @"adCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadTableView:)
-                                                 name:SKMainObserverReloadViewControlerNotification
-                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTableView:)
@@ -95,18 +96,19 @@ static NSString * const adCellIdentifier = @"adCell";
     self.storyHelper = [[SKStoryHelper alloc] init];
     self.alertHelper = [[SKAlertHelper alloc] init];
     self.gameCenterHelper = [[SKGameKitHelper alloc] init];
+    self.localNotificationHelper = [[SKLocalNotificationHelper alloc] init];
     self.storyHelper.delegate = self;
-    self.gameCenterHelper.delegate = self;
     
     [self checkScore];
     [self.storyHelper showTutorial];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self.gameCenterHelper authenticateLocalPlayer];
     [super viewDidAppear:animated];
     [self.tableView reloadData];
-    [self.gameCenterHelper authenticateLocalPlayer];
 }
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -134,7 +136,7 @@ static NSString * const adCellIdentifier = @"adCell";
             
             self.scoreCell = (SKScoreCell *)cell;
             [self updateScoreLabel];
-            return self.scoreCell;
+            return cell;
             
         case SKCellsTimer:
             
@@ -159,15 +161,8 @@ static NSString * const adCellIdentifier = @"adCell";
             
             cell = [tableView dequeueReusableCellWithIdentifier:adCellIdentifier
                                                    forIndexPath:indexPath];
-            
             self.adCell = (SKAdCell *)cell;
-            self.adCell.adView.adUnitID = kAdMobAdIdentifier;
-            self.adCell.adView.adSize = kGADAdSizeSmartBannerPortrait;
-            self.adCell.adView.rootViewController = self;
-            self.adCell.adView.delegate = self;
-            
-            GADRequest *request = [GADRequest request];
-            [self.adCell.adView loadRequest:request];
+
             return self.adCell;
     }
     return cell;
@@ -182,12 +177,12 @@ static NSString * const adCellIdentifier = @"adCell";
 
     switch (indexPath.row) {
         case SKCellsScore:
-            return screenHeight * 0.05f;
+            return 40;
         case SKCellsTimer:
             return screenHeight * 0.52f;
-        case SKCellsCode:
-            return screenHeight * 0.15f;
         case SKCellsAd:
+            return screenHeight * 0.15f;
+        case SKCellsCode:
             return 60;
     }
     
@@ -198,22 +193,10 @@ static NSString * const adCellIdentifier = @"adCell";
     return NO;
 }
 
-#pragma mark - Notifications
-
 - (void) reloadTableView:(NSNotification *) notification {
-
     [self checkScore];
     [self updateScoreLabel];
     [self.tableView reloadData];
-}
-
-#pragma mark - SKGameKitHelperDelegate
-
-- (void) showAuthenticationController:(UIViewController *)authenticationController {
-    
-    [self.parentViewController presentViewController:authenticationController
-                       animated:YES
-                     completion:nil];
 }
 
 #pragma mark - Actions
@@ -285,17 +268,6 @@ static NSString * const adCellIdentifier = @"adCell";
     }
 }
 
-#pragma mark - GADBannerViewDelegate
-
-- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
-    NSLog(@"====== Success loading ======");
-    self.adCell.adView = self.bannerView;
-}
-
-- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
-    NSLog(@"====== Loading failure , error - %@ ======", [error localizedDescription]);
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -363,7 +335,6 @@ static NSString * const adCellIdentifier = @"adCell";
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [textField resignFirstResponder];
             textField.text = @"";
-            
             [self codeDidEntered];
         });
     }
@@ -382,7 +353,12 @@ static NSString * const adCellIdentifier = @"adCell";
         [self.storyHelper showLastStory];
     }
     
-    [[SKMainObserver sharedObserver] updateDataWithScore:userScore];
+    __weak SKBunkerTableViewController *weakSelf = self;
+    [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+        [weakSelf reloadTableView:nil];
+        [[SKUserDataManager sharedManager] updateUserWithScore:userScore];
+    }];
+    
     [self.gameCenterHelper reportScore:(int64_t)userScore];
 }
 
@@ -394,7 +370,7 @@ static NSString * const adCellIdentifier = @"adCell";
     
     [self.timer stopTimer];
     self.timer = [[SKTimer alloc] initWithStartInSeconds:start
-                                                 withEnd:end
+                                                     end:end
                                                 interval:interval
                                              andDelegate:self];
     [self.timer startTimer];
@@ -403,7 +379,7 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void) startTimerToNextFireDate {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSTimeInterval start = [[SKMainObserver sharedObserver] timeIntervalBeforeNextFireDate];
+        NSTimeInterval start = [self timeIntervalBeforeNextFireDate];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self startTimerInStart:start
@@ -418,8 +394,7 @@ static NSString * const adCellIdentifier = @"adCell";
 - (void)timerComponentsDidChange:(NSDateComponents *)components {
     
     if (components.minute < kMinutesBeforeFireDateToWarn) {
-        UIColor *customRed = RGBA(163.f, 26.f, 27.f, 1.f);
-        self.timerCell.timerLabel.textColor = customRed;
+        self.timerCell.timerLabel.textColor = [UIColor warningRedColor];
         [self codeCanBeEntered:YES];
     } else {
         self.timerCell.timerLabel.textColor = [UIColor whiteColor];
@@ -428,7 +403,14 @@ static NSString * const adCellIdentifier = @"adCell";
     
     if (components.second < 1 && components.minute < 1) {
         [self startTimerToNextFireDate];
-        [[SKMainObserver sharedObserver] updateDataWithScore:0];
+        
+        __weak SKBunkerTableViewController *weakSelf = self;
+        
+        [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+            [weakSelf reloadTableView:nil];
+            [[SKUserDataManager sharedManager] updateUserWithScore:0];
+        }];
+        
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.timerCell.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
@@ -477,7 +459,11 @@ static NSString * const adCellIdentifier = @"adCell";
     
     if (recountDates) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
-        [[SKMainObserver sharedObserver] updateNotificationDates];
+        
+        __weak SKBunkerTableViewController *weakSelf = self;
+        [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+            [weakSelf reloadTableView:nil];
+        }];
     }
 }
 
@@ -498,6 +484,19 @@ static NSString * const adCellIdentifier = @"adCell";
     } else {
         self.codeCanEntered = NO;
     }
+}
+
+- (NSTimeInterval)timeIntervalBeforeNextFireDate {
+    
+    NSArray *fireDates = [[SKUserDataManager sharedManager] fireDates];
+    SKDateGenerator *generator = [[SKDateGenerator alloc] init];
+    NSDate *closeFiredate = [generator firstFireDateSinceNowFromArray:fireDates];
+    NSDateComponents *startRangeComponents =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
+                                                                            fromDate:[NSDate date]
+                                                                              toDate:closeFiredate
+                                                                             options:0];
+    
+    return (NSTimeInterval)startRangeComponents.second;
 }
 
 @end

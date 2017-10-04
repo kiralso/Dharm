@@ -13,7 +13,7 @@
 #import "CBStoreHouseRefreshControl.h"
 #import "SKLeaderboardCell.h"
 
-@interface SKLeaderboardsViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface SKLeaderboardsViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, SKGameKitHelperDelegate>
 
 @property (strong, nonatomic) NSArray *usersArray;
 @property (nonatomic, strong) CBStoreHouseRefreshControl *storeHouseRefreshControl;
@@ -28,6 +28,9 @@
     
     [self setBackgroundImageViewWithImageName:backgroundPath()];
 
+    self.gameCenterHelper = [[SKGameKitHelper alloc] init];
+    self.gameCenterHelper.delegate = self;
+
     self.usersArray = nil;
 }
 
@@ -37,7 +40,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    //[self.gameCenterHelper authenticateLocalPlayer];
     [self loadPlayers];
     
     self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.tableView
@@ -56,24 +59,23 @@
 -(void)loadPlayers {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
     NSString *identifier = self.gameCenterHelper.leaderboardIdentifier;
 
-    __weak SKLeaderboardsViewController *weakSelf = self;
-    
-    [self.gameCenterHelper loadLeaderboardWithIdentifier:identifier
-                                                     andCompetionHandler:^(NSArray<GKScore *> *scores,
-                                                                           NSError *error) {
-        
-        if (error) {
-            NSLog(@"ERROR - %@", error.localizedDescription);
-        } else {
-            weakSelf.usersArray = scores;
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [[weakSelf tableView] reloadData];
-        }
-    }];
-
+    if (identifier) {
+        __weak SKLeaderboardsViewController *weakSelf = self;
+        [self.gameCenterHelper loadLeaderboardWithIdentifier:identifier
+                                         andCompetionHandler:^(NSArray<GKScore *> *scores,
+                                                               NSError *error) {
+                                             
+                                             if (error) {
+                                                 NSLog(@"ERROR - %@", error.localizedDescription);
+                                             } else {
+                                                 weakSelf.usersArray = scores;
+                                                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                                 [[weakSelf tableView] reloadData];
+                                             }
+                                         }];
+    }
 }
 
 -(UIImage *)playerAvatarWithIndex:(NSInteger)index {
@@ -172,6 +174,15 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     [self.storeHouseRefreshControl scrollViewDidEndDragging];
+}
+
+#pragma mark - SKGameKitHelperDelegate
+
+- (void) showAuthenticationController:(UIViewController *)authenticationController {
+    
+    [self.parentViewController presentViewController:authenticationController
+                                            animated:YES
+                                          completion:nil];
 }
 
 #pragma mark - CBStoreHouseRefreshControl

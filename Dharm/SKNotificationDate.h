@@ -13,6 +13,6 @@
 @property(strong, nonatomic) NSDate *fireDate;
 @property(strong, nonatomic) NSDate *warningDate;
 
-- (instancetype)initWithFireDate:(NSDate *) fireDate warningDate:(NSDate *) warningDate;
+- (instancetype)initWithFireDate:(NSDate *)fireDate warningDate:(NSDate *)warningDate;
 
 @end

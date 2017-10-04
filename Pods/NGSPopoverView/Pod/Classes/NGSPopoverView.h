@@ -87,9 +87,7 @@ IB_DESIGNABLE
 
 /*!
  * @brief Use setContentView: method to assign content view.
- * @param cornerRadius Rounded corner radius in CGFloat value. Can be 0.
- * @param arrowDirection Direction of arrow - left, right, top or bottom.
- * @param arrowSize Arrow dimensions in CGSize. If not square, look differs for vertical and horizontal arrow.
+ 
  */
 -(instancetype)initWithCornerRadius:(CGFloat)corner
                           direction:(NGSPopoverArrowPosition)direction
