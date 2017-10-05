@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, SKStoryPageNumber) {
     //pages
     SKStoryPageNumberTutorial,
     SKStoryPageNumberOne,
@@ -40,7 +40,7 @@ typedef enum : NSUInteger {
     SKStoryPageDisasterOne,
     SKStoryPageDisasterTwo,
     SKStoryPageDisasterThree
-} SKStoryPageNumber;
+};
 
 @interface SKStoryPage : NSObject
 
@@ -50,7 +50,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *storyTitle;
 @property (assign, nonatomic) BOOL isChoise;
 
-- (instancetype)initWithIndex:(SKStoryPageNumber) index;
-- (NSArray *)pagesWithArrayOfIndexes:(NSArray<NSNumber *> *) indexes;
+- (instancetype)initWithIndex:(SKStoryPageNumber)index;
+- (NSArray *)pagesWithArrayOfIndexes:(NSArray<NSNumber *> *)indexes;
 
 @end

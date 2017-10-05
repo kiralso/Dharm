@@ -21,19 +21,15 @@ static NSString *const kUserKey = @"SKUser";
 @implementation SKUserDataManager
 
 + (SKUserDataManager *)sharedManager {
-    
     static SKUserDataManager *manager = nil;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[SKUserDataManager alloc] init];
     });
-    
     return manager;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.defaults = [NSUserDefaults standardUserDefaults];
@@ -41,13 +37,12 @@ static NSString *const kUserKey = @"SKUser";
     }
     return self;
 }
+
 #pragma mark - User
 
 - (SKUser *)loadUser {
-    
     NSData *storedUser = [self.defaults objectForKey:kUserKey];
     SKUser *user = nil;
-    
     if (storedUser) {
         user = [NSKeyedUnarchiver unarchiveObjectWithData:storedUser];
     } else {
@@ -57,7 +52,6 @@ static NSString *const kUserKey = @"SKUser";
         user.pagesIndexesArray = @[@0, @1, @2, @3, @4, @5];
         user.isGameOver = NO;
     }
-    
     return user;
 }
 
@@ -68,7 +62,6 @@ static NSString *const kUserKey = @"SKUser";
 }
 
 - (void)resetUser {
-    
     self.user.score = 0;
     self.user.maxScore = 0;
     self.user.pagesIndexesArray = @[@0, @1, @2, @3, @4, @5];
@@ -80,11 +73,9 @@ static NSString *const kUserKey = @"SKUser";
 #pragma mark - Score
 
 - (void)updateUserWithScore:(NSInteger) score {
-    
     if (self.user.maxScore < score) {
         self.user.maxScore = score;
     }
-    
     self.user.score = score;
     [self saveUser];
 }
@@ -97,28 +88,21 @@ static NSString *const kUserKey = @"SKUser";
 }
 
 - (NSArray *)fireDates {
-    
     NSMutableArray *fireDatesArray = [NSMutableArray array];
-    
     for (SKNotificationDate *date in self.user.notificationDatesArray) {
         [fireDatesArray addObject:date.fireDate];
     }
-
     return fireDatesArray;
 }
 
 - (SKNotificationDate *)notificationDateWithFireDate:(NSDate *)fireDate
                                          warningDate:(NSDate *)warningDate {
-    
     NSMutableArray *datesArray = [NSMutableArray arrayWithArray:self.user.notificationDatesArray];
     SKNotificationDate *notificationDate = [[SKNotificationDate alloc] initWithFireDate:fireDate
                                                                             warningDate:warningDate];
-    
     [datesArray addObject:notificationDate];
-    
     self.user.notificationDatesArray = datesArray;
     [self saveUser];
-    
     return notificationDate;
 }
 

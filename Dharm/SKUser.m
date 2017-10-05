@@ -17,7 +17,6 @@
 #pragma mark - NSCoder
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    
     [encoder encodeObject:@(self.score) forKey:@"score"];
     [encoder encodeObject:@(self.maxScore) forKey:@"maxScore"];
     [encoder encodeObject:self.notificationDatesArray forKey:@"notificationDatesArray"];
@@ -27,7 +26,6 @@
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-    
     if (self = [super init]) {
         self.score = [[decoder decodeObjectForKey:@"score"] integerValue];
         self.maxScore = [[decoder decodeObjectForKey:@"maxScore"] integerValue];
@@ -36,7 +34,6 @@
         self.answeredPages = [decoder decodeObjectForKey:@"answeredPages"];
         self.isGameOver = [[decoder decodeObjectForKey:@"isGameOver"] boolValue];
     }
-    
     return self;
 }
 

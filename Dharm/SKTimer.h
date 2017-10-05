@@ -14,9 +14,7 @@ extern NSString* const SKTimerTextChangedNotification;
 extern NSString* const SKTimerTextUserInfoKey;
 
 @protocol SKTimerDelegate
-
 - (void)timerComponentsDidChange:(NSDateComponents *)components;
-
 @end
 
 @interface SKTimer : NSObject

@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *playerAliasLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rowNumberLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *playerAvatarImage;
 
 @end

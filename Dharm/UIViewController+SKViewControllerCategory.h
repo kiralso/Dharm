@@ -10,6 +10,6 @@
 
 @interface UIViewController (SKViewControllerCategory)
 
-- (void) drawStatusBarOnNavigationViewWithColor: (UIColor *) color;
+- (void)drawStatusBarOnNavigationViewWithColor:(UIColor *)color;
 
 @end

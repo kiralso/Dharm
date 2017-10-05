@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class SKScoreCell;
-@class SKTimerCell;
-@class SKCodeCell;
-@class SKAdCell;
-
 @interface SKBunkerTableViewController : UITableViewController
 
 - (IBAction)showMenuAction:(UIBarButtonItem *)sender;

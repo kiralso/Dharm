@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VMaskTextField.h"
 
 @interface SKCodeCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
+@property (weak, nonatomic) IBOutlet VMaskTextField *codeTextField;
 
 @end

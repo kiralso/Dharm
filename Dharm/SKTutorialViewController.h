@@ -12,7 +12,6 @@
 
 @property (assign, nonatomic) NSInteger pageIndex;
 @property (assign, nonatomic) NSInteger disasterPower;
-
 @property (strong, nonatomic) NSArray *pagesArray;
 @property (assign, nonatomic) BOOL isTutorial;
 @property (assign, nonatomic) BOOL isDisaster;

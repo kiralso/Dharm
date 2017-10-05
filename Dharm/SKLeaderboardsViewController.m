@@ -14,35 +14,26 @@
 #import "SKLeaderboardCell.h"
 
 @interface SKLeaderboardsViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, SKGameKitHelperDelegate>
-
 @property (strong, nonatomic) NSArray *usersArray;
 @property (nonatomic, strong) CBStoreHouseRefreshControl *storeHouseRefreshControl;
 @property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
-
 @end
+
+static NSInteger const SKNumberOfSections = 1;
+static CGFloat const SKHeightForRow = 80.0f;
 
 @implementation SKLeaderboardsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setBackgroundImageViewWithImageName:backgroundPath()];
-
-    self.gameCenterHelper = [[SKGameKitHelper alloc] init];
+    self.gameCenterHelper = [SKGameKitHelper sharedManager];
     self.gameCenterHelper.delegate = self;
-
-    self.usersArray = nil;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    //[self.gameCenterHelper authenticateLocalPlayer];
     [self loadPlayers];
-    
     self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.tableView
                                                                             target:self
                                                                      refreshAction:@selector(refreshTriggered)
@@ -57,10 +48,8 @@
 }
 
 -(void)loadPlayers {
-    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *identifier = self.gameCenterHelper.leaderboardIdentifier;
-
     if (identifier) {
         __weak SKLeaderboardsViewController *weakSelf = self;
         [self.gameCenterHelper loadLeaderboardWithIdentifier:identifier
@@ -79,7 +68,6 @@
 }
 
 -(UIImage *)playerAvatarWithIndex:(NSInteger)index {
-    
     switch (index) {
         case 0:
             return [UIImage imageNamed:@"hurley"];
@@ -134,7 +122,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return SKNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -142,17 +130,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     SKLeaderboardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SKLeaderboardCell"
                                                               forIndexPath:indexPath];
-    
     GKScore *score = [self.usersArray objectAtIndex:indexPath.row];
-    
     cell.playerAliasLabel.text = [NSString stringWithFormat:@"%@", score.player.alias];
     cell.scoreLabel.text = [NSString stringWithFormat:@"%lld", score.value];
     cell.rowNumberLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1];
     cell.playerAvatarImage.image = [self playerAvatarWithIndex:indexPath.row];
-    
     return cell;
 }
 
@@ -163,7 +147,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.f;
+    return SKHeightForRow;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -179,7 +163,6 @@
 #pragma mark - SKGameKitHelperDelegate
 
 - (void) showAuthenticationController:(UIViewController *)authenticationController {
-    
     [self.parentViewController presentViewController:authenticationController
                                             animated:YES
                                           completion:nil];
@@ -188,15 +171,13 @@
 #pragma mark - CBStoreHouseRefreshControl
 
 - (void)refreshTriggered {
-
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
     [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:1.0 inModes:@[NSRunLoopCommonModes]];
 }
 
 - (void)finishRefreshControl {
-    
     [self loadPlayers];
     [self.storeHouseRefreshControl finishingLoading];
 }
+
 @end

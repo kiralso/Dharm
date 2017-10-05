@@ -13,9 +13,7 @@
 - (instancetype)initWithIndex:(SKStoryPageNumber) index {
     self = [super init];
     if (self) {
-        
         switch (index) {
-                
             case SKStoryPageNumberTutorial:
                 self.imageName = @"Tutorial";
                 self.storyText = NSLocalizedString(@"TUTORIAL", nil);
@@ -188,22 +186,16 @@
     return self;
 }
 
-- (NSArray *)pagesWithArrayOfIndexes:(NSArray<NSNumber *> *) indexes {
-    
+- (NSArray *)pagesWithArrayOfIndexes:(NSArray<NSNumber *> *)indexes {
     NSMutableArray *pages = [NSMutableArray array];
-    
     for (NSNumber *number in indexes) {
-        
         NSInteger index = [number integerValue];
-        
         if (index >= SKStoryPageNumberMax) {
             break;
         }
-        
         SKStoryPage *page = [[SKStoryPage alloc] initWithIndex:index];
         [pages addObject:page];
     }
-
     return pages;
 }
 

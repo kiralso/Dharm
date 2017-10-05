@@ -8,6 +8,7 @@ pod 'AMViralSwitch'
 pod 'NGSPopoverView'
 pod 'MSWeakTimer', '~> 1.1.0'
 pod 'CBStoreHouseRefreshControl'
+pod "VMaskTextField"
   # Pods for Dharm
 
 end

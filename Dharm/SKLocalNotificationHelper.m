@@ -13,21 +13,18 @@
 #import "UIApplication+SKNotificationManager.h"
 #import "SKNotificationDate.h"
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, SKLocalNotification) {
     SKWarningLocalNotification,
     SKFailLocalNotification,
-} SKLocalNotification;
+};
 
 @interface SKLocalNotificationHelper()
-
 @property (strong, nonatomic) SKDateGenerator *dateGenerator;
-
 @end
 
 @implementation SKLocalNotificationHelper
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.dateGenerator = [[SKDateGenerator alloc] init];
@@ -36,11 +33,9 @@ typedef enum : NSUInteger {
 }
 
 - (void)updateNotificationDatesWithCompletion:(void(^)(NSArray<NSDate *> *))handler {
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *datesArray = nil;
     BOOL isHardcore = [defaults boolForKey:kDifficultySwitchKey];
-    
     if (isHardcore) {
         datesArray = [self.dateGenerator fireDatesSinceNow];
     } else {
@@ -49,9 +44,7 @@ typedef enum : NSUInteger {
         datesArray = [self.dateGenerator datesArrayBetweenStartDate:startDate
                                                          andEndDate:endDate];
     }
-    
     [self localNotificationsAndSaveDatesArray:datesArray];
-    
     if (handler) {
         handler(datesArray);
     }
@@ -60,10 +53,8 @@ typedef enum : NSUInteger {
 #pragma mark - Private Methods
 
 - (void)scheduleLocalNotificationsForDates:(NSArray<NSDate *> *)dates withType:(SKLocalNotification)type {
-    
     NSString *title = nil;
     NSString *body = nil;
-    
     switch (type) {
         case SKWarningLocalNotification:
             title = NSLocalizedString(@"SAVETHEWORLD", nil);
@@ -74,30 +65,22 @@ typedef enum : NSUInteger {
             body = NSLocalizedString(@"SHAME", nil);
             break;
     }
-    
     [[UIApplication sharedApplication] scheduleLocalNotificationsForFireDates:dates
                                                                         title:title
                                                                 andAllertBody:body];
 }
 
 - (void)localNotificationsAndSaveDatesArray:(NSArray <NSDate *> *)dates {
-    
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
     NSArray *warningDates = [self.dateGenerator warningDatesWithArray:dates];
-    
     [self scheduleLocalNotificationsForDates:dates withType:SKFailLocalNotification];
     [self scheduleLocalNotificationsForDates:warningDates withType:SKWarningLocalNotification];
-    
     NSMutableArray *notificationsArray = [NSMutableArray array];
-    
     for (int i = 0; i < [dates count]; i++) {
         SKNotificationDate * nd = [[SKNotificationDate alloc] initWithFireDate:dates[i]
                                                                    warningDate:warningDates[i]];
-        
         [notificationsArray addObject:nd];
     }
-    
     [[SKUserDataManager sharedManager] updateUserWithNotificationDateArray:notificationsArray];
 }
 

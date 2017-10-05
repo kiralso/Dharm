@@ -26,18 +26,15 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    
     [encoder encodeObject:self.fireDate forKey:@"fireDate"];
     [encoder encodeObject:self.warningDate forKey:@"warningDate"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-    
     if (self = [super init]) {
         self.fireDate = [decoder decodeObjectForKey:@"fireDate"];
         self.warningDate = [decoder decodeObjectForKey:@"warningDate"];
     }
-    
     return self;
 }
 @end

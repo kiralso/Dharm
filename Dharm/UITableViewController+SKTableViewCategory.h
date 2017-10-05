@@ -10,6 +10,6 @@
 
 @interface UITableViewController (SKTableViewCategory)
 
-- (void) setBackgroundImageViewWithImageName:(NSString *) imageName;
+- (void)setBackgroundImageViewWithImageName:(NSString *)imageName;
 
 @end

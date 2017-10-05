@@ -13,7 +13,6 @@
 @class SKStoryPage;
 
 @protocol SKStoryHelperDelegate
-
 @optional
 - (void)pagesDidLoad:(NSArray *)pages;
 @end

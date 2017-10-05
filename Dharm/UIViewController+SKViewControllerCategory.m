@@ -10,13 +10,10 @@
 
 @implementation UIViewController (SKViewControllerCategory)
 
-- (void) drawStatusBarOnNavigationViewWithColor: (UIColor *)color {
-    
+- (void)drawStatusBarOnNavigationViewWithColor:(UIColor *)color {
     if (self.navigationController) {
-        
         UIApplication *app = [UIApplication sharedApplication];
         CGFloat statusBarHeight = app.statusBarFrame.size.height;
-        
         UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -statusBarHeight, [UIScreen mainScreen].bounds.size.width, statusBarHeight)];
         statusBarView.backgroundColor = color;
         [self.navigationController.navigationBar addSubview:statusBarView];
