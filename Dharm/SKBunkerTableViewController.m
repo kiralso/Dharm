@@ -21,8 +21,7 @@
 #import "SKLocalNotificationHelper.h"
 #import "UITableViewController+SKTableViewCategory.h"
 
-@interface SKBunkerTableViewController () <UITextFieldDelegate, SKStoryHelperDelegate, SKBunkerTableDataManagerDelegate>
-
+@interface SKBunkerTableViewController () <SKStoryHelperDelegate, SKBunkerTableDataManagerDelegate, SKGameKitHelperDelegate>
 @property (strong, nonatomic) SKStoryMenuViewController *storyVC;
 @property (assign, nonatomic) BOOL isMenuHidden;
 @property (strong, nonatomic) UISwipeGestureRecognizer *rightSwipe;
@@ -32,7 +31,6 @@
 @property (strong, nonatomic) SKAlertHelper *alertHelper;
 @property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
 @property (strong, nonatomic) SKLocalNotificationHelper *localNotificationHelper;
-
 @end
 
 @implementation SKBunkerTableViewController
@@ -79,10 +77,11 @@
     self.alertHelper = [[SKAlertHelper alloc] init];
     self.gameCenterHelper = [SKGameKitHelper sharedManager];
     self.localNotificationHelper = [[SKLocalNotificationHelper alloc] init];
+    self.storyHelper.delegate = self;
     self.tableManager.delegate = self;
+    self.gameCenterHelper.delegate = self;
     self.tableView.delegate = self.tableManager;
     self.tableView.dataSource = self.tableManager;
-    self.storyHelper.delegate = self;
 }
 
 - (void)childControllersInit {
@@ -115,6 +114,14 @@
     [self.storyHelper showDisasterWithPower:times];
 }
 
+#pragma mark - SKGameKitHelperDelegate
+
+- (void)showAuthenticationController:(UIViewController *)authenticationController {
+    [self.parentViewController presentViewController:authenticationController
+                                                animated:YES
+                                              completion:nil];
+}
+
 #pragma mark - Notifications
 
 - (void) reloadTableView:(NSNotification *)notification {
@@ -135,7 +142,6 @@
     UILabel *label = [[UILabel alloc] init];
     label.text = [NSString stringWithFormat:NSLocalizedString(@"POPOVER", nil), kMinutesBeforeFireDateToWarn];
     label.numberOfLines = 0;
-    
     NGSPopoverView *popover = [[NGSPopoverView alloc] initWithCornerRadius:10.f
                                                                  direction:NGSPopoverArrowPositionTop
                                                                  arrowSize:CGSizeMake(0, 0)];
@@ -173,15 +179,10 @@
 #pragma mark - Gestures
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)sender {
-    switch (sender.direction) {
-        case UISwipeGestureRecognizerDirectionRight:
-            [self showMenu];
-            break;
-        case UISwipeGestureRecognizerDirectionLeft:
-            [self hideMenu];
-            break;
-        default:
-            break;
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        [self showMenu];
+    } else if (sender.direction == UISwipeGestureRecognizerDirectionLeft){
+        [self hideMenu];
     }
 }
 

@@ -89,6 +89,7 @@ static NSInteger const SKNumberOfRows = 4;
         cell = [tableView dequeueReusableCellWithIdentifier:timerCellIdentifier
                                                          forIndexPath:indexPath];
         self.timerCell = (SKTimerCell *)cell;
+        [self checkScore];
         [self startTimerToNextFireDate];
     } else if (indexPath.row == SKCellsCode) {
         cell = [tableView dequeueReusableCellWithIdentifier:codeCellIdentifier

@@ -23,33 +23,38 @@
     return datesArray;
 }
 
-- (NSDate *)firstFireDateSinceNowFromArray:(NSArray *) datesArray {
-    NSDate *fireDate = nil;
-    NSDateComponents *startRangeComponents =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
-                                                                            fromDate:[NSDate date]
-                                                                              toDate:[datesArray firstObject]
-                                                                             options:0];
-    NSInteger startRange = ABS(startRangeComponents.second);
-    for (NSDate *date in datesArray) {
-        NSDateComponents *components =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
-                                                                      fromDate:[NSDate date]
-                                                                        toDate:date
-                                                                       options:0];
-        
-        if (components.second < startRange && components.second > 0) {
-            startRange = components.second;
-            fireDate = date;
+- (NSDate *)firstFireDateSinceNowFromArray:(NSArray *)datesArray {
+    NSDate *fireDate;
+    if ([datesArray count] > 0) {
+        NSDateComponents *startRangeComponents =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
+                                                                                fromDate:[NSDate date]
+                                                                                  toDate:[datesArray firstObject]
+                                                                                 options:0];
+        NSInteger startRange = ABS(startRangeComponents.second);
+        for (NSDate *date in datesArray) {
+            NSDateComponents *components =[[NSCalendar currentCalendar] components:NSCalendarUnitSecond
+                                                                          fromDate:[NSDate date]
+                                                                            toDate:date
+                                                                           options:0];
+            
+            if (components.second < startRange && components.second > 0) {
+                startRange = components.second;
+                fireDate = date;
+            }
         }
-    }
-    
-    if (fireDate) {
-        return fireDate;
+        
+        if (fireDate) {
+            return fireDate;
+        } else {
+            return [datesArray firstObject];
+        }
     } else {
-        return [datesArray firstObject];
-    }    
+        return nil;
+    }
 }
 
-- (NSArray<NSDate *> *) fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *) startComponents andComponents:(NSDateComponents *) endComponents {
+- (NSArray<NSDate *> *) fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *)startComponents
+                                                        andComponents:(NSDateComponents *)endComponents {
     NSMutableArray *dates = [NSMutableArray array];
     int i = 0;
     while ([dates count] < 30) {
@@ -89,7 +94,7 @@
 
 #pragma mark - warning dates
 
-- (NSArray<NSDate *> *)warningDatesWithArray:(NSArray<NSDate *> *) array {
+- (NSArray<NSDate *> *)warningDatesWithArray:(NSArray<NSDate *> *)array {
     NSMutableArray *dates = [NSMutableArray array];
     for (NSDate *dateFromArray in array) {
         NSDate *date= [NSDate dateWithTimeInterval:-kMinutesBeforeFireDateToWarn*60 sinceDate:dateFromArray];
