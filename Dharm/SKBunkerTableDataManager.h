@@ -13,14 +13,22 @@
 @class SKTimerCell;
 @class SKCodeCell;
 
+@class SKBunkerTableDataManager;
+
 @protocol SKBunkerTableDataManagerDelegate
-- (void)codeDidEnteredSuccess:(BOOL)flag;
+
+- (void)codeCanBeEntered:(BOOL)flag;
+
 - (void)codeDidnNotEnteredTimes:(NSInteger)times;
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string forMananger:(SKBunkerTableDataManager *)manager;
+
 @end
 
 @interface SKBunkerTableDataManager : NSObject <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) UITableViewController<SKBunkerTableDataManagerDelegate> *delegate;
-@property (assign, nonatomic) BOOL codeCanEntered;
+@property (weak, nonatomic) id <SKBunkerTableDataManagerDelegate> delegate;
+
+- (instancetype)initWithTableView:(UITableView *)tableView;
 
 @end

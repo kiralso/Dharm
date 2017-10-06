@@ -9,7 +9,6 @@
 //Models
 #import "SKBunkerTableDataManager.h"
 #import "SKUserDataManager.h"
-#import "SKSafetyCodeManager.h"
 #import "SKLocalNotificationHelper.h"
 #import "UIColor+SKColorCategory.h"
 #import "SKDateGenerator.h"
@@ -29,12 +28,13 @@ typedef NS_ENUM(NSInteger, SKCell) {
     SKCellsCode
 };
 
-@interface SKBunkerTableDataManager() <SKTimerDelegate, SKSafetyCodeManagerDelegate>
+@interface SKBunkerTableDataManager() <SKTimerDelegate, SKCodeCellDelegate>
+
+@property (strong, nonatomic) UITableView *tableView;
 
 //Models
 @property (strong, nonatomic) SKTimer *timer;
 @property (strong, nonatomic) SKLocalNotificationHelper *localNotificationHelper;
-@property (strong, nonatomic) SKSafetyCodeManager *codeManager;
 
 //Cells
 @property (strong, nonatomic) SKScoreCell *scoreCell;
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, SKCell) {
 //Constants
 static NSString * const scoreCellIdentifier = @"scoreCell";
 static NSString * const timerCellIdentifier = @"timerCell";
-static NSString * const codeCellIdentifier = @"codeCell";
+static NSString * const codeCellIdentifier = @"SKCodeCell";
 static NSString * const adCellIdentifier = @"adCell";
 
 static NSInteger const SKNumberOfSections = 1;
@@ -57,13 +57,12 @@ static NSInteger const SKNumberOfRows = 4;
 
 @implementation SKBunkerTableDataManager 
 
-@synthesize codeCanEntered;
-
-- (instancetype)init {
+- (instancetype)initWithTableView:(UITableView *)tableView {
     self = [super init];
     if (self) {
         self.localNotificationHelper = [[SKLocalNotificationHelper alloc] init];
         self.showDisaster = YES;
+        self.tableView = tableView;
     }
     return self;
 }
@@ -80,24 +79,28 @@ static NSInteger const SKNumberOfRows = 4;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
+    
     if (indexPath.row == SKCellsScore) {
         cell = [tableView dequeueReusableCellWithIdentifier:scoreCellIdentifier
                                                                         forIndexPath:indexPath];
         self.scoreCell = (SKScoreCell *)cell;
         [self updateScoreLabel];
-    } else if (indexPath.row == SKCellsTimer) {
+    }
+    else if (indexPath.row == SKCellsTimer) {
         cell = [tableView dequeueReusableCellWithIdentifier:timerCellIdentifier
                                                          forIndexPath:indexPath];
         self.timerCell = (SKTimerCell *)cell;
         [self checkScore];
         [self startTimerToNextFireDate];
-    } else if (indexPath.row == SKCellsCode) {
+    }
+    else if (indexPath.row == SKCellsCode) {
         cell = [tableView dequeueReusableCellWithIdentifier:codeCellIdentifier
                                                         forIndexPath:indexPath];
         self.codeCell = (SKCodeCell *)cell;
-        self.codeManager = [[SKSafetyCodeManager alloc] initWithTextField:self.codeCell.codeTextField];
-        self.codeManager.delegate = self;
-    } else if (indexPath.row == SKCellsAd) {
+        [self.codeCell updateCell];
+        self.codeCell.delegate = self;
+    }
+    else if (indexPath.row == SKCellsAd) {
         cell = [tableView dequeueReusableCellWithIdentifier:adCellIdentifier
                                                forIndexPath:indexPath];
     }
@@ -107,7 +110,7 @@ static NSInteger const SKNumberOfRows = 4;
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGRect rect = self.delegate.tableView.bounds;
+    CGRect rect = [UIScreen mainScreen].bounds;
     CGFloat screenHeight = rect.size.height;
     CGFloat height;
     if (indexPath.row == SKCellsScore) {
@@ -153,10 +156,10 @@ static NSInteger const SKNumberOfRows = 4;
 - (void)timerComponentsDidChange:(NSDateComponents *)components {
     if (components.minute < kMinutesBeforeFireDateToWarn) {
         self.timerCell.timerLabel.textColor = [UIColor warningRedColor];
-        [self codeCanBeEntered:YES];
+        [self.delegate codeCanBeEntered:YES];
     } else {
         self.timerCell.timerLabel.textColor = [UIColor whiteColor];
-        [self codeCanBeEntered:NO];
+        [self.delegate codeCanBeEntered:NO];
     }
     __weak SKBunkerTableDataManager *weakSelf = self;
     if (components.second < 1 && components.minute < 1) {
@@ -171,6 +174,12 @@ static NSInteger const SKNumberOfRows = 4;
                                                   (int)components.minute, (int)components.second];
         });
     }
+}
+
+#pragma mark - SKCodeCellDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string cell:(SKCodeCell *)cell {
+    return [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string forMananger:self];
 }
 
 #pragma mark - Score
@@ -209,7 +218,7 @@ static NSInteger const SKNumberOfRows = 4;
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
         __weak SKBunkerTableDataManager *weakSelf = self;
         [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
-            [weakSelf.delegate.tableView reloadData];
+            [weakSelf.tableView reloadData];
         }];
     }
     [self updateScoreLabel];
@@ -220,25 +229,11 @@ static NSInteger const SKNumberOfRows = 4;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSInteger score = [SKUserDataManager sharedManager].user.score;
         self.scoreCell.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
-        [weakSelf.delegate.tableView reloadData];
+        [weakSelf.tableView reloadData];
     });
 }
 
-#pragma mark - SKSafetyCodeManagerDelegate
-
-- (void)codeDidEnteredSuccess:(BOOL)flag {
-    [self.delegate codeDidEnteredSuccess:flag];
-}
-
 #pragma mark - Helpful Functions
-
-- (void) codeCanBeEntered:(BOOL)flag {
-    if (flag) {
-        self.codeCanEntered = YES;
-    } else {
-        self.codeCanEntered = NO;
-    }
-}
 
 - (NSTimeInterval)timeIntervalBeforeNextFireDate {
     NSArray *fireDates = [[SKUserDataManager sharedManager] fireDates];
