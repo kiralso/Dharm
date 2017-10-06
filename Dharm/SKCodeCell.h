@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VMaskTextField.h"
+
+@class SKCodeCell;
+
+@protocol SKCodeCellDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string cell:(SKCodeCell *)cell;
+
+@end
 
 @interface SKCodeCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet VMaskTextField *codeTextField;
+@property (weak, nonatomic) id <SKCodeCellDelegate> delegate;
+
+- (void)updateCell;
 
 @end

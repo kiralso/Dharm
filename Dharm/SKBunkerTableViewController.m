@@ -11,6 +11,7 @@
 #import "SKStoryMenuViewController.h"
 
 //Models
+#import "SKCodeCell.h"
 #import "SKUtils.h"
 #import "NGSPopoverView.h"
 #import "SKUserDataManager.h"
@@ -22,6 +23,7 @@
 #import "UITableViewController+SKTableViewCategory.h"
 
 @interface SKBunkerTableViewController () <SKStoryHelperDelegate, SKBunkerTableDataManagerDelegate, SKGameKitHelperDelegate>
+
 @property (strong, nonatomic) SKStoryMenuViewController *storyVC;
 @property (assign, nonatomic) BOOL isMenuHidden;
 @property (strong, nonatomic) UISwipeGestureRecognizer *rightSwipe;
@@ -31,6 +33,9 @@
 @property (strong, nonatomic) SKAlertHelper *alertHelper;
 @property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
 @property (strong, nonatomic) SKLocalNotificationHelper *localNotificationHelper;
+
+@property (assign, nonatomic) BOOL codeCanEntered;
+
 @end
 
 @implementation SKBunkerTableViewController
@@ -41,6 +46,7 @@
                                              selector:@selector(reloadTableView:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
+    [self setupTableView];
     [self flagsInit];
     [self gesturesInit];
     [self managersInit];
@@ -57,8 +63,15 @@
 
 #pragma mark - Initialization
 
-- (void)flagsInit {
+- (void)setupTableView {
     self.tableView.allowsSelection = NO;
+    
+    NSString *cellClassName = NSStringFromClass([SKCodeCell class]);
+    UINib *nib = [UINib nibWithNibName:cellClassName bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:cellClassName];
+}
+
+- (void)flagsInit {
     self.isMenuHidden = YES;
 }
 
@@ -72,7 +85,7 @@
 }
 
 - (void)managersInit {
-    self.tableManager = [[SKBunkerTableDataManager alloc] init];
+    self.tableManager = [[SKBunkerTableDataManager alloc] initWithTableView:self.tableView];
     self.storyHelper = [[SKStoryHelper alloc] init];
     self.alertHelper = [[SKAlertHelper alloc] init];
     self.gameCenterHelper = [SKGameKitHelper sharedManager];
@@ -112,6 +125,28 @@
 
 - (void)codeDidnNotEnteredTimes:(NSInteger)times {
     [self.storyHelper showDisasterWithPower:times];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string forMananger:(SKBunkerTableDataManager *)manager {
+    NSCharacterSet* validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSArray* components = [string componentsSeparatedByCharactersInSet:validationSet];
+    NSString *resultString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([components count] <= 1) {
+        if (self.codeCanEntered) {
+            if ([resultString isEqualToString:kSafetyString]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [textField resignFirstResponder];
+                    textField.text = @"";
+                    [self codeDidEnteredSuccess:YES];
+                });
+            }
+            return YES;
+        } else {
+            [textField resignFirstResponder];
+            [self codeDidEnteredSuccess:NO];
+        }
+    }
+    return NO;
 }
 
 #pragma mark - SKGameKitHelperDelegate
@@ -183,6 +218,17 @@
         [self showMenu];
     } else if (sender.direction == UISwipeGestureRecognizerDirectionLeft){
         [self hideMenu];
+    }
+}
+
+#pragma mark - Setters & getters
+
+- (void) codeCanBeEntered:(BOOL)flag {
+    if (flag) {
+        self.codeCanEntered = YES;
+    }
+    else {
+        self.codeCanEntered = NO;
     }
 }
 

@@ -12,4 +12,6 @@
 
 + (UIColor *)warningRedColor;
 
++ (UIColor *)textFieldPlaceholderColor;
+
 @end

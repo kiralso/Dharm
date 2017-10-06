@@ -15,4 +15,9 @@
     return RGBA(163.f, 26.f, 27.f, 1.f);
 }
 
++ (UIColor *)textFieldPlaceholderColor {
+    return RGBA(110.0, 110.0, 110.0, 1.f);
+
+}
+
 @end
