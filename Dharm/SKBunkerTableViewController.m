@@ -12,6 +12,10 @@
 
 //Models
 #import "SKCodeCell.h"
+#import "SKTimerCell.h"
+#import "SKAdCell.h"
+#import "SKScoreCell.h"
+
 #import "SKUtils.h"
 #import "NGSPopoverView.h"
 #import "SKUserDataManager.h"
@@ -52,10 +56,10 @@
     [self managersInit];
     [self childControllersInit];
     [self setBackgroundImageViewWithImageName:backgroundPath()];
-    [self.storyHelper showTutorial];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self.storyHelper showTutorial];
     [self.gameCenterHelper authenticateLocalPlayer];
     [super viewDidAppear:animated];
     [self.tableView reloadData];
@@ -66,9 +70,21 @@
 - (void)setupTableView {
     self.tableView.allowsSelection = NO;
     
-    NSString *cellClassName = NSStringFromClass([SKCodeCell class]);
-    UINib *nib = [UINib nibWithNibName:cellClassName bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:cellClassName];
+    NSString *codeCellClassName = NSStringFromClass([SKCodeCell class]);
+    UINib *codeNib = [UINib nibWithNibName:codeCellClassName bundle:nil];
+    [self.tableView registerNib:codeNib forCellReuseIdentifier:codeCellClassName];
+    
+    NSString *timerCellClassName = NSStringFromClass([SKTimerCell class]);
+    UINib *timerNib = [UINib nibWithNibName:timerCellClassName bundle:nil];
+    [self.tableView registerNib:timerNib forCellReuseIdentifier:timerCellClassName];
+    
+    NSString *adCellClassName = NSStringFromClass([SKAdCell class]);
+    UINib *adNib = [UINib nibWithNibName:adCellClassName bundle:nil];
+    [self.tableView registerNib:adNib forCellReuseIdentifier:adCellClassName];
+    
+    NSString *scoreCellClassName = NSStringFromClass([SKScoreCell class]);
+    UINib *scoreNib = [UINib nibWithNibName:scoreCellClassName bundle:nil];
+    [self.tableView registerNib:scoreNib forCellReuseIdentifier:scoreCellClassName];
 }
 
 - (void)flagsInit {
@@ -152,9 +168,9 @@
 #pragma mark - SKGameKitHelperDelegate
 
 - (void)showAuthenticationController:(UIViewController *)authenticationController {
-    [self.parentViewController presentViewController:authenticationController
-                                                animated:YES
-                                              completion:nil];
+        [self presentViewController:authenticationController
+                           animated:YES
+                         completion:nil];
 }
 
 #pragma mark - Notifications
@@ -226,8 +242,7 @@
 - (void) codeCanBeEntered:(BOOL)flag {
     if (flag) {
         self.codeCanEntered = YES;
-    }
-    else {
+    } else {
         self.codeCanEntered = NO;
     }
 }

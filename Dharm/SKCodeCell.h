@@ -11,9 +11,7 @@
 @class SKCodeCell;
 
 @protocol SKCodeCellDelegate
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string cell:(SKCodeCell *)cell;
-
 @end
 
 @interface SKCodeCell : UITableViewCell

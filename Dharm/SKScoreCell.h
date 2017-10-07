@@ -10,6 +10,8 @@
 
 @interface SKScoreCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic)UILabel *scoreLabel;
+
+- (void)updateCell;
 
 @end

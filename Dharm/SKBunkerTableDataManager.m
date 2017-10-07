@@ -47,10 +47,10 @@ typedef NS_ENUM(NSInteger, SKCell) {
 @end
 
 //Constants
-static NSString * const scoreCellIdentifier = @"scoreCell";
-static NSString * const timerCellIdentifier = @"timerCell";
-static NSString * const codeCellIdentifier = @"SKCodeCell";
-static NSString * const adCellIdentifier = @"adCell";
+static NSString * const SKScoreCellIdentifier = @"SKScoreCell";
+static NSString * const SKTimerCellIdentifier = @"SKTimerCell";
+static NSString * const SKCodeCellIdentifier = @"SKCodeCell";
+static NSString * const SKAdCellIdentifier = @"SKAdCell";
 
 static NSInteger const SKNumberOfSections = 1;
 static NSInteger const SKNumberOfRows = 4;
@@ -81,27 +81,29 @@ static NSInteger const SKNumberOfRows = 4;
     UITableViewCell *cell;
     
     if (indexPath.row == SKCellsScore) {
-        cell = [tableView dequeueReusableCellWithIdentifier:scoreCellIdentifier
-                                                                        forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:SKScoreCellIdentifier
+                                               forIndexPath:indexPath];
         self.scoreCell = (SKScoreCell *)cell;
+        [self.scoreCell updateCell];
         [self updateScoreLabel];
     }
     else if (indexPath.row == SKCellsTimer) {
-        cell = [tableView dequeueReusableCellWithIdentifier:timerCellIdentifier
-                                                         forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:SKTimerCellIdentifier
+                                               forIndexPath:indexPath];
         self.timerCell = (SKTimerCell *)cell;
+        [self.timerCell updateCell];
         [self checkScore];
         [self startTimerToNextFireDate];
     }
     else if (indexPath.row == SKCellsCode) {
-        cell = [tableView dequeueReusableCellWithIdentifier:codeCellIdentifier
-                                                        forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:SKCodeCellIdentifier
+                                               forIndexPath:indexPath];
         self.codeCell = (SKCodeCell *)cell;
         [self.codeCell updateCell];
         self.codeCell.delegate = self;
     }
     else if (indexPath.row == SKCellsAd) {
-        cell = [tableView dequeueReusableCellWithIdentifier:adCellIdentifier
+        cell = [tableView dequeueReusableCellWithIdentifier:SKAdCellIdentifier
                                                forIndexPath:indexPath];
     }
     return cell;
@@ -110,19 +112,17 @@ static NSInteger const SKNumberOfRows = 4;
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGRect rect = [UIScreen mainScreen].bounds;
+    CGRect rect = tableView.bounds;
     CGFloat screenHeight = rect.size.height;
-    CGFloat height;
+    CGFloat height = 0;
     if (indexPath.row == SKCellsScore) {
-        height = 40.f;
+        height = screenHeight * 0.1f;
     } else if (indexPath.row == SKCellsTimer) {
-        height = screenHeight * 0.52f;
+        height = screenHeight * 0.45f;
     } else if (indexPath.row == SKCellsCode) {
-        height = 60;
+        height = screenHeight * 0.1f;
     } else if (indexPath.row == SKCellsAd) {
-        height = screenHeight * 0.15f;
-    } else {
-        height = 0;
+        height = screenHeight * 0.1f;
     }
     return height;
 }
@@ -208,13 +208,13 @@ static NSInteger const SKNumberOfRows = 4;
         }
     }
     
-    if (resetScore) {
+    if (resetScore && self.showDisaster) {
+        self.showDisaster = NO;
         [[SKUserDataManager sharedManager] updateUserWithScore:0];
         [self.delegate codeDidnNotEnteredTimes:power];
     }
     
-    if (recountDates && self.showDisaster) {
-        self.showDisaster = NO;
+    if (recountDates) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
         __weak SKBunkerTableDataManager *weakSelf = self;
         [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
@@ -224,7 +224,7 @@ static NSInteger const SKNumberOfRows = 4;
     [self updateScoreLabel];
 }
 
-- (void) updateScoreLabel {
+- (void)updateScoreLabel {
     __weak SKBunkerTableDataManager *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSInteger score = [SKUserDataManager sharedManager].user.score;

@@ -27,9 +27,8 @@
 - (void)showTutorial {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isFirstTime = [defaults boolForKey:kIsFirstTime];
-    SKTutorialPageViewController *tutorialVC = [self.delegate.storyboard instantiateViewControllerWithIdentifier:@"SKTutorialPageViewController"];
-
     if (!isFirstTime) {
+        SKTutorialPageViewController *tutorialVC = [self.delegate.storyboard instantiateViewControllerWithIdentifier:@"SKTutorialPageViewController"];
         [defaults setBool:YES forKey:kIsFirstTime];
         tutorialVC.indexOfInitialViewController = SKStoryPageNumberTutorial;
         tutorialVC.isTutorial = YES;

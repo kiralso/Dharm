@@ -10,6 +10,8 @@
 
 @interface SKTimerCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) UILabel *timerLabel;
+
+- (void)updateCell;
 
 @end

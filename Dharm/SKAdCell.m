@@ -10,4 +10,16 @@
 
 @implementation SKAdCell
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupCell];
+    }
+    return self;
+}
+
+- (void)setupCell {
+    self.backgroundColor = [UIColor clearColor];
+}
+
 @end

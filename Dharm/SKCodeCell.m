@@ -11,8 +11,8 @@
 #import "VMaskTextField.h"
 #import "UIColor+SKColorCategory.h"
 
-static CGFloat  const SKCodeTextFieldHeight = 35.0;
-static CGFloat  const SKCodeTextFieldWidth = 347.0;
+static CGFloat const SKCodeTextFieldHeight = 35.0;
+static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 static NSString * const SKTextFieldPlaceholderText = @"enter the code here";
 
@@ -50,7 +50,7 @@ static NSString * const SKTextFieldPlaceholderText = @"enter the code here";
 - (void)initializeTextField {
     self.codeTextField = [[VMaskTextField alloc] init];
     self.codeTextField.placeholder = SKTextFieldPlaceholderText;
-    self.codeTextField.font = [UIFont fontWithName:@"Avenir Next Regular" size:25.0];
+    self.codeTextField.font = [UIFont fontWithName:@"Avenir Next" size:25.0];
     self.codeTextField.mask = @"# # ## ## ## ##"; // 4 8 15 16 23 42
     self.codeTextField.delegate = self;
     self.codeTextField.adjustsFontSizeToFitWidth = YES;
@@ -58,8 +58,7 @@ static NSString * const SKTextFieldPlaceholderText = @"enter the code here";
     self.codeTextField.textAlignment = NSTextAlignmentCenter;
     self.codeTextField.textColor = [UIColor whiteColor];
     self.codeTextField.keyboardType = UIKeyboardTypeNumberPad;
-    
-    [self.codeTextField setValue:[UIColor whiteColor]
+    [self.codeTextField setValue:[UIColor textFieldPlaceholderColor]
                     forKeyPath:@"_placeholderLabel.textColor"];
     
     [self.contentView addSubview:self.codeTextField];
@@ -73,11 +72,14 @@ static NSString * const SKTextFieldPlaceholderText = @"enter the code here";
 
 #pragma mark - UITextFieldDelegate
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return YES;
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (self.delegate) {
         return [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string cell:self];
-    }
-    else {
+    } else {
         return NO;
     }
 }
