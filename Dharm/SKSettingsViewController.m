@@ -10,7 +10,7 @@
 #import "SKUtils.h"
 #import "AMViralSwitch.h"
 #import "UIViewController+SKViewControllerCategory.h"
-#import "SKLocalNotificationHelper.h"
+#import "SKLocalNotificationManager.h"
 
 @interface SKSettingsViewController ()
 
@@ -141,7 +141,7 @@ static NSInteger const kHoursBetweenPickers = 3;
     [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
     [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];
     
-    SKLocalNotificationHelper *notificationHelper = [[SKLocalNotificationHelper alloc] init];
+    SKLocalNotificationManager *notificationHelper = [[SKLocalNotificationManager alloc] init];
     [notificationHelper updateNotificationDatesWithCompletion:nil];
 }
 

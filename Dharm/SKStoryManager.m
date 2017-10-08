@@ -1,19 +1,19 @@
 //
-//  SKStoryHelper.m
+//  SKStoryManager.m
 //  Dharm
 //
 //  Created by Кирилл on 16.07.17.
 //  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
-#import "SKStoryHelper.h"
+#import "SKStoryManager.h"
 #import "SKStoryPage.h"
 #import "SKUserDataManager.h"
 #import "SKTutorialPageViewController.h"
 #import "SKTutorialViewController.h"
 #import "SKUtils.h"
 
-@implementation SKStoryHelper
+@implementation SKStoryManager
 
 - (NSArray<SKStoryPage *> *)loadPages {
     NSArray *pagesIndexesArray = [self pagesIndexesWithoutLast];

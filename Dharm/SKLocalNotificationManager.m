@@ -1,12 +1,12 @@
 //
-//  SKLocalNotificationHelper.m
+//  SKLocalNotificationManager.m
 //  Dharm
 //
 //  Created by Kirill Solovyov on 03.10.17.
 //  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
-#import "SKLocalNotificationHelper.h"
+#import "SKLocalNotificationManager.h"
 #import "SKUserDataManager.h"
 #import "SKUtils.h"
 #import "SKDateGenerator.h"
@@ -18,11 +18,11 @@ typedef NS_ENUM(NSUInteger, SKLocalNotification) {
     SKFailLocalNotification,
 };
 
-@interface SKLocalNotificationHelper()
+@interface SKLocalNotificationManager()
 @property (strong, nonatomic) SKDateGenerator *dateGenerator;
 @end
 
-@implementation SKLocalNotificationHelper
+@implementation SKLocalNotificationManager
 
 - (instancetype)init {
     self = [super init];

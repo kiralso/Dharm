@@ -648,7 +648,7 @@ This station was originally constructed as a laboratory, where scientists could 
         <!--Bunker-->
         <scene sceneID="TrX-Z3-gi9">
             <objects>
-                <viewController id="Pjb-0X-3Op" customClass="SKBunkerTableViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SKBunkerTableViewController" id="Pjb-0X-3Op" customClass="SKBunkerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LfB-t3-QbT"/>
                         <viewControllerLayoutGuide type="bottom" id="sOE-71-vol"/>
@@ -677,23 +677,9 @@ This station was originally constructed as a laboratory, where scientists could 
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
-                <navigationItem title="Bunker" id="3qJ-WZ-25J">
-                    <barButtonItem key="leftBarButtonItem" image="icons8-Menu-50" id="riW-8Q-395">
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </barButtonItem>
-                    <barButtonItem key="rightBarButtonItem" title="Item" id="DEx-gt-yZu">
-                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="unm-q5-WYA">
-                            <rect key="frame" x="276" y="7" width="83" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" image="icons8-Question Mark-96-2"/>
-                        </button>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </barButtonItem>
-                </navigationItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5NO-4f-vkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1700" y="-637"/>
+            <point key="canvasLocation" x="1759" y="-636"/>
         </scene>
         <!--Tutorial Page View Controller-->
         <scene sceneID="Edv-ip-jI1">

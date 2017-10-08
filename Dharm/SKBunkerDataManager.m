@@ -1,5 +1,5 @@
 //
-//  SKBunkerTableDataManager.m
+//  SKBunkerDataManager.m
 //  Dharm
 //
 //  Created by Kirill Solovyov on 05.10.17.
@@ -7,33 +7,33 @@
 //
 
 //Models
-#import "SKBunkerTableDataManager.h"
-#import "SKBunkerTableViewController.h"
+#import "SKBunkerDataManager.h"
+#import "SKBunkerViewController.h"
 #import "SKUserDataManager.h"
 #import "VMaskTextField.h"
-#import "SKLocalNotificationHelper.h"
+#import "SKLocalNotificationManager.h"
 #import "UIColor+SKColorCategory.h"
 #import "SKDateGenerator.h"
 #import "SKTimer.h"
 #import "SKUtils.h"
 
-@interface SKBunkerTableDataManager() <SKTimerDelegate>
+@interface SKBunkerDataManager() <SKTimerDelegate>
 
 //Models
 @property (strong, nonatomic) SKTimer *timer;
-@property (strong, nonatomic) SKLocalNotificationHelper *localNotificationHelper;
+@property (strong, nonatomic) SKLocalNotificationManager *localNotificationManager;
 @property (assign ,nonatomic) BOOL codeCanEntered;
 
 //Flags
 @property (assign, nonatomic) BOOL showDisaster;
 @end
 
-@implementation SKBunkerTableDataManager 
+@implementation SKBunkerDataManager
 
-- (instancetype)initWithWithDelegate:(SKBunkerTableViewController<SKBunkerTableDataManagerDelegate> *)delegate {
+- (instancetype)initWithWithDelegate:(SKBunkerViewController<SKBunkerDataManagerDelegate> *)delegate {
     self = [super init];
     if (self) {
-        self.localNotificationHelper = [[SKLocalNotificationHelper alloc] init];
+        self.localNotificationManager = [[SKLocalNotificationManager alloc] init];
         self.showDisaster = YES;
         self.delegate = delegate;
         [self checkScore];
@@ -77,9 +77,9 @@
         self.delegate.timerLabel.textColor = [UIColor whiteColor];
         [self codeCanBeEntered:NO];
     }
-    __weak SKBunkerTableDataManager *weakSelf = self;
+    __weak SKBunkerDataManager *weakSelf = self;
     if (components.second < 1 && components.minute < 1) {
-        [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+        [self.localNotificationManager updateNotificationDatesWithCompletion:^(NSArray *dates) {
             [weakSelf.delegate updateScore];
             [[SKUserDataManager sharedManager] updateUserWithScore:0];
             [weakSelf startTimerToNextFireDate];
@@ -105,8 +105,8 @@
                     [textField resignFirstResponder];
                     textField.text = @"";
                     NSInteger userScore = [SKUserDataManager sharedManager].user.score + 1;
-                    __weak SKBunkerTableDataManager *weakSelf = self;
-                    [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+                    __weak SKBunkerDataManager *weakSelf = self;
+                    [self.localNotificationManager updateNotificationDatesWithCompletion:^(NSArray *dates) {
                         [[SKUserDataManager sharedManager] updateUserWithScore:userScore];
                         [weakSelf checkScore];
                         [weakSelf startTimerToNextFireDate];
@@ -162,8 +162,8 @@
 
 - (void)recountDates {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
-    __weak SKBunkerTableDataManager *weakSelf = self;
-    [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+    __weak SKBunkerDataManager *weakSelf = self;
+    [self.localNotificationManager updateNotificationDatesWithCompletion:^(NSArray *dates) {
         [weakSelf checkScore];
         [weakSelf startTimerToNextFireDate];
     }];

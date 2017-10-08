@@ -1,5 +1,5 @@
 //
-//  SKAlertHelper.h
+//  SKAlertManager.h
 //  Dharm
 //
 //  Created by Kirill Solovyov on 01.10.17.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface SKAlertHelper : NSObject
+@interface SKAlertManager : NSObject
 
 - (void)showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController;
 - (void)showResetStoryAlertOnViewController:(UIViewController *_Nonnull)viewController

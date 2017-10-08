@@ -1,5 +1,5 @@
 //
-//  SKBunkerTableViewController.m
+//  SKBunkerViewController.m
 //  Dharm
 //
 //  Created by Кирилл on 09.04.17.
@@ -7,18 +7,18 @@
 //
 
 //Controllers
-#import "SKBunkerTableViewController.h"
+#import "SKBunkerViewController.h"
 #import "SKStoryMenuViewController.h"
 
 //Models
 #import "SKUtils.h"
 #import "NGSPopoverView.h"
 #import "SKUserDataManager.h"
-#import "SKBunkerTableDataManager.h"
-#import "SKStoryHelper.h"
-#import "SKAlertHelper.h"
+#import "SKBunkerDataManager.h"
+#import "SKStoryManager.h"
+#import "SKAlertManager.h"
 #import "VMaskTextField.h"
-#import "SKGameKitHelper.h"
+#import "SKGameKitManager.h"
 #import "UITableViewController+SKTableViewCategory.h"
 #import "UIColor+SKColorCategory.h"
 
@@ -29,20 +29,20 @@ static CGFloat const SKTimerTextLableWidth = 300.0;
 static CGFloat const SKCodeTextFieldHeight = 35.0;
 static CGFloat const SKCodeTextFieldWidth = 347.0;
 
-@interface SKBunkerTableViewController () <SKStoryHelperDelegate, SKBunkerTableDataManagerDelegate, SKGameKitHelperDelegate>
+@interface SKBunkerViewController () <SKStoryManagerDelegate, SKBunkerDataManagerDelegate, SKGameKitManagerDelegate>
 
 @property (strong, nonatomic) SKStoryMenuViewController *storyVC;
-@property (strong, nonatomic) SKBunkerTableDataManager *tableManager;
-@property (strong, nonatomic) SKStoryHelper *storyHelper;
-@property (strong, nonatomic) SKAlertHelper *alertHelper;
-@property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
+@property (strong, nonatomic) SKBunkerDataManager *tableManager;
+@property (strong, nonatomic) SKStoryManager *storyHelper;
+@property (strong, nonatomic) SKAlertManager *alertHelper;
+@property (strong, nonatomic) SKGameKitManager *gameCenterManager;
 @property (strong, nonatomic) UIImageView *backgroundView;
 @property (assign, nonatomic) BOOL codeCanEntered;
 @property (assign, nonatomic) BOOL isMenuHidden;
 
 @end
 
-@implementation SKBunkerTableViewController
+@implementation SKBunkerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,7 +63,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     [self updateCodeFieldFrame];
     [self updateScoreLabelFrame];
     [self.storyHelper showTutorial];
-    [self.gameCenterHelper authenticateLocalPlayer];
+    [self.gameCenterManager authenticateLocalPlayer];
     [self childControllersInit];
 }
 
@@ -102,13 +102,13 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 }
 
 - (void)managersInit {
-    self.storyHelper = [[SKStoryHelper alloc] init];
-    self.alertHelper = [[SKAlertHelper alloc] init];
-    self.tableManager = [[SKBunkerTableDataManager alloc] initWithWithDelegate:self];
-    self.gameCenterHelper = [SKGameKitHelper sharedManager];
+    self.storyHelper = [[SKStoryManager alloc] init];
+    self.alertHelper = [[SKAlertManager alloc] init];
+    self.tableManager = [[SKBunkerDataManager alloc] initWithWithDelegate:self];
+    self.gameCenterManager = [SKGameKitManager sharedManager];
     self.storyHelper.delegate = self;
     self.tableManager.delegate = self;
-    self.gameCenterHelper.delegate = self;
+    self.gameCenterManager.delegate = self;
 }
 
 - (void)childControllersInit {
@@ -203,7 +203,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
             [self.storyHelper showLastStory];
         }
         [self updateScore];
-        [self.gameCenterHelper reportScore:(int64_t)userScore];
+        [self.gameCenterManager reportScore:(int64_t)userScore];
     } else {
         [self.alertHelper showCantEnterCodeAlertOnViewController:self];
     }

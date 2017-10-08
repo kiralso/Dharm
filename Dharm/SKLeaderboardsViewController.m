@@ -9,11 +9,11 @@
 #import "SKLeaderboardsViewController.h"
 #import "UITableViewController+SKTableViewCategory.h"
 #import "SKUtils.h"
-#import "SKGameKitHelper.h"
+#import "SKGameKitManager.h"
 #import "SKLeaderboardTableManager.h"
 
 @interface SKLeaderboardsViewController()
-@property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
+@property (strong, nonatomic) SKGameKitManager *gameCenterManager;
 @property (strong, nonatomic) SKLeaderboardTableManager *tableManager;
 @end
 
@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackgroundImageViewWithImageName:backgroundPath()];
-    self.gameCenterHelper = [SKGameKitHelper sharedManager];
+    self.gameCenterManager = [SKGameKitManager sharedManager];
     self.tableManager = [[SKLeaderboardTableManager alloc] init];
     self.tableView.delegate = self.tableManager;
     self.tableView.dataSource = self.tableManager;
@@ -54,10 +54,10 @@
 
 -(void)loadPlayers {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *identifier = self.gameCenterHelper.leaderboardIdentifier;
+    NSString *identifier = self.gameCenterManager.leaderboardIdentifier;
     if (identifier) {
         __weak SKLeaderboardsViewController *weakSelf = self;
-        [self.gameCenterHelper loadLeaderboardWithIdentifier:identifier
+        [self.gameCenterManager loadLeaderboardWithIdentifier:identifier
                                          andCompetionHandler:^(NSArray<GKScore *> *scores,
                                                                NSError *error) {
                                              

@@ -1,5 +1,5 @@
 //
-//  SKGameKitHelper.h
+//  SKGameKitManager.h
 //  Dharm
 //
 //  Created by Кирилл on 23.05.17.
@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-@protocol SKGameKitHelperDelegate
+@protocol SKGameKitManagerDelegate
 - (void) showAuthenticationController:(UIViewController *)authenticationController;
 @end
 
-@interface SKGameKitHelper : NSObject
+@interface SKGameKitManager : NSObject
 
 @property (strong, nonatomic) NSString *leaderboardIdentifier;
-@property (weak, nonatomic) UIViewController<SKGameKitHelperDelegate> *delegate;
+@property (weak, nonatomic) UIViewController<SKGameKitManagerDelegate> *delegate;
 
-+ (SKGameKitHelper *)sharedManager;
++ (SKGameKitManager *)sharedManager;
 - (void)authenticateLocalPlayer;
 - (void)reportScore:(int64_t)score;
 - (void)loadLeaderboardWithIdentifier:(NSString *) leaderboardIdentifier

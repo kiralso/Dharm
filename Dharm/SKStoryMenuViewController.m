@@ -12,9 +12,9 @@
 #import "SKTutorialPageViewController.h"
 #import "SKStoryPage.h"
 #import "SKUserDataManager.h"
-#import "SKStoryHelper.h"
-#import "SKAlertHelper.h"
-#import "SKLocalNotificationHelper.h"
+#import "SKStoryManager.h"
+#import "SKAlertManager.h"
+#import "SKLocalNotificationManager.h"
 
 typedef NS_ENUM(NSInteger, SKTableSection) {
     SKTableSectionPartOne,
@@ -24,14 +24,14 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
     SKTableSectionNumberOfSections,
 };
 
-@interface SKStoryMenuViewController () <UITableViewDelegate, UITableViewDataSource, SKStoryHelperDelegate>
+@interface SKStoryMenuViewController () <UITableViewDelegate, UITableViewDataSource, SKStoryManagerDelegate>
 
 @property (strong, nonatomic) NSArray *pagesArray;
 @property (assign, nonatomic) NSInteger numberOfPagesInPartOne;
 @property (assign, nonatomic) NSInteger numberOfPagesInPartTwo;
 @property (assign, nonatomic) NSInteger numberOfPagesInPartThree;
-@property (strong, nonatomic) SKStoryHelper *storyHelper;
-@property (strong, nonatomic) SKAlertHelper *alertHelper;
+@property (strong, nonatomic) SKStoryManager *storyManager;
+@property (strong, nonatomic) SKAlertManager *alertManager;
 
 @end
 
@@ -41,15 +41,15 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
     [super viewDidLoad];
     self.menuTableView.delegate = self;
     self.menuTableView.dataSource = self;
-    self.alertHelper = [[SKAlertHelper alloc] init];
-    self.storyHelper = [[SKStoryHelper alloc] init];
-    self.storyHelper.delegate = self;
-    self.pagesArray = [self.storyHelper loadPages];
+    self.alertManager = [[SKAlertManager alloc] init];
+    self.storyManager = [[SKStoryManager alloc] init];
+    self.storyManager.delegate = self;
+    self.pagesArray = [self.storyManager loadPages];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.pagesArray = [self.storyHelper loadPages];
+    self.pagesArray = [self.storyManager loadPages];
     self.menuTableView.frame = CGRectMake(0,
                                           self.navigationController.navigationBar.frame.size.height + 20,
                                           self.view.frame.size.width / 1.5,
@@ -62,19 +62,19 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == SKTableSectionResetStory) {
         __weak SKStoryMenuViewController *weakSelf = self;
-        [self.alertHelper showResetStoryAlertOnViewController:self
+        [self.alertManager showResetStoryAlertOnViewController:self
                                                 withOkHandler:^(UIAlertAction * _Nonnull action) {
                                                     [[SKUserDataManager sharedManager] resetUser];
-                                                    weakSelf.pagesArray = [weakSelf.storyHelper loadPages];
+                                                    weakSelf.pagesArray = [weakSelf.storyManager loadPages];
                                                     [weakSelf.menuTableView reloadData];
                                                     UITableViewController *vc = (UITableViewController *)weakSelf.parentViewController;
                                                     [vc.tableView reloadData];
-                                                    SKLocalNotificationHelper *notificationHelper = [[SKLocalNotificationHelper alloc] init];
-                                                    [notificationHelper updateNotificationDatesWithCompletion:nil];
+                                                    SKLocalNotificationManager *notificationManager = [[SKLocalNotificationManager alloc] init];
+                                                    [notificationManager updateNotificationDatesWithCompletion:nil];
         }];
     } else {
         NSInteger index = [self storyIndexFromIndexPath:indexPath];
-        [self.storyHelper showStoryAtIndex:index];
+        [self.storyManager showStoryAtIndex:index];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

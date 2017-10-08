@@ -1,27 +1,27 @@
 //
-//  SKGameKitHelper.m
+//  SKGameKitManager.m
 //  Dharm
 //
 //  Created by Кирилл on 23.05.17.
 //  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
-#import "SKGameKitHelper.h"
+#import "SKGameKitManager.h"
 
-@interface SKGameKitHelper()
+@interface SKGameKitManager()
 @property (assign, nonatomic) BOOL enableGameCenter;
 @end
 
 NSString *const SKPresentAuthenticationViewControllerNotification = @"SKPresentAuthenticationViewControllerNotification";
 NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
 
-@implementation SKGameKitHelper
+@implementation SKGameKitManager
 
-+ (SKGameKitHelper *)sharedManager {
-    static SKGameKitHelper *manager;
++ (SKGameKitManager *)sharedManager {
+    static SKGameKitManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[SKGameKitHelper alloc] init];
+        manager = [[SKGameKitManager alloc] init];
     });
     return manager;
 }

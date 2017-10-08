@@ -1,5 +1,5 @@
 //
-//  SKLocalNotificationHelper.h
+//  SKLocalNotificationManager.h
 //  Dharm
 //
 //  Created by Kirill Solovyov on 03.10.17.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SKLocalNotificationHelper: NSObject
+@interface SKLocalNotificationManager: NSObject
 
 - (void)updateNotificationDatesWithCompletion:(void(^)(NSArray<NSDate *> *))handler;
 

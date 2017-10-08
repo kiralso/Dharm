@@ -1,5 +1,5 @@
 //
-//  SKBunkerTableViewController.h
+//  SKBunkerViewController.h
 //  Dharm
 //
 //  Created by Кирилл on 09.04.17.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class VMaskTextField;
 
-@interface SKBunkerTableViewController : UIViewController
+@interface SKBunkerViewController : UIViewController
 
 @property (strong, nonatomic) UILabel *timerLabel;
 @property (strong, nonatomic) UILabel *scoreLabel;

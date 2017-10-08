@@ -1,5 +1,5 @@
 //
-//  SKStoryHelper.h
+//  SKStoryManager.h
 //  Dharm
 //
 //  Created by Кирилл on 16.07.17.
@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@protocol SKStoryHelperDelegate;
+@protocol SKStoryManagerDelegate;
 @class SKStoryPage;
 
-@protocol SKStoryHelperDelegate
+@protocol SKStoryManagerDelegate
 @optional
 - (void)pagesDidLoad:(NSArray *)pages;
 @end
 
-@interface SKStoryHelper : NSObject
+@interface SKStoryManager : NSObject
 
-@property (weak, nonatomic) UIViewController<SKStoryHelperDelegate> *delegate;
+@property (weak, nonatomic) UIViewController<SKStoryManagerDelegate> *delegate;
 
 - (NSArray<SKStoryPage *> *)loadPages;
 

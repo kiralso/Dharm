@@ -1,14 +1,14 @@
 //
-//  SKAlertHelper.m
+//  SKAlertManager.m
 //  Dharm
 //
 //  Created by Kirill Solovyov on 01.10.17.
 //  Copyright © 2017 Kirill Solovyov. All rights reserved.
 //
 
-#import "SKAlertHelper.h"
+#import "SKAlertManager.h"
 
-@implementation SKAlertHelper
+@implementation SKAlertManager
 
 - (void)showCantEnterCodeAlertOnViewController:(UIViewController *_Nonnull)viewController {
     NSString *alertTitle = NSLocalizedString(@"ALERTERROR", nil);

@@ -10,11 +10,11 @@
 #import "SKTutorialPageViewController.h"
 #import "SKStoryPage.h"
 #import "SKUserDataManager.h"
-#import "SKStoryHelper.h"
+#import "SKStoryManager.h"
 #import "SKUtils.h"
 
 @interface SKTutorialViewController()
-@property (strong, nonatomic) SKStoryHelper *storyHelper;
+@property (strong, nonatomic) SKStoryManager *storyHelper;
 @end
 
 @implementation SKTutorialViewController
@@ -26,7 +26,7 @@
     } else {
         [self setupPageAtIndex:self.pageIndex];
     }
-    self.storyHelper = [[SKStoryHelper alloc] init];
+    self.storyHelper = [[SKStoryManager alloc] init];
     self.textView.textColor = [UIColor whiteColor];
 }
 
