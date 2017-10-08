@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class VMaskTextField;
 
-@interface SKBunkerTableViewController : UITableViewController
+@interface SKBunkerTableViewController : UIViewController
+
+@property (strong, nonatomic) UILabel *timerLabel;
+@property (strong, nonatomic) UILabel *scoreLabel;
+@property (strong, nonatomic) VMaskTextField *codeTextField;
+
+- (void)updateScore;
 
 - (IBAction)showMenuAction:(UIBarButtonItem *)sender;
 - (IBAction)showPopoverAction:(UIButton *)sender;

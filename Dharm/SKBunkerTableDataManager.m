@@ -8,123 +8,39 @@
 
 //Models
 #import "SKBunkerTableDataManager.h"
+#import "SKBunkerTableViewController.h"
 #import "SKUserDataManager.h"
+#import "VMaskTextField.h"
 #import "SKLocalNotificationHelper.h"
 #import "UIColor+SKColorCategory.h"
 #import "SKDateGenerator.h"
 #import "SKTimer.h"
 #import "SKUtils.h"
 
-//Views
-#import "SKScoreCell.h"
-#import "SKTimerCell.h"
-#import "SKCodeCell.h"
-#import "SKAdCell.h"
-
-typedef NS_ENUM(NSInteger, SKCell) {
-    SKCellsScore,
-    SKCellsTimer,
-    SKCellsAd,
-    SKCellsCode
-};
-
-@interface SKBunkerTableDataManager() <SKTimerDelegate, SKCodeCellDelegate>
-
-@property (strong, nonatomic) UITableView *tableView;
+@interface SKBunkerTableDataManager() <SKTimerDelegate>
 
 //Models
 @property (strong, nonatomic) SKTimer *timer;
 @property (strong, nonatomic) SKLocalNotificationHelper *localNotificationHelper;
-
-//Cells
-@property (strong, nonatomic) SKScoreCell *scoreCell;
-@property (strong, nonatomic) SKTimerCell *timerCell;
-@property (strong, nonatomic) SKCodeCell *codeCell;
-@property (strong, nonatomic) SKAdCell *adCell;
+@property (assign ,nonatomic) BOOL codeCanEntered;
 
 //Flags
 @property (assign, nonatomic) BOOL showDisaster;
 @end
 
-//Constants
-static NSString * const SKScoreCellIdentifier = @"SKScoreCell";
-static NSString * const SKTimerCellIdentifier = @"SKTimerCell";
-static NSString * const SKCodeCellIdentifier = @"SKCodeCell";
-static NSString * const SKAdCellIdentifier = @"SKAdCell";
-
-static NSInteger const SKNumberOfSections = 1;
-static NSInteger const SKNumberOfRows = 4;
-
 @implementation SKBunkerTableDataManager 
 
-- (instancetype)initWithTableView:(UITableView *)tableView {
+- (instancetype)initWithWithDelegate:(SKBunkerTableViewController<SKBunkerTableDataManagerDelegate> *)delegate {
     self = [super init];
     if (self) {
         self.localNotificationHelper = [[SKLocalNotificationHelper alloc] init];
         self.showDisaster = YES;
-        self.tableView = tableView;
-    }
-    return self;
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return SKNumberOfSections;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return SKNumberOfRows;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
-    
-    if (indexPath.row == SKCellsScore) {
-        cell = [tableView dequeueReusableCellWithIdentifier:SKScoreCellIdentifier
-                                               forIndexPath:indexPath];
-        self.scoreCell = (SKScoreCell *)cell;
-        [self.scoreCell updateCell];
-        [self updateScoreLabel];
-    }
-    else if (indexPath.row == SKCellsTimer) {
-        cell = [tableView dequeueReusableCellWithIdentifier:SKTimerCellIdentifier
-                                               forIndexPath:indexPath];
-        self.timerCell = (SKTimerCell *)cell;
-        [self.timerCell updateCell];
+        self.delegate = delegate;
         [self checkScore];
+        [self.delegate updateScore];
         [self startTimerToNextFireDate];
     }
-    else if (indexPath.row == SKCellsCode) {
-        cell = [tableView dequeueReusableCellWithIdentifier:SKCodeCellIdentifier
-                                               forIndexPath:indexPath];
-        self.codeCell = (SKCodeCell *)cell;
-        [self.codeCell updateCell];
-        self.codeCell.delegate = self;
-    }
-    else if (indexPath.row == SKCellsAd) {
-        cell = [tableView dequeueReusableCellWithIdentifier:SKAdCellIdentifier
-                                               forIndexPath:indexPath];
-    }
-    return cell;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGRect rect = tableView.bounds;
-    CGFloat screenHeight = rect.size.height;
-    CGFloat height = 0;
-    if (indexPath.row == SKCellsScore) {
-        height = screenHeight * 0.1f;
-    } else if (indexPath.row == SKCellsTimer) {
-        height = screenHeight * 0.45f;
-    } else if (indexPath.row == SKCellsCode) {
-        height = screenHeight * 0.1f;
-    } else if (indexPath.row == SKCellsAd) {
-        height = screenHeight * 0.1f;
-    }
-    return height;
+    return self;
 }
 
 #pragma mark - Timer
@@ -155,31 +71,56 @@ static NSInteger const SKNumberOfRows = 4;
 
 - (void)timerComponentsDidChange:(NSDateComponents *)components {
     if (components.minute < kMinutesBeforeFireDateToWarn) {
-        self.timerCell.timerLabel.textColor = [UIColor warningRedColor];
-        [self.delegate codeCanBeEntered:YES];
+        self.delegate.timerLabel.textColor = [UIColor warningRedColor];
+        [self codeCanBeEntered:YES];
     } else {
-        self.timerCell.timerLabel.textColor = [UIColor whiteColor];
-        [self.delegate codeCanBeEntered:NO];
+        self.delegate.timerLabel.textColor = [UIColor whiteColor];
+        [self codeCanBeEntered:NO];
     }
     __weak SKBunkerTableDataManager *weakSelf = self;
     if (components.second < 1 && components.minute < 1) {
-        [self startTimerToNextFireDate];
         [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
-            [weakSelf updateScoreLabel];
+            [weakSelf.delegate updateScore];
             [[SKUserDataManager sharedManager] updateUserWithScore:0];
+            [weakSelf startTimerToNextFireDate];
         }];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.timerCell.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
+            weakSelf.delegate.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
                                                   (int)components.minute, (int)components.second];
         });
     }
 }
 
-#pragma mark - SKCodeCellDelegate
+#pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string cell:(SKCodeCell *)cell {
-    return [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string forMananger:self];
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSCharacterSet* validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSArray* components = [string componentsSeparatedByCharactersInSet:validationSet];
+    NSString *resultString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([components count] <= 1) {
+        if (self.codeCanEntered) {
+            if ([resultString isEqualToString:kSafetyString]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [textField resignFirstResponder];
+                    textField.text = @"";
+                    NSInteger userScore = [SKUserDataManager sharedManager].user.score + 1;
+                    __weak SKBunkerTableDataManager *weakSelf = self;
+                    [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+                        [[SKUserDataManager sharedManager] updateUserWithScore:userScore];
+                        [weakSelf checkScore];
+                        [weakSelf startTimerToNextFireDate];
+                    }];
+                    [self.delegate codeDidEnteredSuccess:YES];
+                });
+            }
+            return [self.delegate.codeTextField shouldChangeCharactersInRange:range replacementString:string];
+        } else {
+            [textField resignFirstResponder];
+            [self.delegate codeDidEnteredSuccess:NO];
+        }
+    }
+    return NO;
 }
 
 #pragma mark - Score
@@ -202,7 +143,6 @@ static NSInteger const SKNumberOfRows = 4;
                 power++;
             }
         }
-        
         if ([datesAfterNow count] > 0) {
             recountDates = NO;
         }
@@ -215,22 +155,18 @@ static NSInteger const SKNumberOfRows = 4;
     }
     
     if (recountDates) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
-        __weak SKBunkerTableDataManager *weakSelf = self;
-        [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
-            [weakSelf.tableView reloadData];
-        }];
+        [self recountDates];
     }
-    [self updateScoreLabel];
+    [self.delegate updateScore];
 }
 
-- (void)updateScoreLabel {
+- (void)recountDates {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
     __weak SKBunkerTableDataManager *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSInteger score = [SKUserDataManager sharedManager].user.score;
-        self.scoreCell.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
-        [weakSelf.tableView reloadData];
-    });
+    [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
+        [weakSelf checkScore];
+        [weakSelf startTimerToNextFireDate];
+    }];
 }
 
 #pragma mark - Helpful Functions
@@ -244,6 +180,14 @@ static NSInteger const SKNumberOfRows = 4;
                                                                               toDate:closeFiredate
                                                                              options:0];
     return (NSTimeInterval)startRangeComponents.second;
+}
+
+- (void)codeCanBeEntered:(BOOL)flag {
+    if (flag) {
+        self.codeCanEntered = YES;
+    } else {
+        self.codeCanEntered = NO;
+    }
 }
 
 @end

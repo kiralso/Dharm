@@ -9,26 +9,21 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
-@class SKScoreCell;
-@class SKTimerCell;
-@class SKCodeCell;
-
 @class SKBunkerTableDataManager;
+@class SKBunkerTableViewController;
 
 @protocol SKBunkerTableDataManagerDelegate
 
-- (void)codeCanBeEntered:(BOOL)flag;
-
+- (void)codeDidEnteredSuccess:(BOOL)flag;
 - (void)codeDidnNotEnteredTimes:(NSInteger)times;
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string forMananger:(SKBunkerTableDataManager *)manager;
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string forMananger:(SKBunkerTableDataManager *)manager;
 
 @end
 
-@interface SKBunkerTableDataManager : NSObject <UITableViewDelegate, UITableViewDataSource>
+@interface SKBunkerTableDataManager : NSObject <UITextFieldDelegate>
 
-@property (weak, nonatomic) id <SKBunkerTableDataManagerDelegate> delegate;
+@property (weak, nonatomic) SKBunkerTableViewController<SKBunkerTableDataManagerDelegate> *delegate;
 
-- (instancetype)initWithTableView:(UITableView *)tableView;
+- (instancetype)initWithWithDelegate:(SKBunkerTableViewController<SKBunkerTableDataManagerDelegate> *)delegate;
 
 @end

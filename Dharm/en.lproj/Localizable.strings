@@ -21,6 +21,9 @@
 "OK" = "Ok";
 "CANCEL" = "Cancel";
 
+"BUNKER" = "Bunker";
+"ENTERTHECODEHERE" = "enter the code here";
+
 "RESETTITLE" = "Reset story?";
 "RESETMESSAGE" = "Are you really want to reset story and score?";
 

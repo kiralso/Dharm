@@ -47,9 +47,13 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
     self.pagesArray = [self.storyHelper loadPages];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.pagesArray = [self.storyHelper loadPages];
+    self.menuTableView.frame = CGRectMake(0,
+                                          self.navigationController.navigationBar.frame.size.height + 20,
+                                          self.view.frame.size.width / 1.5,
+                                          self.view.frame.size.height - self.tabBarController.tabBar.frame.size.height);
     [self.menuTableView reloadData];
 }
 

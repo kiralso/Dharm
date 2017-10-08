@@ -21,45 +21,33 @@ static NSInteger const kHoursBetweenPickers = 3;
 @implementation SKSettingsViewController
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     self.difficultySwitch.on = [defaults boolForKey:kDifficultySwitchKey];
-    
     if ([defaults objectForKey:kDateFromPickerKey] && [defaults objectForKey:kDateToPickerKey]) {
         self.dateFromPicker.date = [defaults objectForKey:kDateFromPickerKey];
         self.dateToPicker.date = [defaults objectForKey:kDateToPickerKey];
     }
-    
     [defaults synchronize];
-    
     [self checkDifficultyInFromPicker:self.dateFromPicker
                              toPicker:self.dateToPicker
                            withSwitch:self.difficultySwitch
                             infoLabel:self.info];
-    
     self.difficultySwitch.animationDuration = 2.0;
-    
     self.difficultySwitch.animationElementsOff = @[
                                               @{ AMElementView: self.view.layer,
                                                  AMElementKeyPath: @"backgroundColor",
                                                  AMElementFromValue:(id)[UIColor clearColor].CGColor,
                                                  AMElementToValue:(id)self.view.backgroundColor.CGColor}
                                               ];
-    
     self.difficultySwitch.animationElementsOn = @[
                                             @{ AMElementView: self.view.layer,
                                             AMElementKeyPath: @"backgroundColor",
                                           AMElementFromValue:(id)self.view.backgroundColor.CGColor,
                                             AMElementToValue:(id)[UIColor clearColor].CGColor}
                                                    ];
-    
     UIImage *image = [UIImage imageNamed:backgroundPath()];
-    
     self.backgroundView.image = image;
-    
     [self.dateToPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
     [self.dateFromPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
 }

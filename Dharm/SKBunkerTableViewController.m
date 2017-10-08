@@ -11,34 +11,34 @@
 #import "SKStoryMenuViewController.h"
 
 //Models
-#import "SKCodeCell.h"
-#import "SKTimerCell.h"
-#import "SKAdCell.h"
-#import "SKScoreCell.h"
-
 #import "SKUtils.h"
 #import "NGSPopoverView.h"
 #import "SKUserDataManager.h"
 #import "SKBunkerTableDataManager.h"
 #import "SKStoryHelper.h"
 #import "SKAlertHelper.h"
+#import "VMaskTextField.h"
 #import "SKGameKitHelper.h"
-#import "SKLocalNotificationHelper.h"
 #import "UITableViewController+SKTableViewCategory.h"
+#import "UIColor+SKColorCategory.h"
+
+static CGFloat const SKScoreTextLableHeight = 25.0;
+static CGFloat const SKScoreTextLableWidth = 120.0;
+static CGFloat const SKTimerTextLableHeight = 110.0;
+static CGFloat const SKTimerTextLableWidth = 300.0;
+static CGFloat const SKCodeTextFieldHeight = 35.0;
+static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 @interface SKBunkerTableViewController () <SKStoryHelperDelegate, SKBunkerTableDataManagerDelegate, SKGameKitHelperDelegate>
 
 @property (strong, nonatomic) SKStoryMenuViewController *storyVC;
-@property (assign, nonatomic) BOOL isMenuHidden;
-@property (strong, nonatomic) UISwipeGestureRecognizer *rightSwipe;
-@property (strong, nonatomic) UISwipeGestureRecognizer *leftSwipe;
 @property (strong, nonatomic) SKBunkerTableDataManager *tableManager;
 @property (strong, nonatomic) SKStoryHelper *storyHelper;
 @property (strong, nonatomic) SKAlertHelper *alertHelper;
 @property (strong, nonatomic) SKGameKitHelper *gameCenterHelper;
-@property (strong, nonatomic) SKLocalNotificationHelper *localNotificationHelper;
-
+@property (strong, nonatomic) UIImageView *backgroundView;
 @property (assign, nonatomic) BOOL codeCanEntered;
+@property (assign, nonatomic) BOOL isMenuHidden;
 
 @end
 
@@ -46,45 +46,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadTableView:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    [self setupTableView];
+    [self viewControllerInit];
+    [self notificationsInit];
     [self flagsInit];
     [self gesturesInit];
     [self managersInit];
-    [self childControllersInit];
-    [self setBackgroundImageViewWithImageName:backgroundPath()];
+    [self initializeScoreLabel];
+    [self initializeTimerLabel];
+    [self initializeCodeField];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setupBackground];
+    [self updateTimerLabelFrame];
+    [self updateCodeFieldFrame];
+    [self updateScoreLabelFrame];
     [self.storyHelper showTutorial];
     [self.gameCenterHelper authenticateLocalPlayer];
-    [super viewDidAppear:animated];
-    [self.tableView reloadData];
+    [self childControllersInit];
 }
 
 #pragma mark - Initialization
 
-- (void)setupTableView {
-    self.tableView.allowsSelection = NO;
-    
-    NSString *codeCellClassName = NSStringFromClass([SKCodeCell class]);
-    UINib *codeNib = [UINib nibWithNibName:codeCellClassName bundle:nil];
-    [self.tableView registerNib:codeNib forCellReuseIdentifier:codeCellClassName];
-    
-    NSString *timerCellClassName = NSStringFromClass([SKTimerCell class]);
-    UINib *timerNib = [UINib nibWithNibName:timerCellClassName bundle:nil];
-    [self.tableView registerNib:timerNib forCellReuseIdentifier:timerCellClassName];
-    
-    NSString *adCellClassName = NSStringFromClass([SKAdCell class]);
-    UINib *adNib = [UINib nibWithNibName:adCellClassName bundle:nil];
-    [self.tableView registerNib:adNib forCellReuseIdentifier:adCellClassName];
-    
-    NSString *scoreCellClassName = NSStringFromClass([SKScoreCell class]);
-    UINib *scoreNib = [UINib nibWithNibName:scoreCellClassName bundle:nil];
-    [self.tableView registerNib:scoreNib forCellReuseIdentifier:scoreCellClassName];
+- (void)viewControllerInit {
+    self.backgroundView = [[UIImageView alloc] init];
+    self.navigationController.navigationBar.topItem.title = [NSString stringWithFormat:NSLocalizedString(@"BUNKER", nil)];
+}
+
+- (void)notificationsInit {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
 }
 
 - (void)flagsInit {
@@ -92,47 +90,119 @@
 }
 
 - (void)gesturesInit {
-    self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    self.rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    self.leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:self.rightSwipe];
-    [self.view addGestureRecognizer:self.leftSwipe];
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    downSwipe.direction = UISwipeGestureRecognizerDirectionDown;
+    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:rightSwipe];
+    [self.view addGestureRecognizer:leftSwipe];
+    [self.view addGestureRecognizer:downSwipe];
 }
 
 - (void)managersInit {
-    self.tableManager = [[SKBunkerTableDataManager alloc] initWithTableView:self.tableView];
     self.storyHelper = [[SKStoryHelper alloc] init];
     self.alertHelper = [[SKAlertHelper alloc] init];
+    self.tableManager = [[SKBunkerTableDataManager alloc] initWithWithDelegate:self];
     self.gameCenterHelper = [SKGameKitHelper sharedManager];
-    self.localNotificationHelper = [[SKLocalNotificationHelper alloc] init];
     self.storyHelper.delegate = self;
     self.tableManager.delegate = self;
     self.gameCenterHelper.delegate = self;
-    self.tableView.delegate = self.tableManager;
-    self.tableView.dataSource = self.tableManager;
 }
 
 - (void)childControllersInit {
+    self.storyVC = [[SKStoryMenuViewController alloc] init];
     self.storyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SKStoryMenuViewController"];
     [self addChildViewController:self.storyVC];
+}
+
+#pragma mark - Score label
+
+- (void)initializeScoreLabel {
+    self.scoreLabel = [[UILabel alloc] init];
+    self.scoreLabel.font = [UIFont fontWithName:@"Avenir Next" size:17.0];
+    self.scoreLabel.textColor = [UIColor whiteColor];
+    self.scoreLabel.textAlignment = NSTextAlignmentCenter;
+}
+
+- (void)updateScoreLabelFrame {
+    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat codeTextFieldX = (CGRectGetWidth(self.view.frame) - SKScoreTextLableWidth);
+    CGFloat codeTextFieldY = (navigationBarHeight + SKScoreTextLableHeight + 10);
+    self.scoreLabel.frame = CGRectMake(codeTextFieldX, codeTextFieldY, SKScoreTextLableWidth, SKScoreTextLableHeight);
+    [self.view addSubview:self.scoreLabel];
+}
+
+- (void)updateScore {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSInteger score = [SKUserDataManager sharedManager].user.score;
+        self.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
+    });
+}
+
+#pragma mark - Timer label
+
+- (void)initializeTimerLabel {
+    self.timerLabel = [[UILabel alloc] init];
+    self.timerLabel.font = [UIFont fontWithName:@"Avenir Next" size:80.0];
+    self.timerLabel.textColor = [UIColor whiteColor];
+    self.timerLabel.textAlignment = NSTextAlignmentCenter;
+    self.timerLabel.text = @"108:00";
+}
+
+- (void)updateTimerLabelFrame {
+    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat timerTextFieldX = (CGRectGetWidth(self.view.frame) - SKTimerTextLableWidth) / 2;
+    CGFloat timerTextFieldY = SKScoreTextLableHeight + navigationBarHeight + 30;
+    self.timerLabel.frame = CGRectMake(timerTextFieldX, timerTextFieldY, SKTimerTextLableWidth, SKTimerTextLableHeight);
+    [self.view addSubview:self.timerLabel];
+}
+
+#pragma mark - Code textfield
+
+- (void)initializeCodeField {
+    self.codeTextField = [[VMaskTextField alloc] init];
+    self.codeTextField.placeholder = [NSString stringWithFormat:NSLocalizedString(@"ENTERTHECODEHERE", nil)];
+    self.codeTextField.font = [UIFont fontWithName:@"Avenir Next" size:25.0];
+    self.codeTextField.mask = @"# # ## ## ## ##"; // 4 8 15 16 23 42
+    self.codeTextField.delegate = self.tableManager;
+    self.codeTextField.adjustsFontSizeToFitWidth = YES;
+    self.codeTextField.minimumFontSize = 13.0;
+    self.codeTextField.textAlignment = NSTextAlignmentCenter;
+    self.codeTextField.textColor = [UIColor whiteColor];
+    self.codeTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.codeTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    [self.codeTextField setValue:[UIColor textFieldPlaceholderColor]
+                      forKeyPath:@"_placeholderLabel.textColor"];
+}
+
+- (void)updateCodeFieldFrame {
+    CGFloat codeTextFieldX = (CGRectGetWidth(self.view.frame) - SKCodeTextFieldWidth) / 2;
+    CGFloat codeTextFieldY = (CGRectGetHeight(self.view.frame) - SKCodeTextFieldHeight) / 1.15;
+    self.codeTextField.frame = CGRectMake(codeTextFieldX, codeTextFieldY, SKCodeTextFieldWidth, SKCodeTextFieldHeight);
+    [self.view addSubview:self.codeTextField];
+}
+
+#pragma mark - Background
+
+- (void)setupBackground {
+    self.backgroundView.frame = self.view.frame;
+    self.backgroundView.image = [UIImage imageNamed:backgroundPath()];
+    [self.view addSubview:self.backgroundView];
 }
 
 #pragma mark - SKBunkerTableDataManagerDelegate
 
 - (void)codeDidEnteredSuccess:(BOOL)flag {
     if (flag) {
-        NSInteger userScore = [SKUserDataManager sharedManager].user.score + 1;
+        NSInteger userScore = [SKUserDataManager sharedManager].user.score;
         NSInteger maxScore = [SKUserDataManager sharedManager].user.maxScore;
         if (userScore > maxScore || maxScore == 0) {
             [self.storyHelper updatePagesIndexesWithNextIndex];
             [self.storyHelper showLastStory];
         }
-        __weak SKBunkerTableViewController *weakSelf = self;
-        [self.localNotificationHelper updateNotificationDatesWithCompletion:^(NSArray *dates) {
-            [weakSelf.tableView reloadData];
-            [[SKUserDataManager sharedManager] updateUserWithScore:userScore];
-        }];
+        [self updateScore];
         [self.gameCenterHelper reportScore:(int64_t)userScore];
     } else {
         [self.alertHelper showCantEnterCodeAlertOnViewController:self];
@@ -143,40 +213,12 @@
     [self.storyHelper showDisasterWithPower:times];
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string forMananger:(SKBunkerTableDataManager *)manager {
-    NSCharacterSet* validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    NSArray* components = [string componentsSeparatedByCharactersInSet:validationSet];
-    NSString *resultString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if ([components count] <= 1) {
-        if (self.codeCanEntered) {
-            if ([resultString isEqualToString:kSafetyString]) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [textField resignFirstResponder];
-                    textField.text = @"";
-                    [self codeDidEnteredSuccess:YES];
-                });
-            }
-            return YES;
-        } else {
-            [textField resignFirstResponder];
-            [self codeDidEnteredSuccess:NO];
-        }
-    }
-    return NO;
-}
-
 #pragma mark - SKGameKitHelperDelegate
 
 - (void)showAuthenticationController:(UIViewController *)authenticationController {
         [self presentViewController:authenticationController
                            animated:YES
                          completion:nil];
-}
-
-#pragma mark - Notifications
-
-- (void) reloadTableView:(NSNotification *)notification {
-    [self.tableView reloadData];
 }
 
 #pragma mark - Actions
@@ -227,23 +269,32 @@
     }];
 }
 
+#pragma mark - Keyboard
+
+- (void)keyboardHide:(NSNotification *)notification {
+    [UIView animateWithDuration:0.3 animations:^{
+        [self updateCodeFieldFrame];
+    }];
+}
+
+- (void)keyboardShow:(NSNotification *)notification {
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect codeFieldFrame = self.codeTextField.frame;
+        codeFieldFrame.origin.y -= keyboardSize.height;
+        self.codeTextField.frame = codeFieldFrame;
+    }];
+}
+
 #pragma mark - Gestures
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
         [self showMenu];
-    } else if (sender.direction == UISwipeGestureRecognizerDirectionLeft){
+    } else if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
         [self hideMenu];
-    }
-}
-
-#pragma mark - Setters & getters
-
-- (void) codeCanBeEntered:(BOOL)flag {
-    if (flag) {
-        self.codeCanEntered = YES;
-    } else {
-        self.codeCanEntered = NO;
+    } else if (sender.direction == UISwipeGestureRecognizerDirectionDown){
+        [self.codeTextField resignFirstResponder];
     }
 }
 
