@@ -15,8 +15,6 @@
 @property (strong, nonatomic) UILabel *scoreLabel;
 @property (strong, nonatomic) VMaskTextField *codeTextField;
 
-- (void)updateScore;
-
 - (IBAction)showMenuAction:(UIBarButtonItem *)sender;
 - (IBAction)showPopoverAction:(UIButton *)sender;
 

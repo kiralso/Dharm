@@ -61,15 +61,15 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
     if (indexPath.section == SKTableSectionResetStory) {
         __weak SKStoryMenuViewController *weakSelf = self;
         [self.alertManager showResetStoryAlertOnViewController:self
-                                                withOkHandler:^(UIAlertAction * _Nonnull action) {
-                                                    [[SKUserDataManager sharedManager] resetUser];
-                                                    weakSelf.pagesArray = [weakSelf.storyManager loadPages];
-                                                    [weakSelf.menuTableView reloadData];
-                                                    UITableViewController *vc = (UITableViewController *)weakSelf.parentViewController;
-                                                    [vc.tableView reloadData];
-                                                    SKLocalNotificationManager *notificationManager = [[SKLocalNotificationManager alloc] init];
-                                                    [notificationManager updateNotificationDatesWithCompletion:nil];
-        }];
+                                                 withOkHandler:^(UIAlertAction * _Nonnull action) {
+                                                     [[SKUserDataManager sharedManager] resetUser];
+                                                     weakSelf.pagesArray = [weakSelf.storyManager loadPages];
+                                                     [weakSelf.menuTableView reloadData];
+                                                     UITableViewController *vc = (UITableViewController *)weakSelf.parentViewController;
+                                                     [vc.tableView reloadData];
+                                                     SKLocalNotificationManager *notificationManager = [[SKLocalNotificationManager alloc] init];
+                                                     [notificationManager updateNotificationDatesWithCompletion:nil];
+                                                 }];
     } else {
         NSInteger index = [self storyIndexFromIndexPath:indexPath];
         [self.storyManager showStoryAtIndex:index];

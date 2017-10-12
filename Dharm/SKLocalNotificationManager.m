@@ -7,6 +7,7 @@
 //
 
 #import "SKLocalNotificationManager.h"
+#import "SKSettingsManager.h"
 #import "SKUserDataManager.h"
 #import "SKUtils.h"
 #import "SKDateGenerator.h"
@@ -19,7 +20,9 @@ typedef NS_ENUM(NSUInteger, SKLocalNotification) {
 };
 
 @interface SKLocalNotificationManager()
+
 @property (strong, nonatomic) SKDateGenerator *dateGenerator;
+
 @end
 
 @implementation SKLocalNotificationManager
@@ -33,14 +36,14 @@ typedef NS_ENUM(NSUInteger, SKLocalNotification) {
 }
 
 - (void)updateNotificationDatesWithCompletion:(void(^)(NSArray<NSDate *> *))handler {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *datesArray = nil;
-    BOOL isHardcore = [defaults boolForKey:kDifficultySwitchKey];
+    SKSettingsManager *settingsManager = [SKSettingsManager sharedManager];
+    NSArray *datesArray;
+    BOOL isHardcore = [settingsManager difficulty];
     if (isHardcore) {
         datesArray = [self.dateGenerator fireDatesSinceNow];
     } else {
-        NSDate *startDate = [defaults valueForKey:kDateFromPickerKey];
-        NSDate *endDate = [defaults valueForKey:kDateToPickerKey];
+        NSDate *startDate = [settingsManager fromDate];
+        NSDate *endDate = [settingsManager toDate];
         datesArray = [self.dateGenerator datesArrayBetweenStartDate:startDate
                                                          andEndDate:endDate];
     }

@@ -7,12 +7,15 @@
 //
 
 #import "SKSettingsViewController.h"
+#import "SKSettingsManager.h"
 #import "SKUtils.h"
 #import "AMViralSwitch.h"
 #import "UIViewController+SKViewControllerCategory.h"
 #import "SKLocalNotificationManager.h"
 
 @interface SKSettingsViewController ()
+
+@property (strong, nonatomic) SKSettingsManager *settingManager;
 
 @end
 
@@ -22,127 +25,90 @@ static NSInteger const kHoursBetweenPickers = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.difficultySwitch.on = [defaults boolForKey:kDifficultySwitchKey];
-    if ([defaults objectForKey:kDateFromPickerKey] && [defaults objectForKey:kDateToPickerKey]) {
-        self.dateFromPicker.date = [defaults objectForKey:kDateFromPickerKey];
-        self.dateToPicker.date = [defaults objectForKey:kDateToPickerKey];
-    }
-    [defaults synchronize];
-    [self checkDifficultyInFromPicker:self.dateFromPicker
-                             toPicker:self.dateToPicker
-                           withSwitch:self.difficultySwitch
-                            infoLabel:self.info];
-    self.difficultySwitch.animationDuration = 2.0;
-    self.difficultySwitch.animationElementsOff = @[
-                                              @{ AMElementView: self.view.layer,
-                                                 AMElementKeyPath: @"backgroundColor",
-                                                 AMElementFromValue:(id)[UIColor clearColor].CGColor,
-                                                 AMElementToValue:(id)self.view.backgroundColor.CGColor}
-                                              ];
-    self.difficultySwitch.animationElementsOn = @[
-                                            @{ AMElementView: self.view.layer,
-                                            AMElementKeyPath: @"backgroundColor",
-                                          AMElementFromValue:(id)self.view.backgroundColor.CGColor,
-                                            AMElementToValue:(id)[UIColor clearColor].CGColor}
-                                                   ];
+    self.settingManager = [SKSettingsManager sharedManager];
+    [self switchInit];
+    [self pickersInit];
     UIImage *image = [UIImage imageNamed:backgroundPath()];
     self.backgroundView.image = image;
-    [self.dateToPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
-    [self.dateFromPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)switchInit {
+    self.difficultySwitch.on = [self.settingManager difficulty];
+    self.difficultySwitch.animationDuration = 2.0;
+    self.difficultySwitch.animationElementsOff = @[
+                                                   @{ AMElementView: self.view.layer,
+                                                      AMElementKeyPath: @"backgroundColor",
+                                                      AMElementFromValue:(id)[UIColor clearColor].CGColor,
+                                                      AMElementToValue:(id)self.view.backgroundColor.CGColor}
+                                                   ];
+    self.difficultySwitch.animationElementsOn = @[
+                                                  @{ AMElementView: self.view.layer,
+                                                     AMElementKeyPath: @"backgroundColor",
+                                                     AMElementFromValue:(id)self.view.backgroundColor.CGColor,
+                                                     AMElementToValue:(id)[UIColor clearColor].CGColor}
+                                                  ];
+    [self showLabelsWithSwitch:self.difficultySwitch];
+}
+
+- (void)pickersInit {
+    NSDate *toDate = [self.settingManager toDate];
+    NSDate *fromDate = [self.settingManager fromDate];
+    if (toDate && fromDate) {
+        self.dateFromPicker.date = fromDate;
+        self.dateToPicker.date = toDate;
+    }
+    [self.dateToPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
+    [self.dateFromPicker setValue:[UIColor whiteColor] forKey:@"textColor"];
 }
 
 #pragma mark - Actions
 
 - (IBAction)difficultySwitchAction:(AMViralSwitch *)sender {
-    
-    [self checkDifficultyInFromPicker:self.dateFromPicker
-                             toPicker:self.dateToPicker
-                           withSwitch:self.difficultySwitch
-                            infoLabel:self.info];
-    
-    [self saveSettings];
-    
+    [self showLabelsWithSwitch:sender];
     [self checkToPicker];
+    [self.settingManager saveDifficulty:sender.on];
 }
 
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender {
-    
-    [self saveSettings];
     [self checkToPicker];
+    [self.settingManager saveFromDate:sender.date];
 }
 
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender {
-    
-    [self saveSettings];
     [self checkToPicker];
+    [self.settingManager saveToDate:sender.date];
 }
 
 #pragma mark - Useful Methods
 
-- (void) checkDifficultyInFromPicker:(UIDatePicker *) fromPicker toPicker:(UIDatePicker *) toPicker withSwitch:(UISwitch *) dSwitch infoLabel:(UILabel *) label {
-    
-    if (dSwitch.on) {
-        fromPicker.hidden = YES;
-        toPicker.hidden = YES;
-        
-        for (UILabel *label in self.softcoreInfoCollectionOfLabels) {
-            label.hidden = YES;
-        }
-        
-        label.hidden = NO;
-    } else {
-        toPicker.hidden = NO;
-        fromPicker.hidden = NO;
-        
-        for (UILabel *label in self.softcoreInfoCollectionOfLabels) {
-            label.hidden = NO;
-        }
-        
-        label.hidden = YES;
+- (void)showLabelsWithSwitch:(UISwitch *)difficultySwitch {
+    BOOL isHardcore = difficultySwitch.on;
+    self.dateFromPicker.hidden = isHardcore;
+    self.dateToPicker.hidden = isHardcore;
+    for (UILabel *label in self.softcoreInfoCollectionOfLabels) {
+        label.hidden = isHardcore;
     }
-}
-
-- (NSDate *)checkTimeInFromPicker:(UIDatePicker *)fromPicker andToPicker:(UIDatePicker *)toPicker withHoursBetween:(NSInteger)hours {
-    
-    NSDateComponents *fromComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
-                                                          fromDate:fromPicker.date];
-    NSDateComponents *toComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
-                                                                    fromDate:toPicker.date];
-    
-    NSInteger hoursBetween = toComponents.hour - fromComponents.hour;
-    if (ABS(hoursBetween) < hours || hoursBetween == 0) {
-        return [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour
-                                                               value:hours
-                                                              toDate:fromPicker.date
-                                                             options:0];
-    }
-
-    return toPicker.date;
+    self.info.hidden = !isHardcore;
 }
 
 - (void)checkToPicker {
-    
-    NSDate * date = [self checkTimeInFromPicker:self.dateFromPicker
-                                    andToPicker:self.dateToPicker
-                               withHoursBetween:kHoursBetweenPickers];
-
+    NSDate * date = [self checkTimeBetweenPickersWithHours:kHoursBetweenPickers];
     [self.dateToPicker setDate:date animated:YES];
 }
 
-- (void)saveSettings {
-    [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:kDateFromPickerKey];
-    [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
-    [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];
-    
-    SKLocalNotificationManager *notificationHelper = [[SKLocalNotificationManager alloc] init];
-    [notificationHelper updateNotificationDatesWithCompletion:nil];
+- (NSDate *)checkTimeBetweenPickersWithHours:(NSInteger)hours {
+    NSDateComponents *fromComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
+                                                                       fromDate:self.dateFromPicker.date];
+    NSDateComponents *toComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
+                                                                     fromDate:self.dateToPicker.date];
+    NSInteger hoursBetween = toComponents.hour - fromComponents.hour;
+    if (ABS(hoursBetween) < hours || hoursBetween == 0) {
+        return [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour
+                                                        value:hours
+                                                       toDate:self.dateFromPicker.date
+                                                      options:0];
+    }
+    return self.dateToPicker.date;
 }
 
 @end

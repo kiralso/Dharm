@@ -20,8 +20,8 @@ static NSString *const kUserKey = @"SKUser";
 
 @implementation SKUserDataManager
 
-+ (SKUserDataManager *)sharedManager {
-    static SKUserDataManager *manager = nil;
++ (instancetype)sharedManager {
+    static SKUserDataManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[SKUserDataManager alloc] init];

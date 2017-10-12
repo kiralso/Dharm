@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4104E3A51F8FE62200945ACA /* SKSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4104E3A41F8FE62200945ACA /* SKSettingsManager.m */; };
 		411FE4101F81177300566A95 /* SKAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 411FE40F1F81177300566A95 /* SKAlertManager.m */; };
 		411FE4131F81AAFD00566A95 /* UIColor+SKColorCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 411FE4121F81AAFD00566A95 /* UIColor+SKColorCategory.m */; };
 		413379651F87AC190069FC21 /* SKLeaderboardTableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 413379641F87AC190069FC21 /* SKLeaderboardTableManager.m */; };
@@ -49,6 +50,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4104E3A31F8FE62200945ACA /* SKSettingsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKSettingsManager.h; sourceTree = "<group>"; };
+		4104E3A41F8FE62200945ACA /* SKSettingsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKSettingsManager.m; sourceTree = "<group>"; };
+		4104E3A71F90085A00945ACA /* Objective-C.gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Objective-C.gitignore"; sourceTree = "<group>"; };
 		411FE40E1F81177300566A95 /* SKAlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAlertManager.h; sourceTree = "<group>"; };
 		411FE40F1F81177300566A95 /* SKAlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAlertManager.m; sourceTree = "<group>"; };
 		411FE4111F81AAFD00566A95 /* UIColor+SKColorCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+SKColorCategory.h"; sourceTree = "<group>"; };
@@ -141,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4104E3A61F8FEF2500945ACA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4104E3A31F8FE62200945ACA /* SKSettingsManager.h */,
+				4104E3A41F8FE62200945ACA /* SKSettingsManager.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		411FE4081F81118800566A95 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +297,7 @@
 		556DBAEB1E8FB1510038D214 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4104E3A71F90085A00945ACA /* Objective-C.gitignore */,
 				556DBAEE1E8FB1510038D214 /* AppDelegate.h */,
 				556DBAEF1E8FB1510038D214 /* AppDelegate.m */,
 				5513199F1EC09D860072B442 /* SKUtils.h */,
@@ -308,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				411FE40B1F81133100566A95 /* Controller */,
+				4104E3A61F8FEF2500945ACA /* Model */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -517,6 +532,7 @@
 				411FE4101F81177300566A95 /* SKAlertManager.m in Sources */,
 				55E8BE0D1F0EAA76007306C8 /* SKStoryMenuTableViewCell.m in Sources */,
 				556DBAED1E8FB1510038D214 /* main.m in Sources */,
+				4104E3A51F8FE62200945ACA /* SKSettingsManager.m in Sources */,
 				5595A4911F02F675007126E9 /* SKTutorialPageViewController.m in Sources */,
 				55EC38271E91181F00D3E399 /* SKTimer.m in Sources */,
 				55F91BED1F1A39AB0044DF34 /* SKUser.m in Sources */,

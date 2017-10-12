@@ -12,6 +12,7 @@
 #import "SKUserDataManager.h"
 #import "VMaskTextField.h"
 #import "SKLocalNotificationManager.h"
+#import "SKSettingsManager.h"
 #import "UIColor+SKColorCategory.h"
 #import "SKDateGenerator.h"
 #import "SKTimer.h"
@@ -19,13 +20,16 @@
 
 @interface SKBunkerDataManager() <SKTimerDelegate>
 
+@property (weak,nonatomic) SKBunkerViewController<SKBunkerDataManagerDelegate> *delegate;
+
 //Models
 @property (strong, nonatomic) SKTimer *timer;
 @property (strong, nonatomic) SKLocalNotificationManager *localNotificationManager;
-@property (assign ,nonatomic) BOOL codeCanEntered;
 
 //Flags
 @property (assign, nonatomic) BOOL showDisaster;
+@property (assign, nonatomic) BOOL codeCanEntered;
+
 @end
 
 @implementation SKBunkerDataManager
@@ -37,7 +41,8 @@
         self.showDisaster = YES;
         self.delegate = delegate;
         [self checkScore];
-        [self.delegate updateScore];
+        NSInteger score = [SKUserDataManager sharedManager].user.score;
+        [self.delegate updateScoreLabelWithScore:score];
         [self startTimerToNextFireDate];
     }
     return self;
@@ -57,12 +62,13 @@
 }
 
 - (void)startTimerToNextFireDate {
+    __weak SKBunkerDataManager *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSTimeInterval start = [self timeIntervalBeforeNextFireDate];
+        NSTimeInterval start = [weakSelf timeIntervalBeforeNextFireDate];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self startTimerInStart:start
-                                end:0.f
-                        andInterval:0.1];
+            [weakSelf startTimerInStart:start
+                                    end:0.f
+                            andInterval:0.1];
         });
     });
 }
@@ -77,18 +83,10 @@
         self.delegate.timerLabel.textColor = [UIColor whiteColor];
         [self codeCanBeEntered:NO];
     }
-    __weak SKBunkerDataManager *weakSelf = self;
     if (components.second < 1 && components.minute < 1) {
-        [self.localNotificationManager updateNotificationDatesWithCompletion:^(NSArray *dates) {
-            [weakSelf.delegate updateScore];
-            [[SKUserDataManager sharedManager] updateUserWithScore:0];
-            [weakSelf startTimerToNextFireDate];
-        }];
+        [self resetTimerAndScoreWithScore:0];
     } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.delegate.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
-                                                  (int)components.minute, (int)components.second];
-        });
+        [self.delegate updateTimerLabelWithComponents:components];
     }
 }
 
@@ -101,17 +99,13 @@
     if ([components count] <= 1) {
         if (self.codeCanEntered) {
             if ([resultString isEqualToString:kSafetyString]) {
+                __weak SKBunkerDataManager *weakSelf = self;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [textField resignFirstResponder];
                     textField.text = @"";
                     NSInteger userScore = [SKUserDataManager sharedManager].user.score + 1;
-                    __weak SKBunkerDataManager *weakSelf = self;
-                    [self.localNotificationManager updateNotificationDatesWithCompletion:^(NSArray *dates) {
-                        [[SKUserDataManager sharedManager] updateUserWithScore:userScore];
-                        [weakSelf checkScore];
-                        [weakSelf startTimerToNextFireDate];
-                    }];
-                    [self.delegate codeDidEnteredSuccess:YES];
+                    [weakSelf resetTimerAndScoreWithScore:userScore];
+                    [weakSelf.delegate codeDidEnteredSuccess:YES];
                 });
             }
             return [self.delegate.codeTextField shouldChangeCharactersInRange:range replacementString:string];
@@ -147,24 +141,33 @@
             recountDates = NO;
         }
     }
-    
     if (resetScore && self.showDisaster) {
         self.showDisaster = NO;
         [[SKUserDataManager sharedManager] updateUserWithScore:0];
         [self.delegate codeDidnNotEnteredTimes:power];
     }
-    
     if (recountDates) {
         [self recountDates];
     }
-    [self.delegate updateScore];
+    NSInteger score = [SKUserDataManager sharedManager].user.score;
+    [self.delegate updateScoreLabelWithScore:score];
 }
 
 - (void)recountDates {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDifficultySwitchKey];
+    SKSettingsManager *settingsManager = [SKSettingsManager sharedManager];
+    [settingsManager saveDifficulty:YES];
     __weak SKBunkerDataManager *weakSelf = self;
     [self.localNotificationManager updateNotificationDatesWithCompletion:^(NSArray *dates) {
         [weakSelf checkScore];
+        [weakSelf startTimerToNextFireDate];
+    }];
+}
+
+- (void)resetTimerAndScoreWithScore:(NSInteger)score {
+    __weak SKBunkerDataManager *weakSelf = self;
+    [self.localNotificationManager updateNotificationDatesWithCompletion:^(NSArray *dates) {
+        [weakSelf.delegate updateScoreLabelWithScore:score];
+        [[SKUserDataManager sharedManager] updateUserWithScore:score];
         [weakSelf startTimerToNextFireDate];
     }];
 }

@@ -17,6 +17,7 @@
 #import "SKBunkerDataManager.h"
 #import "SKStoryManager.h"
 #import "SKAlertManager.h"
+#import "SKSettingsManager.h"
 #import "VMaskTextField.h"
 #import "SKGameKitManager.h"
 #import "UITableViewController+SKTableViewCategory.h"
@@ -29,15 +30,15 @@ static CGFloat const SKTimerTextLableWidth = 300.0;
 static CGFloat const SKCodeTextFieldHeight = 35.0;
 static CGFloat const SKCodeTextFieldWidth = 347.0;
 
-@interface SKBunkerViewController () <SKStoryManagerDelegate, SKBunkerDataManagerDelegate, SKGameKitManagerDelegate>
+@interface SKBunkerViewController () <SKStoryManagerDelegate, SKBunkerDataManagerDelegate, SKGameKitManagerDelegate, SKSettingsManagerDelegate>
 
 @property (strong, nonatomic) SKStoryMenuViewController *storyVC;
-@property (strong, nonatomic) SKBunkerDataManager *tableManager;
-@property (strong, nonatomic) SKStoryManager *storyHelper;
-@property (strong, nonatomic) SKAlertManager *alertHelper;
+@property (strong, nonatomic) SKBunkerDataManager *dataManager;
+@property (strong, nonatomic) SKStoryManager *storyManager;
+@property (strong, nonatomic) SKAlertManager *alertManager;
 @property (strong, nonatomic) SKGameKitManager *gameCenterManager;
+@property (strong, nonatomic) SKSettingsManager *settingsManager;
 @property (strong, nonatomic) UIImageView *backgroundView;
-@property (assign, nonatomic) BOOL codeCanEntered;
 @property (assign, nonatomic) BOOL isMenuHidden;
 
 @end
@@ -65,7 +66,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     [self updateScoreLabelFrame];
     [self childControllersInit];
     if (isFirstTime()) {
-        [self.storyHelper showTutorial];
+        [self.storyManager showTutorial];
     } else {
         [self.gameCenterManager authenticateLocalPlayer];
     }
@@ -106,13 +107,14 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 }
 
 - (void)managersInit {
-    self.storyHelper = [[SKStoryManager alloc] init];
-    self.alertHelper = [[SKAlertManager alloc] init];
-    self.tableManager = [[SKBunkerDataManager alloc] initWithWithDelegate:self];
+    self.storyManager = [[SKStoryManager alloc] init];
+    self.alertManager = [[SKAlertManager alloc] init];
+    self.dataManager = [[SKBunkerDataManager alloc] initWithWithDelegate: self];
     self.gameCenterManager = [SKGameKitManager sharedManager];
-    self.storyHelper.delegate = self;
-    self.tableManager.delegate = self;
+    self.settingsManager = [SKSettingsManager sharedManager];
+    self.storyManager.delegate = self;
     self.gameCenterManager.delegate = self;
+    self.settingsManager.delegate = self;
 }
 
 - (void)childControllersInit {
@@ -136,13 +138,6 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     CGFloat codeTextFieldY = (navigationBarHeight + SKScoreTextLableHeight + 10);
     self.scoreLabel.frame = CGRectMake(codeTextFieldX, codeTextFieldY, SKScoreTextLableWidth, SKScoreTextLableHeight);
     [self.view addSubview:self.scoreLabel];
-}
-
-- (void)updateScore {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSInteger score = [SKUserDataManager sharedManager].user.score;
-        self.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
-    });
 }
 
 #pragma mark - Timer label
@@ -170,7 +165,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     self.codeTextField.placeholder = [NSString stringWithFormat:NSLocalizedString(@"ENTERTHECODEHERE", nil)];
     self.codeTextField.font = [UIFont fontWithName:@"Avenir Next" size:25.0];
     self.codeTextField.mask = @"# # ## ## ## ##"; // 4 8 15 16 23 42
-    self.codeTextField.delegate = self.tableManager;
+    self.codeTextField.delegate = self.dataManager;
     self.codeTextField.adjustsFontSizeToFitWidth = YES;
     self.codeTextField.minimumFontSize = 13.0;
     self.codeTextField.textAlignment = NSTextAlignmentCenter;
@@ -196,25 +191,40 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     [self.view addSubview:self.backgroundView];
 }
 
-#pragma mark - SKBunkerTableDataManagerDelegate
+#pragma mark - SKBunkerDataManagerDelegate
+
+- (void)updateScoreLabelWithScore:(NSInteger)score {
+    __weak SKBunkerViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        weakSelf.scoreLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Score :%@", nil), @((int)score)];
+    });
+}
+
+- (void)updateTimerLabelWithComponents:(NSDateComponents *)components {
+    __weak SKBunkerViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        weakSelf.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
+                                    (int)components.minute, (int)components.second];
+    });
+}
 
 - (void)codeDidEnteredSuccess:(BOOL)flag {
     if (flag) {
         NSInteger userScore = [SKUserDataManager sharedManager].user.score;
         NSInteger maxScore = [SKUserDataManager sharedManager].user.maxScore;
         if (userScore > maxScore || maxScore == 0) {
-            [self.storyHelper updatePagesIndexesWithNextIndex];
-            [self.storyHelper showLastStory];
+            [self.storyManager updatePagesIndexesWithNextIndex];
+            [self.storyManager showLastStory];
         }
-        [self updateScore];
+        [self updateScoreLabelWithScore:userScore];
         [self.gameCenterManager reportScore:(int64_t)userScore];
     } else {
-        [self.alertHelper showCantEnterCodeAlertOnViewController:self];
+        [self.alertManager showCantEnterCodeAlertOnViewController:self];
     }
 }
 
 - (void)codeDidnNotEnteredTimes:(NSInteger)times {
-    [self.storyHelper showDisasterWithPower:times];
+    [self.storyManager showDisasterWithPower:times];
 }
 
 #pragma mark - SKGameKitHelperDelegate
@@ -223,6 +233,13 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
         [self presentViewController:authenticationController
                            animated:YES
                          completion:nil];
+}
+
+#pragma mark - SKSettingsManagerDelegate
+
+- (void)settingsDidChange {
+    NSInteger currentScore = [SKUserDataManager sharedManager].user.score;
+    [self.dataManager resetTimerAndScoreWithScore:currentScore];
 }
 
 #pragma mark - Actions
@@ -250,43 +267,47 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 #pragma mark - Menu
 
 - (void)showMenu {
+    __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
-        self.storyVC.view.frame = CGRectMake(0,
-                                             0,
-                                             UIScreen.mainScreen.bounds.size.width,
-                                             UIScreen.mainScreen.bounds.size.height);
-        [self.view addSubview:self.storyVC.view];
+        weakSelf.storyVC.view.frame = CGRectMake(0,
+                                                 0,
+                                                 UIScreen.mainScreen.bounds.size.width,
+                                                 UIScreen.mainScreen.bounds.size.height);
+        [weakSelf.view addSubview:self.storyVC.view];
     } completion:^(BOOL finished) {
-        self.isMenuHidden = NO;
+        weakSelf.isMenuHidden = NO;
     }];
 }
 
 - (void)hideMenu {
+    __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
-        self.storyVC.view.frame = CGRectMake(-UIScreen.mainScreen.bounds.size.width,
-                                             0,
-                                             UIScreen.mainScreen.bounds.size.width,
-                                             UIScreen.mainScreen.bounds.size.height);
+        weakSelf.storyVC.view.frame = CGRectMake(-UIScreen.mainScreen.bounds.size.width,
+                                                 0,
+                                                 UIScreen.mainScreen.bounds.size.width,
+                                                 UIScreen.mainScreen.bounds.size.height);
     } completion:^(BOOL finished) {
-        [self.storyVC.view removeFromSuperview];
-        self.isMenuHidden = YES;
+        [weakSelf.storyVC.view removeFromSuperview];
+        weakSelf.isMenuHidden = YES;
     }];
 }
 
 #pragma mark - Keyboard
 
 - (void)keyboardHide:(NSNotification *)notification {
+    __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
-        [self updateCodeFieldFrame];
+        [weakSelf updateCodeFieldFrame];
     }];
 }
 
 - (void)keyboardShow:(NSNotification *)notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
-        CGRect codeFieldFrame = self.codeTextField.frame;
+        CGRect codeFieldFrame = weakSelf.codeTextField.frame;
         codeFieldFrame.origin.y -= keyboardSize.height;
-        self.codeTextField.frame = codeFieldFrame;
+        weakSelf.codeTextField.frame = codeFieldFrame;
     }];
 }
 
@@ -301,5 +322,6 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
         [self.codeTextField resignFirstResponder];
     }
 }
+
 
 @end

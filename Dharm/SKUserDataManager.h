@@ -16,7 +16,7 @@
 
 @property(strong, nonatomic) SKUser *user;
 
-+ (SKUserDataManager *)sharedManager;
++ (instancetype)sharedManager;
 
 - (SKUser *)loadUser;
 - (void)saveUser;

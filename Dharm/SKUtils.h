@@ -19,9 +19,6 @@ static NSString * const kCodeEnteredKey = @"kCodeEnteredKey";
 
 #pragma mark - NSUserDefaults keys
 
-static NSString * const kDifficultySwitchKey = @"difficultySwitch";
-static NSString * const kDateFromPickerKey = @"dateFromPicker";
-static NSString * const kDateToPickerKey = @"dateToPicker";
 static NSString * const kIsFirstTime = @"isFirstTime";
 
 #pragma mark - BackgroundPaths

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
-@class SKBunkerDataManager;
 @class SKBunkerViewController;
 
 @protocol SKBunkerDataManagerDelegate
@@ -17,12 +16,14 @@
 - (void)codeDidEnteredSuccess:(BOOL)flag;
 - (void)codeDidnNotEnteredTimes:(NSInteger)times;
 
+- (void)updateScoreLabelWithScore:(NSInteger)score;
+- (void)updateTimerLabelWithComponents:(NSDateComponents *)components;
+
 @end
 
 @interface SKBunkerDataManager : NSObject <UITextFieldDelegate>
 
-@property (weak, nonatomic) SKBunkerViewController<SKBunkerDataManagerDelegate> *delegate;
-
 - (instancetype)initWithWithDelegate:(SKBunkerViewController<SKBunkerDataManagerDelegate> *)delegate;
+- (void)resetTimerAndScoreWithScore:(NSInteger)score;
 
 @end
