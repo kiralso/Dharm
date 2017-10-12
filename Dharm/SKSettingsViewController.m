@@ -109,7 +109,7 @@ static NSInteger const kHoursBetweenPickers = 3;
     }
 }
 
-- (NSDate *) checkTimeInFromPicker:(UIDatePicker *) fromPicker andToPicker:(UIDatePicker *) toPicker withHoursBetween:(NSInteger) hours {
+- (NSDate *)checkTimeInFromPicker:(UIDatePicker *)fromPicker andToPicker:(UIDatePicker *)toPicker withHoursBetween:(NSInteger)hours {
     
     NSDateComponents *fromComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
                                                           fromDate:fromPicker.date];
@@ -127,7 +127,7 @@ static NSInteger const kHoursBetweenPickers = 3;
     return toPicker.date;
 }
 
-- (void) checkToPicker {
+- (void)checkToPicker {
     
     NSDate * date = [self checkTimeInFromPicker:self.dateFromPicker
                                     andToPicker:self.dateToPicker
@@ -136,7 +136,7 @@ static NSInteger const kHoursBetweenPickers = 3;
     [self.dateToPicker setDate:date animated:YES];
 }
 
-- (void) saveSettings {
+- (void)saveSettings {
     [[NSUserDefaults standardUserDefaults] setObject:self.dateFromPicker.date forKey:kDateFromPickerKey];
     [[NSUserDefaults standardUserDefaults] setObject:self.dateToPicker.date forKey:kDateToPickerKey];
     [[NSUserDefaults standardUserDefaults] setBool:self.difficultySwitch.on forKey:kDifficultySwitchKey];

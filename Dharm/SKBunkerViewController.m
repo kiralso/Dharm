@@ -54,6 +54,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     [self initializeScoreLabel];
     [self initializeTimerLabel];
     [self initializeCodeField];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,9 +63,12 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     [self updateTimerLabelFrame];
     [self updateCodeFieldFrame];
     [self updateScoreLabelFrame];
-    [self.storyHelper showTutorial];
-    [self.gameCenterManager authenticateLocalPlayer];
     [self childControllersInit];
+    if (isFirstTime()) {
+        [self.storyHelper showTutorial];
+    } else {
+        [self.gameCenterManager authenticateLocalPlayer];
+    }
 }
 
 #pragma mark - Initialization

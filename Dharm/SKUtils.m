@@ -16,14 +16,16 @@ BOOL iPhone() {
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
 }
 
+BOOL isFirstTime() {
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:kIsFirstTime];
+}
+
 NSString* backgroundPath() {
-    
     if (iPhone()) {
         return kPhoneBackground;
     }
     if (iPad()) {
         return kPadBackground;
     }
-    
     return nil;
 }

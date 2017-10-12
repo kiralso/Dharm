@@ -12,9 +12,11 @@
 #import "SKGameKitManager.h"
 #import "SKLeaderboardTableManager.h"
 
-@interface SKLeaderboardsViewController()
+@interface SKLeaderboardsViewController() <SKGameKitManagerDelegate>
+
 @property (strong, nonatomic) SKGameKitManager *gameCenterManager;
 @property (strong, nonatomic) SKLeaderboardTableManager *tableManager;
+
 @end
 
 @implementation SKLeaderboardsViewController
@@ -30,6 +32,9 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (isFirstTime()) {
+        [self.gameCenterManager authenticateLocalPlayer];
+    }
     [self loadPlayers];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
@@ -38,7 +43,7 @@
                   forControlEvents:UIControlEventValueChanged];
 }
 
--(void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
@@ -52,7 +57,7 @@
     [self.tableView reloadData];
 }
 
--(void)loadPlayers {
+- (void)loadPlayers {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *identifier = self.gameCenterManager.leaderboardIdentifier;
     if (identifier) {
@@ -70,6 +75,14 @@
                                              }
                                          }];
     }
+}
+
+#pragma mark - SKGameKitHelperDelegate
+
+- (void)showAuthenticationController:(UIViewController *)authenticationController {
+    [self presentViewController:authenticationController
+                       animated:YES
+                     completion:nil];
 }
 
 @end

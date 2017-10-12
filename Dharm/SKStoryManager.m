@@ -25,16 +25,11 @@
 }
 
 - (void)showTutorial {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isFirstTime = [defaults boolForKey:kIsFirstTime];
-    if (!isFirstTime) {
-        SKTutorialPageViewController *tutorialVC = [self.delegate.storyboard instantiateViewControllerWithIdentifier:@"SKTutorialPageViewController"];
-        [defaults setBool:YES forKey:kIsFirstTime];
-        tutorialVC.indexOfInitialViewController = SKStoryPageNumberTutorial;
-        tutorialVC.isTutorial = YES;
-        tutorialVC.storyPages = [self loadPages];
-        [self.delegate presentViewController:tutorialVC animated:YES completion:nil];
-    }
+    SKTutorialPageViewController *tutorialVC = [self.delegate.storyboard instantiateViewControllerWithIdentifier:@"SKTutorialPageViewController"];
+    tutorialVC.indexOfInitialViewController = SKStoryPageNumberTutorial;
+    tutorialVC.isTutorial = YES;
+    tutorialVC.storyPages = [self loadPages];
+    [self.delegate presentViewController:tutorialVC animated:YES completion:nil];
 }
 
 - (void)showDisasterWithPower:(NSInteger)power {

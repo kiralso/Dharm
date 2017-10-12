@@ -8,10 +8,6 @@
 
 #import "SKTabBarController.h"
 
-@interface SKTabBarController ()
-
-@end
-
 @implementation SKTabBarController
 
 - (void)viewDidLoad {

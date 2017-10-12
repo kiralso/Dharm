@@ -38,6 +38,7 @@ static NSString * const kAdMobAdIdentifier = @"ca-app-pub-1068109744372144/49598
 
 BOOL iPad(void);
 BOOL iPhone(void);
+BOOL isFirstTime(void);
 
 NSString* backgroundPath(void);
 

@@ -27,6 +27,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsFirstTime];
     [[SKUserDataManager sharedManager] saveUser];
 }
 
