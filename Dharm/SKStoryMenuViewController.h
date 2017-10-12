@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class SKStoryMenuTableViewCell;
-@class SKStoryResetTableViewCell;
+@class SKBunkerDataManager;
 
 @interface SKStoryMenuViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 
-@property (weak, nonatomic) SKStoryMenuTableViewCell *menuCell;
-@property (weak, nonatomic) SKStoryResetTableViewCell *resetCell;
+@property (strong, nonatomic) SKBunkerDataManager *bunkerDataManager;
 
 @end

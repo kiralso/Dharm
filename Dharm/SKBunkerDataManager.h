@@ -23,7 +23,8 @@
 
 @interface SKBunkerDataManager : NSObject <UITextFieldDelegate>
 
-- (instancetype)initWithWithDelegate:(SKBunkerViewController<SKBunkerDataManagerDelegate> *)delegate;
+- (instancetype)initWithWithDelegate:(id<SKBunkerDataManagerDelegate>)delegate;
 - (void)resetTimerAndScoreWithScore:(NSInteger)score;
+- (void)codeCanBeEntered:(BOOL)flag;
 
 @end

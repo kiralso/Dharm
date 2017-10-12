@@ -32,7 +32,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 @interface SKBunkerViewController () <SKStoryManagerDelegate, SKBunkerDataManagerDelegate, SKGameKitManagerDelegate, SKSettingsManagerDelegate>
 
-@property (strong, nonatomic) SKStoryMenuViewController *storyVC;
+@property (strong, nonatomic) SKStoryMenuViewController *menuViewController;
 @property (strong, nonatomic) SKBunkerDataManager *dataManager;
 @property (strong, nonatomic) SKStoryManager *storyManager;
 @property (strong, nonatomic) SKAlertManager *alertManager;
@@ -55,7 +55,11 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     [self initializeScoreLabel];
     [self initializeTimerLabel];
     [self initializeCodeField];
-    
+    if (isFirstTime()) {
+        [self.storyManager showTutorial];
+    } else {
+        [self.gameCenterManager authenticateLocalPlayer];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -65,11 +69,6 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     [self updateCodeFieldFrame];
     [self updateScoreLabelFrame];
     [self childControllersInit];
-    if (isFirstTime()) {
-        [self.storyManager showTutorial];
-    } else {
-        [self.gameCenterManager authenticateLocalPlayer];
-    }
 }
 
 #pragma mark - Initialization
@@ -118,9 +117,10 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 }
 
 - (void)childControllersInit {
-    self.storyVC = [[SKStoryMenuViewController alloc] init];
-    self.storyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SKStoryMenuViewController"];
-    [self addChildViewController:self.storyVC];
+    self.menuViewController = [[SKStoryMenuViewController alloc] init];
+    self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SKStoryMenuViewController"];
+    self.menuViewController.bunkerDataManager = self.dataManager;
+    [self addChildViewController:self.menuViewController];
 }
 
 #pragma mark - Score label
@@ -201,18 +201,29 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 }
 
 - (void)updateTimerLabelWithComponents:(NSDateComponents *)components {
-    __weak SKBunkerViewController *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        weakSelf.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
-                                    (int)components.minute, (int)components.second];
-    });
+    if (components.minute < kMinutesBeforeFireDateToWarn) {
+        self.timerLabel.textColor = [UIColor warningRedColor];
+        [self.dataManager codeCanBeEntered:YES];
+    } else {
+        self.timerLabel.textColor = [UIColor whiteColor];
+        [self.dataManager codeCanBeEntered:NO];
+    }
+    if (components.second < 1 && components.minute < 1) {
+        [self.dataManager resetTimerAndScoreWithScore:0];
+    } else {
+        __weak SKBunkerViewController *weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.timerLabel.text = [NSString stringWithFormat:@"%003i:%02i",
+                                        (int)components.minute, (int)components.second];
+        });
+    }
 }
 
 - (void)codeDidEnteredSuccess:(BOOL)flag {
     if (flag) {
         NSInteger userScore = [SKUserDataManager sharedManager].user.score;
         NSInteger maxScore = [SKUserDataManager sharedManager].user.maxScore;
-        if (userScore > maxScore || maxScore == 0) {
+        if (userScore == maxScore) {
             [self.storyManager updatePagesIndexesWithNextIndex];
             [self.storyManager showLastStory];
         }
@@ -269,11 +280,11 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 - (void)showMenu {
     __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
-        weakSelf.storyVC.view.frame = CGRectMake(0,
-                                                 0,
-                                                 UIScreen.mainScreen.bounds.size.width,
-                                                 UIScreen.mainScreen.bounds.size.height);
-        [weakSelf.view addSubview:self.storyVC.view];
+        weakSelf.menuViewController.view.frame = CGRectMake(0,
+                                                            0,
+                                                            UIScreen.mainScreen.bounds.size.width,
+                                                            UIScreen.mainScreen.bounds.size.height);
+        [weakSelf.view addSubview:self.menuViewController.view];
     } completion:^(BOOL finished) {
         weakSelf.isMenuHidden = NO;
     }];
@@ -282,12 +293,12 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 - (void)hideMenu {
     __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
-        weakSelf.storyVC.view.frame = CGRectMake(-UIScreen.mainScreen.bounds.size.width,
-                                                 0,
-                                                 UIScreen.mainScreen.bounds.size.width,
-                                                 UIScreen.mainScreen.bounds.size.height);
+        weakSelf.menuViewController.view.frame = CGRectMake(-UIScreen.mainScreen.bounds.size.width,
+                                                            0,
+                                                            UIScreen.mainScreen.bounds.size.width,
+                                                            UIScreen.mainScreen.bounds.size.height);
     } completion:^(BOOL finished) {
-        [weakSelf.storyVC.view removeFromSuperview];
+        [weakSelf.menuViewController.view removeFromSuperview];
         weakSelf.isMenuHidden = YES;
     }];
 }

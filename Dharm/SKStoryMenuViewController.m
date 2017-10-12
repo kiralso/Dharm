@@ -7,6 +7,7 @@
 //
 
 #import "SKStoryMenuViewController.h"
+#import "SKBunkerDataManager.h"
 #import "SKStoryMenuTableViewCell.h"
 #import "SKStoryResetTableViewCell.h"
 #import "SKTutorialPageViewController.h"
@@ -32,6 +33,8 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
 @property (assign, nonatomic) NSInteger numberOfPagesInPartThree;
 @property (strong, nonatomic) SKStoryManager *storyManager;
 @property (strong, nonatomic) SKAlertManager *alertManager;
+@property (weak, nonatomic) SKStoryMenuTableViewCell *menuCell;
+@property (weak, nonatomic) SKStoryResetTableViewCell *resetCell;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTableConstraint;
 
 @end
@@ -65,8 +68,7 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
                                                      [[SKUserDataManager sharedManager] resetUser];
                                                      weakSelf.pagesArray = [weakSelf.storyManager loadPages];
                                                      [weakSelf.menuTableView reloadData];
-                                                     UITableViewController *vc = (UITableViewController *)weakSelf.parentViewController;
-                                                     [vc.tableView reloadData];
+                                                     [self.bunkerDataManager resetTimerAndScoreWithScore:0];
                                                      SKLocalNotificationManager *notificationManager = [[SKLocalNotificationManager alloc] init];
                                                      [notificationManager updateNotificationDatesWithCompletion:nil];
                                                  }];

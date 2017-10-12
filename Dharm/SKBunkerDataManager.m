@@ -20,7 +20,7 @@
 
 @interface SKBunkerDataManager() <SKTimerDelegate>
 
-@property (weak,nonatomic) SKBunkerViewController<SKBunkerDataManagerDelegate> *delegate;
+@property (weak,nonatomic) id<SKBunkerDataManagerDelegate> delegate;
 
 //Models
 @property (strong, nonatomic) SKTimer *timer;
@@ -34,7 +34,7 @@
 
 @implementation SKBunkerDataManager
 
-- (instancetype)initWithWithDelegate:(SKBunkerViewController<SKBunkerDataManagerDelegate> *)delegate {
+- (instancetype)initWithWithDelegate:(id<SKBunkerDataManagerDelegate>)delegate {
     self = [super init];
     if (self) {
         self.localNotificationManager = [[SKLocalNotificationManager alloc] init];
@@ -76,18 +76,7 @@
 #pragma mark - SKTimerDelegate
 
 - (void)timerComponentsDidChange:(NSDateComponents *)components {
-    if (components.minute < kMinutesBeforeFireDateToWarn) {
-        self.delegate.timerLabel.textColor = [UIColor warningRedColor];
-        [self codeCanBeEntered:YES];
-    } else {
-        self.delegate.timerLabel.textColor = [UIColor whiteColor];
-        [self codeCanBeEntered:NO];
-    }
-    if (components.second < 1 && components.minute < 1) {
-        [self resetTimerAndScoreWithScore:0];
-    } else {
-        [self.delegate updateTimerLabelWithComponents:components];
-    }
+    [self.delegate updateTimerLabelWithComponents:components];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -108,7 +97,7 @@
                     [weakSelf.delegate codeDidEnteredSuccess:YES];
                 });
             }
-            return [self.delegate.codeTextField shouldChangeCharactersInRange:range replacementString:string];
+            return [(VMaskTextField *)textField shouldChangeCharactersInRange:range replacementString:string];
         } else {
             [textField resignFirstResponder];
             [self.delegate codeDidEnteredSuccess:NO];
