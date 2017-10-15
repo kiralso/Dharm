@@ -13,7 +13,7 @@
 - (NSDate *)localDateFromGMTDate:(NSDate *)date;
 - (NSArray<NSDate *> *)fireDatesSinceNow;
 - (NSDate *)firstFireDateSinceNowFromArray:(NSArray *)datesArray;
-- (NSArray<NSDate *> *)warningDatesWithArray:(NSArray<NSDate *> *) array;
+- (NSArray<NSDate *> *)warningDatesWithArray:(NSArray<NSDate *> *)array;
 - (NSArray<NSDate *> *)fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *)startComponents andComponents:(NSDateComponents *)endComponents;
 - (NSArray<NSDate *> *)datesArrayBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
 

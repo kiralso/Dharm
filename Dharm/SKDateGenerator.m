@@ -53,7 +53,7 @@
     }
 }
 
-- (NSArray<NSDate *> *) fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *)startComponents
+- (NSArray<NSDate *> *)fireDatesWithHoursAndMinutesBetweenComponents:(NSDateComponents *)startComponents
                                                         andComponents:(NSDateComponents *)endComponents {
     NSMutableArray *dates = [NSMutableArray array];
     int i = 0;
@@ -105,7 +105,7 @@
 
 #pragma mark - Local date
 
--(NSDate *)localDateFromGMTDate:(NSDate *) date {
+-(NSDate *)localDateFromGMTDate:(NSDate *)date {
     NSTimeZone *tz = [NSTimeZone defaultTimeZone];
     NSInteger seconds = [tz secondsFromGMTForDate: date];
     return [NSDate dateWithTimeInterval: seconds sinceDate: date];
@@ -113,7 +113,15 @@
 
 #pragma mark - Other
 
-- (NSArray<NSDate *> *)datesArrayBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate {
+- (NSArray<NSDate *> *)datesArrayBetweenStartDate:(NSDate *)startDate
+                                       andEndDate:(NSDate *)endDate {
+    if (!(startDate && endDate)) {
+        startDate = [NSDate date];
+        endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour
+                                                           value:4
+                                                          toDate:startDate
+                                                         options:0];
+    }
     NSDate *dateTo = endDate;
     NSDateComponents *componentsTo =[[NSCalendar currentCalendar]
                                      components:NSCalendarUnitHour | NSCalendarUnitMinute

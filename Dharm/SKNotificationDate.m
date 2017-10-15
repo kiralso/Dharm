@@ -14,7 +14,7 @@
 
 @implementation SKNotificationDate
 
-- (instancetype)initWithFireDate:(NSDate *) fireDate warningDate:(NSDate *) warningDate {
+- (instancetype)initWithFireDate:(NSDate *)fireDate warningDate:(NSDate *)warningDate {
     self = [super init];
     if (self) {
         self.fireDate = fireDate;
