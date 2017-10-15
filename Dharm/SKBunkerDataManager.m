@@ -161,6 +161,11 @@
     }];
 }
 
+- (void)updateData {
+    [self checkScore];
+    [self startTimerToNextFireDate];
+}
+
 #pragma mark - Helpful Functions
 
 - (NSTimeInterval)timeIntervalBeforeNextFireDate {

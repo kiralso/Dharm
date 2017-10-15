@@ -87,6 +87,10 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
                                              selector:@selector(keyboardShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateData:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 - (void)flagsInit {
@@ -320,6 +324,12 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
         codeFieldFrame.origin.y -= keyboardSize.height;
         weakSelf.codeTextField.frame = codeFieldFrame;
     }];
+}
+
+#pragma mark - Notifications
+
+- (void)updateData:(NSNotification *)notification {
+    [self.dataManager updateData];
 }
 
 #pragma mark - Gestures

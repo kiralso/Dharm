@@ -26,5 +26,6 @@
 - (instancetype)initWithWithDelegate:(id<SKBunkerDataManagerDelegate>)delegate;
 - (void)resetTimerAndScoreWithScore:(NSInteger)score;
 - (void)codeCanBeEntered:(BOOL)flag;
+- (void)updateData;
 
 @end
