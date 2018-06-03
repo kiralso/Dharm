@@ -11,7 +11,6 @@
 @interface UIColor (SKColorCategory)
 
 + (UIColor *)warningRedColor;
-
 + (UIColor *)textFieldPlaceholderColor;
 
 @end

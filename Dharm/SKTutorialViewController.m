@@ -19,6 +19,8 @@
 
 @implementation SKTutorialViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (self.isDisaster) {

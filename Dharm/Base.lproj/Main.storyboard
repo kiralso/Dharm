@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ANy-Z8-0Ss">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ANy-Z8-0Ss">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-Medium</string>
-            <string>AvenirNext-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Tab Bar Controller-->
         <scene sceneID="1io-27-K8U">
@@ -542,7 +536,7 @@ This station was originally constructed as a laboratory, where scientists could 
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIz-vl-Nmd">
-                                            <rect key="frame" x="7.5" y="0.0" width="22.5" height="80"/>
+                                            <rect key="frame" x="7.5" y="0.0" width="22.5" height="27.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22.5" id="Z9b-9r-Mq1"/>
                                             </constraints>
@@ -551,10 +545,7 @@ This station was originally constructed as a laboratory, where scientists could 
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaZ-bi-ld0">
-                                            <rect key="frame" x="126" y="0.0" width="113.5" height="80"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="n4i-4P-oIy"/>
-                                            </constraints>
+                                            <rect key="frame" x="126" y="0.0" width="113.5" height="27.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -571,7 +562,7 @@ This station was originally constructed as a laboratory, where scientists could 
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="John Lock" translatesAutoresizingMaskIntoConstraints="NO" id="p0K-YN-7v9">
-                                            <rect key="frame" x="38" y="9" width="60" height="60"/>
+                                            <rect key="frame" x="38" y="12" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="EmM-O6-RN6"/>
                                                 <constraint firstAttribute="width" constant="60" id="JUJ-AK-pwu"/>
@@ -589,14 +580,12 @@ This station was originally constructed as a laboratory, where scientists could 
                                         <constraint firstItem="4SI-UR-bGf" firstAttribute="leading" secondItem="oaZ-bi-ld0" secondAttribute="trailing" constant="8" id="37d-kk-CXl"/>
                                         <constraint firstItem="p0K-YN-7v9" firstAttribute="top" secondItem="9Xx-uQ-suA" secondAttribute="topMargin" constant="1" id="3bF-88-d6j"/>
                                         <constraint firstAttribute="bottom" secondItem="uIz-vl-Nmd" secondAttribute="bottom" constant="-0.5" id="DS7-DW-ssw"/>
-                                        <constraint firstAttribute="bottom" secondItem="oaZ-bi-ld0" secondAttribute="bottom" constant="-0.5" id="Fkg-je-Zcq"/>
+                                        <constraint firstAttribute="bottom" secondItem="oaZ-bi-ld0" secondAttribute="bottom" id="Fkg-je-Zcq"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="p0K-YN-7v9" secondAttribute="bottom" constant="2.5" id="HfV-6g-Whd"/>
-                                        <constraint firstAttribute="trailing" secondItem="4SI-UR-bGf" secondAttribute="trailing" constant="8" id="I50-93-4cZ"/>
                                         <constraint firstItem="uIz-vl-Nmd" firstAttribute="top" secondItem="9Xx-uQ-suA" secondAttribute="top" id="QrK-Av-ca4"/>
                                         <constraint firstItem="p0K-YN-7v9" firstAttribute="leading" secondItem="uIz-vl-Nmd" secondAttribute="trailing" constant="8" id="X6Q-VD-lli"/>
                                         <constraint firstItem="oaZ-bi-ld0" firstAttribute="leading" secondItem="p0K-YN-7v9" secondAttribute="trailing" constant="28" id="Yc3-rU-jrg"/>
                                         <constraint firstItem="4SI-UR-bGf" firstAttribute="top" secondItem="9Xx-uQ-suA" secondAttribute="top" id="aDj-o7-Sar"/>
-                                        <constraint firstAttribute="bottom" secondItem="4SI-UR-bGf" secondAttribute="bottom" constant="-0.5" id="qfk-zS-gIo"/>
                                         <constraint firstAttribute="trailing" secondItem="4SI-UR-bGf" secondAttribute="trailing" constant="8" id="s7h-bZ-q7L"/>
                                         <constraint firstItem="oaZ-bi-ld0" firstAttribute="top" secondItem="9Xx-uQ-suA" secondAttribute="top" id="wff-50-yTJ"/>
                                         <constraint firstItem="uIz-vl-Nmd" firstAttribute="leading" secondItem="9Xx-uQ-suA" secondAttribute="leading" constant="7.5" id="xW7-VB-nd8"/>

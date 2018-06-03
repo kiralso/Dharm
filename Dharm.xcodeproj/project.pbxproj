@@ -14,6 +14,7 @@
 		4145A18E3BD3374C31CC8907 /* libPods-Dharm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4FB7AC4ACD06E84E2DCDAE /* libPods-Dharm.a */; };
 		414E51261F86499500D48E86 /* SKBunkerDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414E51251F86499500D48E86 /* SKBunkerDataManager.m */; };
 		4181F2E91F841B7900F2B2F0 /* SKLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4181F2E81F841B7900F2B2F0 /* SKLocalNotificationManager.m */; };
+		41D91A7520C44CC6007A2D9A /* UIFont+UIFont_SKFontCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D91A7420C44CC6007A2D9A /* UIFont+UIFont_SKFontCategory.m */; };
 		55079BE11EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55079BE01EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m */; };
 		55079BE41EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55079BE31EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m */; };
 		551319A11EC09D860072B442 /* SKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 551319A01EC09D860072B442 /* SKUtils.m */; };
@@ -63,6 +64,8 @@
 		414E51251F86499500D48E86 /* SKBunkerDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKBunkerDataManager.m; sourceTree = "<group>"; };
 		4181F2E71F841B7900F2B2F0 /* SKLocalNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKLocalNotificationManager.h; sourceTree = "<group>"; };
 		4181F2E81F841B7900F2B2F0 /* SKLocalNotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKLocalNotificationManager.m; sourceTree = "<group>"; };
+		41D91A7320C44CC6007A2D9A /* UIFont+UIFont_SKFontCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+UIFont_SKFontCategory.h"; sourceTree = "<group>"; };
+		41D91A7420C44CC6007A2D9A /* UIFont+UIFont_SKFontCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+UIFont_SKFontCategory.m"; sourceTree = "<group>"; };
 		55079BDF1EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SKViewControllerCategory.h"; sourceTree = "<group>"; };
 		55079BE01EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SKViewControllerCategory.m"; sourceTree = "<group>"; };
 		55079BE21EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+SKTableViewCategory.h"; sourceTree = "<group>"; };
@@ -162,7 +165,7 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		411FE4091F81119200566A95 /* Model */ = {
+		411FE4091F81119200566A95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				55F91BEE1F1A39C40044DF34 /* SKNotificationDate.h */,
@@ -186,7 +189,7 @@
 				414E51241F86499500D48E86 /* SKBunkerDataManager.h */,
 				414E51251F86499500D48E86 /* SKBunkerDataManager.m */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		411FE40A1F8111B500566A95 /* Controller */ = {
@@ -254,6 +257,8 @@
 				55079BE31EB779BD0044FCF4 /* UITableViewController+SKTableViewCategory.m */,
 				411FE4111F81AAFD00566A95 /* UIColor+SKColorCategory.h */,
 				411FE4121F81AAFD00566A95 /* UIColor+SKColorCategory.m */,
+				41D91A7320C44CC6007A2D9A /* UIFont+UIFont_SKFontCategory.h */,
+				41D91A7420C44CC6007A2D9A /* UIFont+UIFont_SKFontCategory.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -313,7 +318,7 @@
 			children = (
 				411FE40A1F8111B500566A95 /* Controller */,
 				411FE4081F81118800566A95 /* View */,
-				411FE4091F81119200566A95 /* Model */,
+				411FE4091F81119200566A95 /* Models */,
 			);
 			name = Bunker;
 			sourceTree = "<group>";
@@ -516,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41D91A7520C44CC6007A2D9A /* UIFont+UIFont_SKFontCategory.m in Sources */,
 				55079BE11EB7780C0044FCF4 /* UIViewController+SKViewControllerCategory.m in Sources */,
 				55E8BE0A1F0EAA4E007306C8 /* SKStoryMenuViewController.m in Sources */,
 				55320D101EFE949A0054F7A6 /* SKTutorialViewController.m in Sources */,

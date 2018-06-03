@@ -12,6 +12,9 @@
 
 @end
 
+static NSString * const fireDateKey = @"fireDateKey";
+static NSString * const warningDateKey = @"warningDateKey";
+
 @implementation SKNotificationDate
 
 - (instancetype)initWithFireDate:(NSDate *)fireDate warningDate:(NSDate *)warningDate {
@@ -26,14 +29,14 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:self.fireDate forKey:@"fireDate"];
-    [encoder encodeObject:self.warningDate forKey:@"warningDate"];
+    [encoder encodeObject:self.fireDate forKey:fireDateKey];
+    [encoder encodeObject:self.warningDate forKey:warningDateKey];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        self.fireDate = [decoder decodeObjectForKey:@"fireDate"];
-        self.warningDate = [decoder decodeObjectForKey:@"warningDate"];
+        self.fireDate = [decoder decodeObjectForKey:fireDateKey];
+        self.warningDate = [decoder decodeObjectForKey:warningDateKey];
     }
     return self;
 }

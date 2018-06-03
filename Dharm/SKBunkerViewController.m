@@ -22,6 +22,7 @@
 #import "SKGameKitManager.h"
 #import "UITableViewController+SKTableViewCategory.h"
 #import "UIColor+SKColorCategory.h"
+#import "UIFont+UIFont_SKFontCategory.h"
 
 static CGFloat const SKScoreTextLableHeight = 25.0;
 static CGFloat const SKScoreTextLableWidth = 120.0;
@@ -29,6 +30,8 @@ static CGFloat const SKTimerTextLableHeight = 110.0;
 static CGFloat const SKTimerTextLableWidth = 300.0;
 static CGFloat const SKCodeTextFieldHeight = 35.0;
 static CGFloat const SKCodeTextFieldWidth = 347.0;
+static CGFloat const SKAnimation300Milliseconds = 0.3;
+static CGFloat const SKCornerRadius = 10.0;
 
 @interface SKBunkerViewController () <SKStoryManagerDelegate, SKBunkerDataManagerDelegate, SKGameKitManagerDelegate, SKSettingsManagerDelegate>
 
@@ -101,9 +104,11 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     UISwipeGestureRecognizer *downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    
     downSwipe.direction = UISwipeGestureRecognizerDirectionDown;
     rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    
     [self.view addGestureRecognizer:rightSwipe];
     [self.view addGestureRecognizer:leftSwipe];
     [self.view addGestureRecognizer:downSwipe];
@@ -131,7 +136,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 - (void)initializeScoreLabel {
     self.scoreLabel = [[UILabel alloc] init];
-    self.scoreLabel.font = [UIFont fontWithName:@"Avenir Next" size:17.0];
+    self.scoreLabel.font = [UIFont regularWithSize:[UIFont small]];
     self.scoreLabel.textColor = [UIColor whiteColor];
     self.scoreLabel.textAlignment = NSTextAlignmentCenter;
 }
@@ -148,7 +153,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 - (void)initializeTimerLabel {
     self.timerLabel = [[UILabel alloc] init];
-    self.timerLabel.font = [UIFont fontWithName:@"Avenir Next" size:80.0];
+    self.timerLabel.font = [UIFont regularWithSize:[UIFont huge]];
     self.timerLabel.textColor = [UIColor whiteColor];
     self.timerLabel.textAlignment = NSTextAlignmentCenter;
     self.timerLabel.text = @"108:00";
@@ -167,7 +172,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 - (void)initializeCodeField {
     self.codeTextField = [[VMaskTextField alloc] init];
     self.codeTextField.placeholder = [NSString stringWithFormat:NSLocalizedString(@"ENTERTHECODEHERE", nil)];
-    self.codeTextField.font = [UIFont fontWithName:@"Avenir Next" size:25.0];
+    self.codeTextField.font = [UIFont regularWithSize:[UIFont medium]];
     self.codeTextField.mask = @"# # ## ## ## ##"; // 4 8 15 16 23 42
     self.codeTextField.delegate = self.dataManager;
     self.codeTextField.adjustsFontSizeToFitWidth = YES;
@@ -271,7 +276,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
     UILabel *label = [[UILabel alloc] init];
     label.text = [NSString stringWithFormat:NSLocalizedString(@"POPOVER", nil), kMinutesBeforeFireDateToWarn];
     label.numberOfLines = 0;
-    NGSPopoverView *popover = [[NGSPopoverView alloc] initWithCornerRadius:10.f
+    NGSPopoverView *popover = [[NGSPopoverView alloc] initWithCornerRadius:SKCornerRadius
                                                                  direction:NGSPopoverArrowPositionTop
                                                                  arrowSize:CGSizeMake(0, 0)];
     popover.contentView = label;
@@ -283,7 +288,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 - (void)showMenu {
     __weak SKBunkerViewController *weakSelf = self;
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:SKAnimation300Milliseconds animations:^{
         weakSelf.menuViewController.view.frame = CGRectMake(0,
                                                             0,
                                                             UIScreen.mainScreen.bounds.size.width,
@@ -296,7 +301,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 - (void)hideMenu {
     __weak SKBunkerViewController *weakSelf = self;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:SKAnimation300Milliseconds animations:^{
         weakSelf.menuViewController.view.frame = CGRectMake(-UIScreen.mainScreen.bounds.size.width,
                                                             0,
                                                             UIScreen.mainScreen.bounds.size.width,
@@ -311,7 +316,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 
 - (void)keyboardHide:(NSNotification *)notification {
     __weak SKBunkerViewController *weakSelf = self;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:SKAnimation300Milliseconds animations:^{
         [weakSelf updateCodeFieldFrame];
     }];
 }
@@ -319,7 +324,7 @@ static CGFloat const SKCodeTextFieldWidth = 347.0;
 - (void)keyboardShow:(NSNotification *)notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     __weak SKBunkerViewController *weakSelf = self;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:SKAnimation300Milliseconds animations:^{
         CGRect codeFieldFrame = weakSelf.codeTextField.frame;
         codeFieldFrame.origin.y -= keyboardSize.height;
         weakSelf.codeTextField.frame = codeFieldFrame;
