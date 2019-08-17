@@ -71,7 +71,6 @@ static CGFloat const SKCornerRadius = 10.0;
 #pragma mark - Initialization
 
 - (void)viewControllerInit {
-    self.backgroundView = [[UIImageView alloc] init];
     self.navigationController.navigationBar.topItem.title = [NSString stringWithFormat:NSLocalizedString(@"BUNKER", nil)];
 }
 
@@ -199,6 +198,7 @@ static CGFloat const SKCornerRadius = 10.0;
 #pragma mark - Background
 
 - (void)setupBackground {
+    self.backgroundView = [[UIImageView alloc] init];
     [self.view addSubview:self.backgroundView];
     [self.backgroundView autoPinEdgesToSuperviewEdges];
     self.backgroundView.backgroundColor = [UIColor blackColor];

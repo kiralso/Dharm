@@ -12,6 +12,7 @@
 #import "AMViralSwitch.h"
 #import "UIViewController+SKViewControllerCategory.h"
 #import "SKLocalNotificationManager.h"
+#import <PureLayout.h>
 
 @interface SKSettingsViewController ()
 
@@ -26,10 +27,21 @@ static NSInteger const kHoursBetweenPickers = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.settingManager = [SKSettingsManager sharedManager];
+    
+    [self setupUI];
+}
+
+- (void)setupUI {
+    [self setupBackground];
     [self switchInit];
     [self pickersInit];
-    UIImage *image = [UIImage imageNamed:backgroundPath()];
-    self.backgroundView.image = image;
+}
+
+- (void)setupBackground {
+    [self.backgroundView autoPinEdgesToSuperviewEdges];
+    self.backgroundView.backgroundColor = [UIColor blackColor];
+    self.backgroundView.image = [UIImage imageNamed:backgroundPath()];
+    self.backgroundView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)switchInit {

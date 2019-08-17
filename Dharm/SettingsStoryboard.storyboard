@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nBZ-lD-oFB">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings-->
+        <scene sceneID="akg-ZL-EcM">
+            <objects>
+                <viewController title="Settings" id="u3P-AF-ex8" customClass="SKSettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R6g-8A-Iwb"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Mv-tZ-FcQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hqi-bH-KDr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rJ5-4a-wTU" userLabel="backgroundView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OHm-JT-bmQ" userLabel="Main Stack View">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wNT-W4-Qqu" userLabel="First Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="258"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWY-zr-70H" userLabel="hardcore view">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
+                                                <subviews>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qaY-jR-w0a" customClass="AMViralSwitch">
+                                                        <rect key="frame" x="14" y="13" width="51" height="31"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="tintColor" red="0.61960784310000006" green="0.65490196079999996" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="onTintColor" red="0.087579467250000001" green="0.084978096929999997" blue="0.090180837560000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="thumbTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <connections>
+                                                            <action selector="difficultySwitchAction:" destination="u3P-AF-ex8" eventType="valueChanged" id="rEk-6l-MG9"/>
+                                                        </connections>
+                                                    </switch>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hardcore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7Q-aa-kmp">
+                                                        <rect key="frame" x="77" y="6" width="99" height="45"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When would you like to save the world?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSl-ov-q6B">
+                                                <rect key="frame" x="0.0" y="129" width="414" height="129"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CFb-aF-a06" userLabel="Second Stack View">
+                                        <rect key="frame" x="0.0" y="258" width="414" height="258"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can enter the code from:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yph-iN-Ava">
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="258"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sxN-9c-D87">
+                                                <rect key="frame" x="207" y="0.0" width="207" height="258"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="512937614.15922499">
+                                                    <!--2017-04-03 18:40:14 +0000-->
+                                                </date>
+                                                <locale key="locale" localeIdentifier="en_150"/>
+                                                <connections>
+                                                    <action selector="dateFromPickerAction:" destination="u3P-AF-ex8" eventType="valueChanged" id="CoE-PL-fJj"/>
+                                                </connections>
+                                            </datePicker>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="f0R-de-aKR">
+                                        <rect key="frame" x="0.0" y="516" width="414" height="258"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6M-HL-xav">
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="258"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hw7-rh-HDn">
+                                                <rect key="frame" x="207" y="0.0" width="207" height="258"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="512937731.30951399">
+                                                    <!--2017-04-03 18:42:11 +0000-->
+                                                </date>
+                                                <locale key="locale" localeIdentifier="ru"/>
+                                                <connections>
+                                                    <action selector="dateToPickerAction:" destination="u3P-AF-ex8" eventType="valueChanged" id="NLD-L1-K8q"/>
+                                                </connections>
+                                            </datePicker>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gC-fK-Rny">
+                                <rect key="frame" x="20" y="379.5" width="374" height="137"/>
+                                <string key="text">When the hardcore mode is on, you have to save the world every 108 minutes at any time.
+Turn the mode off, if your life has not prepared you for this!</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rJ5-4a-wTU" firstAttribute="centerY" secondItem="9gC-fK-Rny" secondAttribute="centerY" id="2IQ-Tg-npR"/>
+                            <constraint firstItem="9gC-fK-Rny" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hqi-bH-KDr" secondAttribute="leadingMargin" id="ARQ-VJ-hC5"/>
+                            <constraint firstItem="7Mv-tZ-FcQ" firstAttribute="top" secondItem="OHm-JT-bmQ" secondAttribute="bottom" id="Af6-1a-cRe"/>
+                            <constraint firstItem="9gC-fK-Rny" firstAttribute="centerX" secondItem="Hqi-bH-KDr" secondAttribute="centerX" id="BZY-Yl-90a"/>
+                            <constraint firstItem="9gC-fK-Rny" firstAttribute="centerY" secondItem="Hqi-bH-KDr" secondAttribute="centerY" id="HxI-K8-hHy"/>
+                            <constraint firstItem="OHm-JT-bmQ" firstAttribute="top" secondItem="R6g-8A-Iwb" secondAttribute="bottom" id="PjA-0e-WyT"/>
+                            <constraint firstItem="9gC-fK-Rny" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Hqi-bH-KDr" secondAttribute="trailingMargin" id="TEJ-pa-J7r"/>
+                            <constraint firstItem="OHm-JT-bmQ" firstAttribute="leading" secondItem="Hqi-bH-KDr" secondAttribute="leading" id="XeL-JN-lfx"/>
+                            <constraint firstAttribute="trailing" secondItem="rJ5-4a-wTU" secondAttribute="trailing" id="ZyN-ow-eFD"/>
+                            <constraint firstAttribute="trailing" secondItem="OHm-JT-bmQ" secondAttribute="trailing" id="grY-Z0-Y4d"/>
+                            <constraint firstItem="rJ5-4a-wTU" firstAttribute="top" secondItem="Hqi-bH-KDr" secondAttribute="top" id="k56-fF-D04"/>
+                            <constraint firstItem="rJ5-4a-wTU" firstAttribute="leading" secondItem="Hqi-bH-KDr" secondAttribute="leading" id="mCk-rH-ETG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kOa-fc-8Nb"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="kvy-wm-Ivt"/>
+                    <connections>
+                        <outlet property="backgroundView" destination="rJ5-4a-wTU" id="TrL-Bb-rbs"/>
+                        <outlet property="dateFromPicker" destination="sxN-9c-D87" id="LWV-EU-WTI"/>
+                        <outlet property="dateToPicker" destination="hw7-rh-HDn" id="gLa-is-6jN"/>
+                        <outlet property="difficultySwitch" destination="qaY-jR-w0a" id="yG2-uu-Kbe"/>
+                        <outlet property="info" destination="9gC-fK-Rny" id="oje-fP-YJZ"/>
+                        <outletCollection property="softcoreInfoCollectionOfLabels" destination="SSl-ov-q6B" id="f4r-Xf-0Do"/>
+                        <outletCollection property="softcoreInfoCollectionOfLabels" destination="Yph-iN-Ava" id="JJt-Re-0J8"/>
+                        <outletCollection property="softcoreInfoCollectionOfLabels" destination="d6M-HL-xav" id="LY7-Z5-l0K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZxF-LK-Y71" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1760.15625" y="62.109374999999993"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="A2b-K3-dTP">
+            <objects>
+                <navigationController id="nBZ-lD-oFB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="square-3" selectedImage="square-3" id="wfQ-Pl-H0I"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="i2L-zJ-nit">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="u3P-AF-ex8" kind="relationship" relationship="rootViewController" id="eCr-om-SRC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="33Q-hd-znm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913" y="63"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="square-3" width="32" height="32"/>
+    </resources>
+</document>
