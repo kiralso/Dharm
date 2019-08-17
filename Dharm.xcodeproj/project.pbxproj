@@ -246,6 +246,24 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		41A7654E2308186A00FB1D86 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				41A7654F2308187200FB1D86 /* UserStories */,
+			);
+			name = Presentation;
+			sourceTree = "<group>";
+		};
+		41A7654F2308187200FB1D86 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				556DBB101E8FB78D0038D214 /* Leaderboards */,
+				556DBB0F1E8FB7840038D214 /* Settings */,
+				556DBB0E1E8FB77C0038D214 /* Bunker */,
+			);
+			name = UserStories;
+			sourceTree = "<group>";
+		};
 		55079BE51EB779E90044FCF4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,10 +302,8 @@
 		556DBAEA1E8FB1510038D214 /* Dharm */ = {
 			isa = PBXGroup;
 			children = (
+				41A7654E2308186A00FB1D86 /* Presentation */,
 				55079BE51EB779E90044FCF4 /* Categories */,
-				556DBB0E1E8FB77C0038D214 /* Bunker */,
-				556DBB0F1E8FB7840038D214 /* Settings */,
-				556DBB101E8FB78D0038D214 /* Leaderboards */,
 				556DBAEB1E8FB1510038D214 /* Supporting Files */,
 				556DBAFA1E8FB1520038D214 /* Assets.xcassets */,
 				556DBAF41E8FB1520038D214 /* Main.storyboard */,
@@ -394,7 +410,6 @@
 				556DBAE41E8FB1510038D214 /* Sources */,
 				556DBAE51E8FB1510038D214 /* Frameworks */,
 				556DBAE61E8FB1510038D214 /* Resources */,
-				4619396BAE73BC316C71259D /* [CP] Embed Pods Frameworks */,
 				25C823DE6E849F28F61614C4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -432,6 +447,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				ru,
@@ -468,32 +484,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Dharm/Pods-Dharm-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/NGSPopoverView/NGSPopoverView.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/VMaskTextField/VMaskTextField.bundle,
+				"${PODS_ROOT}/Target Support Files/Pods-Dharm/Pods-Dharm-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/NGSPopoverView/NGSPopoverView.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VMaskTextField/VMaskTextField.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NGSPopoverView.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VMaskTextField.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dharm/Pods-Dharm-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4619396BAE73BC316C71259D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dharm/Pods-Dharm-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dharm/Pods-Dharm-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C7B9B0C518E57B1C02DAD803 /* [CP] Check Pods Manifest.lock */ = {
@@ -704,7 +706,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -728,7 +730,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

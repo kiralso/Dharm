@@ -23,6 +23,7 @@
 #import "UITableViewController+SKTableViewCategory.h"
 #import "UIColor+SKColorCategory.h"
 #import "UIFont+UIFont_SKFontCategory.h"
+#import <PureLayout.h>
 
 static CGFloat const SKScoreTextLableHeight = 25.0;
 static CGFloat const SKScoreTextLableWidth = 120.0;
@@ -43,35 +44,28 @@ static CGFloat const SKCornerRadius = 10.0;
 @property (strong, nonatomic) SKSettingsManager *settingsManager;
 @property (strong, nonatomic) UIImageView *backgroundView;
 @property (assign, nonatomic) BOOL isMenuHidden;
+@property (strong, nonatomic) NSLayoutConstraint *textFieldBottomConstraint;
 
 @end
 
 @implementation SKBunkerViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self viewControllerInit];
     [self notificationsInit];
     [self flagsInit];
     [self gesturesInit];
     [self managersInit];
-    [self initializeScoreLabel];
-    [self initializeTimerLabel];
-    [self initializeCodeField];
+    [self setupMenuViewController];
+    [self setupUI];
+
     if (isFirstTime()) {
         [self.storyManager showTutorial];
     } else {
         [self.gameCenterManager authenticateLocalPlayer];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self setupBackground];
-    [self updateTimerLabelFrame];
-    [self updateCodeFieldFrame];
-    [self updateScoreLabelFrame];
-    [self childControllersInit];
 }
 
 #pragma mark - Initialization
@@ -125,51 +119,61 @@ static CGFloat const SKCornerRadius = 10.0;
     self.settingsManager.delegate = self;
 }
 
-- (void)childControllersInit {
-    self.menuViewController = [[SKStoryMenuViewController alloc] init];
+- (void)setupMenuViewController {
     self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SKStoryMenuViewController"];
     self.menuViewController.bunkerDataManager = self.dataManager;
     [self addChildViewController:self.menuViewController];
+    [self.menuViewController willMoveToParentViewController:self];
+    
+    self.menuViewController.view.frame = CGRectMake(-UIScreen.mainScreen.bounds.size.width,
+                                                    0,
+                                                    UIScreen.mainScreen.bounds.size.width,
+                                                    UIScreen.mainScreen.bounds.size.height);
+}
+
+- (void)setupUI {
+    [self viewControllerInit];
+    [self setupBackground];
+    [self setupScoreLabel];
+    [self setupTimerLabel];
+    [self setupCodeField];
 }
 
 #pragma mark - Score label
 
-- (void)initializeScoreLabel {
+- (void)setupScoreLabel {
     self.scoreLabel = [[UILabel alloc] init];
     self.scoreLabel.font = [UIFont regularWithSize:[UIFont small]];
     self.scoreLabel.textColor = [UIColor whiteColor];
     self.scoreLabel.textAlignment = NSTextAlignmentCenter;
-}
-
-- (void)updateScoreLabelFrame {
-    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
-    CGFloat codeTextFieldX = (CGRectGetWidth(self.view.frame) - SKScoreTextLableWidth);
-    CGFloat codeTextFieldY = (navigationBarHeight + SKScoreTextLableHeight + 10);
-    self.scoreLabel.frame = CGRectMake(codeTextFieldX, codeTextFieldY, SKScoreTextLableWidth, SKScoreTextLableHeight);
+    
     [self.view addSubview:self.scoreLabel];
+    [self.scoreLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:8];
+    [self.scoreLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+    [self.scoreLabel autoSetDimension:ALDimensionHeight toSize:SKScoreTextLableHeight];
+    [self.scoreLabel autoSetDimension:ALDimensionWidth toSize:SKScoreTextLableWidth];
 }
 
 #pragma mark - Timer label
 
-- (void)initializeTimerLabel {
+- (void)setupTimerLabel {
     self.timerLabel = [[UILabel alloc] init];
     self.timerLabel.font = [UIFont regularWithSize:[UIFont huge]];
     self.timerLabel.textColor = [UIColor whiteColor];
     self.timerLabel.textAlignment = NSTextAlignmentCenter;
-    self.timerLabel.text = @"108:00";
-}
-
-- (void)updateTimerLabelFrame {
-    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
-    CGFloat timerTextFieldX = (CGRectGetWidth(self.view.frame) - SKTimerTextLableWidth) / 2;
-    CGFloat timerTextFieldY = SKScoreTextLableHeight + navigationBarHeight + 30;
-    self.timerLabel.frame = CGRectMake(timerTextFieldX, timerTextFieldY, SKTimerTextLableWidth, SKTimerTextLableHeight);
+    self.timerLabel.text = NSLocalizedString(@"108:00", nil);
+    
     [self.view addSubview:self.timerLabel];
+    [self.timerLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.scoreLabel withOffset:16];
+    [self.timerLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+    [self.timerLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading];
+    [self.timerLabel autoSetDimension:ALDimensionHeight toSize:SKTimerTextLableHeight];
+    [self.timerLabel autoSetDimension:ALDimensionWidth toSize:SKTimerTextLableWidth];
 }
 
 #pragma mark - Code textfield
 
-- (void)initializeCodeField {
+- (void)setupCodeField {
     self.codeTextField = [[VMaskTextField alloc] init];
     self.codeTextField.placeholder = [NSString stringWithFormat:NSLocalizedString(@"ENTERTHECODEHERE", nil)];
     self.codeTextField.font = [UIFont regularWithSize:[UIFont medium]];
@@ -183,21 +187,23 @@ static CGFloat const SKCornerRadius = 10.0;
     self.codeTextField.keyboardAppearance = UIKeyboardAppearanceDark;
     [self.codeTextField setValue:[UIColor textFieldPlaceholderColor]
                       forKeyPath:@"_placeholderLabel.textColor"];
-}
-
-- (void)updateCodeFieldFrame {
-    CGFloat codeTextFieldX = (CGRectGetWidth(self.view.frame) - SKCodeTextFieldWidth) / 2;
-    CGFloat codeTextFieldY = (CGRectGetHeight(self.view.frame) - SKCodeTextFieldHeight) / 1.15;
-    self.codeTextField.frame = CGRectMake(codeTextFieldX, codeTextFieldY, SKCodeTextFieldWidth, SKCodeTextFieldHeight);
+    
     [self.view addSubview:self.codeTextField];
+    self.textFieldBottomConstraint = [self.codeTextField autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:16];
+    [self.codeTextField autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
+    [self.codeTextField autoPinEdgeToSuperviewEdge:ALEdgeLeading];
+    [self.codeTextField autoSetDimension:ALDimensionHeight toSize:SKCodeTextFieldHeight];
+    [self.codeTextField autoSetDimension:ALDimensionWidth toSize:SKCodeTextFieldWidth];
 }
 
 #pragma mark - Background
 
 - (void)setupBackground {
-    self.backgroundView.frame = self.view.frame;
-    self.backgroundView.image = [UIImage imageNamed:backgroundPath()];
     [self.view addSubview:self.backgroundView];
+    [self.backgroundView autoPinEdgesToSuperviewEdges];
+    self.backgroundView.backgroundColor = [UIColor blackColor];
+    self.backgroundView.image = [UIImage imageNamed:backgroundPath()];
+    self.backgroundView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 #pragma mark - SKBunkerDataManagerDelegate
@@ -287,13 +293,14 @@ static CGFloat const SKCornerRadius = 10.0;
 #pragma mark - Menu
 
 - (void)showMenu {
+    [self.view addSubview:self.menuViewController.view];
     __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:SKAnimation300Milliseconds animations:^{
         weakSelf.menuViewController.view.frame = CGRectMake(0,
                                                             0,
                                                             UIScreen.mainScreen.bounds.size.width,
                                                             UIScreen.mainScreen.bounds.size.height);
-        [weakSelf.view addSubview:self.menuViewController.view];
+        [weakSelf.view layoutSubviews];
     } completion:^(BOOL finished) {
         weakSelf.isMenuHidden = NO;
     }];
@@ -317,17 +324,18 @@ static CGFloat const SKCornerRadius = 10.0;
 - (void)keyboardHide:(NSNotification *)notification {
     __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:SKAnimation300Milliseconds animations:^{
-        [weakSelf updateCodeFieldFrame];
+        weakSelf.textFieldBottomConstraint.constant = -16;
+        [weakSelf.view layoutSubviews];
     }];
 }
 
 - (void)keyboardShow:(NSNotification *)notification {
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    CGFloat keyboardHeight = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
     __weak SKBunkerViewController *weakSelf = self;
     [UIView animateWithDuration:SKAnimation300Milliseconds animations:^{
-        CGRect codeFieldFrame = weakSelf.codeTextField.frame;
-        codeFieldFrame.origin.y -= keyboardSize.height;
-        weakSelf.codeTextField.frame = codeFieldFrame;
+        weakSelf.textFieldBottomConstraint.constant = weakSelf.textFieldBottomConstraint.constant - keyboardHeight + tabBarHeight;
+        [weakSelf.view layoutSubviews];
     }];
 }
 

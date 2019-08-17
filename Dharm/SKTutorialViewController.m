@@ -50,6 +50,7 @@
 #pragma mark - Actions
 
 - (IBAction)doneAction:(UIButton *)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsFirstTime];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
