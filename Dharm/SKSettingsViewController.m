@@ -26,12 +26,18 @@ static NSInteger const kHoursBetweenPickers = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.settingManager = [SKSettingsManager sharedManager];
     
+    self.settingManager = [SKSettingsManager sharedManager];
+    [self pickersInit];
     [self setupUI];
 }
 
 - (void)setupUI {
+    self.hardcoreLabel.text = NSLocalizedString(@"HARDCORE", nil);
+    self.info.text = NSLocalizedString(@"INFO_HARDCORE", nil);
+    self.toDateLabel.text = NSLocalizedString(@"TO_DATE_TEXT", nil);
+    self.fromDateLabel.text = NSLocalizedString(@"FROM_DATE_TEXT", nil);
+    
     [self setupBackground];
     [self switchInit];
     [self pickersInit];
@@ -46,19 +52,6 @@ static NSInteger const kHoursBetweenPickers = 3;
 
 - (void)switchInit {
     self.difficultySwitch.on = [self.settingManager difficulty];
-    self.difficultySwitch.animationDuration = 2.0;
-    self.difficultySwitch.animationElementsOff = @[
-                                                   @{ AMElementView: self.view.layer,
-                                                      AMElementKeyPath: @"backgroundColor",
-                                                      AMElementFromValue:(id)[UIColor clearColor].CGColor,
-                                                      AMElementToValue:(id)self.view.backgroundColor.CGColor}
-                                                   ];
-    self.difficultySwitch.animationElementsOn = @[
-                                                  @{ AMElementView: self.view.layer,
-                                                     AMElementKeyPath: @"backgroundColor",
-                                                     AMElementFromValue:(id)self.view.backgroundColor.CGColor,
-                                                     AMElementToValue:(id)[UIColor clearColor].CGColor}
-                                                  ];
     [self showLabelsWithSwitch:self.difficultySwitch];
 }
 
@@ -75,9 +68,9 @@ static NSInteger const kHoursBetweenPickers = 3;
 
 #pragma mark - Actions
 
-- (IBAction)difficultySwitchAction:(AMViralSwitch *)sender {
-    [self showLabelsWithSwitch:sender];
+- (IBAction)difficultySwitchAction:(UISwitch *)sender {
     [self checkToPicker];
+    [self showLabelsWithSwitch:sender];
     [self.settingManager saveDifficulty:sender.on];
 }
 
@@ -97,10 +90,8 @@ static NSInteger const kHoursBetweenPickers = 3;
     BOOL isHardcore = difficultySwitch.on;
     self.dateFromPicker.hidden = isHardcore;
     self.dateToPicker.hidden = isHardcore;
-    for (UILabel *label in self.softcoreInfoCollectionOfLabels) {
-        label.hidden = isHardcore;
-    }
-    self.info.hidden = !isHardcore;
+    self.toDateLabel.hidden = isHardcore;
+    self.fromDateLabel.hidden = isHardcore;
 }
 
 - (void)checkToPicker {

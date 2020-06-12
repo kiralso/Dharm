@@ -36,6 +36,10 @@ NSString *const kLeaderboardIdentifier = @"grp.com.dharm.leaderboard2";
 
 #pragma mark - Authentication
 
+- (BOOL)isPlayerAuthenticated {
+    return [GKLocalPlayer localPlayer].isAuthenticated;
+}
+
 - (void)authenticateLocalPlayer {
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
     localPlayer.authenticateHandler =^(UIViewController *viewController, NSError *error) {

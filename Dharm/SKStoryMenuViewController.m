@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, SKTableSection) {
     [super viewDidLoad];
     self.menuTableView.delegate = self;
     self.menuTableView.dataSource = self;
+    self.menuTableView.sectionIndexBackgroundColor = [UIColor whiteColor];
     self.alertManager = [[SKAlertManager alloc] init];
     self.storyManager = [[SKStoryManager alloc] init];
     self.storyManager.delegate = self;

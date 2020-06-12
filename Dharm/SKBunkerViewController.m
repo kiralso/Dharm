@@ -174,7 +174,6 @@ static CGFloat const SKCornerRadius = 10.0;
 
 - (void)setupCodeField {
     self.codeTextField = [[VMaskTextField alloc] init];
-    self.codeTextField.placeholder = [NSString stringWithFormat:NSLocalizedString(@"ENTERTHECODEHERE", nil)];
     self.codeTextField.font = [UIFont regularWithSize:[UIFont medium]];
     self.codeTextField.mask = @"# # ## ## ## ##"; // 4 8 15 16 23 42
     self.codeTextField.delegate = self.dataManager;
@@ -184,8 +183,9 @@ static CGFloat const SKCornerRadius = 10.0;
     self.codeTextField.textColor = [UIColor whiteColor];
     self.codeTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.codeTextField.keyboardAppearance = UIKeyboardAppearanceDark;
-    [self.codeTextField setValue:[UIColor textFieldPlaceholderColor]
-                      forKeyPath:@"_placeholderLabel.textColor"];
+    NSString* placepolder = [NSString stringWithFormat:NSLocalizedString(@"ENTERTHECODEHERE", nil)];
+    self.codeTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString: placepolder
+                                                                               attributes: @{NSForegroundColorAttributeName: [UIColor textFieldPlaceholderColor]}];
     
     [self.view addSubview:self.codeTextField];
     self.textFieldBottomConstraint = [self.codeTextField autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:16];
@@ -281,6 +281,7 @@ static CGFloat const SKCornerRadius = 10.0;
 - (IBAction)showPopoverAction:(UIButton *)sender {
     UILabel *label = [[UILabel alloc] init];
     label.text = [NSString stringWithFormat:NSLocalizedString(@"POPOVER", nil), kMinutesBeforeFireDateToWarn];
+    label.textColor = [UIColor blackColor];
     label.numberOfLines = 0;
     NGSPopoverView *popover = [[NGSPopoverView alloc] initWithCornerRadius:SKCornerRadius
                                                                  direction:NGSPopoverArrowPositionTop

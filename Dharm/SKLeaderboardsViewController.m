@@ -21,22 +21,25 @@
 
 @implementation SKLeaderboardsViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setBackgroundImageViewWithImageName:backgroundPath()];
     self.gameCenterManager = [SKGameKitManager sharedManager];
     self.tableManager = [[SKLeaderboardTableManager alloc] init];
     self.tableView.delegate = self.tableManager;
     self.tableView.dataSource = self.tableManager;
+    
+    self.refreshControl = [[UIRefreshControl alloc]init];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (isFirstTime()) {
-        [self.gameCenterManager authenticateLocalPlayer];
-    }
+    
+    [self.gameCenterManager authenticateLocalPlayer];
     [self loadPlayers];
-    self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self
                             action:@selector(refreshTable)
@@ -46,6 +49,18 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+#pragma mark - UI
+
+- (UIView *)createNoAuthView {
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor blackColor];
+    UILabel *label = [[UILabel alloc] init];
+    label.text = NSLocalizedString(@"", nil);
+    [view addSubview:label];
+    
+    return view;
 }
 
 #pragma mark - Helpful functions

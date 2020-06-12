@@ -13,14 +13,16 @@
 
 @interface SKSettingsViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet AMViralSwitch *difficultySwitch;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
+@property (weak, nonatomic) IBOutlet UISwitch *difficultySwitch;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateFromPicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateToPicker;
 @property (weak, nonatomic) IBOutlet UILabel *info;
-@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *softcoreInfoCollectionOfLabels;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
+@property (weak, nonatomic) IBOutlet UILabel *hardcoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *toDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fromDateLabel;
 
-- (IBAction)difficultySwitchAction:(AMViralSwitch *)sender;
+- (IBAction)difficultySwitchAction:(UISwitch *)sender;
 - (IBAction)dateFromPickerAction:(UIDatePicker *)sender;
 - (IBAction)dateToPickerAction:(UIDatePicker *)sender;
 

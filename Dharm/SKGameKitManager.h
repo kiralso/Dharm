@@ -19,6 +19,7 @@
 @property (weak, nonatomic) UIViewController<SKGameKitManagerDelegate> *delegate;
 
 + (SKGameKitManager *)sharedManager;
+- (BOOL)isPlayerAuthenticated;
 - (void)authenticateLocalPlayer;
 - (void)reportScore:(int64_t)score;
 - (void)loadLeaderboardWithIdentifier:(NSString *) leaderboardIdentifier

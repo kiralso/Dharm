@@ -6,7 +6,7 @@
   Copyright © 2017 Kirill Solovyov. All rights reserved.
 */
 
-"Score :%@" = "Score :%@";
+"Score :%@" = "Score: %@";
 "PROGRESS" = "%ld of %ld";
 
 "POPOVER" = "Code: 4 8 15 16 23 42\nYou can enter the numbers %li minutes before the countdown gets to zero";
@@ -26,6 +26,12 @@
 
 "RESETTITLE" = "Reset story?";
 "RESETMESSAGE" = "Are you really want to reset story and score?";
+
+// Settings
+"HARDCORE" = "Hardcore";
+"INFO_HARDCORE" = "When the hardcore mode is on, you will save the world every 108 minutes. Turn it off if life hasn’t prepared you for this.";
+"TO_DATE_TEXT" = "The bunker will be active from this time";
+"FROM_DATE_TEXT" = "After this time, the application will not bother";
 
 // Tutorial
 // First Chapter
