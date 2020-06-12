@@ -710,6 +710,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -720,6 +721,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/MSWeakTimer",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/UIView+Shake",
 				);
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -736,6 +738,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZTRS68H53M;
 				INFOPLIST_FILE = Dharm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -746,6 +749,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/MSWeakTimer",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/UIView+Shake",
 				);
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SK.Dharm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
